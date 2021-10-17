@@ -1,0 +1,754 @@
+= Lists
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Immutable Types
+
+****
+The types which we have seen thus far are integer, Boolean and string.
+
+Each of these is _immutable_:
+
+- values of each of these types are atomic,
+- when we apply an operation to a value of the type, the result is a _new_ value of the type,
+- we never _change a value_; rather, we create a new value.
+
+Consider these two examples...
+****
+
+[source, python]
+----
+n = 3
+n = 2 * n                    # Example 1.
+----
+
+****
+Above, we evaluate the expression $2 times n$, and the result is a _new integer value_ $6$.
+
+That new value is then assigned to the variable $n$.
+
+There is no sense in which the original value $3$ changed (or mutated) into the new value $6$.
+****
+
+
+[source, python]
+----
+s = "hello"
+s = s[1:]                    # Example 2.
+----
+
+****
+We evaluate the expression $s[1:]$, and the result is a _new string value_ ($"ello"$),
+and that new value is assigned to the variable $s$.
+
+There is no sense in which the original string value changed into new value.
+****
+
+****
+So, integer Boolean and string values in Python are immutable
+
+(Floating-point numbers are immutable too.)
+****
+
+// //////////////////////////////////////////////////////////////
+== Lists
+
+****
+In Python, a list is a type whose values are _sequences of values_ (of any type).
+
+Here are some examples...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+b = ["dog", "cat", "mouse"]
+c = []
+----
+
+****
+$a$, $b$ and $c$ are lists:
+
+- $a$ is a list of four integers,
+- $b$ is a list of three strings, and
+- $c$ is an empty list.
+
+The syntax for list literals is:
+
+- the list is contained in *square* brackets, and
+- the values separated by commas.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Length
+
+****
+As with strings, the built-in function +len()+ returns the length of a list...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+b = ["dog", "cat", "mouse"]
+c = []
+
+len(a)                       # 4
+len(b)                       # 3
+len(c)                       # 0
+
+len(a) + len(b) + len(c)     # 7
+----
+
+// //////////////////////////////////////////////////////////////
+=== Concatenation
+
+****
+As we have seen before, for addition:
+
+- if the operands to "\+" are both integers, then "+" is integer addition, and
+- if the operands to "\+" are both strings, then "+" is string concatenation.
+
+Similarly:
+
+- if the operands to "\+" are both lists, then "+" is _list concatenation_.
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+b = [1, 2, 3]
+
+c = a + b                    # [2, 4, 6, 8, 1, 2, 3]
+----
+
+****
+The result of list concatenation is a _new list_ whose elements consist of first
+all of the elements from the left-hand list, and then all of the elements from the
+right-hand list.
+****
+
+****
+Consider the case where $a$ and $b$ are very long, say each containing many millions of elements.
+
+The cost of building a new list is proportional to the length of the list.
+
+The cost of  building a new list by concatenating $a$ and $b$ might be quite high,
+both in terms of time and memory, if $a$ and/or $b$ is very long.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Indexing
+
+****
+We can ask what value is at a particular position in a list.
+
+The syntax is the same as the corresponding syntax for strings...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+
+a[0]                         # 2
+a[1]                         # 4
+a[2]                         # 6
+a[3]                         # 8
+
+c = a[3] * a[0]              # 16
+a[a[0]]                      # a[2], or 6
+----
+
+****
+Observe that, as with strings, we count positions start at position $0$.
+
+For a non-empty list $a$, the last element in the list is at position $"len"(a)-1$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Slicing
+
+****
+We can extract a sub-sequence from an existing list.
+
+The result is a new list.
+
+Again, the syntax is similar to that used for strings...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+
+a[1:3]                       # [4, 6]
+a[:3]                        # [2, 4, 6]
+a[1:]                        # [4, 6, 8]
+a[:]                         # [2, 4, 6, 8]
+----
+
+****
+In the last example, above, the result is a new list which is a copy of the entire
+list $a$.
+
+Because the result is always a new list, the cost of this operation depends upon the length of the new list.
+
+For short lists, the this cost will usually be negligible; but for very
+long lists -- as we shall see later -- this cost makes the difference between a practical algorithm
+and an impracticable one.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Appending elements
+
+****
+We can add elements to the end of *an existing list* as follows...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+
+a.append(9)                  # a is now [2, 4, 6, 8, 9]
+a.append(1)                  # a is now [2, 4, 6, 8, 9, 1]
+len(a)                       # 6
+----
+
+****
+_a.append()_ is what is known as a _list method_.
+
+A "method" is a function that is associated with a value, associated with
+the list $a$, here.
+
+As with other functions, we call a method by appending parentheses,
+enclosing any arguments within those parentheses.
+
+The notation _a.append()_ can be read as _call the append function
+associated with the list value stored in variable $a$_.
+****
+
+.Observation 1 -- Lists are mutable!
+****
+For the first time we are changing the actual value of an existing list.
+
+We can see this because,
+although there was no further assignment to the variable $a$,
+the value associated with $a$ changed.
+
+This observation is important, because...
+****
+
+.Observation 2 -- Cost
+****
+The cost of _a.append() does not depend upon the length of $a$_.
+
+Appending to an existing list is fast, even if the list is very long.
+****
+
+[NOTE]
+====
+_a.append()_ is fast because we are not building a new list, rather we are just
+adding a new element to an existing list.
+====
+
+.Observation 3 -- Assignment
+****
+When we assign a list value to a variable, internally we are actually
+assigning a _reference_ to the memory area in which the list is stored.
+
+This can create counter-intuitive situations...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+b = a
+
+a.append(9)                  # a is now [2, 4, 6, 8, 9]
+a.append(1)                  # a is now [2, 4, 6, 8, 9, 1]
+
+b                            # b is also now [2, 4, 6, 8, 9, 1]
+----
+
+****
+In this example, there is only one list.
+
+We might visualise this as follows...
+****
+
+.In memory, $a$ and $b$ are references to the same list
+----
+   -----
+ a | --|-
+   ----- \
+          \ -----  -----  -----  -----  -----  -----
+           -| 2 |  | 4 |  | 6 |  | 8 |  | 9 |  | 1 |
+          / -----  -----  -----  -----  -----  -----
+   ----- /
+ b | --|-
+   -----
+----
+
+****
+If we intend, instead, to make a copy of the list, then we must do so explicitly...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+b = a[:]                     # b is a new (different) list, a copy of a
+----
+
+.Now, $a$ and $b$ are two different objects in memory
+----
+   -----    -----  -----  -----  -----
+ a | --|--> | 2 |  | 4 |  | 6 |  | 8 |
+   -----    -----  -----  -----  -----
+
+   -----    -----  -----  -----  -----
+ b | --|--> | 2 |  | 4 |  | 6 |  | 8 |
+   -----    -----  -----  -----  -----
+----
+
+// //////////////////////////////////////////////////////////////
+=== Removing elements
+
+****
+We can also remove elements from the end of a list...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+
+a.pop()                      # 8; and a is now [2, 4, 6]
+a.pop()                      # 6; and a is now [2, 4]
+len(a)                       # 2
+----
+
+****
+_a.pop()_:
+
+- is another list method,
+- it removes _the last_ element from a list, and
+- evaluates to that value.
+
+As with _a.append()_, the cost does not depend upon the length of the list.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Changing elements
+
+****
+Finally, we can change individual elements within a list.
+
+The syntax is similar to indexing, except that it appears _on the left-hand side_ of an
+assignment...
+****
+
+[source, python]
+----
+a = [2, 4, 6, 8]
+
+a[3] = 7                     # a is now [2, 4, 6, 7]
+a[2] = 5                     # a is now [2, 4, 5, 7]
+a[1] = 3                     # a is now [2, 3, 5, 7]
+a[0] = 1                     # a is now [1, 3, 5, 7]
+----
+
+****
+These assignments are not creating new lists; they are changing the values
+at particular positions within the existing list.
+
+The cost does not depend upon the length of the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Examples
+
+// //////////////////////////////////////////////////////////////
+=== Reading lists
+
+.Reading a list of integers
+****
+Standard input consists of a sequence of integers, one per line, terminated by a $0$.
+
+We would read such a sequence into a list as follows...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+a = []                       # Start with an empty list.
+
+n = int(input())
+while n != 0:
+   a.append(n)               # Append each new integer encountered to the end of the list.
+   n = int(input())
+----
+
+[NOTE]
+====
+The structure of the loop itself above is the same as we have seen many times
+before.
+====
+
+.Reading a list of strings
+****
+Standard input consists of a sequence of lines of text, terminated by a line containing only the text +end+.
+
+We would read such a sequence into a list as follows...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+a = []                       # Again, start with an empty list.
+
+s = input()
+while s != "end":
+   a.append(s)               # Append each new line encountered to the end of the list.
+   s = input()
+----
+
+// //////////////////////////////////////////////////////////////
+=== Write a list
+
+.Task
+****
+Assume an existing list $a$.
+
+Write a Python script which writes the values in $a$ to standard output, one per line.
+****
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   print(a[i])               # Print out the element at position i in a.
+   i = i + 1
+----
+
+[NOTE]
+====
+Observe again that this is the same loop pattern which have seen
+previously.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Maximum
+
+.Task
+****
+Assume an existing *non-empty* list of integers $a$.
+
+Write a Python script which writes only the largest value in $a$ to
+standard output.
+****
+
+[source, python]
+----
+maximum = a[0]               # Start by "guessing" that a[0] is the largest value.
+
+i = 0                        # "i = 1" would be correct here too.
+while i < len(a):
+   if maximum < a[i]:        # If the current value (a[i]) is bigger, ...
+      maximum = a[i]         # ... then note a[i] as the new maximum value.
+   i = i + 1
+
+print(maximum)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Sum
+
+.Task
+****
+Assume an existing list of integers $a$.
+
+Write a Python script which writes only the sum of the values in $a$ to
+standard output.
+****
+
+[source, python]
+----
+total = 0                    # Start with the total as zero, and...
+
+i = 0
+while i < len(a):
+   total = total + a[i]      # ... add each newly-encountered value to the total.
+   i = i + 1
+
+print(total)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Reverse
+
+.Task
+****
+Assume an existing list $a$.
+
+Write a Python script which reverses the elements of $a$ _in place_.
+****
+
+[NOTE]
+====
+By _in place_ we mean that we do not create a new list, rather we rearrange
+the positions of elements in the existing list.
+====
+
+[source, python]
+.Example
+----
+# Before:
+#
+[ 6, 5, 4, 3, 2, 1, 0 ]      # This is a.
+
+# After:
+#
+[ 0, 1, 2, 3, 4, 5, 6 ]      # This is a too, with the positions of the element rearranged.
+----
+
+[source, python]
+----
+i = 0
+while i < len(a) / 2:
+   tmp = a[i]                # Swap a[i] and a[len(a)-i-1] (that is,
+   a[i] = a[len(a) - i - 1]  # swap the i-th element with the corresponding
+   a[len(a) - i - 1] = tmp   # element, counting from the end of the list).
+   i = i + 1
+----
+
+[NOTE]
+====
+Observer that we stop not after _len(a)_ iterations (as elsewhere), but after only _len(a) / 2_ iterations.
+
+In other words, we only traverse half of the list.
+
+What would be the effect if we continued iterating and traversed the whole list?
+====
+
+[source, python]
+.Illustration
+----
+a = [ 6, 5, 4, 3, 2, 1, 0 ]  # tmp:
+
+# After 1 iteration:
+#
+a = [ 0, 5, 4, 3, 2, 1, 6 ]  # tmp: 6
+#     |                 |
+#     ------------------- swapped positions 0 and 6
+
+# After 2 iterations:
+#
+a = [ 0, 1, 4, 3, 2, 5, 6 ]  # tmp: 5
+#        |           |
+#        ------------ swapped positions 1 and 5
+
+# After 3 iterations:
+#
+a = [ 0, 1, 2, 3, 4, 5, 6 ]  # tmp: 4
+#           |     |
+#           ------ swapped positions 2 and 4
+----
+
+// //////////////////////////////////////////////////////////////
+=== Larger than average
+
+.Task
+****
+Assume an existing list of integers $a$.
+
+Let _average_ be the integer average of those values.
+
+Write a Python script which writes only those integers in $a$ which are greater
+than _average_ to standard output, one per line.
+****
+
+[NOTE]
+====
+We cannot know the average until we have examined every element in the list.
+
+Therefore, we have to first scan the list to calculate the average, before then scanning the
+list for a second time printing out those elements which are greater than that
+average.
+====
+
+[source, python]
+----
+# First we calculate the average.
+#
+total = 0
+
+i = 0
+while i < len(a):
+   total = total + a[i]
+   i = i + 1
+
+average = total / len(a)
+
+# Now that we know the average, we scan the list a second time printing out those
+# elements which are greater than average.
+#
+i = 0
+while i < len(a):
+   if average < a[i]:
+      print(a[i])
+   i = i + 1
+----
+
+[NOTE]
+====
+The code above works in general.
+
+However, there is a serious bug in one particular case.
+
+Can you spot it?
+
+What would you do to fix the issue?
+====
+
+// //////////////////////////////////////////////////////////////
+== Command-line args
+
+****
+Here are some shell commands...
+****
+
+[source, sh]
+----
+$ cd ca116
+$ nano hello.py
+$ python3 hello.py
+$ einstein hello.py
+$ cp hello.py goodbye.py
+----
+
+****
+In each case, above:
+
+- the first tokens on the lines -- _cd_, _nano_, _python3_, and so on -- are the names of the commands, and
+- subsequent tokens -- _ca116_, _hello.py_, _goodbye.py_ -- are the _arguments_ to those commands.
+
+In particular, these are known as _command-line arguments_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== In Python
+
+****
+Command-line arguments are another way of providing input to a command.
+
+And we can use command-line arguments in Python scripts too...
+****
+
+.Example invocation
+----
+$ python3 echo.py dog cat mouse
+----
+
+[source, python]
+._echo.py_
+----
+#!/usr/bin/env python3
+
+import sys
+args = sys.argv
+
+i = 0
+while i < len(args):
+   print(args[i])
+   i = i + 1
+----
+
+.Example standard output
+----
+echo.py
+dog
+cat
+mouse
+----
+
+// //////////////////////////////////////////////////////////////
+=== The _sys_ module
+
+****
+This script contains something wholly new to us.
+
+It uses a Python module called _sys_.
+
+A _module_ is a unit of Python code, often written by somebody else.
+
+Here, we're using the _sys_ module, which is built into the Python
+interpreter itself.
+
+We can import a module into our Python script -- as illustrated above --
+and then use the objects defined in the module within our own code.
+****
+
+****
+The _sys_ module provides is access to the command-line arguments.
+
+In particular, _sys.argv_ is the entire command line, including the name of
+out script.
+
+And -- helpfully -- it's just a Python list, we we can use it as we would any other list.
+****
+
+[NOTE]
+====
+The syntax _sys.argv_ means _give me the "argv" object from the "sys" module_.
+
+We can then treat the resulting object like any other list.
+
+_argv_ is short for _argument vector_.
+
+_argv_ is the standard term for the corresponding feature in the
+C programming language.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Example
+
+****
+_sys.argv_ includes the script name (_echo.py_) as the first argument.
+
+Usually, we don't care about that argument, and so we write our scripts
+like this...
+****
+
+.Example invocation
+----
+$ python3 echo.py dog cat mouse
+----
+
+[source, python]
+._echo.py_
+----
+#!/usr/bin/env python3
+
+import sys
+args = sys.argv[1:]          # Skip the first element in sys.argv.
+                             # It's the script name, which we usually don't care about.
+i = 0
+while i < len(args):
+   print(args[i])
+   i = i + 1
+----
+
+.Example standard output
+----
+dog
+cat
+mouse
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

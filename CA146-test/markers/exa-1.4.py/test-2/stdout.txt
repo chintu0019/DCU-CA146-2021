@@ -1,0 +1,10 @@
+d = {'sheep': 'flock', 'geese': 'gaggle', 'fish': 'school', 'donkeys': 'drove', 'bees': 'swarm', 'cows': 'herd', 'dogs': 'pack'}
+running your script...
+
+bees --> swarm
+cows --> herd
+dogs --> pack
+donkeys --> drove
+fish --> school
+geese --> gaggle
+sheep --> flock

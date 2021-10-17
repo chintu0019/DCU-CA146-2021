@@ -1,0 +1,72 @@
+# ###########################################################
+# 0 - intro
+
+1. plan.
+2. reminder about model solutions page.
+
+
+# ###########################################################
+# 1 - review material
+
+s = "hello"
+s[0]   # "h"
+s[1]   # "e"
+s[2]   # "l"
+s[3]   # "l"
+s[4]   # "o"
+s[5]   # IndexError!
+
+i = 0
+while i < N:
+   # Do something.
+   i = i + 1
+
+# Prepare for the first test.
+while not P:
+   # Do something.
+   # Prepare for the next test.
+
+
+# ###########################################################
+# 2 - review examples from last week
+
+In particular, observer both the *similarities* and the *differences*
+between the solutions to the various tasks.
+
+Note to self: see ../week-05.
+
+
+# ###########################################################
+# 3 - short-circuit evaluation
+
+BOOLEAN_EXPRESSION_1 and BOOLEAN_EXPRESSION_2
+
+If BOOLEAN_EXPRESSION_1 is False, then the Python interpreter does not
+evaluate BOOLEAN_EXPRESSION_2 at all.
+
+
+# ###########################################################
+# 4 - linear search
+
+See notes.
+
+Examples:
+   - strip leading spaces
+   - first digit
+   - first number
+   - normalise spaces
+     (perhaps skip this in lecture, it's in the notes)
+   - is prime
+
+Linear-search pattern:
+
+   i = 0
+   while i < N and not P:
+      i = i + 1
+
+Termination:
+
+   if i < N:
+      # Found!
+   else:
+      # Not found.

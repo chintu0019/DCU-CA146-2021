@@ -1,0 +1,8 @@
+dog
+banana
+cat
+orange
+apple
+baboon
+mouse
+egg

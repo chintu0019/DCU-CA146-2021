@@ -1,0 +1,342 @@
+= Developing and testing your software
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+It is essential that you develop a good workflow around your software-development process.
+
+Here are some of the essentials of a good software development process...
+****
+
+.Do...
+****
+_...begin by preparing test data._
+
+For example, if your script will have to read lines of text from standard
+input, then prepare sample input in a text file.
+
+Then you can quickly test your script like this...
+****
+
+----
+$ python3 my-script.py < sample-input.txt
+----
+
+****
+It is worth taking the time to do this because, thereafter, testing your
+script is just a matter of hitting the _Up-Arrow_ key and then _Enter_.
+****
+
+.Do not...
+****
+_...attempt to write all of your script at once._
+
+The longer you wait to test each detail of your implementation, the harder
+it will be to resolve any issue you encounter.
+
+(And the more time you will waste in the long run.)
+****
+
+.Do...
+****
+_...work on small, incremental development steps._
+****
+
+// .Do not use _Einstein_ to test you work
+// ****
+// _Einstein_ is an appropriate platform for verifying that you work is
+// considered correct, but only after you are already reasonably confident
+// already that you work appears correct.
+//
+// You should first test your work locally, and only once it appears to work
+// correctly locally should you upload it to _Einstein_.
+//
+// _Einstein_ should *never* encounter syntax errors or indentation errors,
+// because you should already have spotted these locally and fixed them before
+// uploading your work.
+// ****
+//
+// .Consider this example task
+// ****
+// Standard input consists of a sequence of lines of text terminated by a line
+// containing only the text "end".
+//
+// Write a Python script which writes _each number_ in the input to standard
+// output, one per line.
+//
+// Take a number to be _any sequence of contiguous digits_ in the input.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Test cases
+//
+// ****
+// Often, *the very first thing you should do* is create a simple test case that
+// you can run quickly and repeatedly to easily test your work as you go along.
+//
+// The test case (or cases) need not be comprehensive.
+//
+// You just need enough to get a quick indication that you are indeed on the right track.
+// ****
+//
+// ****
+// For the example task above, a file named _input.txt_ containing the
+// following text may suffice...
+// ****
+//
+// ._input.txt_
+// ----
+// Mary had 123 little lambs: 1, 2, 3.
+// end
+// ----
+//
+// ****
+// Now you can test your work quickly and easily...
+// ****
+//
+// [source, sh]
+// ----
+// $ python3 TASK-NAME.py < input.txt
+// ----
+//
+// [NOTE]
+// ====
+// The symbol "<" has a special meaning to the shell:
+//
+// _< FILENAME_::
+//   instructs the shell to arrange that standard input is read not from the terminal, but from a file instead.
+//
+// Similarly:
+//
+// _> FILENAME_::
+//   instructs the shell to arrange that standard output is written not to the terminal, but to a file instead.
+//
+// _>> FILENAME_::
+//   is the same, except that any output is _appended to the file_.
+// ====
+//
+// ****
+// If the task at hand only requires a single line of input, then you can test
+// it like this...
+// ****
+//
+// [source, sh]
+// ----
+// $ echo "Mary had a little lamb." | python3 TASK_NAME
+// ----
+//
+// [NOTE]
+// ====
+// The _echo_ command writes text to standard output.
+//
+// The pipe symbol ("|") has a special meaning to the shell:
+//
+// - the shell arranges that the standard output from the first command is
+//   "piped" as the standard input to the next command.
+//
+// So you won't have to type the input each time yourself.
+// ====
+//
+// // //////////////////////////////////////////////////////////////
+// === Tip 1
+//
+// ****
+// *_Always create an environment where you can test your work quickly and easily._*
+//
+// The effort of doing so more than pays off in terms of allowing you to catch
+// your mistakes early, making them easier to fix.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Stepwise development
+//
+// ****
+// Do not attempt to develop your solutions in just one big step.
+//
+// Instead:
+//
+// - break the development process down into relatively small incremental steps, and
+// - test each step before moving on to the next.
+//
+// That way, each individual step is more manageable, and any errors in your
+// thinking or implementation can be identified early (which makes them easier
+// to fix).
+// ****
+//
+// ****
+// Also, add _print_ statements to your code not because they are needed, but
+// just to verify that execution is proceeding as you expect.
+//
+// Again, if there is an error in your thinking or implementation, then you
+// will spot it early, and fix it quickly.
+// ****
+//
+// ****
+// We proceed with the example task above as follows...
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Step 1
+//
+// ****
+// Begin by simply reading the input and copying it to standard output.
+// ****
+//
+// [source, python]
+// ----
+// #!/usr/bin/env python3
+//
+// s = input()
+// while s != "end":
+//    print(s)
+//    s = input()
+// ----
+//
+// ****
+// And run it...
+// ****
+//
+// [source, sh]
+// ----
+// $ python3 TASK-NAME.py < input.txt
+// ----
+//
+// ****
+// We are now confident that we are handling the input lines correctly, and no
+// longer have to consider that detail of the task.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Step 2
+//
+// ****
+// Finding _all_ numbers on a line is tricky.
+//
+// It might be easier to start by finding just the first number...
+// ****
+//
+// [source, python]
+// ----
+// #!/usr/bin/env python3
+//
+// s = input()
+// while s != "end":
+//    i = 0
+//
+//    # Find the start of the number.
+//    while i < len(s) and (s[i] < "0" or "9" < s[i]):
+//       i = i + 1
+//
+//    # And print something out to show us that that is working.
+//    print(i, s[i:])
+//
+//    s = input()
+// ----
+//
+// ****
+// And test that again.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Step 3
+//
+// ****
+// Next, we'll try to find the end of the first number too....
+// ****
+//
+// [source, python]
+// ----
+// #!/usr/bin/env python3
+//
+// s = input()
+// while s != "end":
+//    i = 0
+//
+//    # Find the start of the number.
+//    while i < len(s) and (s[i] < "0" or "9" < s[i]):
+//       i = i + 1
+//
+//    # And find the end of the number.
+//    # if i is len(s), then this is a no-op.
+//    j = i + 1
+//    while j < len(s) and ("0" <= s[j] and s[j] <= "9"):
+//       j += 1
+//
+//    if i < len(s):
+//       # We print out the positions and the "number" which we have found,
+//       # Just to verify that everything looks correct.
+//       print(i, j, s[i:j])
+//
+//    s = input()
+// ----
+//
+// ****
+// And test that again.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Step 4
+//
+// ****
+// Finally, we can tweak our implementation to find not just the first number,
+// but _all numbers_.
+//
+// To do this, we take the code above and:
+//
+// . _repeatedly_ find numbers (so, add a loop), and
+// . each time start not at position _0_, but at the position after the
+//   previous number.
+// ****
+//
+// [source, python]
+// ----
+// #!/usr/bin/env python3
+//
+// s = input()
+// while s != "end":
+//    i = 0
+//
+//    while i < len(s):
+//       # Find the start of the number.
+//       while i < len(s) and (s[i] < "0" or "9" < s[i]):
+//          i = i + 1
+//
+//       # And find the end of the number.
+//       # if i is len(s), then this is a no-op.
+//       j = i + 1
+//       while j < len(s) and ("0" <= s[j] and s[j] <= "9"):
+//          j += 1
+//
+//       if i < len(s):
+//          print(s[i:j])
+//
+//       # j + 1 is the first position at which the *next number* could
+//       # possibly start.
+//       i = j + 1
+//
+//    s = input()
+// ----
+//
+// ****
+// And test that again.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Tip 2
+//
+// ****
+// Do not try to solve an entire task in one big step.
+//
+// Instead, break the task into smaller steps, and develop and test those
+// smaller step incrementally.
+// ****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

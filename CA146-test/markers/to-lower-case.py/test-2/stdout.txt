@@ -1,0 +1,12 @@
+upper = "abcdefghifklmnopqrstuvwxyz"
+lower = "abcdefghifklmnopqrstuvwxyz"
+
+s = raw_input()
+while s != "end":
+   t = ""
+
+   i = 0
+   while i < len(s):
+      j = 0
+      while j < len(upper) and s[i] != upper[j]:
+         j = j + 1

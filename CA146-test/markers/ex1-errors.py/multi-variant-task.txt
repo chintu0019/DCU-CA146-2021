@@ -1,0 +1,6 @@
+ex1-errors-1.py
+ex1-errors-2.py
+ex1-errors-3.py
+ex1-errors-4.py
+ex1-errors-5.py
+ex1-errors-6.py

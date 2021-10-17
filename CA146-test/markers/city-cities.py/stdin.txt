@@ -1,0 +1,11 @@
+City,State,LatD,LatM,LatS,NS,LonD,LonM,LonS,EW
+Worcester,MA,42,16,12,N,71,48,0,W
+Winston-Salem,NC,36,5,59,N,80,15,0,W
+Valley City,ND,46,55,11,N,98,0,36,W
+Wenatchee,WA,47,25,11,N,120,19,11,W
+Weed,CA,41,25,11,N,122,23,23,W
+Salt Lake City,UT,40,45,35,N,111,52,47,W
+Wausau,WI,44,57,35,N,89,38,23,W
+Stroudsburg,PA,40,59,24,N,75,11,24,W
+Stockton,CA,37,57,35,N,121,17,24,W
+end

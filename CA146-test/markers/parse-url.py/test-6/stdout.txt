@@ -1,0 +1,3 @@
+scheme: ftp
+host: speedtest.tele2.net
+path: /1KB.zip

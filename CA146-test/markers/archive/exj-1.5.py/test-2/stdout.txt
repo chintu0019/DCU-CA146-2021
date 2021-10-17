@@ -1,0 +1,4 @@
+s = "      space        "
+running your script...
+
+1

@@ -1,0 +1,6 @@
+abc
+aa
+aaaa
+aaaaaa
+aabaa
+end

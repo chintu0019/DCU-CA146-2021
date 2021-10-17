@@ -1,0 +1,11 @@
+s = /hello/world
+2
+
+s = //hello//world
+4
+
+s = 
+0
+
+s = /////
+5

@@ -1,0 +1,6 @@
+Athlone Bray 56
+Athlone Cork 72
+Bray Cork 62
+Cork Dublin 106
+Cork Enfield 40
+Enfield Dublin 78

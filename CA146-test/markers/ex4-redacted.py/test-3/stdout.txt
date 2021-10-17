@@ -1,0 +1,34 @@
+showing banned.txt:
+   |black
+   |horned
+   |Bessie
+   |Pamela,
+   |Henry,
+   |picture
+   |crescent
+   |haunted
+   |its
+
+running your script:
+   |I cannot tell what sentiment ******* the quite solitary churchyard, with
+   |*** inscribed headstone; *** gate, *** two trees, *** low horizon,
+   |girdled by a broken wall, and *** newly-risen crescent, attesting the
+   |hour of eventide.
+   |
+   |The two ships becalmed on a torpid sea, I believed to be marine phantoms.
+   |
+   |The fiend pinning down the thief's pack behind him, I passed over
+   |quickly: it was an object of terror.
+   |
+   |So was the ***** ****** thing seated aloof on a rock, surveying a distant
+   |crowd surrounding a gallows.
+   |
+   |Each ******* told a story; mysterious often to my undeveloped
+   |understanding and imperfect feelings, yet ever profoundly interesting: as
+   |interesting as the tales ****** sometimes narrated on winter evenings,
+   |when she chanced to be in good humour; and when, having brought her
+   |ironing-table to the nursery hearth, she allowed us to sit about it, and
+   |while she got up Mrs. Reed's lace frills, and crimped her nightcap
+   |borders, fed our eager attention with passages of love and adventure
+   |taken from old fairy tales and other ballads; or (as at a later period I
+   |discovered) from the pages of ******* and ****** Earl of Moreland.

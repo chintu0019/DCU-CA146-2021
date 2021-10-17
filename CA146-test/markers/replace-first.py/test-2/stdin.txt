@@ -1,0 +1,10 @@
+word ab word
+word ab ab word
+
+ab
+ab word
+word ab
+word ab ab
+
+abab
+end

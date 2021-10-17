@@ -1,0 +1,501 @@
+= Variables
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// ****
+// From previously, recall that a computer is really just a very fast calculator _with lots of memory_.
+//
+// Computer memory allows programs to remember data values for later.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Variables
+
+****
+In computer programming languages -- and in Python in particular --
+a _variable_ is a symbolic name for a memory location.
+****
+
+[source, python]
+.Examples
+----
+x = 1 + 2
+
+x                          # 3
+2 * x                      # 6
+1 - x                      # -2
+----
+
+****
+Above, $x$ is a variable; it is a symbolic name for a memory location.
+
+The integer expression +1 + 2+ evaluates to the value $3$, and the value $3$ is stored in the variable $x$.
+
+Subsequently, the symbolic name $x$ can be used within integer expressions.
+
+When the Python interpreter encounters a variable name ($x$, here), it
+looks up the value associated with $x$ ($3$, here) and replaces the
+variable with that value.
+
+So an integer expression might be evaluated as follows...
+****
+
+[source, python]
+----
+# Say we have two variables:
+x = 3
+y = 2
+
+# Then:
+x * 5 + y
+3 * 5 + y                  # simplifies to this
+15 + y                     # simplifies to this
+15 + 2                     # simplifies to this
+17                         # evaluates to 17
+----
+
+[source, python]
+.Another example
+----
+length = 105
+width = 68
+area = length * width
+
+area                       # 7140
+----
+
+// //////////////////////////////////////////////////////////////
+=== Assignment Statements
+
+****
+An _assignment statement_ is used to set the value of a variable:
+
+[source, python]
+----
+x = 1 + 2
+----
+
+The structure of an assignment statement is as follows:
+
+- First, we state the name of the variable to which a value is being assigned ($x$, here).
+- Second, we have the +=+ sign, indicating that this is an assignment statement.
+- Third, we have an expression (here, it's an integer expression).
+
+When the Python interpreter encounters an assignment statement, it
+evaluates the expression on the right-hand side and assigns the resulting
+value to a variable of the indicated name.
+****
+
+[NOTE]
+====
+Observe that the use of the +=+ symbol here is very different to its use in
+mathematics.
+
++=+ here _is not_ asserting that two quantities are equal:
+
+- it is _always_ an assignment statement,
+- the value resulting from evaluating the expression on the right-hand side
+  should be associated with the variable named on the left.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Variable Names
+
+****
+In the examples above we used five variable names in examples: +x+, +y+,
++length+, +width+ and +area+.
+
+Python enforces rules for the names you choose for variables:
+
+- they may contain letters: +a+ to +z+, +A+ to +Z+,
+- they may contain digits: +0+ to +9+,
+- they may contain the underscore character: +_+, and
+- they may not start with digit.
+****
+
+****
+However, as a matter of style, you should always use the following rules:
+
+Variable names:
+
+- should always start with a lower-case letter,
+- should not contain capital letters, and
+- should contain digits only with very good reason.
+
+The underscore character should be used to join words.
+
+For example, if you had a variable representing an _average score_, then a
+suitable variable name might be +average_score+.
+****
+
+[source, python]
+.Examples of variable names
+----
+total_score = 5675
+count = 23
+average_score = total_score / count
+----
+
+// //////////////////////////////////////////////////////////////
+=== Choice of Variable Names
+
+****
+Variable names should be chosen to be helpful to _somebody
+else_ trying to understand your program.
+
+Obscure, cryptic or otherwise poorly-chosen variable names can make
+computer programs very difficult to understand (hence, difficult to
+maintain).
+
+Generally, it is correct to choose concise descriptive
+variable names (such as +length+, +width+ and +area+, above).
+
+However, as we go along, we will find that very-short conventional variable
+names are usually used in some circumstances.  For example, a suitable
+variable name for an variable storing some unimportant numeric value might
+just be $n$.
+****
+
+// //////////////////////////////////////////////////////////////
+==== Example 1
+
+****
+Poorly chosen variable names can obfuscate the actual computation.
+
+[source, python]
+.Bad:
+----
+a = 105
+b = 68
+c = a * b
+
+# The variable names chosen here are not helpful; it's not clear what is being calculated.
+----
+
+[source, python]
+.Good:
+----
+length = 105
+width = 68
+area = length * width
+
+# Now it's clear.
+----
+****
+
+// //////////////////////////////////////////////////////////////
+==== Example 2
+
+****
+Unhelpful variable names can make debugging hard.  Here's an artificial example.
+
+[source, python]
+.Is this correct?
+----
+x = 100
+y = x * x
+z = 2 * y
+
+# Is this correct?  Incorrect?  Who knows!
+----
+
+[source, python]
+.Clearer:
+----
+side = 100
+area = side * side
+volume = 2 * area
+
+# Now it's clear from the variable names what is intended, and it's clear
+# that there is an error!
+
+# It should probably be ...
+----
+
+[source, python]
+.Correct:
+----
+side = 100
+area = side * side
+volume = side * area
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Variable Vary
+
+****
+The values stored in a variable change with each new assignment statement.
+
+[source, python]
+.Example 3
+----
+x = 3
+x * x         # 9
+
+x = 4
+x * x         # 16
+
+x = x + 1
+x * x         # 25
+----
+
+[source, python]
+.Example 4
+----
+x = 1
+x = x + 1               # 2
+x = x + 1               # 3
+x = x + 1               # 4
+x = x + 1               # 5
+
+
+# Now x's value is 5.
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Swapping Variables
+
+****
+A common problem is to swap the values in two variables.
+
+For example, say you have two variables $a$ and $b$, and each contains some
+(unknown) value.
+
+You want to arrange that:
+
+- the value initially in $a$ ends up in $b$, and
+- the value initially in $b$ ends up in $a$.
+
+To solve this problem, we need a temporary variable:
+
+[source, python]
+----
+tmp = a
+a = b
+b = tmp
+----
+
++tmp+ is the name conventionally used for such a temporary variable.
+****
+
+.Example
+****
+Assume that $a$ is initially $3$ and $b$ is initially $4$.
+
+[source, python]
+----
+             #  a    b    tmp
+             #  3    4
+
+tmp = a      #  3    4    3
+a = b        #  4    4    3
+b = tmp      #  4    3    3
+             #  |    |
+             #  ------ these values have been swapped!
+----
+
+The values in $a$ and $b$ have been swapped.
+
+Observe that this sequence of three assignment statements is correct
+regardless of the actual values of $a$ and $b$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Input and Output
+
+****
+In Python:
+
+- the built-in function +input()+ can be used for reading input,
+- the built-in function +int()+ can be used for converting a value to an
+  integer, and
+- the built-in function +print()+ can be used for writing output.
+****
+
+[source, python]
+.Examples
+----
+x = int(input())     # The variable x contains a value read from the terminal.
+
+print(x * 2)         # Write the value of the variable x doubled to the terminal.
+print(x * 2, x * 3)  # Write the value of the variable x doubled and x trebled.
+----
+
+****
+When we use one of these functions, the parentheses are always required.
+****
+
+****
+This example is perhaps confusing:
+
+[source, python]
+----
+x = int(input())
+----
+
+We can understand this as follows:
+
+[source, python]
+----
+input()              # Read "something" from the terminal.
+int(SOMETHING)       # Convert SOMETHING to an integer.
+int(input())         # Read "something" from the terminal and convert it to an integer.
+
+x = int(input())     # Same thing, assigning the resulting value to variable x.
+----
+****
+
+[NOTE]
+====
+The use of the language "read from terminal" "write to terminal" is
+imprecise, and we will introduce the correct terminology for this later.
+====
+
+// //////////////////////////////////////////////////////////////
+== Python scripts
+
+****
+A Python script is simply a text file containing a sequence of Python
+statements and expressions.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example 1
+
+****
+Write a Python script which outputs the message "hello".
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+print("hello")
+----
+
+.Standard output
+----
+hello
+----
+
+// //////////////////////////////////////////////////////////////
+=== The "shebang"
+
+****
+This is the Python 3 shebang:
+
+[source, python]
+----
+#!/usr/bin/env python3
+----
+
+Exactly this shebang must be the _very first line_ in every Python script.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example 2
+
+****
+Write a Python script which outputs first the message "hello" on one line,
+and then the message "world" on a second line.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+print("hello")
+print("world")
+----
+
+.Standard output
+----
+hello
+world
+----
+
+[NOTE]
+====
+The Python interpreter simply executes or evaluates statements or
+expressions from top to bottom.
+====
+
+// //////////////////////////////////////////////////////////////
+== Examples
+
+// //////////////////////////////////////////////////////////////
+=== Example 3
+
+****
+Write a Python script which reads an integer from standard input, and
+outputs that integer doubled.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+x = int(input())
+
+print(x * 2)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Example 4
+
+****
+Write a Python script which reads an integer from standard input, and
+outputs that integer doubled, trebled and quadrupled, with one output per
+line.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+x = int(input())
+
+print(x * 2)
+print(x * 3)
+print(x * 4)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Example 5
+
+****
+Write a Python script which reads *two* integers from standard input, and
+outputs the sum of those two integers.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+x = int(input())
+y = int(input())
+
+print(x + y)
+----
+
+[NOTE]
+====
+To read _two integers_ from standard input, we simply first read the first
+integer, and then the second.
+
+These statements are executed from top to bottom.
+
+So, the Python interpreter encounters the first assignment and reads a
+first integer, and then encounters the second assignment and reads a
+second integer.
+====
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

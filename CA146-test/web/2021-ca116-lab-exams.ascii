@@ -1,0 +1,63 @@
+= Lab exams
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+There will be three "lab exams":
+
+- one in week four,
+- one in week seven, and
+- one in week ten
+
+Each lab exam will take place at 16:00 in that week's Wednesday-afternoon
+slot and last for 90 minutes.
+****
+
+****
+Here are some details:
+
+- These will be open-book assessments, and will involve you completing a small number of computer programming tasks.
+- The exam tasks will be available on the course web site: http://ca116.computing.dcu.ie/[].
+- You will be uploading your solutions to _Einstein_: http://ca116.computing.dcu.ie/einstein/[].
+
+- Be aware that there may be brief periods during the days and hours
+  leading up to the lab exam during which the regular course web site is
+  not available
+****
+
+.Rules
+****
+- This is an examination; examination rules apply: +
+  communication between classmates (or anybody else) is strictly forbidden.
+- In your solutions to the tasks you are given, you **may not** use Python
+  features which have not been covered in the module.
+****
+
+.What to expect
+****
+- You will be asked to complete a small number of tasks.  The type and scope of
+  the tasks will be similar to those on the regular lab sheets, and the tasks will vary in difficulty.
+- There will be fewer tasks than on a typical lab sheet.
+- The examinable material is everything that has been covered in the
+  module, excluding material covered for the first time in the week of the exam.
+****
+
+.Marking
+****
+- The marking process is primarily automatic.  You will upload your work in
+  the usual way and correct solutions will (initially) receive full marks (for the
+  task) and incorrect solutions zero marks.
+- In addition, all solutions will be briefly reviewed for style and
+  approach.  For example, marks will be deducted for poor solutions, or for
+  solutions which use inappropriate techniques.
+- It will not be possible to provide detailed feedback to all students.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+//
+//vim: ft=asciidoc
+//
+

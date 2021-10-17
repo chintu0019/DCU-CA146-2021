@@ -1,0 +1,356 @@
+= Labsheet 8c
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== The OS module
+
+****
+Previously, we have used the +sys+ module.
+
+The +sys+ module provides access to system-specific parameters and objects
+(such as the command-line arguments, and standard input and standard output).
+
+The +os+ module similarly provides access to miscellaneous operating system features.
+
+Copy the following script into a file and run it.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import os
+files = os.listdir(".")         # Line A.
+
+i = 0
+while i < len(files):
+   if files[i][0] != ".":       # Line B.
+      print(files[i])
+   i = i + 1
+----
+
+****
+It should be clear roughly what is happening: the script is listing the contents of
+a directory, in this case the current working directory.
+Two details might not be obvious, though.
+
+On Unix and Unix-like systems, "+.+" (dot) is the universal name for the
+current working directory (line A); so here, we are listing the
+contents of the current working directory (whatever that might be).
+
+On Unix and Unix-like systems, a leading dot on a file or directory name
+makes that file or directory "hidden" (line +B+).
+
+Hidden files and directories are usually omitted by the +ls+ command (and
+also by your file manager).  Here, we're filtering out the hidden files
+(those for which the character at position $0$ is a dot).
+****
+
+// //////////////////////////////////////////////////////////////
+== Listing files
+
+// //////////////////////////////////////////////////////////////
+=== List python files -- 1
+
+.Task
+****
+Write a Python script named +list-python-files-1.py+ which writes the
+names of all of the Python files in the current working directory to
+standard output, one per line.
+
+Take a Python file to be any file whose name ends with "+.py+".
+****
+
+.Example standard output
+----
+some-file.py
+some-other-file.py
+----
+
+[NOTE]
+====
+The order of the files does not matter because _Einstein_ will sort the
+output for you.
+====
+
+// //////////////////////////////////////////////////////////////
+=== List python files -- 2
+
+.Task
+****
+Write a Python script named +list-python-files-2.py+ which writes the
+names of all of the Python files in the current working directory to
+standard output.
+
+Take a Python file to be any *non-empty* file whose name ends with "+.py+".
+****
+
+.Example standard output
+----
+some-non-empty-file.py
+some-other-non-empty-file.py
+----
+
+[TIP]
+====
+Not really a tip, but...
+
+How might you test for "non-emptiness"?
+====
+
+// //////////////////////////////////////////////////////////////
+=== List python files -- 3
+
+.Task
+****
+Write a Python script named +list-python-files-3.py+ which writes the
+names of all of the Python files in the current working directory to
+standard output.
+
+Take a Python file to be any non-empty file for which:
+
+- either:
+** the file name name _ends_ with the extension "+.py+", _or_
+** the content of the _very first line_ of the file _exactly matches_
+   the Python shebang.
+****
+
+[source, python]
+.Python shebang line
+----
+#!/usr/bin/env python3
+----
+
+.Example standard output
+----
+some-non-empty-file.py
+some-other-non-empty-file       # The shebang must match in this file.
+----
+
+// //////////////////////////////////////////////////////////////
+== Backup files
+
+// //////////////////////////////////////////////////////////////
+=== Backup files -- 1
+
+.Task
+****
+Write a Python script named +backup-files-1.py+ which
+creates a backup copy of every _non-backup file_ in the current working directory.
+****
+
+****
+Details...
+
+For a file named +some-file.txt+, the backup file should be named +some-file.txt.bak+.
+
+A _backup file_ is any file whose name ends with "+.bak+"; so a _non-backup file_ is any other file.
+****
+
+.Example
+----
+some-file.py              # Create a backup named some-file.py.bak.
+some-other-file.txt       # Create a backup named some-other-file.txt.bak.
+yet-another-file.bak      # Do not create a backup of this file.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Backup files -- 2
+
+.Background
+****
+The +os+ module contains methods for checking what type of thing a directory entry is.
+****
+
+[source, python]
+----
+import os
+
+# Test whether an entry is a regular file (or not).
+os.path.isfile("some-file.py")                            # True.
+os.path.isfile("does-not-exits.txt")                      # False.
+os.path.isfile("some-directory")                          # False.
+
+# Test whether an entry is a directory (or not).
+os.path.isdir("some-file.py")                             # False.
+os.path.isdir("some-directory")                           # True.
+----
+
+.Task
+****
+Write a Python script named +backup-files-2.py+ which
+creates a backup copy of every non-backup _regular file_ in the current working
+directory.
+****
+
+.Example
+----
+some-file.py              # Create a backup named some-file.py.bak.
+some-other-file.txt       # Create a backup named some-other-file.txt.bak.
+yet-another-file.bak      # Do not create a backup of this file.
+some-directory            # Do not create a backup of this directory.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Backup files -- 3
+
+****
+The +os+ module also provides a function +os.unlink(file_name)+ which removes
+the indicated file.
+****
+
+.Task
+****
+Write a Python script named +remove-backup-files.py+ which removes all
+backup *regular files* in the current working directory.
+****
+
+[TIP]
+====
+Watch out for unusually-named directories.
+====
+
+// //////////////////////////////////////////////////////////////
+== Other tasks
+
+// //////////////////////////////////////////////////////////////
+=== Treasure hunt
+
+.Task
+****
+The current working directory contains a text file named +start.txt+ and
+some number of other files.
+
+Each file contains either the name of another file, or a message.
+
+Write a Python script named +treasure-hunt.py+ which begins with the file
+named +start.txt+ and follows the sequence of files named until it
+encounters a file whose content *is not* a file name.
+
+Write the message in that file to standard output.
+
+A file's content is a file name if a file of that name exists;  otherwise, it is a message.
+
+This is similar to the children's game https://en.wikipedia.org/wiki/Treasure_hunt_(game)[treasure hunt].
+****
+
+****
+.Example +start.txt+
+----
+a
+----
+
+.Example +a+
+----
+b.txt
+----
+
+.Example +b.txt+
+----
+c.txt
+----
+
+.Example +c.txt+
+----
+Bingo!
+----
+
+.Example standard output
+----
+Bingo!
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== List all files
+
+.Task
+****
+Write a Python script named +list-all-files.py+ which lists *all* files in
+or under the current working directory.
+
+_All files_ here includes files in the current working directory, in
+directories, in sub-directories, and so on.
+****
+
+.Example standard output
+----
+./a.txt
+./b.txt
+./d/a.txt
+./d/b.txt
+./d/a/b/c/d/a.txt
+----
+
+[TIP]
+====
+Recall that dot is the name of the current working directory.
+
+All paths in the output should be preceded by the dot component; (this should make the task easier).
+
+Maintain a list of the directories that you still have to visit.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === List files
+//
+// .Task
+// ****
+// The current working directory contains some number of files and
+// directories; none of the names of the files and directories contain
+// whitespace characters.
+//
+// Write a Python script named +ls.py+ which lists the contents of the
+// directory in alphabetical order by name, preceding each name with either an
+// +f+ or a +d+ to indicate whether the entry is a file or a directory,
+// respectively.
+// ****
+//
+// .Examples:
+// ----
+// Files: main.c makefile test.py
+// Directories: src etc
+// ----
+//
+// .Example standard output
+// ----
+// d etc
+// f ls.py
+// f main.c
+// f makefile
+// f runner.zsh
+// d src
+// f test.py
+// ----
+//
+// .Tip
+// ****
+// You should have an existing implementation of either selection sort or
+// insertion sort which you can re-use _unchanged_ here.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// === Compare files
+//
+// ****
+// If you have not already done so, then try the
+// link:/labsheet-14.html#_compare_files[compare files] task from Tuesday's
+// lab.  It can be solved elegantly  linear search.
+// ****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

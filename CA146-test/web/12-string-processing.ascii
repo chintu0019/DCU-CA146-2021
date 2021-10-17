@@ -1,0 +1,283 @@
+= Text Processing
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Trimming whitespace
+
+****
+The commonly-occurring whitespace characters are space, tab and newline.
+****
+
+****
+It is common to trim whitespace characters from the start and end of
+a string.
+
+Three Python string methods do this:
+
++str.lstrip()+::
+  Return a new string with any whitespace characters trimmed from the _start_
+  of the string.
++str.rstrip()+::
+  Return a new string with any whitespace characters trimmed from the _end_
+  of the string.
++str.strip()+::
+  Equivalent to both of the above.
+****
+
+[source, python]
+----
+s = " Hello   world!   \n"
+s.strip()                   # "Hello   world!"
+----
+
+// //////////////////////////////////////////////////////////////
+== Textual Data
+
+****
+Consider the following data...
+****
+
+.A class timetable
+----
+1 10 1 ca277 lg26 Programming Fundamentals I
+1 11 2 ca222 qg27 Enterprise Information Systems
+1 14 1 ca277 lg26 Programming Fundamentals I
+1 15 1 ca200 qg22 Quantitative Analysis for Business Decisions
+2 11 1 ca214 hg22 Systems Analysis
+2 13 1 ca200 cg86 Quantitative Analysis for Business Decisions
+2 14 2 ca200 l114 Quantitative Analysis for Business Decisions
+3 09 1 ca227 l101 Business Data Management I
+3 11 2 ca277 lg26 Programming Fundamentals I
+4 10 2 ca227 c114 Business Data Management I
+4 13 1 ca214 hg23 Systems Analysis
+4 14 2 ca214 xg19 Systems Analysis
+end
+----
+
+****
+This is textual data.  Each line represents one timetabled event.
+
+Such textual data is common.
+// For example, one of the options when you
+// export data from a spreadsheet is CSV, meaning _comma separated values_ --
+// which is also a textual representation of data.
+
+We already know how to read a sequence of lines into a list of lines.
+
+Here, we learn how to break each line into a sequence of tokens.
+
+This allows us to write programs which manipulate the data based on individual fields.
+****
+
+****
++str.split()+ and +str.join()+ are the two main string methods which we
+will consider.
+****
+
+// //////////////////////////////////////////////////////////////
+== Splitting...
+
+// //////////////////////////////////////////////////////////////
+=== ... on whitespace
+
+****
+The +str.split()+ method splits a string into a _list of
+strings_ using whitespace characters or sequences of whitespace characters as separators.
+
+It returns a list of strings.
+****
+
+[source, python]
+.Example 1
+----
+line = "1 10 1 ca116 lg26 Computer Programming 1"
+
+tokens = line.split()
+print(tokens)          # ['1', '10', '1', 'ca116', 'lg26', 'Computer', 'Programming', '1']
+
+print(tokens[0])       # '1'
+print(tokens[1])       # '10'
+print(tokens[2])       # '1'
+print(tokens[3])       # 'ca116'
+print(tokens[4])       # 'lg26'
+print(tokens[5])       # 'Computer'
+print(tokens[6])       # 'Programming'
+print(tokens[7])       # '1'
+----
+
+[source, python]
+.Example 2
+----
+s = "     hello   world    "
+
+print(s.split())      # ['hello', 'world']
+----
+
+****
+With no arguments, +str.split()+:
+
+- removes any leading or trailing whitespace characters,
+- converts runs of whitespace characters to a single space character, and
+- splits the resulting string on space characters, yielding a list of strings.
+
+In the resulting list, you are guaranteed that:
+
+- none of the strings are empty, and
+- none contain whitespace characters.
+****
+
+****
+The list itself, though, _can_ be empty...
+****
+
+[source, python]
+.Example 3
+----
+s = "    "
+print(s.split())    # []
+----
+
+// //////////////////////////////////////////////////////////////
+=== ... on other characters
+
+****
+It is also possible to use +str.split()+ to split lines on characters _other
+than whitespace_.
+
+In this case, however, the splitting behaviour is slightly different.
+****
+
+[source, python]
+.Example 4
+----
+s = "/home/blott/teaching/ca116/web"
+print(s.split("/"))   # ['', 'home', 'blott', 'teaching', 'ca116', 'web']
+
+s = "Long-Tall--Sally"
+print(s.split("-"))   # ['Long', 'Tall', '', 'Sally']
+----
+
+****
+Observe the leading empty string in the first example, above, and the middle empty string in the second example.
+
+When used like this -- and unlike the first case -- there is no special treatment of whitespace characters, and no special treatment of runs of separator characters.
+****
+
+[source, python]
+.Example 4
+----
+# Here, we parse a date string into year, month and day.
+date = "2018/10/08"
+tokens = date.split("/")
+
+# We pick out the individual parts, and convert them to integers.
+year = int(tokens[0])                   # 2018
+moth = int(tokens[1])                   # 10
+day = int(tokens[2])                    # 8
+
+print(day + "/" + month + "/" + year)   # 8/10/2018
+----
+
+// //////////////////////////////////////////////////////////////
+== Join
+
+****
+Above, we saw how to split a string into a list of tokens.
+
+The opposite of this is joining a list of tokens together to form a single string.
+
+This is the role of the +str.join()+ method.
+****
+
+[source, python]
+.Example 5
+----
+line = "1 10 1 ca116 lg26 Computer Programming I"
+tokens = line.split()
+
+print(" ".join(tokens))    # '1 10 1 ca116 lg26 Computer Programming I'
+print("/".join(tokens))    # '1/10/1/ca116/lg26/Computer/Programming/I'
+print(",".join(tokens))    # '1,10,1,ca116,lg26,Computer,Programming,I'
+print("___".join(tokens))  # '1___10___1___ca116___lg26___Computer___Programming___I'
+print("".join(tokens))     # '1101ca116lg26OmputerProgramming1'
+----
+
+****
+In the general case...
+****
+
+[source, python]
+----
+s = SEPARATOR.join(TOKENS)
+----
+
+****
++TOKENS+ is the list of tokens (strings) you want joined together.
+
++SEPARATOR+ is the separator to place between tokens in the resulting string.
+
+If the separator is the empty string (as in the final line of Example 5,
+above), then the tokens are joined together without any intervening
+characters.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example Task
+
+****
+Write a Python script which, for each timetable
+entry, writes only the module code and the module title to standard output.
+****
+
+.Example standard input
+----
+1 10 1 ca277 lg26 Programming Fundamentals I
+1 11 2 ca222 qg27 Enterprise Information Systems
+1 14 1 ca277 lg26 Programming Fundamentals I
+1 15 1 ca200 qg22 Quantitative Analysis for Business Decisions
+end
+----
+
+.Example standard output
+----
+ca277 Programming Fundamentals I
+ca222 Enterprise Information Systems
+ca277 Programming Fundamentals I
+ca200 Quantitative Analysis for Business Decisions
+----
+
+[source, python]
+.Example solution
+----
+#!/usr/bin/env python3
+
+timetable = []
+
+line = input()
+while line != "end":
+   timetable.append(line)
+   line = input()
+
+# We know that:
+#   - the module code is at position 3, and
+#   - everything from position 5 onwards is the module title.
+
+i = 0
+while i < len(timetable):
+   tokens = timetable[i].split()
+   print(tokens[3], " ".join(tokens[5:]))
+   #     |       |  |                  |
+   #     code_____  title_______________
+   i = i + 1
+----
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

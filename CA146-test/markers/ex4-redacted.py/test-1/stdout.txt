@@ -1,0 +1,6 @@
+showing banned.txt:
+   |Spanish
+   |Inquisition!
+
+running your script:
+   |Nobody expects the ******* ************

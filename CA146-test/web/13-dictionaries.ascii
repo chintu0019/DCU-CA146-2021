@@ -1,0 +1,783 @@
+= Dictionaries
+Stephen Blott <stephen.blott@dcu.ie>
+:numbered:
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== The +in+ operator
+
+// //////////////////////////////////////////////////////////////
+=== Linear search
+
+****
+It is common to test whether an element is present (or not) in a collection
+of elements, for example in a list.
+
+One approach is to use linear search.  For example, given a list +a+ and a
+value +v+, we can test whether +v+ is present in +a+ as follows.
+****
+
+[source, python]
+----
+i = 0
+while i < len(a) and a[i] != v:
+   i = i + 1
+
+if i < len(a):
+   # v is present in a
+else:
+   # v is not present in a
+----
+
+****
+If you are lucky and +v+ happens always to be the first element in +a+, then the cost is $O(1)$.
+
+However, if +v+ turns out not to be present in the list at all, then the
+entire list must be searched before we learn that.
+So the cost is $O(n)$ (where $n$ is the length of the lists).
+
+In the general case, where perhaps half of the list must be search, linear search is
+still $O(n)$ (the cost is still proportional to the length of the list).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example (de-duplicate)
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.
+
+Write a Python script which copies standard input to standard output,
+but omitting words which have been seen previously.
+****
+
+.Approach
+****
+Remember the words that we have previously seen in a list called +seen+.
+
+For each new word, search for it in +seen+:
+
+- if we find it there, then we have seen the word before, so we skip it;
+- otherwise, we haven't seen the word before, so we add it to +seen+ and
+  write it to standard output.
+****
+
+[source, python]
+.De-duplicate:
+----
+#!/usr/bin/env python3
+
+import sys
+
+words = sys.stdin.readlines()
+seen = []
+
+i = 0
+while i < len(words):
+   j = 0
+   while j < len(seen) and seen[j] != words[i]:
+      j = j + 1
+
+   if j == len(seen):
+      seen.append(words[i])
+      sys.stdout.write(words[i])
+   i = i + 1
+----
+
+****
+In the best case (all of the words are the same), the overall cost here is $O(n)$,
+where $n$ is the number of words).
+
+However, for the general case, we have an $O(n)$ inner loop (linear search) within an $O(n)$ outer loop to consider each word in turn, so the overall cost is $O(n^2)$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== The +in+ operator
+
+****
+Python provides a built-in operator for testing the presence of a
+value in a list, the +in+ operator.
+
+The example above can be re-written as follows.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import sys
+
+words = sys.stdin.readlines()
+seen = []
+
+i = 0
+while i < len(words):
+   if words[i] not in seen:       # <-- We use the Python "in" operator.
+      seen.append(words[i])
+      sys.stdout.write(words[i])
+   i = i + 1
+----
+
+****
+That's considerably more concise.
+****
+
+[source, python]
+.Explanation
+----
+# Assume some list a and some value v.
+
+v in a
+# This is a Boolean expression.  It is True whenever v is an element of the
+# list a (and False otherwise).
+
+not (v in a)
+# This is also a Boolean expression.  It is False whenever v is an element of the
+# list a (and True otherwise).
+
+# However, in Python, we almost never write this this way.  To test whether an
+# element is *not* in a list, we use the following not-in operator...
+
+v not in a
+# This is also a Boolean expression.  It is False whenever v is an element of the
+# list a (and True otherwise).
+----
+
+// //////////////////////////////////////////////////////////////
+=== Cost?
+
+****
+Linear search is $O(n)$;
+therefore, the complexity of the original solution above is $O(n^2)$.
+
+Using the +in+ operator does not change this.
+
+Our original linear-search loop is still there, it's just hidden behind some concise Python syntax.
+
+Testing for the presence of an element in a list is fundamentally
+$O(n)$:
+
+- so the cost of using the +in+ operator is still $O(n)$, and
+- the overall cost remains $O(n^2)$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Lists again
+
+****
+Let's think about lists again.
+
+We can think of a list is as a mapping from keys to values, where the keys are always
+non-negative integers (beginning from $0$).
+****
+
+[source, python]
+----
+a = ["dog", "cat", "mouse", "horse"]
+
+# you can think of a is a mapping from integers to strings:
+#
+#   0 -> "dog"
+#   1 -> "cat"
+#   2 -> "mouse"
+#   3 -> "horse"
+----
+
+****
+Given a list +a+, we know its length: +len(a)+.
+
+And given the length of a list +a+, we know all of its keys, +0+, +1+, +2+, ..., +len(a)-1+.
+
+Looking up the value associated with a particular integer key +i+ is fast, it is
+$O(1)$.  This cost does not depend upon the length of the list.
+
+This is because of the way that lists are implemented by the Python interpreter.
+It uses simple arithmetic to directly calculate the position of the $i$-th element of +a+ in memory.
+
+However, testing for the presence
+of a value in a list is slow; we may have to examine every element
+in the list, which is $O(n)$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Dictionaries
+
+****
+A list is as a mapping from non-negative integers to values.
+
+A dictionary is a mapping from _values of any (immutable) type_ to other
+values.
+
+For our purposes, the keys will most frequently be strings,
+and the dictionary will be a mapping of strings to values.  However, in
+general, the keys can be of any immutable type.
+
+Here is an example.
+****
+
+[source, python]
+----
+people = {
+   "Elvis Presley": "08/01/35",
+   "Lisa Presley": "01/02/68",
+   "Robert Zimmerman": "24/05/41",
+   "Adele Adkins": "05/05/88",
+   "Sia Furler": "18/12/75",
+   "Justin Bieber": "01/03/94",
+   "Paul Hewson": "10/05/60",
+}
+
+print people["Robert Zimmerman"]    # "24/05/41"
+print people["Adele Adkins"]        # "05/05/88"
+----
+
+****
+For list literals, we use `[` and `]`.
+
+For dictionary literals, we use braces, `{` and `}`.
+
+Each entry is a pair, a _key_ and a _value_.  In the example above, the
+keys are peoples' names, and the values are their dates of birth.  The keys
+and the values are both strings.
+
+We can assign values to keys in a dictionary dynamically too.  For example,
+the following is equivalent to the example above.
+****
+
+[source, python]
+----
+people = {}                         # A new, empty dictionary.
+
+people["Elvis Presley"] = "08/01/35"
+people["Lisa Presley"] = "01/02/68"
+people["Robert Zimmerman"] = "24/05/41"
+people["Adele Adkins"] = "05/05/88"
+people["Sia Furler"] = "18/12/75"
+people["Justin Bieber"] = "01/03/94"
+people["Paul Hewson"] = "10/05/60"
+
+print people["Robert Zimmerman"]    # "24/05/41"
+print people["Adele Adkins"]        # "05/05/88"
+----
+
+****
+For assignment (and looking up values), we use square brackets, just like
+with lists.  Braces are used only for dictionary literals.
+****
+
+// //////////////////////////////////////////////////////////////
+=== The +in+ operator
+
+****
+We can also use the +in+ operator with dictionaries.
+In this case, the +in+ operator tests whether a key is defined in a
+dictionary (or not).
+****
+
+[source, python]
+----
+print "Justin Bieber" in people     # True
+print "John Lennon" in people       # False
+print "John Lennon" not in people   # True
+----
+
+// //////////////////////////////////////////////////////////////
+=== Cost?
+
+****
+The key point about dictionaries is that:
+
+- _looking up a key_ in a dictionary, and
+- _testing for the presence of a key_ in a dictionary
+
+are both $O(1)$.
+
+These operations are fast: the cost does not depend upon the number of entries in the dictionary.
+
+This is fundamentally different to lists.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example revisited
+
+****
+With dictionaries, we can rewrite our de-duplication example.
+
+Previously, we used a list called +seen+ to store the words which we had
+seen previously.  Looking up each new word in the list was $O(n)$ (so,
+slow), and overall our solution was $O(n^2)$, making it impractical for all
+but the smallest of problem sizes.
+
+Instead of using a list to store the lines which we have seen previously, we
+now use a dictionary.  The keys within the dictionary are the words which we have seen
+previously.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import sys
+
+words = sys.stdin.readlines()
+seen = {}                           # This is now a dictionary.
+
+i = 0
+while i < len(words):
+   if words[i] not in seen:         # This test is now fast (O(1)).
+      seen[words[i]] = True         # Note that we have seen words[i].
+      sys.stdout.write(words[i])
+   i = i + 1
+----
+
+.Example standard input
+----
+dog
+cat
+cat
+mouse
+dog
+----
+
+[source, python]
+----
+# Following execution, the dictionary seen is:
+{
+   "dog": True,
+   "cat": True,
+   "mouse": True,
+}
+----
+
+****
+Previously, the overall cost of our solution was $O(n^2)$.
+
+Using a dictionary instead of a list, the test for whether we have
+seen a word previously is now $O(1)$, so the overall cost
+is just $O(n)$.
+
+This solution, therefore, is also suitable for large data sets.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Iteration
+
+****
+Given an arbitrary list $a$ of length $n$, we know all of the "keys" of
+$a$, they are the integer values form $0$ to $n-1$.
+
+This allows us to examine every element in a list using a simple loop, as
+follows.
+****
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   sys.stdout.write(a[i])       # We know that i is a valid "key" for a.
+   i = i + 1
+----
+
+****
+Given an arbitrary dictionary $d$, we usually _do not_ know the keys of $d$,
+so we cannot just iterate over them as we do with lists.
+
+For iterating over the keys of a dictionary, we need to use a different
+kind of loop, a +for+ loop.
+
+Here is an example.
+****
+
+[source, python]
+----
+people = {
+   "Elvis Presley": "08/01/35",
+   "Lisa Presley": "01/02/68",
+   "Robert Zimmerman": "24/05/41",
+   "Adele Adkins": "05/05/88",
+   "Sia Furler": "18/12/75",
+   "Justin Bieber": "01/03/94",
+   "Paul Hewson": "10/05/60",
+}
+
+for person in people:
+   print person
+----
+
+.Output
+----
+Lisa Presley
+Robert Zimmerman
+Paul Hewson
+Sia Furler
+Justin Bieber
+Adele Adkins
+Elvis Presley
+----
+
+****
+In the +for+ loop above, +person+ is an arbitrary variable name.  The
+programmer (you) can choose any suitable variable name.
+This is known as the _loop variable_.
+
++person+ is a suitable choice for the loop variable here because we happen know that the dictionary contains people.
+
+In the general case, where we do not know the contents of the dictionary, we
+would often use the name +key+ (or even just +k+) for the loop variable. All we know is that it's a key.
+
+Python arranges that the body of the +for+ loop is executed for each entry
+in the dictionary, with the loop variable set to each entry's key in turn.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Ordering
+
+****
+Consider the output in the example above.  Here it is again.
+****
+
+----
+Lisa Presley
+Robert Zimmerman
+Paul Hewson
+Sia Furler
+Justin Bieber
+Adele Adkins
+Elvis Presley
+----
+
+****
+In particular, observe _the order_ in which the output is appears.
+
+When we created the dictionary, the order was +Elvis+, +Lisa+, +Robert+, ...
+
+In the output above, the order is +Lisa+, +Robert+, +Paul+, ...
+****
+
+****
+With dictionaries:
+
+- looking up a key is fast (it is constant time),
+- however we lose the original order of the entries.
+
+This trade off is fundamental; it relates to how dictionaries are
+implemented by the Python interpreter.
+
+With lists, the keys _must be integers_, and we retain the original
+ordering on the entries.  With dictionaries, the keys _can be any
+(immutable) type_, but we lose the original order.
+****
+
+// // //////////////////////////////////////////////////////////////
+// === Iterating in order
+//
+// ****
+// When we iterate over the keys of a dictionary, we visit the keys in what
+// appears to be an arbitrary order.
+// Sometimes, we need to iterate over the keys in a defined order, for
+// example in increasing order.
+//
+// The Python built-in function +sorted()+ can be used to achieve this.
+//
+// For example, continuing the example above, we can iterate over the keys of
+// the dictionary +people+ in alphabetical order as follows.
+// ****
+//
+// [source, python]
+// ----
+// people = {
+//    "Elvis Presley": "08/01/35",
+//    "Lisa Presley": "01/02/68",
+//    "Robert Zimmerman": "24/05/41",
+//    "Adele Adkins": "05/05/88",
+//    "Sia Furler": "18/12/75",
+//    "Justin Bieber": "01/03/94",
+//    "Paul Hewson": "10/05/60",
+// }
+//
+// for person in sorted(people):       # We visit the keys in alphabetical order.
+//    print person
+// ----
+//
+// .Output
+// ----
+// Adele Adkins
+// Elvis Presley
+// Justin Bieber
+// Lisa Presley
+// Paul Hewson
+// Robert Zimmerman
+// Sia Furler
+// ----
+
+// // //////////////////////////////////////////////////////////////
+// === Sorting
+//
+// ****
+// One
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Examples
+
+// //////////////////////////////////////////////////////////////
+=== Word counts
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.
+
+Write a Python script which outputs, for each word encountered, that
+word and a count of the number of times which that word occurred.
+
+The order of the output does not matter.
+****
+
+.Example standard input
+----
+dog
+cat
+mouse
+mouse
+dog
+mouse
+dog
+cat
+dog
+----
+
+.Example standard output
+----
+dog 4
+cat 2
+mouse 3
+----
+
+.Approach
+****
+We need to consider each word from standard input in turn.  For that, we
+can use the same type of loop that we have used throughout, a +while+ loop.
+
+And we need to maintain a count of the number of times which we have seen
+each word.  For that, we use a dictionary (+counts+, below).  The keys are
+the words (so, strings), and the values are the counts (so, integers).
+
+Each value tracks,
+as we proceed, the number of times that we have encountered the corresponding word
+so far.
+
+Within the loop, we increase the count for the current word.
+
+When we're done, we iterate over the keys of the dictionary to produce the required output.
+****
+
+****
+With the example data, above (+dog+, +cat+, +mouse+, +mouse+, +dog+, ...) the dictionary +counts+ is build line by line as follows:
+
+[source, python]
+----
+{ # After "dog":
+   "dog": 1,
+}
+
+{ # After "dog", "cat":
+   "dog": 1,
+   "cat": 1,
+}
+
+{ # After "dog", "cat", "mouse":
+   "dog": 1,
+   "cat": 1,
+   "mouse": 1,
+}
+
+{ # After "dog", "cat", "mouse", "mouse":
+   "dog": 1,
+   "cat": 1,
+   "mouse": 2,
+}
+
+{ # After "dog", "cat", "mouse", "mouse", "dog":
+   "dog": 2,
+   "cat": 1,
+   "mouse": 2,
+}
+----
+****
+
+[source, python]
+.Example solution
+----
+#!/usr/bin/env python3
+
+import sys
+
+words = sys.stdin.readlines()
+counts = {}
+
+i = 0
+while i < len(words):
+   word = words[i].rstrip()         # Strip trailing newline character.
+   if word not in counts:           # Is this a new word?
+      counts[word] = 0
+   counts[word] = counts[word] + 1  # Increment the count for the current word.
+   i = i + 1
+
+for word in counts:
+   print(word, counts[word])
+----
+
+.Explanation
+****
+We begin with an empty dictionary (+counts+).
+
+The structure of the outer loop is exactly as we have seen before.
+
+Within the body of the first loop, we first check whether we have seen
+this word before.  If we have not, then we add a new entry to the
+dictionary.  Then we increment the count for the current word.
+
+When we're done, we iterate over the words (the
+second loop), printing each out in turn.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Distance travelled
+
+****
+This is a more complicated example.
+****
+
+.Background
+****
+Standard input describes a graph, a network of towns together with the lengths of the roads connecting them.
+
+For example, taking there to be five towns named +Athlone+, +Bray+, +Cork+, +Dublin+ and +Enfield+, standard input might be as follows:
+
+.Example standard input
+----
+Athlone Bray 56
+Athlone Cork 72
+Bray Cork 62
+Cork Dublin 106
+Cork Enfield 40
+Enfield Dublin 78
+----
+
+It is 56km from Athlone to Bray, 72km from Athlone to Cork, 62km from Bray to Cork, and so on.
+
+If it is 52km from Athlone to Bray, then it is also 52km from Bray to Athlone.
+
+Town names are always exactly one word (they do not contain hyphens).
+
+The distances in this example are, of course, simply made up.
+****
+
+.Task
+****
+Standard input is as describe above.
+
+Write a Python script which accepts some number of command-line arguments,
+each adjacent pair being towns which are connected by road, and writes the
+total distance in kilometers of the journey described to standard output.
+****
+
+.Example command-line arguments
+----
+Athlone Cork Enfield Cork Bray
+----
+
+.Example standard output
+----
+214
+----
+
+.Explanation
+****
+214 is 72 + 40 + 40 + 62.
+****
+
+.Approach
+****
+Build the graph as a dictionary where the keys are town pairs, and the
+values are distances.  When we learn that it is 56km from Athlone to Bray,
+for example, we add this, and we also add the same distance for Bray to
+Athlone.
+
+In the keys, the town names are separated by hyphens.
+
+For the example input above, the graph/dictionary ends up being:
+[source, python]
+----
+{
+   "Dublin-Enfield": 78,
+   "Enfield-Dublin": 78,
+   "Athlone-Cork": 72,
+   "Cork-Athlone": 72,
+   "Dublin-Cork": 106,
+   "Cork-Dublin": 106,
+   "Athlone-Bray": 56,
+   "Bray-Athlone": 56,
+   "Cork-Bray": 62,
+   "Bray-Cork": 62,
+   "Enfield-Cork": 40,
+   "Cork-Enfield": 40,
+}
+----
+
+Then we traverse the arguments, adding in the distance for each adjacent pair of towns.
+
+For these command-line arguments:
+
+- +Athlone Cork Enfield Cork Bray+
+
+We look up these keys:
+
+- +Athlone-Cork+
+- +Cork-Enfield+
+- +Enfield-Cork+
+- +Cork-Bray+
+****
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+import sys
+
+a = sys.stdin.readlines()
+graph = {}
+
+i = 0
+while i < len(a):
+   tokens = a[i].split()             # ["Athlone", "Bray", "56"]
+   src = tokens[0]                   # "Athlone"
+   dst = tokens[1]                   # "Bray"
+   distance = int(tokens[2])         # 56
+   key1 = src + "-" + dst            # "Athlone-Bray"
+   key2 = dst + "-" + src            # "Bray-Athlone"
+   graph[key1] = distance
+   graph[key2] = distance
+   i = i + 1
+
+args = sys.argv[1:]                  # We skip sys.argv[0], the script name.
+distance = 0
+
+i = 1                                # Start at 1, and always consider positions i-1 and i.
+while i < len(args):
+   key = args[i-1] + "-" + args[i]   # E.g. "Athlone-Bray"
+   distance += graph[key]
+   i = i + 1
+
+print(distance)
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,1119 @@
+= Linear search
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+.Background
+****
+To this point, we have considered two types of loop:
+
+. _do-something-$n$-times_, where we know in advance how many times our
+  loop will iterate, and
+. _search loops_, where we are searching for a line or a value which
+  satisfies some property.
+
+Implicit in all of the examples of search loops which we have
+encountered thus far, is the fact that we _will find_ what we're looking
+for.
+
+We have not tackled any task for which we _may *or may not*
+find_ what we're are looking for.
+
+_Linear search_ is an approach to writing loops which addresses this issue.
+****
+
+// //////////////////////////////////////////////////////////////
+== Short-circuit evaluation
+
+.Consider this example...
+[source, python]
+----
+s = "hello"
+i = len(s)                           # 5
+
+s[i] == " "                          # IndexError!
+                                     # There is no character at position 5 in s.
+
+i < len(s) and s[i] == " "           # False (the index error does not arise!)
+----
+
+****
+This is known as _short circuit evaluation_ of the Boolean operator _and_:
+
+- if the left-operand to _and_ evaluates to _False_,
+- then we already know that the _and_ expression as a whole will evaluate to _False_,
+- so there is no need to evaluate the right operand at all.
+
+In the example above,
+
+- when +i < len[s]+ evaluates to _False_,
+- there is no need to evaluate +s[i] == " "+,
+- so the index error does not arise.
+****
+
+****
+A similar thing happens with the _or_ operator (but the other way around):
+
+- if the left operand to _or_ evaluates to _True_, then the right operand is not evaluated.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example tasks
+
+****
+Consider the following tasks.
+
+They all require linear search.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Leading spaces
+
+.Task
+****
+Standard input consists of a single line of text with leading space characters.
+
+Write a Python script which writes that text to standard output, _but with any leading space characters removed_.
+****
+
+.Example standard input
+----
+       Mary had a little lamb.
+----
+
+.Example standard output
+----
+Mary had a little lamb.
+----
+
+// //////////////////////////////////////////////////////////////
+=== First digit
+
+.Task
+****
+Standard input consists of a single line of text which _may_ contain a digit.
+
+Write a Python script which writes the first digit in the text to standard output.
+
+Your script should produce no output if the text does not contain a digit.
+****
+
+****
+.Example standard input -- 1
+----
+Mary had 1 little lamb.
+----
+
+.Example standard output -- 1
+----
+1
+----
+****
+
+****
+.Example standard input -- 2
+----
+Mary had a little lamb.
+----
+
+.Example standard output -- 2
+----
+                                          # empty (no output at all)!
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// === Strip Leading Spaces 2
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines of text, terminate by a line
+// containing only the text +end+.
+//
+// Write a Python script which copies standard input to standard output, with
+// leading whitespace on each line removed.
+// ****
+//
+// .Example standard input
+// ----
+//       Mary had a little lamb,
+//    it's fleece was white as snow.
+//       And everywhere that Mary went,
+//    the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went,
+// the lamb was sure to go.
+// ----
+//
+// [source, python]
+// .Solution
+// ----
+// #!/usr/bin/env python3
+//
+// s = input()
+// while s != "end":
+//    i = 0                                         # Linear search.
+//    while i < len(s) and s[i].isspace():          #
+//       i = i + 1                                  #
+//    print(s[i:])
+//    s = input()
+// ----
+
+// // //////////////////////////////////////////////////////////////
+// === Grep
+//
+// .Background
+// ****
+// +grep+ is a https://linux.die.net/man/1/grep[Unix utility] for filter lines of text.
+//
+// Here, we implement a simple version of +grep+.
+// ****
+//
+// .Task
+// ****
+// A single command-line argument is provided, a +pattern+.
+//
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script which copies only those lines containing +pattern+ to standard output.
+// ****
+//
+// .Example invocation
+// ----
+// python something.py Mary
+// ----
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went,
+// the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Mary had a little lamb,
+// And everywhere that Mary went,
+// ----
+//
+// [source, python]
+// .Solution
+// ----
+// #!/usr/bin/env python3
+//
+// import sys
+// pattern = sys.argv[1]
+//
+// s = input()
+// while s != "end":
+//    i = 0                                                # Linear search.
+//    while i < len(s) and s[i:i+len(pattern)] != pattern: #
+//       i = i + 1                                         #
+//
+//    if i < len(s):                                       #
+//       print(s)                                          #
+//
+//    s = input()
+// ----
+
+// //////////////////////////////////////////////////////////////
+=== First number
+
+.Task
+****
+Standard input consists of a single line of text which _may_ contain a number.
+
+Write a Python script which writes the first number in the text to standard output.
+
+Your script should produce no output if the text does not contain a number.
+****
+
+.Example standard input
+----
+Mary had 123 little lambs.
+----
+
+.Example standard output
+----
+123
+----
+
+[NOTE]
+====
+Take a number to be a sequence of adjacent digits.
+
+(In other words, we're not interested in negative numbers, or
+floating-point numbers.)
+====
+
+// //////////////////////////////////////////////////////////////
+=== Normalise spaces
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script which copies that line to standard output with
+_leading or trailing spaces removed_, and
+with _exactly one space character between tokens_.
+****
+
+.Example standard input
+----
+  Mary   had   a little lamb,  it's fleece   was   white  as snow.____
+----
+
+.Example standard output
+----
+Mary had a little lamb, it's fleece was white as snow.
+----
+
+[NOTE]
+====
+In the example above, the trailing underscores represent trailing space
+characters (which otherwise would not be visible).
+
+These are removed in the output.
+====
+
+// [source, python]
+// .Solution
+// ----
+// #!/usr/bin/env python3
+//
+// t = ""
+// s = input()
+//
+// while 0 < len(s):                                # Keep going until s is the empty string.
+//
+//    # Trim any leading whitespace.
+//    i = 0                                         # Linear search.
+//    while i < len(s) and s[i].isspace():          #
+//       i = i + 1                                  #
+//    s = s[i:]
+//
+//    # Find the next whitespace position.
+//    i = 0                                         # Linear search (again).
+//    while i < len(s) and not s[i].isspace():      #
+//       i = i + 1                                  #
+//
+//    if 0 < i:                                     # If we found a word, then
+//       t = t + " " + s[:i]                        # add it to t.
+//
+//    s = s[i:]
+//
+// print(t[1:])                                     # Print t, but without leading space character.
+// ----
+
+// //////////////////////////////////////////////////////////////
+=== Is prime
+
+.Definition
+****
+A _prime number_ is an integer greater than or equal to two which is
+divisible only by 1 and itself.
+****
+
+.Task
+****
+Standard input consists of a single line containing an integer +n+.
+
+Write a Python script which outputs either the message "prime" or the
+message "not prime", depending upon whether +n+ is a prime or not.
+****
+
+.Example standard input
+----
+101
+----
+
+.Example standard output
+----
+prime
+----
+
+// [source, python]
+// .Solution
+// ----
+// #!/usr/bin/env python3
+//
+// import sys
+// n = int(sys.argv[1])
+//
+// i = 2                                            # Linear search.
+// while i < n and n % i != 0:                      #
+//    i = i + 1                                     #
+//
+// if 1 < n and i == n:
+//    print("prime")
+// else:
+//    print("not prime")
+// ----
+//
+// .Discussion
+// ****
+// Here, we treat this as a linear search problem:
+// we are searching for a factor of +n+ which disproves the proposition that
+// +n+ is prime.
+//
+// It is technically not necessary to search beyond the square root of
+// +n+, but that optimisation has been omitted above.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Linear search
+
+****
+These tasks are all search tasks; in each case, the solution requires that we search for something:
+
+Leading spaces::
+  We must find the position of the _first non-space character_.
+
+First digit::
+  We must find the position of the _first digit character_.
+
+First number::
+  We must find the position of the _first digit character_ and, after that,
+  the position of the _next non-digit character_.
+
+Normalise spaces::
+  We must repeatedly find the positions of space and non-space characters.
+
+Is prime::
+  We must find the _first number greater than 1 which evenly divides $n$_.
+****
+
+****
+Also, in each case, the possibility exists that we will *not find* what we are searching for.
+
+There may be no non-space characters, or no digits, or no number which evenly divides $n$.
+
+This is different to the type of search problem which we considered previously (for which
+we required the implicit assumption that a match would indeed always be found).
+****
+
+****
+This is a general type of search problem which warrants its own approach, and even its own name.
+
+The approach is known as _linear search_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== General case
+
+****
+In the general case, we are searching for the position of an element satisfying some property $P$.
+
+The pattern is as follows...
+****
+
+[source, python]
+----
+i = 0
+while i < N and not P:
+   i = i + 1
+----
+
+****
+$N$ is the number of elements through which we are searching.
+
+And we are searching for the position of an element satisfying some property $P$, so
+we _keep going_ as long as the current element _does not_ satisfy $P$.
+
+Usually,
+other than incrementing the loop variable +i+, the body of the loop is empty.
+****
+
+.Example
+****
+Consider a concrete example.
+
+Say we have some string +s+, perhaps like this...
+****
+
+[source, python]
+----
+s = "        Mary had a little lamb"
+#    |       |
+#    012345689
+----
+
+****
+Say we are searching for _the position +i+ of the first non-space character in +s+._
+
+In the example, that is position +9+, the position of the character "M".
+****
+
+****
+We are searching for _the position of first non-space character_.
+
+So, we are searching for the first position +i+ such that +s[i] != " "+.
+
+This is our property $P$.
+
+Therefore, we _keep going_ while _not_ $P$, so while +s[i] == " "+.
+
+$N$, in this case, is just the length of the string, so +len(s)+.
+
+Instantiating the pattern above, we get a loop like this...
+****
+
+[source, python]
+----
+i = 0
+while i < len(s) and s[i] == " ":
+   i = i + 1
+----
+
+.Execution in the case of the example
+----
+       012345689
+       |       |
+  s = "        Mary had a little lamb"
+
+  i      i < len(s) and s[i] == " "
+  ---------------------------------
+
+  0      True       and True
+  1      True       and True
+  2      True       and True
+  3      True       and True
+  4      True       and True
+  5      True       and True
+  6      True       and True
+  7      True       and True
+  8      True       and True
+  9      True       and False        <--- The loop stops iterating here.
+
+  And 9 is indeed the position of the first non-space character, as
+  required.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Termination
+
+****
+Eventually the loop will stop iterating.
+
+There are then two possibilities:
+
+- we found the thing we're looking for, or
+- we didn't find the thing we're looking for.
+
+In the case of the example, we either found a non-space character, or we didn't
+find a non-space character (because the string contained only spaces).
+
+When the loop stops iterating, we must distinguish these two cases.
+****
+
+****
+The loop condition is of the form...
+****
+
+[source, python]
+----
+while i < N and not P:
+   ...
+----
+
+****
+Following the loop, the loop condition as a whole must be _False_;
+otherwise the loop would still be iterating.
+
+We test +i < N+ again.
+
+If +i < N+ is _True_:
+
+- then _not_ $P$ must be _False_ (because the loop stopped iterating),
+- so $P$ must be _True_,
+- or, in other words, we have found a position +i+ satisfying $P$.
+
+Otherwise:
+
+- we have searched all positions +i+ and not found a position satisfying $P$,
+- so there is no position +i+ satisfying $P$.
+****
+
+****
+Consider our concrete example again...
+****
+
+[source, python]
+----
+i = 0
+while i < len(s) and s[i] == " ":
+   i = i + 1
+----
+
+****
+When this loop stops, we know that the condition is _False_.
+
+So we know...
+****
+
+[source, python]
+----
+#  A: **********                              Either A must be False...
+#     |        |
+while i < len(s) and s[i] == " ":
+#                    |         |
+#                 B: ***********              or B must be False.
+----
+
+****
+We test +i < len(s)+ again (A, above).
+
+If A is _True_:
+
+- then B must be _False_ (because the loop stopped iterating),
+- therefore +s[i] != " "+,
+- therefore we have found a non-space character at position +i+.
+
+Otherwise, if A is _False_,
+
+- then we have run out of search positions,
+- therefore there are no non-space characters in +s+.
+****
+
+****
+So, we can test whether we have found what we're looking for (the position
+of a non-space character, in this example) as follows...
+****
+
+[source, python]
+----
+i = 0
+while i < len(s) and s[i] == " ":
+   i = i + 1
+
+if i < len(s):
+   # We have found the position of a non-space character.
+else:
+   # No such position exists.
+----
+
+[NOTE]
+====
+Linear search arises commonly in practice.
+
+However it is all too easy to overlook linear search as a
+solution, thereby unnecessarily complicating matters.
+====
+
+// //////////////////////////////////////////////////////////////
+== Example tasks again
+
+****
+Here are the solutions to the five example tasks above.
+
+Each solution involves linear search.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Leading spaces
+
+.Task
+****
+Standard input consists of a single line of text with leading space characters.
+
+Write a Python script which writes that text to standard output, _but with the leading spaces removed_.
+****
+
+.Example standard input
+----
+       Mary had a little lamb.
+----
+
+.Example standard output
+----
+Mary had a little lamb.
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+s = input()
+
+i = 0                               # Linear search.
+while i < len(s) and s[i] == " ":   # Find the position i of the first non-space character.
+   i = i + 1                        #
+
+print(s[i:])
+----
+
+[NOTE]
+====
+Above, we are searching for a non-space character.
+
+Therefore, we keep going while the current character (+s[i]+) is a space character.
+====
+
+// //////////////////////////////////////////////////////////////
+=== First digit
+
+.Task
+****
+Standard input consists of a single line of text which _may_ contain a digit.
+
+Write a Python script which writes the first digit in the text to standard output.
+
+Your script should produce no output if the text does not contain a digit.
+****
+
+.Example standard input
+----
+Mary had 1 little lamb.
+----
+
+.Example standard output
+----
+1
+----
+
+[source, python]
+.Test for a digit
+----
+# All digits are between "0" and "9".
+
+"0" <= s[i] and s[i] <= "9"
+----
+
+[source, python]
+.Test for *not* a digit
+----
+# This is the logical opposite of the test above.
+
+s[i] < "0" or "9" < s[i]
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+s = input()
+
+i = 0                                            # Linear search.
+while i < len(s) and (s[i] < "0" or "9" < s[i]): #
+   i = i + 1                                     #
+
+if i < len(s):
+   print(s[i])
+----
+
+// //////////////////////////////////////////////////////////////
+=== First number
+
+.Task
+****
+Standard input consists of a single line of text which _may_ contain a number.
+
+Write a Python script which writes the first number in the text to standard output.
+
+Your script should produce no output if the text does not contain a number.
+****
+
+.Example standard input
+----
+Mary had 123 little lambs.
+----
+
+.Example standard output
+----
+123
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+s = input()
+
+# As above, a character s[i] is a digit if "0" <= s[i] and s[i] <= "9".
+
+i = 0                                                  # Linear search.
+while i < len(s) and (s[i] < "0" or "9" < s[i]):       #
+   i = i + 1                                           #
+
+if i < len(s):                                         # Have we found a digit?
+   # We have found a digit.
+   # Therefore, we have found the start of a sequence of digits (a number).
+   # Next, we must find the position following the last digit.
+   # We are searching for the next non-digit character.
+   j = i                                               # Linear search again
+   while j < len(s) and "0" <= s[j] and s[j] <= "9":   # Find the next non-digit character.
+      j = j + 1                                        #
+
+   print(s[i:j])
+----
+
+****
+Here, we require linear search twice:
+
+- first, we search for the first digit,
+- then, if we have found one, and knowing the position +i+ of the start
+  of the number, we search for the next non-digit.
+
+For the second loop we use +j+ as our loop variable, because +i+ is already
+being used.
+****
+
+****
+If there _is_ a number in +s+, then we end up in a position like this...
+****
+
+[source, python]
+----
+#             i
+#             |
+s = "Mary had 187256 little lambs."
+#                   |
+#                   j
+
+print(s[i:j])                                          # "187256"
+----
+
+****
+If there _is not_ a number in +s+, then we end up in a position like
+this...
+****
+
+[source, python]
+----
+#                                      i
+#                                      |
+s = "Mary had one hundred little lambs."
+
+# Because i < len(s) is False, we know that we have not found a digit in s.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Normalise spaces
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script which copies that line to standard output with _leading or trailing spaces removed_, and
+with _exactly one space character between words_.
+****
+
+.Example standard input
+----
+  Mary   had   a little lamb,  it's fleece   was   white  as snow.____
+----
+
+.Example standard output
+----
+Mary had a little lamb, it's fleece was white as snow.
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+t = ""
+s = input()
+
+i = 0
+while i < len(s):
+   # Find the position of the next non-space.
+   while i < len(s) and s[i] == " ":          # Linear search.
+      i = i + 1                               #
+
+   j = i
+   if i < len(s):
+      # We have found the position of the start of a word.
+      # Find the position of the next space.
+      while j < len(s) and s[j] != " ":       # Linear search again.
+         j = j + 1                            #
+
+      t = t + " " + s[i:j]
+
+   i = j + 1
+
+print(t[1:])
+----
+
+// //////////////////////////////////////////////////////////////
+=== Is prime
+
+.Definition
+****
+A _prime number_ is an integer greater than or equal to two which is
+divisible only by 1 and itself.
+****
+
+.Task
+****
+Standard input consists of a single line containing an integer +n+.
+
+Write a Python script which writes either the message "prime" or the
+message "not prime" to standard output, depending upon whether +n+ is a prime number or not.
+****
+
+.Example standard input
+----
+101
+----
+
+.Example standard output
+----
+prime
+----
+
+****
+We treat this as a search problem.
+
+We are searching for the first number greater than 1 which evenly divides +n+.
+****
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+n = input()
+
+i = 2                                            # Linear search.
+while i < n and n % i != 0:                      #
+   i = i + 1                                     #
+
+if n < 2 or i < n:
+   print("not prime")
+else:
+   print("prime")
+----
+
+[TIP]
+====
+Can you improve upon this solution?
+
+In particular, it is not necessary to search _all_ of the values
+from 2 to +n+ to determine whether +n+ is a prime.
+
+For example, if +n+ is +101+, then it is enough to search the values up to and including just +10+.
+
+What is the general rule?
+
+How do we change (and substantially improve!) the solution above accordingly?
+====
+
+// //////////////////////////////////////////////////////////////
+== And finally...
+
+// //////////////////////////////////////////////////////////////
+=== Three "similar" tasks
+
+****
+Consider the following very-similar looking tasks.
+
+Each has a fundamentally different solution.
+****
+
+[source, python]
+.Testing for digits
+----
+# The following is True if s[i] is a digit.
+#
+"0" <= s[i] and s[i] <= "9"
+
+# The following is True if s[i] is *not* a digit.
+#
+s[i] < "0" or "9" < s[i]
+
+#
+# The second Boolean expression is the logical opposite if the first.
+----
+
+****
+Standard input consists of a single line of text.
+****
+
+.Task 1
+****
+Write a Python script which writes _each digit_ in the text to standard
+output, one per line.
+****
+
+.Task 2
+****
+Write a Python script which writes _the first digit_ in the text to standard
+output.
+
+_You should assume that a digit does indeed occur in the text._
+****
+
+.Task 3
+****
+Write a Python script which writes _the first digit_ in the text to standard
+output.
+
+Your script should produce no output _if the text does not contain a digit_.
+****
+
+[source, python]
+.Solution to task 1
+----
+#!/usr/bin/env python3
+
+# We must consider each character in s; therefore we use our do-something-n-times pattern.
+
+s = input()
+
+i = 0
+while i < len(s):
+   if "0" <= s[i] and s[i] <= "9":
+      print(s[i])
+   i = i + 1
+----
+
+[source, python]
+.Solution to task 2
+----
+#!/usr/bin/env python3
+
+# We are looking for the first digit, and we know we will find one.
+# So we use a search loop.
+#
+# We are looking for i such that "0" <= s[i] and s[i] <= "9".
+#
+# Therefore we keep going while: s[i] < "0" or "9" < s[i].
+
+s = input()
+
+i = 0
+while s[i] < "0" or "9" < s[i]:
+   i = i + 1
+
+print(s[i])
+----
+
+[source, python]
+.Solution to task 3
+----
+#!/usr/bin/env python3
+
+# We are looking for the first digit, but we don't know that we will find one.
+# So we use linear search.
+#
+# As above, we are looking for i such that "0" <= s[i] and s[i] <= "9".
+#
+# Therefore we keep going while: s[i] < "0" or "9" < s[i].
+
+s = input()
+
+i = 0
+while i < len(s) and (s[i] < "0" or "9" < s[i]):
+   i = i + 1
+
+if i < len(s):
+   print(s[i])
+----
+
+.Conclusion
+****
+Although these tasks appear at first glance to be very similar,
+each requires a different approach.
+
+You will have to learn how to read a task statement and work out what
+approach your solution requires.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Decision tree
+
+****
+Your decision process when encountering a new task requiring a loop should
+be as follows...
+****
+
+----
+Do I know how many times the loop must iterate?
+              |
+              | Yes
+              |
+               -----> do-something-n-times
+
+Otherwise, can I formulate this as a linear search problem?
+              |
+              | Yes
+              |
+               -----> linear search (of course)
+
+Otherwise, fall back to the general search loop, and try to identify what
+it is you're searching for.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Tip 1
+
+****
+When writing a loop, always get the loop right before worrying too much
+about what it does.
+
+To verify that your loop is working, simply put a suitable _print_
+statement somewhere to verify that the variable values are as you expect.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Tip 2
+
+****
+On Unix-like systems (like Linux) the pipe symbol ("|") instructs the shell
+to arrange that the standard output of one command is "piped" as the
+standard input of the next command.
+
+This can speed up the testing process for your Python scripts:
+
+----
+$ echo "3.14" | python3 parse-date.py
+----
+
+Once that command is on your history, then use _Up Arrow_ to find the
+command and _Enter_ to re-run it.
+
+This avoids having to repeatedly enter the same test data.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Warning
+
+****
+If you search online for "Python linear search" then you will find many pages advocating
+using a Python "break" statement.
+
+*Do not follow this advice.*
+
+The internet is not always correct; and, in this case, this is _bad advice_.
+****
+
+****
+For this module, all of the tasks you will encounter can be solved more elegantly,
+clearly and concisely using the approach described above.
+
+In fact, the Python "break" statement is not to be used at all in this module.
+
+Other banned features include "continue", "exit()" and "quit()".
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

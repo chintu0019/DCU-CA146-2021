@@ -1,0 +1,516 @@
+= Labsheet 6a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== List tasks
+
+// //////////////////////////////////////////////////////////////
+=== Read a list of lines
+
+.Task
+****
+Standard input consists of a sequence of lines, terminated by a line containing only the text "end".
+
+Write a Python script named +lines-to-list.py+ which writes those lines to standard output as a list literal.
+****
+
+.Example standard input
+----
+Nobody
+expects
+the
+Spanish Inquisition!
+end
+----
+
+.Example standard output
+----
+['Nobody', 'expects', 'the', 'Spanish Inquisition!']
+----
+
+[TIP]
+====
+If you have a list list $a$ containing the lines as required, then
+write your output as follows:
+
+[source, python]
+----
+print(a)
+----
+====
+
+[source, python]
+.Start like this
+----
+#!/usr/bin/env python
+
+a = []
+
+# FIXME:
+# Read the lines of standard input, appending each in turn to the list a.
+
+# And print the list out, like this...
+print(a)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Label lines
+
+.Task
+****
+Standard input consists of a sequence of lines, terminated by a line containing only the text "end".
+
+Write a Python script named +label-lines.py+ which
+writes each line labelled with its position in the sequence and the total number of lines
+in the sequence to standard output.
+****
+
+.Example standard input
+----
+Nobody
+expects
+the
+Spanish Inquisition!
+end
+----
+
+.Example standard output
+----
+0 4 Nobody
+1 4 expects
+2 4 the
+3 4 Spanish Inquisition!
+----
+
+[TIP]
+====
+The first column in the output is the position of the line in the list, and
+the second column is the total number of lines (4, in this case).
+
+You cannot know the total number of lines until you have read _all of the lines_.
+
+Therefore you cannot produce the first line of output until you have read
+the last line of the input.
+
+Therefore, you will have to store the lines in a list.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Read a list of integers
+
+.Task
+****
+Standard input consists of a *sequence of integers*, one per line, terminated by a line containing only the text "end".
+
+Write a Python script named +lines-to-list-ints.py+ which
+writes those lines to standard output as a list literal.
+****
+
+.Example standard input
+----
+5
+2
+8
+end
+----
+
+.Example standard output
+----
+[5, 2, 8]
+----
+
+[TIP]
+====
+Each line of input contains either an integer or the text "end".
+
+Because, each line _might_ contain contain the text "end", you will have
+to read each line as a string with _input()_, and convert that string to
+an integer with _int()_ only once you know that it does not contain the
+text "end".
+
+Again, if you have a list $a$ containing the integers as required,
+then write your output as follows:
+
+[source, python]
+----
+print(a)
+----
+====
+
+// //////////////////////////////////////////////////////////////
+=== Add something
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line, terminated
+by a line containing only the text "end", and followed then by *one further integer*, $n$ say.
+
+Write a Python script named +add-something.py+ which, for each integer $m$
+in the original sequence, writes $m+n$ to standard output.
+****
+
+.Example standard input
+----
+10
+5
+2
+end
+3
+----
+
+.Example standard output
+----
+13
+8
+5
+----
+
+[TIP]
+====
+Again, here, you cannot know the first line of output until you have read the last line of input.
+
+Therefore you must store each number in a list.
+
+To read the input, read the integers storing them in a list until you
+encounter the text "end" -- as before -- and then simply read one more line:
+
+[source, python]
+----
+a = []
+
+# Read integers into a until encountering the text "end", as before.
+
+n = int(input())  # Read the final integer n.
+----
+====
+
+// //////////////////////////////////////////////////////////////
+== Arguments
+
+.Example invocation
+----
+$ python3 SOMETHING.py dog cat mouse
+----
+
+[source, python]
+.Example script
+----
+#!/usr/bin/env python
+
+import sys              # import the sys module
+
+print(sys.argv[0])      # SOMETHING.py
+
+args = sys.argv[1:]     # strip off the script name
+                        # args is now a list of strings, like any other list of strings
+
+print len(args)         # 3
+
+print args[0]           # dog
+print args[1]           # cat
+print args[2]           # mouse
+----
+
+****
+_sys.argv_ is a list of strings, and the element at position $0$ is always the name of your script.
+
+Usually we aren't interested in that first element, so we strip it off (as above).
+****
+
+[TIP]
+====
+_sys_ is short for _system_, and
+_argv_ is short for _argument vector_.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Copy arguments
+
+.Task
+****
+The _command-line arguments_ consist of a sequence of words.
+
+Write a Python script named +copy-args.py+ which writes each such word to
+standard output, one per line.
+****
+
+.Example invocation
+----
+$ python3 copy-args.py cat dog mouse
+----
+
+.Example standard output
+----
+cat
+dog
+mouse
+----
+
+// //////////////////////////////////////////////////////////////
+=== Add Arguments
+
+.Task
+****
+The _command-line arguments_ consist of a sequence of _integers_.
+
+Write a Python script named +add-args.py+ which writes just the sum of those integers to standard output.
+****
+
+.Example invocation
+----
+$ python3 add-args.py 1 2 3
+----
+
+.Example standard output
+----
+6
+----
+
+[TIP]
+====
+_sys.argv_ is always a list of _strings_.
+
+You will have to convert each element to an integer with _int()_ in order to sum them.
+====
+
+// //////////////////////////////////////////////////////////////
+== More list tasks
+
+// //////////////////////////////////////////////////////////////
+=== Even then odd
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line, terminated
+by a line containing only the text "end".
+
+Write a Python script named +even-then-odd.py+ which writes first _all of
+the even numbers_ encountered to standard output (one per line), and then _all of the odd
+numbers_.
+****
+
+.Example standard input
+----
+3
+7
+2
+5
+6
+end
+----
+
+.Example standard output
+----
+2
+6
+3
+7
+5
+----
+
+[TIP]
+====
+You can print the even numbers out as you encounter them.
+
+You cannot print the odd numbers as you go along, though, because you may
+yet encounter another even number.
+
+Therefore you will have to save the odd numbers in a list, and print them
+out after you have read all of the input.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Reverse lines
+
+.Task
+****
+Standard input consists of a sequence of lines, terminated by a line containing only the text "end".
+
+Write a Python script named +reverse-lines.py+ writes outputs those lines to standard output _in reverse order_.
+****
+
+.Example standard input
+----
+the lamb was sure to go.
+And everywhere that Mary went
+its fleece was white as snow.
+Mary had a little lamb
+end
+----
+
+.Example standard output
+----
+Mary had a little lamb
+its fleece was white as snow.
+And everywhere that Mary went
+the lamb was sure to go.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Grep
+
+.Background
+****
+_grep_ is the name of a standard Unix utility.
+
+_grep_ filter lines of text, including in the output only those input lines which match some pattern.
+
+The unusual-sounding name stands for _global regular expression print_.
+****
+
+.Task
+****
+Standard input consists of a sequence of lines, terminated by a line containing only the text "end".
+
+Further, assume a single command-line argument, a _pattern_.
+
+Write a Python script named +grep-lines.py+ which
+copies the input lines to standard output, but including in the
+output only those lines which contain _pattern_.
+****
+
+.Example invocation
+----
+$ python3 grep-lines.py Mary
+----
+
+.Example standard input
+----
+Mary had a little lamb,
+it's fleece was white as snow.
+And everywhere that Mary went
+the lamb was sure to go.
+end
+----
+
+.Example standard output
+----
+Mary had a little lamb,
+And everywhere that Mary went
+----
+
+[TIP]
+====
+This is a linear-search problem.
+====
+
+// //////////////////////////////////////////////////////////////
+=== De-duplicate Lines
+
+.Task
+****
+Standard input consists of a sequence of lines, terminated by a line containing only the text "end".
+
+Write a Python script named +de-dup-lines.py+ which writes only the first
+occurrence of each line to standard output.
+
+Subsequent duplicates are skipped.
+****
+
+.Example standard input
+----
+red herring
+blue
+red herring
+green
+green
+end
+----
+
+.Example standard output
+----
+red herring
+blue
+green
+----
+
+[TIP]
+====
+Store the lines which you have already seen in a list and, for each new
+line encountered, first check whether the new line occurs in that list.
+
+This is another linear-search problem.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Histogram
+
+****
+This task requires some lateral thinking.
+****
+
+.Task
+****
+Standard input consists of a sequence of digits, one per line, terminated by a line containing only the text "end".
+
+Write a Python script named +histogram.py+ which writes _a histogram of the frequency of occurrence of each digit_
+to standard output.
+
+See the example for the output format.
+****
+
+.Example standard input
+----
+0
+9
+6
+2
+3
+0
+8
+4
+2
+1
+8
+4
+9
+8
+3
+1
+6
+8
+9
+7
+4
+end
+----
+
+.Example standard output
+----
+0 **
+1 **
+2 **
+3 **
+4 ***
+5
+6 **
+7 *
+8 ****
+9 ***
+----
+
+.Explanation
+****
+There were four eights in the example input, but just one seven and no
+fives at all; hence the number of asterisks in each line of the histogram.
+
+(The histogram is on its side.)
+****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,635 @@
+= Labsheet 2b
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+.Links
+****
+_Einstein_ is link:/einstein[here], and _TermCast_ is link:/termcast/[here].
+****
+
+[source, python]
+.The Python 3 shebang
+----
+#!/usr/bin/env python3
+----
+
+.if statements (syntax)
+****
+[source, python]
+----
+# One case...
+#
+if x == 0:
+   print "hello"
+
+# Two cases...
+#
+if x == 0:
+   print "hello"
+else:
+   print "goodbye"
+
+# More cases...
+#
+if x == 0:
+   print "hello"
+elif x == 1:
+   print "goodbye"
+else:
+   print "ciao"
+
+# Notes:
+#   - colons are always *required* for if, else and elif lines
+#   - indentation is significant, it denotes code blocks, and
+#   - the else branch is always optional
+----
+****
+
+.Tabs
+****
+*Do not use tab characters for indentation.*
+
+Most text editors can be configured to replace tabs with spaces.
+
+The nano editor on _Termcast_ cast is configured to replace tabs with
+spaces by default.
+
+Be consistent with indentation.
+
+Pick a number (2, 3 or 4 spaces), and stick to it.  Tabs are replaced with
+4 spaces in nano on _TermCast_ by default.
+****
+
+[TIP]
+====
+. In the tasks below, _click on the task name_ to copy that name to the clipboard. +
+  (That way, even with long task names, you won't accidentally misname your Python script.)
+. To paste on _TermCast_, use _Control-Shift-V_.
+====
+
+// // //////////////////////////////////////////////////////////////
+// == Everest -- again
+//
+// ****
+// Again, take a look http://www.bbc.com/news/world-asia-34383037[here];
+// no one younger than 18 or older than 75 would be allowed to climb Everest.
+// ****
+//
+// .Task
+// ****
+// Write a Python script named +everest-age-again.py+ which initialises a variable +age+ with a suitable integer value, and then outputs either the message:
+//
+// ----
+// You may climb Everest.
+// ----
+//
+// or the message:
+//
+// ----
+// You may not climb Everest.
+// ----
+//
+// as appropriate.
+// ****
+//
+// .Note
+// ****
+// This is different from what we did previously.  It requires you to output _one message_ or _another_, which we couldn't do previously without the conditional execution provided by the +if+ statement.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Weekend
+
+.Task
+****
+Standard input consists of a single integer value in
+the range 0 to 6 (inclusive), where 0 is Monday.
+
+Write a Python script named +weekend.py+ which outputs the message +weekend+ if the day is Saturday or Sunday, and the message +weekday+ otherwise.
+****
+
+****
+.Example standard input 1
+----
+5
+----
+
+.Example standard output 1
+----
+weekend
+----
+****
+
+****
+.Example standard input 2
+----
+4
+----
+
+.Example standard output 2
+----
+weekday
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Longer of Two Strings
+
+.Task
+****
+Standard input consists of exactly two lines of text.
+
+Write a Python script named +longer-of-two-strings.py+ which outputs only
+the longer of the two strings.
+****
+
+****
+.Example standard input 1
+----
+This is short.
+But this is quite long.
+----
+
+.Example standard output 1
+----
+But this is quite long.
+----
+****
+
+****
+.Example standard input 2
+----
+Nobody expects the Spanish
+Inquisition!
+----
+
+.Example standard output 2
+----
+Nobody expects the Spanish
+----
+****
+
+[TIP]
+====
+Use +len(s)+ to find the length of a string.
+
+You should assume that the strings are not of equal length.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Home or Away
+
+.Task
+****
+Standard input consists of two integers, one per line; these are respectively the scores
+of the home and the away teams in a football (soccer) match.
+
+
+Write a Python script named +home-win.py+ which outputs exactly one of the
+following three messages, as appropriate:
+
+----
+Home win.
+----
+
+----
+Draw.
+----
+
+----
+Away win.
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Fizz or Buzz
+
+.Background
+****
+Fizz-buzz is a children's counting came in which:
+
+- any number which is divisible by 3 is replaced with +fizz+, and
+- any number which is divisible by 5 is replaced with +buzz+.
+
+However, numbers which are divisible by _both_ 3 _and_ 5 are replaced with +fizz-buzz+.
+
+For all other numbers, just the number itself is said.
+****
+
+.Task
+****
+Standard input consists of a single integer.
+
+Write a Python script named +fizz-or-buzz.py+ which outputs the appropriate fizz-buzz output for that integer.
+****
+
+****
+.Example standard input 1
+----
+3
+----
+
+.Example standard output 1
+----
+fizz
+----
+****
+
+****
+.Example standard input 2
+----
+4
+----
+
+.Example standard output 2
+----
+4
+----
+****
+
+.Other examples
+----
+1  -> 1
+2  -> 2
+3  -> fizz
+4  -> 4
+5  -> buzz
+6  -> fizz
+7  -> 7
+15 -> fizz-buzz
+----
+
+[TIP]
+====
+You will need an if-elif-else statement.
+
+Note in particular that the order of the cases within that statement
+matters.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Longer of Three Strings
+
+.Task
+****
+Standard input consists of exactly *three* lines of text.
+
+Write a Python script named +longer-of-three-strings.py+ which outputs only
+the longer of the three strings.
+****
+
+****
+.Example standard input 1
+----
+This is short.
+But
+this is quite long.
+----
+
+.Example standard output 1
+----
+this is quite long.
+----
+****
+
+****
+.Example standard input 2
+----
+Nobody expects the
+Spanish
+Inquisition!
+----
+
+.Example standard output 2
+----
+Nobody expects the
+----
+****
+
+[TIP]
+====
+Again, you may assume that no pair of strings is of equal length.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Small Primes
+
+****
+A _prime number_ is a positive integer greater than or equal to 2 which
+is only divisible by 1 and itself.
+****
+
+****
+Standard input consists of a small positive integer, $n$ say; $n$ is strictly less than twenty.
+
+Write a Python script named +small-primes.py+ which
+outputs either the message +prime+ or the message +not prime+ depending
+upon whether $n$ is prime or not.
+****
+
+****
+.Example standard input 1
+----
+5
+----
+
+.Example standard output 1
+----
+prime
+----
+****
+
+****
+.Example standard input 2
+----
+6
+----
+
+.Example standard output 2
+----
+not prime
+----
+****
+
+[TIP]
+====
+If you think carefully about the conditions you use, then you only need
+three branches: an if branch and an elif branch (each with
+a moderately simple condition), and an else branch.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Hailstone Numbers
+
+.Background
+****
+The Hailstone sequence is a sequence of positive integers; you can read about it https://plus.maths.org/content/mathematical-mysteries-hailstone-sequences[here].
+****
+
+.Task
+****
+Standard input consists of a single positive integer, $n$ say.
+
+Write a Python script named +next-hailstone.py+ which outputs just the term following $n$ in the Hailstone sequence.
+****
+
+****
+.Example standard input 1
+----
+10
+----
+
+.Example standard output 1
+----
+5
+----
+****
+
+****
+.Example standard input 2
+----
+5
+----
+
+.Example standard output 2
+----
+16
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Triangle Numbers
+
+.Background
+****
+Take $a$, $b$ and $c$ to be the _supposed_ lengths of the sides of a triangle.
+
+Some values of $a$, $b$ and $c$ can form triangles; for example, 3, 4 and 5.
+
+Some other values of $a$, $b$ and $c$ _cannot_ form a triangle; for example, 1, 2 and 100.
+
+In this latter case, one of the sides is too long for the other two, they
+cannot possibly reach each other to form a triangle).
+
+In fact, even 3, 6 and 3 cannot form a triangle; the best they can do
+is form a line.
+****
+
+.Task
+****
+Standard input consists three positive integers, $a$, $b$ and $c$ say, the supposed lengths of the sides of a triangle, one per line.
+
+Write a Python script named +is-triangle.py+ which outputs either the
+message +yes+ or the message +no+ depending upon whether $a$, $b$ and $c$
+can be the lengths of the sides of a triangle, or not.
+****
+
+****
+.Example standard input 1
+----
+3
+4
+5
+----
+
+.Example standard output 1
+----
+yes
+----
+****
+
+****
+.Example standard input 2
+----
+1
+100
+2
+----
+
+.Example standard output 2
+----
+no
+----
+****
+
+
+// // //////////////////////////////////////////////////////////////
+// == Degree classification
+//
+// .Background
+// ****
+// In DCU, a student's degree classification is based on their overall mark:
+//
+// - _first_: a mark of 70% or more
+// - _second_: any other mark of 50% or more
+// - _third_: any other mark of 40% or more
+// - _fail_: any mark less than 40%
+// ****
+//
+// .Task
+// ****
+// Write a Python script +degree-classification.py+ and begin by assigning an integer value (+65+, say) to the variable +mark+.
+//
+// Add an +if+ statement, the branches of which assign either +"first"+, +"second"+, +"third"+ or +"fail"+ to the variable +classification+.
+//
+// Print out a message for the form:
+//
+//
+// ----
+// A mark of 65 percent is classified as a second
+// ----
+//
+// Try running your script with +mark+ initialised to various suitable values.
+// ****
+//
+// .Tip
+// ****
+// There are multiple cases here.  You will have to use +elif+ clauses.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Overlapping Circles
+
+.Task
+****
+Standard input consists of six positive integers, $x_1$, $y_1$ and $r_1$, and $x_2$, $y_2$ and $r_2$  say, the centres and radii of two circles.
+
+Write a Python script named +overlapping-circles.py+ which outputs either
+the message +yes+ or the message +no+ depending upon whether the two circles overlap or not.
+****
+
+****
+.Example standard input 1
+----
+1
+1
+10
+2
+2
+10
+----
+
+.Example standard output 1
+----
+yes
+----
+****
+
+****
+.Example standard input 2
+----
+1
+1
+1
+10
+10
+1
+----
+
+.Example standard output 2
+----
+no
+----
+****
+
+[NOTE]
+====
+Touching circles are not considered to be overlapping.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Ordinal Indicators
+
+.Background
+****
+An ordinal indicator is the "st", "nd", "rd" or "th" appended to a
+number, as in "1st", "2nd", "3rd", "4th", and so on.
+
+The rule is:
+
+- if the final digit is $1$, then append "st",
+- if the final digit is $2$, then append "nd",
+- if the final digit is $3$, then append "rd",
+- otherwise, append "th"
+
+There are three special cases, though:
+
+- for $11$, $12$ and $13$, the ordinal indicator is "th", as in "11th".
+****
+
+****
+Standard input consists of a single integer, $n$ say.
+
+Write a Python script named +ordinal-indicator.py+ which outputs the ordinal indicator for $n$.
+****
+
+****
+.Example standard input 1
+----
+31
+----
+
+.Example standard output 1
+----
+st
+----
+****
+
+****
+.Example standard input 2
+----
+152
+----
+
+.Example standard output 2
+----
+nd
+----
+****
+
+****
+.Example standard input 3
+----
+11
+----
+
+.Example standard output 3
+----
+th
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Something Different
+//
+// ****
+// The following task is not related to +if+ statements; it is, however,
+// related to something else we have covered this week.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Product Digits
+//
+// .Task
+// ****
+// Standard input consists of two positive integers, +m+ and +n+ say.
+//
+// Write a Python script named +product-digits.py+ which outputs the _number of
+// digits_ in the product of +m+ and +n+.
+//
+// For example, if +m+ and +n+ were +20+ and +80+, then the output would be +4+,
+// because there are four digits in +1600+, the product of +m+ and +n+.
+// ****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

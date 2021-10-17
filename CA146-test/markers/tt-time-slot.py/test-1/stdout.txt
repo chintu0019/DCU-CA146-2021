@@ -1,0 +1,4 @@
+1 10:00 10:50 ca277 lg26 Programming Fundamentals I
+1 11:00 12:50 ca222 qg27 Enterprise Information Systems
+1 15:00 17:50 ca277 lg26 Programming Fundamentals I
+1 15:00 15:50 ca200 qg22 Quantitative Analysis for Business Decisions

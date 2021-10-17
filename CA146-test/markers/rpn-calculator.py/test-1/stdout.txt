@@ -1,0 +1,9 @@
+Testing binary operations...
+3
+30
+32
+4
+1
+11
+2
+81

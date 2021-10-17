@@ -1,0 +1,9 @@
+pi: 3
+radius: 20
+executing...
+variable circumference is now 120
+
+pi: 3.14
+radius: 30
+executing...
+variable circumference is now 188.4

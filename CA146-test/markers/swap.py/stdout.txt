@@ -1,0 +1,27 @@
+running swap.py multiple times...
+
+before: n = 1 , m = 2 after: n = 2 , m = 1
+before: n = 2 , m = 7 after: n = 7 , m = 2
+before: n = 7 , m = 17 after: n = 17 , m = 7
+before: n = 17 , m = 78 after: n = 78 , m = 17
+before: n = 78 , m = 127 after: n = 127 , m = 78
+before: n = 3 , m = 2 after: n = 2 , m = 3
+before: n = 2 , m = 7 after: n = 7 , m = 2
+before: n = 7 , m = 17 after: n = 17 , m = 7
+before: n = 17 , m = 78 after: n = 78 , m = 17
+before: n = 78 , m = 127 after: n = 127 , m = 78
+before: n = 22 , m = 2 after: n = 2 , m = 22
+before: n = 2 , m = 7 after: n = 7 , m = 2
+before: n = 7 , m = 17 after: n = 17 , m = 7
+before: n = 17 , m = 78 after: n = 78 , m = 17
+before: n = 78 , m = 127 after: n = 127 , m = 78
+before: n = 123 , m = 2 after: n = 2 , m = 123
+before: n = 2 , m = 7 after: n = 7 , m = 2
+before: n = 7 , m = 17 after: n = 17 , m = 7
+before: n = 17 , m = 78 after: n = 78 , m = 17
+before: n = 78 , m = 127 after: n = 127 , m = 78
+before: n = 1024 , m = 2 after: n = 2 , m = 1024
+before: n = 2 , m = 7 after: n = 7 , m = 2
+before: n = 7 , m = 17 after: n = 17 , m = 7
+before: n = 17 , m = 78 after: n = 78 , m = 17
+before: n = 78 , m = 127 after: n = 127 , m = 78

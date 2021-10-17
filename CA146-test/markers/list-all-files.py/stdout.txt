@@ -1,0 +1,21 @@
+here are all of the files:
+  ./a/b/c/d/e/long.txt
+  ./a/b/c/x/y/zzz.txt/a
+  ./a/b/c/x/y/zzz.txt/very-long
+  ./a/b/c/x/y/zzz.txt/very-long.py
+  ./a/b/c/x/y/zzz.txt/very-long.txt
+  ./a.txt
+  ./b.txt
+  ./d/a.txt
+  ./d/b.txt
+
+running your script...
+  ./a/b/c/d/e/long.txt
+  ./a/b/c/x/y/zzz.txt/a
+  ./a/b/c/x/y/zzz.txt/very-long
+  ./a/b/c/x/y/zzz.txt/very-long.py
+  ./a/b/c/x/y/zzz.txt/very-long.txt
+  ./a.txt
+  ./b.txt
+  ./d/a.txt
+  ./d/b.txt

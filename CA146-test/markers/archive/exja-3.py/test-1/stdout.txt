@@ -1,0 +1,10 @@
+mouse cat
+marmot dog
+snake dog
+three four
+dog frog
+five six
+one two
+cat zebra
+dog zebra
+horse zebra

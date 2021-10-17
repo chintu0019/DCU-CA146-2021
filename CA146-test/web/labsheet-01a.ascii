@@ -1,0 +1,449 @@
+= Labsheet 1a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+At 14:00 on the day of this lab and for about two hours, I will "hang out"
+at the module's Zoom room:
+
+- https://dcu-ie.zoom.us/j/96296887695[]
+
+You do not have to join there.
+
+However, drop by if you have any issues and I will try to help.
+****
+
+// //////////////////////////////////////////////////////////////
+== Uploading your work
+
+****
+For all of the following tasks, you should upload and verify your solution
+on _Einstein_, link:/einstein/[here].
+****
+
+****
+If you are using link:/termcast/[termcast], then you can
+use the +einstein+ upload command instead.
+
+Upload a script named "hello.py" like this:
+
+[source, sh]
+----
+$ einstein hello.py
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Examples
+
+// //////////////////////////////////////////////////////////////
+=== Example task 1
+
+.Task
+****
+Write a Python script named +hello.py+ which writes the message "hello" to
+standard output.
+****
+
+.Example output
+----
+hello
+----
+
+****
+Run this script in the terminal as follows:
+
+----
+$ python3 hello.py
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Solution 1
+
+****
+Here is the solution to this task.
+
+Using a text editor, create a text file called +hello.py+ with the
+following contents:
+
+[source, python]
+----
+#!/usr/bin/env python
+
+print("hello")
+----
+****
+
+****
+Run this script in the terminal as follows:
+
+----
+$ python3 hello.py
+----
+****
+
+[TIP]
+====
+You can upload this solution to _Einstein_.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Example task 2
+
+.Task
+****
+Write a Python script named +double.py+ which reads a single integer and
+outputs that number doubled.
+****
+
+.Example input
+----
+3
+----
+
+.Example output
+----
+6
+----
+
+// //////////////////////////////////////////////////////////////
+=== Solution 2
+
+****
+Here is the solution to this task.
+
+Using a text editor, create a text file called +double.py+ with the following contents:
+
+[source, python]
+----
+#!/usr/bin/env python
+
+n = int(input())
+
+print(n * 2)
+----
+****
+
+****
+Run this in the terminal as follows:
+
+----
+$ python3 double.py
+----
+
+Enter a number and hit +<Enter>+.  Your script will output the number you entered doubled.
+****
+
+[TIP]
+====
+You can upload this solution to _Einstein_ too.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Observation
+
+****
+When you are asked to complete a lab task, you will usually be provided
+with sample input and the corresponding expected output: for example, $3$
+and $6$, above.
+
+The example input and output *is not* part of the task statement.  It is
+*just an example* of the input your script might expect and the
+corresponding output that it would be required to produce.
+
+The actual input (and hence the actual output) might be different.
+
+Therefore, the example input and output *should almost never occur in your solution*.
+****
+
+****
+For task 2, above, observe that the example solution is correct if the input
+happens to be $3$.
+
+However, the example solution would also be correct _whatever_ the input happened to be.
+
+The values $3$ and $6$ from the example input and output _do not_ occur in the solution.
+****
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Treble
+
+.Task
+****
+Write a Python script named +treble.py+ which reads a single integer and
+outputs that number trebled.
+****
+
+.Example input
+----
+3
+----
+
+.Example output
+----
+9
+----
+
+// //////////////////////////////////////////////////////////////
+=== Square
+
+.Task
+****
+Write a Python script named +square.py+ which reads a single integer and
+outputs that number squared.
+****
+
+.Example input
+----
+4
+----
+
+.Example output
+----
+16
+----
+
+[TIP]
+====
+It is possible to use the exponent operator (+**+) for this task, but
+better to just use multiplication instead.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Gaelic Score
+
+.Task
+****
+Write a Python script named +gaelic-score.py+ when reads _two_ integers,
+first the number of goals in a gaelic football match and then the number of
+points, and outputs the total score.
+****
+
+.Example input
+----
+3
+4
+----
+
+.Example output
+----
+13
+----
+
+.Tips
+****
+In Gaelic football, a goal is worth three points (and a point just one point, of course).
+
+To read _two_ integers, simply read the second one after reading the first, like this:
+
+[source, python]
+----
+a = int(input())    # a is the first number
+b = int(input())    # and b is the second number
+----
+
+In your solution,, of course, you should use more appropriate variable names.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sweets per Child
+
+.Task
+****
+Assume that there are ten children in a group.
+
+Write a Python script named +sweets-per-child.py+ which reads a number of
+sweets (an integer) and outputs the number of sweets each child receives.
+
+Each child receives the most sweets possible such that each child receives the
+same number of sweets.
+
+There may be some sweets left over.
+****
+
+****
+.Example input 1
+----
+30
+----
+
+.Example output 1
+----
+3
+----
+****
+
+****
+.Example input 2
+----
+45
+----
+
+.Example output 2
+----
+4
+----
+
+In this case, there are five sweets left over.
+****
+
+[TIP]
+====
+Recall that the +//+ operator is _integer division_ (any remainder is discarded).
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sweets Left Over
+
+.Task
+****
+Assume that there are ten children in a group.
+
+Write a Python script named +sweets-left-over.py+ which reads a number of
+sweets (an integer) and outputs the number of sweets _left over_ after the
+sweets have been given to the children.
+
+Each child receives the most sweets possible such that each child receives the
+same number of sweets.
+****
+
+****
+.Example input 1
+----
+30
+----
+
+.Example output 1
+----
+0
+----
+
+There are no sweets left over after each child receives three sweets.
+****
+
+****
+.Example input 2
+----
+45
+----
+
+.Example output 2
+----
+5
+----
+
+There are five sweets left over after each child receives four sweets.
+****
+
+// //////////////////////////////////////////////////////////////
+== Trickier Tasks
+
+****
+These two tasks are trickier than the previous tasks, and may require a
+little more thought.
+****
+
+[NOTE]
+====
+None of these tasks require any elements of Python which have not yet been
+covered.
+
+The purpose of these tasks is to solve them using _only_ the elements of
+Python which have been covered this far.
+====
+
+[NOTE]
+====
+If you find these tasks tricky, then skip them for now.  We can talk about
+them tomorrow.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Odd Value or Zero
+
+.Task
+****
+Write a Python script named +odd-value-or-zero.py+ which reads and integer
+($n$, say) and:
+
+- if $n$ is odd, then outputs the value $n$, or
+- if $n$ is even, then outputs just $0$.
+****
+
+****
+.Example input 1
+----
+3
+----
+
+.Example output 1
+----
+3
+----
+
+$n$ is odd, so output $n$ itself.
+****
+
+****
+.Example input 2
+----
+4
+----
+
+.Example output 2
+----
+0
+----
+
+$n$ is even, so output $0$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Even Value or Zero
+
+.Task
+****
+Write a Python script named +even-value-or-zero.py+ which reads and integer
+($n$, say) and:
+
+- if $n$ is *even*, then outputs the value $n$, or
+- if $n$ is *odd*, then outputs just $0$.
+
+(This is the same as the previous task, except the other way around.)
+****
+
+****
+.Example input 1
+----
+3
+----
+
+.Example output 1
+----
+0
+----
+****
+
+****
+.Example input 2
+----
+4
+----
+
+.Example output 2
+----
+4
+----
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// // //////////////////////////////////////////////////////////////

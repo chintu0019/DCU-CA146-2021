@@ -1,0 +1,7 @@
+cat
+elk
+dog
+dog
+pig
+cat
+elk

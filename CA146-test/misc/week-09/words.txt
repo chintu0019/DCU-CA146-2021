@@ -1,0 +1,14 @@
+dog
+cat
+mouse
+mouse
+cat
+elephant
+snake
+cat
+dog
+snake
+marmot
+cat
+marmot
+goose

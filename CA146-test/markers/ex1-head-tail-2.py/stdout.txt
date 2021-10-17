@@ -1,0 +1,12 @@
+str-rstrip.py
+str-split.py
+str-startswith.py
+str-strip.py
+str-upper-vowel.py
+str-xX.py
+sum-five-abs.py
+sum-five-odd-even.py
+sum-five-pos-neg.py
+sum-five.py
+swap-first-and-last.py
+three-copies.py

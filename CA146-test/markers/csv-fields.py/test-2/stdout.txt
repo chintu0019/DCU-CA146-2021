@@ -1,0 +1,10 @@
+LatM
+LatS
+NS
+LonD
+City
+State
+LatD
+LonM
+LonS
+EW

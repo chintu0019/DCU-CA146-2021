@@ -1,0 +1,7 @@
+root /bin/bash
+bin /usr/sbin/nologin
+games /usr/sbin/nologin
+blott /usr/local/bin/zsh
+mysql /bin/false
+mediatomb /usr/sbin/nologin
+gitlab-runner /bin/bash

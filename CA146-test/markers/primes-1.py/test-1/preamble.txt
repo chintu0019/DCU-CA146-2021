@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+def isprime(n):
+   i = 2
+   while i < n and n % i != 0:
+      i = i + 1
+
+   return i == n and 2 <= n
+
+a = [ -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+
+print "a =", str(a)

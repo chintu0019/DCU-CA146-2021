@@ -1,0 +1,29 @@
+before: a = ['cat', 'elephant', 'mouse', 'lizard', 'horse', 'mongoose']
+        i = 1
+        j = 2
+after: a = ['cat', 'mouse', 'elephant', 'lizard', 'horse', 'mongoose']
+
+before: a = ['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef', 'abcdefg']
+        i = 0
+        j = 6
+after: a = ['abcdefg', 'ab', 'abc', 'abcd', 'abcde', 'abcdef', 'a']
+
+before: a = ['87654321', '7654321', '654321', '54321', '4321', '321', '21', '2']
+        i = 3
+        j = 4
+after: a = ['87654321', '7654321', '654321', '4321', '54321', '321', '21', '2']
+
+before: a = ['', '', '', '', '', '', '', '', '', '']
+        i = 3
+        j = 3
+after: a = ['', '', '', '', '', '', '', '', '', '']
+
+before: a = ['mongoose']
+        i = 0
+        j = 0
+after: a = ['mongoose']
+
+before: a = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        i = 6
+        j = 2
+after: a = ['1', '2', '7', '4', '5', '6', '3', '8', '9', '10']

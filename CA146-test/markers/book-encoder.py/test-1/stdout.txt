@@ -1,0 +1,12 @@
+There is no unique output for this task, it depends upon the
+characters from the pages which your implementation chooses
+to use.
+
+Therefore, here, the test runs your encoder, and then runs
+a known-correct decoder to verify that your encoder is correct.
+
+You will only see the output of your encoder if it is incorrect.
+
+Decoded:
+  Mary had a little lamb its fleece was white as snow,
+  And everywhere that Mary went the lamb was sure to go.

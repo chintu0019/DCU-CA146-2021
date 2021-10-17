@@ -1,0 +1,9 @@
+sweets: 78
+children: 5
+  executing...
+  variable sweets_per_child is now 15
+
+sweets: 6796
+children: 56
+  executing...
+  variable sweets_per_child is now 121

@@ -1,0 +1,1364 @@
+= Variables (examples)
+Stephen Blott <stephen.blott@dcu.ie>
+:data-uri:
+:theme: smblott
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+y = 4
+
+z = x + y             # 7
+----
+
+****
+These are _assignment statements_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+y = 4
+
+z = x + y             # 7
+----
+
+****
+$x$, $y$ and $z$ are _variables_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+y = 4
+
+z = x + y             # 7
+----
+
+****
+Let's see what happens when we this Python script is executed...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+y = 4
+
+z = x + y             # 7
+----
+
+****
+The interpreter considers each statement in turn, from top to bottom...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+y = 4
+
+z = x + y             # 7
+----
+
+****
+So we only consider one statement at a time...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+****
+We start with the first statement.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Let's consider what happens in memory.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+The Python interpreter proceeds as follows...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Evaluate the expression on the right-hand side (so, just $3$ here).
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $x$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $x$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($3$) in the newly-allocated memory slot....
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($3$) in the newly-allocated memory slot.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And that's the interpreter done with this assignment statement.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 3
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Then move on to the next statement...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Then move on to the next statement.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Evaluate the expression on the right-hand side (so, $4$ here).
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:                                          x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $y$....
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $y$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   |   |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($4$) in the newly-allocated memory slot....
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($4$) in the newly-allocated memory slot.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+y = 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Then move on to the next statement...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = x + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Then move on to the next statement.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = x + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Evaluate the expression on the right-hand side...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = x + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+This time the expression itself involves variables.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = x + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   |*3*|   |   |
+   ---------------------------------------------------------
+----
+
+****
+Look up $x$ in memory...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = x + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   |*3*|   |   |
+   ---------------------------------------------------------
+----
+
+****
+And replace $x$ in the expression with the value from memory...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And replace $x$ in the expression with the value from memory.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And look up $y$ in memory...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   |*4*|   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And look up $y$ in memory.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + y
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   |*4*|   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And replace $y$ in the expression with the value from memory...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And replace $y$ in the expression with the value from memory.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 3 + 4
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Add them...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Add them.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y                                   x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $z$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+Allocate an area of memory for the new variable $z$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   |   |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($7$) in the newly-allocated memory slot....
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And store the value ($7$) in the newly-allocated memory slot.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+z = 7
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And we could imagine our program continuing with further statements...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = y + z
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+****
+And we could imagine our program continuing with further statements.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = y + z
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   |*4*|   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 4 + z
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 4 + z
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   |*7*|   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 4 + 7
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 11
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 3 |   |   |
+   ---------------------------------------------------------
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 11
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   |*3*|   |   |
+   ---------------------------------------------------------
+----
+
+****
+This time we already have a memory slot for $x$, so we re-use it...
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+x = 11
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 11|   |   |
+   ---------------------------------------------------------
+----
+
+****
+This time we already have a memory slot for $x$, so we re-use it.
+****
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+----
+#
+----
+
+----
+Memory:      y       z                           x
+   ---------------------------------------------------------
+   |   |   | 4 |   | 7 |   |   |   |   |   |   | 11|   |   |
+   ---------------------------------------------------------
+----
+
+****
+And so in, executing each assignment statement in turn.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = EXPRESSION
+----
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = EXPRESSION
+----
+
+****
+Or, because we have only covered integers so far...
+****
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = INTEGER_EXPRESSION
+----
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = INTEGER_EXPRESSION
+----
+
+****
+Assignment statements are always of this form.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = INTEGER_EXPRESSION
+----
+
+****
+The thing on the right can be _any integer expression_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = INTEGER_EXPRESSION
+----
+
+****
+The thing on the right can be _any integer expression_.
+****
+
+****
+And the variable name on the left can be _any valid variable name_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assignment Statements
+
+----
+VARIABLE_NAME = INTEGER_EXPRESSION
+----
+
+****
+The thing on the right can be _any integer expression_.
+****
+
+****
+And the variable name on the left can be _any valid variable name_.
+****
+
+****
+The variable name is *always* on the *left*, and the expression is *always*
+on the *right*.
+****
+
+// //////////////////////////////////////////////////////////////
+== Never like this!
+
+****
+This is **wrong**:
+
+[source, python]
+----
+3 + 4 = x
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Never like this!
+
+****
+This is **wrong**:
+
+[source, python]
+----
+3 + 4 = x
+----
+****
+
+****
+Rather, like this:
+
+[source, python]
+----
+x = 3 + 4
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Never like this!
+
+****
+This is **wrong**:
+
+[source, python]
+----
+width = int(input())
+height = int(input())
+
+area of pitch = width * height
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Never like this!
+
+****
+This is **wrong**:
+
+[source, python]
+----
+width = int(input())
+height = int(input())
+
+area of pitch = width * height
+----
+****
+
+****
+Rather, like this:
+
+[source, python]
+----
+width = int(input())
+height = int(input())
+
+area_of_pitch = width * height
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1
+x = x + 1
+x = x * 8
+x = x % 7
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1
+x = x + 1
+x = x * 8
+x = x % 7
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+****
+Each statement is executed in turn, from top to bottom...
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1
+x = x + 1            ----- Memory
+x = x * 8            |   |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1        <--
+x = x + 1            ----- Memory
+x = x * 8            |   |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1        <--     x
+x = x + 1            ----- Memory
+x = x * 8            |   |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1        <--     x
+x = x + 1            ----- Memory
+x = x * 8            | 1 |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1    <--     ----- Memory
+x = x * 8            | 1 |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1    <--     ----- Memory
+x = x * 8            | 2 |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8    <--     | 2 |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8    <--     | 16|
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8            | 16|
+x = x % 7    <--     -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8            | 2 |
+x = x % 7    <--     -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8            | 2 |
+x = x % 7            -----
+x = x * x    <--
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8            | 4 |
+x = x % 7            -----
+x = x * x    <--
+----
+
+****
+After executing this script, the value of $x$ is?
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1                x
+x = x + 1            ----- Memory
+x = x * 8            | 4 |
+x = x % 7            -----
+x = x * x
+----
+
+****
+After executing this script, the value of $x$ is $4$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Variables' Values Change (They're "Variable")
+
+[source, python]
+.Example:
+----
+x = 1
+x = x + 1
+x = x * 8
+x = x % 7
+x = x * x
+----
+
+.Observe again that
+****
+- "+=+" here is *not* asserting equality
+- it is an assignment statement +
+  the value of the variable may be changed by each assignment
+****
+
+// //////////////////////////////////////////////////////////////
+== Notes
+
+----
+>>> x = 3
+>>> y = z + x
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'z' is not defined
+----
+
+****
+A variable must be defined before it can be used.
+
+If a variable name is used before it is defined, then error occurs.
+****
+
+// //////////////////////////////////////////////////////////////
+== Notes -- Comments
+
+****
+In Python, everything following a +#+ on a line is ignored
+
+This is called a _comment_.
+****
+
+[source, python]
+.Example:
+----
+x = 999    # This text is ignored by the Python interpreter.
+
+# As is this.
+----
+
+// //////////////////////////////////////////////////////////////
+== Example
+
+[source, python]
+.The area of the pitch at Old Trafford:
+----
+length = 105             # in metres
+width = 68               # in metres
+area = length * width    # in square metres
+----
+
+****
+Comments should be used whenever you or somebody else may need
+clarification as to how your script works, or why it is written the way it
+is.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

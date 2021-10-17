@@ -1,0 +1,75 @@
+test 38:
+  first: False
+  second: False
+  third: False
+  fail: True
+test 39:
+  first: False
+  second: False
+  third: False
+  fail: True
+test 40:
+  first: False
+  second: False
+  third: True
+  fail: False
+test 41:
+  first: False
+  second: False
+  third: True
+  fail: False
+test 42:
+  first: False
+  second: False
+  third: True
+  fail: False
+test 48:
+  first: False
+  second: False
+  third: True
+  fail: False
+test 49:
+  first: False
+  second: False
+  third: True
+  fail: False
+test 50:
+  first: False
+  second: True
+  third: False
+  fail: False
+test 51:
+  first: False
+  second: True
+  third: False
+  fail: False
+test 52:
+  first: False
+  second: True
+  third: False
+  fail: False
+test 68:
+  first: False
+  second: True
+  third: False
+  fail: False
+test 69:
+  first: False
+  second: True
+  third: False
+  fail: False
+test 70:
+  first: True
+  second: False
+  third: False
+  fail: False
+test 71:
+  first: True
+  second: False
+  third: False
+  fail: False
+test 72:
+  first: True
+  second: False
+  third: False
+  fail: False

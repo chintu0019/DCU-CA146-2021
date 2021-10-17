@@ -1,0 +1,23 @@
+= CA116 -- Lab Exam Placeholder
+Stephen Blott <stephen.blott@dcu.ie>
+:numbered:
+:toc2:
+:toclevels=4:
+:theme: smblott
+
+****
+The lab exam will be published here at the time that the lab exam starts.
+
+You will have to reload this page.
+
+On most browsers, that's the +F5+ key.
+****
+
+// //////////////////////////////////////////////////////////////
+include::../web/misc/instrument.txt[]
+include::../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

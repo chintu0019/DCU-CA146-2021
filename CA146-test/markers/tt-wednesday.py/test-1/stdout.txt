@@ -1,0 +1,5 @@
+3 11 2 ca222 qg27 Enterprise Information Systems
+3 15 1 ca200 qg22 Quantitative Analysis for Business Decisions
+3 09 1 ca227 l101 Business Data Management I
+3 11 2 ca277 lg26 Programming Fundamentals I
+3 13 1 ca214 hg23 Systems Analysis

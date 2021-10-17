@@ -1,0 +1,4 @@
+s = "   "
+running your script...
+
+0

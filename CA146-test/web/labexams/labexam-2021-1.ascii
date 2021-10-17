@@ -1,0 +1,299 @@
+= Lab exam 1
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+.Rules
+****
+This is an examination; examination rules apply.
+
+You have until 17:30 to complete your work.
+
+All four questions are worth equal marks.
+****
+
+.Einstein Upload
+****
+Name your Python files _exactly_ as instructed in each of the tasks below.
+
+Upload your solutions to _Einstein_, link:/einstein/[here].
+
+You may upload your work as many times as you like.
+
+Later uploads (of the same file name) wholly replace earlier ones.
+
+So, the *last upload* for each task is the one that counts.
+****
+
+[source, python]
+.Shebang
+----
+#!/usr/bin/env python3
+----
+
+[source, python]
+.Tips
+----
+# Use int(input()) when reading integers from standard input.
+#
+n = int(input())
+
+# Use input() when reading a line of text (a string) from standard input.
+#
+s = input()
+----
+
+// //////////////////////////////////////////////////////////////
+== Part A
+
+.Task
+****
+The following Python script contains a number of basic errors (syntax
+errors, indentation errors, etc.).
+
+Make a copy of the script in a file named +ex1-errors.py+ locally, and fix
+those errors.
+
+Then upload that file to _Einstein_.
+****
+
+++++
+<div class="listingblock"> <div class="content"><pre><tt>
+<div class="mvt" task="ex1-errors.py"></div></tt>
+</pre></div></div>
+++++
+
+[TIP]
+._TermCast_ and paste
+====
+Use +Control-Shift-v+ to paste into _TermCast_.
+
+(You can also paste by right-clicking your mouse.)
+
+Unfortunately, both of these seem to break the newline characters.
+
+You will have to fix these by reinserting the line breaks manually.
+
+Sorry.  I can't see a better way right now.
+====
+
+[NOTE]
+====
+None of the errors which you must identify and fix require you to
+understand what the script is doing.
+
+*Do not make any changes beyond those which are necessary to get the script
+to pass the tests on _Einstein_*.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Longest line
+//
+// [NOTE]
+// ====
+// For this task, you are given the solution (below).
+//
+// However, that solution contains errors.
+//
+// Your task is to correct those errors.
+//
+// The logic of the solution is already substantially correct; the errors are all
+// details.
+// ====
+//
+// .Task
+// ****
+// Standard input consists of _exactly eight_ lines of text.
+//
+// Write a Python script named +ex1-longest-line.py+ which writes only the
+// longest line encountered to standard output.
+//
+// You should assume that there is a unique longest line.
+// ****
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went,
+// the lamb was sure to go.
+// He followed her to school one day,
+// that was against the rule.
+// It made the children laugh and play,
+// to see a lamb at school.
+// ----
+//
+// .Example standard output
+// ----
+// It made the children laugh and play,
+// ----
+//
+// [source, python]
+// .Solution (contains errors)
+// ----
+// #!/usr/bin/env python3
+//
+// n = 8
+// longest = ""
+//
+// i = 0
+// while i <= n:
+//    line = int(input)
+//    if len(line) < len(longest)
+//        longest = line
+//    i + i + 1
+//
+// print(longest)
+// ----
+//
+// ****
+// Copy the solution above to a file, fix the errors, and upload the corrected
+// solution to _Einstein_.
+// ****
+//
+// [TIP]
+// ====
+// In _TermCast_, use Control-Shift-v to paste into the terminal.
+// ====
+
+// //////////////////////////////////////////////////////////////
+== Part B
+
+// //////////////////////////////////////////////////////////////
+=== Isosceles triangle
+
+[NOTE]
+====
+An _isosceles triangle_ is a triangle which has two sides of equal length.
+
+All equilateral triangles are also isosceles triangles.
+====
+
+.Task
+****
+Standard input consists of exactly three positive integers, one per line.
+
+These are the lengths of the sides of a triangle.
+
+Write a Python script named +ex1-isosceles-triangle.py+ which writes
+either the message "yes" or the message "no" to standard output depending
+upon whether the triangle is an isosceles triangle or not.
+****
+
+****
+.Example standard input -- 1
+----
+4
+2
+4
+----
+
+.Example standard output -- 1
+----
+yes
+----
+****
+
+****
+.Example standard input -- 2
+----
+3
+4
+5
+----
+
+.Example standard output -- 2
+----
+no
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Odd of even
+
+.Task
+****
+Standard input consists of a sequence of exactly ten integers, one per
+line.
+
+Write a Python script named +ex1-odd-or-even.py+ which writes
+either the message "odd" or the message" even to standard output for each
+number, depending upon whether that number is odd or even.
+****
+
+.Example standard input
+----
+38
+25
+32
+19
+35
+13
+5
+14
+30
+38
+----
+
+.Example standard output
+----
+even
+odd
+even
+odd
+odd
+odd
+odd
+even
+even
+even
+----
+
+[NOTE]
+====
+Your solution must make good use of a while loop.
+
+The word +input+ may occur at most once in your solution.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum numbers
+
+.Task
+****
+Standard input consists of:
+
+- first a single line containing a positive integer, $n$ say,
+- then $n$ further lines.
+
+Each of these subsequent lines contains a _number word_.
+
+The number words are +one+, +two+, +three+, +four+ or +five+.
+
+Write a Python script named +ex1-sum-numbers.py+ which outputs the sum of the corresponding numbers.
+****
+
+.Example standard input
+----
+4
+five
+two
+two
+three
+----
+
+.Example standard output
+----
+12
+----
+
+.Explanation
+****
+$n$ here is $4$, so there are four number words.
+
+The sum of $5$, $2$, $2$ and $3$ is $12$.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]

@@ -1,0 +1,4652 @@
+= Selection Sort
+Stephen Blott <stephen.blott@dcu.ie>
+:data-uri:
+:theme: morteratsch-slidy
+
+// //////////////////////////////////////////////////////////////
+== Today
+
+****
+_Selection sort_, our first general-purpose sorting algorithm.
+****
+
+// //////////////////////////////////////////////////////////////
+== Today
+
+.Plan:
+****
+. task 1
+. task 2
+. selection sort
+. discussion of selection sort
+****
+
+----
+ |--------|  -->  |--------|  -->  |-----------|
+ | Task 1 |       | Task 2 |       | Selection |
+ |        |       |        |       | Sort      |
+ |--------|       |--------|       |-----------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Sorting
+
+.Sorting
+****
+Sorting is the process of _arranging a sequence of elements into order_.
+****
+
+.Ordering
+****
+We assume some ordering on elements:
+
+- e.g. _numerical order_, or _reverse numerical order_, or _alphabetical order_, or _alphanumerical order_
+
+We care only that an ordering exists, we do not care which ordering; any
+ordering will do.
+****
+
+****
+Here, we'll consider integers, and we'll be sorting into _increasing  numerical order_.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Sorting
+//
+// .For today
+// ****
+// - we'll just be using numerical order, because it's simple and convenient
+//
+// However, keep in mind that any ordering will do.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+49 32 39 13 30 12 14 19 31 31
+----
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+49 32 39 13 30 12 14 19 31 31
+----
+
+.After
+----
+12 13 14 19 30 31 31 32 39 49
+----
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.After
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 39, 49]
+----
+
+****
+We'll maintain the sequence as a Python list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.After
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 39, 49]
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Starting
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 32, 39, 13, 30, 49, 14, 19, 31, 31]
+ |                   |
+ | swap              |
+ --------------------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 39, 32, 30, 49, 14, 19, 31, 31]
+     |       |
+     | swap  |
+     --------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 32, 30, 49, 39, 19, 31, 31]
+         |               |
+         | swap          |
+         ----------------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 19, 30, 49, 39, 32, 31, 31]
+             |               |
+             | swap          |
+             ----------------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 19, 30, 49, 39, 32, 31, 31]
+                 |
+                 | swap
+                 |
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 19, 30, 31, 39, 32, 49, 31]
+                     |           |
+                     | swap      |
+                     ------------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 49, 39]
+                         |           |
+                         | swap      |
+                         ------------
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Processing
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 49, 39]
+                             |
+                             | swap
+                             |
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Done
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 39, 49]
+                                 |   |
+                                 |   |
+                                 ----
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Done
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 39, 49]
+                                     |
+                                     |
+                                     |
+----
+
+****
+Sorting is done _in place_, meaning that we _do not_ build a new list;
+rather, we rearrange the elements within the existing list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting -- Example
+
+.Before
+----
+[49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Done
+----
+[12, 13, 14, 19, 30, 31, 31, 32, 39, 49]
+----
+
+****
+No additional memory is required for a second copy of the list.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == In-Place Sorting
+//
+// .With _in-place_ sorting:
+// ****
+// - the elements of the list are rearranged in place
+// - we do not build a new list, and we require (almost) no extra memory
+//
+// Selection sort is an example of an in-place sorting algorithm.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Notation
+
+****
+$a$::
+  the sequence (a list) to be sorted
+
+$N$::
+  the length of $a$ (shorthand for +len(a)+)
+
+$a[j:k]$::
+  that part of $a$ from position $j$ (_inclusive_) to position $k$ (_exclusive_)
+****
+
+// //////////////////////////////////////////////////////////////
+== Notation -- Example
+
+----
+        0  1  2  3  4  5  6  7  8  9
+
+a:     49 32 39 13 30 12 14 19 31 31
+                |      |
+a[3:6]          ========
+
+N:     10
+----
+
+// //////////////////////////////////////////////////////////////
+== Notation -- Example
+
+----
+        0  1  2  3  4  5  6  7  8  9
+
+a:     49 32 39 13 30 12 14 19 31 31
+                |                  |
+a[3:N]          ====================
+
+N:     10
+----
+
+// //////////////////////////////////////////////////////////////
+== Notation -- Example
+
+----
+        0  1  2  3  4  5  6  7  8  9
+
+a:     49 32 39 13 30 12 14 19 31 31
+       |                           |
+a[0:N] =============================
+
+N:     10
+----
+
+// // //////////////////////////////////////////////////////////////
+// == Notation
+//
+// .Note:
+// ****
+// - $N$ is *not* a variable
+// - it's shorthand for $"len"(a)$
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+****
+Assume an existing _non-empty_ list $a$.
+
+Find $p$, the position of the *smallest* element in $a$.
+****
+
+****
+For equal smallest, choose the position of the first candidate.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+****
+Assume an existing _non-empty_ list $a$.
+
+Find $p$, the position of the *smallest* element in $a$.
+****
+
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+49 32 39 13 30 12 14 19 31 31
+
+p = ?
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+****
+Assume an existing _non-empty_ list $a$.
+
+Find $p$, the position of the *smallest* element in $a$.
+****
+
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+****
+Assume an existing _non-empty_ list $a$.
+
+Find $p$, the position of the *smallest* element in $a$.
+****
+.Observation
+****
+The smallest element could be at _any_ position.
+
+Therefore, we will have to examine _every_ position.
+
+Therefore, we use our _do-something-$n$-times_ pattern.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+#
+i = 0
+while i < N:
+   # do something
+   #
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+#
+i = 0
+while i < N:
+   # do something
+   #
+   i = i + 1
+----
+
+****
+Here, $N$ is the length of $a$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+#
+i = 0
+while i < len(a):
+   # do something
+   #
+   i = i + 1
+----
+
+****
+Here, $N$ is the length of $a$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+#
+i = 0
+while i < len(a):
+   # do something
+   #
+   i = i + 1
+----
+
+****
+We start by ``guessing'' that the smallest element is at position $0$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   # do something
+   #
+   i = i + 1
+----
+
+****
+We start by just ``guessing'' that the smallest element is at position $0$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   # do something
+   #
+   i = i + 1
+----
+
+****
+And we update our ``guess'' as we go along (if necessary)...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   # if the current element is a new minimum
+   #    then update p accordingly
+   i = i + 1
+----
+
+****
+And we update our ``guess'' as we go along (if necessary)...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   # if a[i] is a new minimum
+   #    then update p accordingly
+   i = i + 1
+----
+
+****
+And we update our ``guess'' as we go along (if necessary)...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   if a[i] < a[p]:
+      # then update p accordingly
+   i = i + 1
+----
+
+****
+And we update our ``guess'' as we go along (if necessary)...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   if a[i] < a[p]:
+      p = i
+   i = i + 1
+----
+
+****
+And we update our ``guess'' as we go along (if necessary).
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 0
+while i < len(a):
+   if a[i] < a[p]:
+      p = i
+   i = i + 1
+----
+
+****
+There's no need to compare $a[0]$ with itself:
+
+- they're the same thing!
+- so, instead of starting at position $0$ as normal, we can start with $i$ at position $1$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 1
+while i < len(a):
+   if a[i] < a[p]:
+      p = i
+   i = i + 1
+----
+
+****
+There's no need to compare $a[0]$ with itself:
+
+- they're the same thing!
+- so, instead of starting at position $0$ as normal, we can start with $i$ at position $1$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+i = 1
+while i < len(a):
+   if a[i] < a[p]:
+      p = i
+   i = i + 1
+----
+
+****
+Knowing what we will be doing later, we'll choose $j$ as the loop variable...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Knowing what we will be doing later, we'll choose $j$ as the loop variable.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Done
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Observation:
+
+Throughout, $a[p]$ is the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Initially:
+
+$a[0]$ is the smallest element in $a[0:1]$ (trivially).
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+After each iteration:
+
+We update $p$ if the element at the newly-included position is smaller.
+
+So $a[p]$ *remains* the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Upon completion:
+
+- $j$ is $N$,
+- so $a[p]$ is the smallest element in $a[0:N]$, as required.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Let's try "running" this by hand...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+
+
+49 32 39 13 30 12 14 19 31 31
+
+p = ?
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+
+
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+j = ?
+
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+****
+And we begin our loop...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+   |
+   | p = 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | j = 2
+      |
+49 32 39 13 30 12 14 19 31 31
+   |
+   | p = 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | j = 3
+         |
+49 32 39 13 30 12 14 19 31 31
+   |
+   | p = 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | j = 3
+         |
+49 32 39 13 30 12 14 19 31 31
+         |
+         | p = 3
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | j = 4
+            |
+49 32 39 13 30 12 14 19 31 31
+         |
+         | p = 3
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | j = 5
+               |
+49 32 39 13 30 12 14 19 31 31
+         |
+         | p = 3
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | j = 5
+               |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                  | j = 6
+                  |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                     | j = 7
+                     |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                        | j = 8
+                        |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                           | j = 9
+                           |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example -- Done
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | j = 10
+                              |     N
+49 32 39 13 30 12 14 19 31 31       len(a)
+               |
+               | p = 5
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example -- Done
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | j = 10
+                              |     N
+49 32 39 13 30 12 14 19 31 31       len(a)
+               |
+               | p = 5
+----
+
+****
+$a[p]$ (being $12$) is indeed the smallest element in $a[0:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example -- Done
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | j = 10
+                              |     N
+49 32 39 13 30 12 14 19 31 31       len(a)
+               |
+               | p = 5
+----
+
+****
+So $p$ (being $5$) is the _position_ of the smallest element in $a$, as required.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Now, let's run that by hand again...
+****
+
+// start
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+****
+We started like this.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+****
+Observe:
+
+$0$ is the position of the smallest element in $a[0:1]$ (trivially).
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | j = 1
+   |
+49 32 39 13 30 12 14 19 31 31
+|
+| p = 0
+----
+
+****
+And after each iteration...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | j = 2
+      |
+49 32 39 13 30 12 14 19 31 31
+   |
+   | p = 1
+----
+
+****
+$1$ is the position of the smallest element in $a[0:2]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | j = 3
+         |
+49 32 39 13 30 12 14 19 31 31
+   |
+   | p = 1
+----
+
+****
+$1$ is the position of the smallest element in $a[0:3]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | j = 4
+            |
+49 32 39 13 30 12 14 19 31 31
+         |
+         | p = 3
+----
+
+****
+$3$ is the position of the smallest element in $a[0:4]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | j = 5
+               |
+49 32 39 13 30 12 14 19 31 31
+         |
+         | p = 3
+----
+
+****
+$3$ is the position of the smallest element in $a[0:5]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                  | j = 6
+                  |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+$5$ is the position of the smallest element in $a[0:6]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                     | j = 7
+                     |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+$5$ is the position of the smallest element in $a[0:7]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                        | j = 8
+                        |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+$5$ is the position of the smallest element in $a[0:8]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                           | j = 9
+                           |
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+$5$ is the position of the smallest element in $a[0:9]$.
+
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 1 -- Example -- Done
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | j = 10
+                              |     N
+49 32 39 13 30 12 14 19 31 31       len(a)
+               |
+               | p = 5
+----
+
+****
+$5$ is the position of the smallest element in $a[0:10]$.
+
+$p$ is the position of the smallest element in $a[0:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+****
+This is a loop invariant...
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+****
+This is a loop invariant:
+
+- it was true trivially when $j$ was $1$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+****
+This is a loop invariant:
+
+- if it was true _before_ each iteration or our loop, +
+  then it was also true _after_ that iteration...
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+****
+This is a loop invariant:
+
+- therefore, it was _always_ true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:j]$.
+****
+
+****
+This is a loop invariant:
+
+- therefore, it was _always_ true, +
+  including when we're done...
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+****
+$p$ is the position of the smallest element in $a[0:N]$, as required.
+****
+
+****
+Therefore, our solution is correct.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop Invariants
+
+.Formally
+****
+We can _prove_, mathematically, that our solution is correct.
+****
+
+.Informally
+****
+Loop invariants help us reason about the correctness of our solution.
+****
+
+.Debugging
+****
+When having difficulty, ask yourself: _what is always true_?
+****
+
+// end
+
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Observations
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// # <----- here
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+// ----
+//
+// .Before the first iteration:
+// ****
+// - $a[p]$ is the smallest element in +a[0:j]+
+// - because it is the _only_ element in +a[0:j]+
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Observations
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+//    # <----- here
+// ----
+//
+// .After each iteration:
+// ****
+// - $a[p]$ is _still_ the smallest element in +a[0:j]+
+// - because, if we encountered a new smallest element, we changed $p$
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Observations
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+//
+// # <----- here
+// ----
+//
+// .And when the loop completes:
+// ****
+// - $a[p]$ is *still* the smallest element in +a[0:j]+
+// - and +a[0:j]+ is +a[0:N]+, which is *all* of $a$
+// - so $p$ is the position of the smallest element in $a$, as required
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Observations
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+// ----
+//
+// .Such a property:
+// ****
+// - is known as a _loop invariant_
+// - it holds both _before_ and _after_ each iteration of a loop
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Observations
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+// ----
+//
+// .Here, our loop invariant is:
+// ****
+// - $a[p]$ is the smallest element in +a[0:j]+
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Task 1 -- Complete
+//
+// [source, python]
+// ----
+// p = 0
+// j = 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+// ----
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+// //////////////////////////////////////////////////////////////
+== Task 1
+
+****
+Assume an existing _non-empty_ list $a$.
+
+Find $p$, the position of the *smallest* element in $a$.
+****
+
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+****
+Assume an existing _non-empty_ list $a$, and a position $i$.
+
+Find $p$, the position of the *smallest* element in $a[i:N]$.
+****
+
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+****
+Assume an existing _non-empty_ list $a$, and a position $i$.
+
+Find $p$, the position of the *smallest* element in $a[i:N]$.
+****
+
+****
+Well, that's almost identical to the previous task.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+****
+Assume an existing _non-empty_ list $a$, and a position $i$.
+
+Find $p$, the position of the *smallest* element in $a[i:N]$.
+****
+
+****
+The only difference is that:
+
+- instead of starting at position $0$, we start at position $i$
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+We start with our solution to Task 1.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+[source, python]
+----
+p = 0
+j = 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+And, instead of starting at position $0$, we start at position $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+[source, python]
+----
+p = i
+j = ?
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+And, instead of starting at position $0$, we start at position $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2
+
+[source, python]
+----
+p = i
+j = i + 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+And, instead of starting at position $0$, we start at position $i$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Task 2 -- Complete
+
+[source, python]
+----
+p = i
+j = i + 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+// // //////////////////////////////////////////////////////////////
+// == Task 2 -- Complete
+//
+// [source, python]
+// ----
+// p = i
+// j = i + 1
+// while j < len(a):
+//    if a[j] < a[p]:
+//       p = j
+//    j = j + 1
+// ----
+//
+// .Loop invariant:
+// ****
+// - $a[p]$ is the smallest element in +a[i:j]+
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Task 2 -- Complete
+
+[source, python]
+----
+p = i
+j = i + 1
+while j < len(a):
+   if a[j] < a[p]:
+      p = j
+   j = j + 1
+----
+
+****
+Remember this fragment, we'll be using it later.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+.Selection sort:
+****
+- is a general-purpose sorting algorithm
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+.The main idea:
+****
+- maintain the sequence in two parts: a _sorted_ part and an _unsorted part_
+- additionally: +
+  all of the elements in the sorted part are less than or equal to all of the elements in the unsorted part
+// - repeatedly:
+// ** identify the _smallest_ element in the unsorted part
+// ** and "move" it from the unsorted part to the sorted part
+****
+
+// ****
+// - consider each position $i$ of $a$ in turn
+// - for each such position:
+// ** find $p$, the position of the _smallest element_ in $a[i:N]$
+// ** move $a[p]$ -- the smallest element -- into position $i$,
+//    by swapping it with the element at position $a[i]$
+// ** and move on to the next position
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// .Our loop invariants
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// .Our loop invariants
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// .When $i$ is $0$, both of these hold trivially:
+// ****
+// - because +a[0:i]+ is empty
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | | unsorted      |
+=========== =================
+
+
+
+
+And...
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | | unsorted      |
+=========== =================
+    |             |
+    |             |
+    -----         ------------------
+        |                          |
+All of these are less than all of these
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | | unsorted      |
+=========== =================
+----
+
+****
+Initially, the entire sequence is unsorted (the sorted part is empty)...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i
+|
+** ** ** ** ** ** ** ** ** **
+| unsorted                  |
+=============================
+----
+
+****
+Initially, the entire sequence is unsorted (the sorted part is empty).
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | | unsorted      |
+=========== =================
+----
+
+****
+When we're done, the entire sequence will be sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | i
+                              |
+** ** ** ** ** ** ** ** ** **
+| sorted                    |
+=============================
+----
+
+****
+When we're done, the entire sequence will be sorted.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | | unsorted      |
+=========== =================
+----
+
+****
+So, it works like this...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+** ** ** ** ** ** ** ** ** **
+|   unsorted                |
+=============================
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+** ** ** ** ** ** ** ** ** **
+|| | unsorted             |
+== ==========================
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i =2
+      |
+** ** ** ** ** ** ** ** ** **
+|   | |   unsorted          |
+===== =======================
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+** ** ** ** ** ** ** ** ** **
+|      | |   unsorted       |
+======== ====================
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** ** ** ** ** ** **
+| sorted  | |   unsorted    |
+=========== =================
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | i = 5
+               |
+** ** ** ** ** ** ** ** ** **
+| sorted     | | unsorted   |
+============== ==============
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                  | i = 6
+                  |
+** ** ** ** ** ** ** ** ** **
+|   sorted      | |         |
+================= ===========
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                     | i = 7
+                     |
+** ** ** ** ** ** ** ** ** **
+|   sorted         | |      |
+==================== ========
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                        | i = 8
+                        |
+** ** ** ** ** ** ** ** ** **
+|   sorted            | |   |
+======================= =====
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                           | i = 9
+                           |
+** ** ** ** ** ** ** ** ** **
+|   sorted               | ||
+========================== ==
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | i = 10
+                              |     len(a)
+** ** ** ** ** ** ** ** ** **
+|   sorted                  |
+=============================
+----
+
+****
+Done!
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+49 32 39 13 30 12 14 19 31 31
+| unsorted                  |
+=============================
+----
+
+****
+The sequence is initially unsorted.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+49 32 39 13 30 12 14 19 31 31
+
+p = ?
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+49 32 39 13 30 12 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+Swap $a[i]$ and $a[p]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+12 32 39 13 30 49 14 19 31 31
+               |
+               | p = 5
+----
+
+****
+Swap $a[i]$ and $a[p]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+12 32 39 13 30 49 14 19 31 31
+||
+==
+----
+
+****
+$a[0:i+1]$ is now sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+12 32 39 13 30 49 14 19 31 31
+|| |                        |
+== ==========================
+----
+
+****
+And each of $a[0:i+1]$ is less than or equal to each of $a[i+1:N]$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+// | i = 0
+// |
+// 12 32 39 13 30 49 14 19 31 31
+// || |                        |
+// == ==========================
+// ----
+//
+// ****
+// So our loop invariant holds for $i$ being $1$.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+| i = 0
+|
+12 32 39 13 30 49 14 19 31 31
+|| |                        |
+== ==========================
+----
+
+****
+So we can advance $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 32 39 13 30 49 14 19 31 31
+|| |                        |
+== ==========================
+----
+
+****
+So we can advance $i$.
+****
+
+// / //////////////////////////////////////////////////////////////
+// = Selection Sort -- Illustration
+//
+// ---
+//   1  2  3  4  5  6  7  8  9
+//
+//   | i = 1
+//   |
+// 2 32 39 13 30 49 14 19 31 31
+// |
+// =
+// ---
+//
+// ***
+// a[0:i]+ is sorted.
+// ***
+//
+// / //////////////////////////////////////////////////////////////
+// = Selection Sort -- Illustration
+//
+// ---
+//   1  2  3  4  5  6  7  8  9
+//
+//   | i = 1
+//   |
+// 2 32 39 13 30 49 14 19 31 31
+// | |                        |
+// = ==========================
+// ---
+//
+// ***
+// ach of +a[0:i]+ is less than or equal to each of $a[i:N]$.
+// ***
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 32 39 13 30 49 14 19 31 31
+
+p = ?
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 32 39 13 30 49 14 19 31 31
+         |
+         | p = 3
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 32 39 13 30 49 14 19 31 31
+         |
+         | p = 3
+----
+
+****
+Swap $a[i]$ and $a[p]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 13 39 32 30 49 14 19 31 31
+         |
+         | p = 3
+----
+
+****
+Swap $a[i]$ and $a[p]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 13 39 32 30 49 14 19 31 31
+|   |
+=====
+----
+
+****
+$a[0:i+1]$ is now sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 13 39 32 30 49 14 19 31 31
+|   | |                     |
+===== =======================
+----
+
+****
+And each of $a[0:i+1]$ is less than or equal to each of $a[i+1:N]$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//    | i = 1
+//    |
+// 12 13 39 32 30 49 14 19 31 31
+// |   | |                     |
+// ===== =======================
+// ----
+//
+// ****
+// So our loop invariant holds for $i$ being +2+.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+   | i = 1
+   |
+12 13 39 32 30 49 14 19 31 31
+|   | |                     |
+===== =======================
+----
+
+****
+So we can advance $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+|   | |                     |
+===== =======================
+----
+
+****
+So we can advance $i$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//       | i = 2
+//       |
+// 12 13 39 32 30 49 14 19 31 31
+// |   |
+// =====
+// ----
+//
+// ****
+// +a[0:i]+ is sorted.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//       | i = 2
+//       |
+// 12 13 39 32 30 49 14 19 31 31
+// |   | |                     |
+// ===== =======================
+// ----
+//
+// ****
+// Each of +a[0:i]+ is less than or equal to each of $a[i:N]$.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+
+p = ?
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Swap $a[i]$ and $a[p]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Swap $a[i]$ and $a[p]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+****
+$a[0:i+1]$ is now sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      | |                  |
+======== ===================|
+----
+
+****
+And each of $a[0:i+1]$ is less than or equal to each of $a[i+1:N]$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//       | i = 2
+//       |
+// 12 13 14 32 30 49 39 19 31 31
+// |      | |                  |
+// ======== ===================|
+// ----
+//
+// ****
+// So our loop invariant holds for $i$ being +3+.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      | |                  |
+======== ===================|
+----
+
+****
+So we can advance $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 32 30 49 39 19 31 31
+|      | |                  |
+======== ===================|
+----
+
+****
+So we can advance $i$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//          | i = 3
+//          |
+// 12 13 14 32 30 49 39 19 31 31
+// |      |
+// ========
+// ----
+//
+// ****
+// Once again, +a[0:i]+ is sorted.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//          | i = 3
+//          |
+// 12 13 14 32 30 49 39 19 31 31
+// |      | |                  |
+// ======== ====================
+// ----
+//
+// ****
+// And each of +a[0:i]+ is less than or equal to each of $a[i:N]$.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//          | i = 3
+//          |
+// 12 13 14 32 30 49 39 19 31 31
+// |      |
+// ========
+// ----
+//
+// ****
+// So, we proceed as before...
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 32 30 49 39 19 31 31
+
+p = ?
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 32 30 49 39 19 31 31
+                     |
+                     | p = 7
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 32 30 49 39 19 31 31
+                     |
+                     | p = 7
+----
+
+****
+Swap $a[i]$ and $a[p]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 19 30 49 39 32 31 31
+                     |
+                     | p = 7
+----
+
+****
+Swap $a[i]$ and $a[p]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 19 30 49 39 32 31 31
+|         |
+===========
+----
+
+****
+And again, $a[0:i+1]$ is sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 19 30 49 39 32 31 31
+|         | |               |
+=========== =================
+----
+
+****
+And each of $a[0:i+1]$ is less than or equal to each of $a[i+1:N]$.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Illustration
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//          | i = 3
+//          |
+// 12 13 14 19 30 49 39 32 31 31
+// |         | |               |
+// =========== =================
+// ----
+//
+// ****
+// So our loop invariant holds for $i$ being $4$.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 19 30 49 39 32 31 31
+|         | |               |
+=========== =================
+----
+
+****
+So we can advance $i$, again...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+12 13 14 19 30 49 39 32 31 31
+|         | |               |
+=========== =================
+----
+
+****
+So we can advance $i$, again.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+12 13 14 19 30 49 39 32 31 31
+|         | |               |
+=========== =================
+----
+
+****
+And so we continue...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | i = 5
+               |
+12 13 14 19 30 49 39 32 31 31
+|            | |            |
+============== ==============
+----
+
+****
+We swapped position $4$ with itself.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                  | i = 6
+                  |
+12 13 14 19 30 31 39 32 49 31
+|               | |         |
+================= ===========
+----
+
+****
+We swapped position $8$ with position $5$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                     | i = 7
+                     |
+12 13 14 19 30 31 31 32 49 39
+|                  | |      |
+==================== ========
+----
+
+****
+We swapped position $9$ with position $6$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                        | i = 8
+                        |
+12 13 14 19 30 31 31 32 49 39
+|                     | |   |
+======================= =====
+----
+
+****
+We swapped position $7$ with itself.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                           | i = 9
+                           |
+12 13 14 19 30 31 31 32 39 49
+|                        | ||
+========================== ==
+----
+
+****
+We swapped position $9$ with position $8$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+                              | i = 10
+                              |     N
+12 13 14 19 30 31 31 32 39 49       len(a)
+|                           |
+=============================
+----
+
+****
+Eventually:
+
+- $a[0:N]$ (which is the entire list) is sorted, as required.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// .Input
+// ****
+// . a sequence (a list, $a$) of elements
+// . an ordering function +
+//   (we'll just use +\<=+)
+// ****
+//
+// .On completion
+// ****
+// - $a$ is sorted into increasing order w.r.t. +\<=+
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// .As always:
+// ****
+// - the first thing we have to do is to work out how our algorithm works
+// ****
+//
+// .So, let's...
+// ****
+// - work out how selection sort works
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// ****
+// There's an illustration of selection sort in operation https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif[here].
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// image::figures-slidy/FigSortSelectionInv.png[width="70%",align="center"]
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// The list is partitioned into two halves:
+//
+// - +a[:i]+ and +a[i:]+ (for some $i$)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// . +a[:i]+ is sorted
+// . each of +a[:i]+ is _less than or equal to_ each of +a[i:]+
+// ****
+//
+// ****
+// This is called a _loop invariant_.
+//
+// It's a property that:
+//
+// - holds both _before_ and _after_ each iteration of a loop
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// . +a[:i]+ is sorted
+// . each of +a[:i]+ is _less than or equal to_ each of +a[i:]+
+// ****
+//
+// ****
+// It is trivial to ensure that this property holds before entering the loop:
+//
+// - simply set $i$ to $0$ +
+//   (and the property obviously holds because the sorted part is empty)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// . +a[:i]+ is sorted
+// . each of +a[:i]+ is _less than or equal to_ each of +a[i:]+
+// ****
+//
+// ****
+// Then we advance $i$ through the list...
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// . +a[:i]+ is sorted
+// . each of +a[:i]+ is _less than or equal to_ each of +a[i:]+
+// ****
+//
+// ****
+// And, *if* the property holds when we're done (that is, when $i$ is +len(a)+):
+//
+// - *then* the entire list is sorted +
+//   (because the _unsorted part_ is empty, so the rest is sorted)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Example
+//
+// ****
+// TBD
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Approach
+//
+// ****
+// . +a[:i]+ is sorted
+// . each of +a[:i]+ is _less than or equal to_ each of +a[i:]+
+// ****
+//
+// ****
+// So:
+//
+// - we consider each position in turn...
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort
+//
+// .Throughout, the following properties hold:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//             | i = 4
+//             |
+// 12 13 14 19 30 49 39 32 31 31
+// |         | |               |
+// =========== =================
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// .By always choosing the _smallest_ element in $a[i:N]$:
+// ****
+// - both of these properties remain true
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// .On each iteration:
+// ****
+// - we move *exactly one* value from the unsorted part of $a$ to the sorted part
+// - and we choose the *smallest value* from the unsorted part
+// - let's call that value +v+...
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// .+v+ is the _smallest value_ from $a[i:N]$:
+// ****
+// - so the first property above remains true
+// - because the remaining values from the unsorted part are all greater than or equal to +v+
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// .But:
+// ****
+// - +v+ is also greater than or equal to the values in the sorted part +
+//   (*because of property 1*)
+// - so, after appending +v+ to the sorted part, that part remains sorted too
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// ****
+// We can even imagine example without any particular numbers...
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+****
+Throughout, the following properties hold:
+
+. $a[0:i]$ is sorted, and
+. each of $a[0:i]$ is less than or equal to each of $a[i:N]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+|         | |               |
+=========== =================
+----
+
+****
+Consider some arbitrary situation...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+| sorted  | |               |
+=========== =================
+----
+
+****
+Assume that the part of the list on the left is sorted.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+|         | | unsorted      |
+=========== =================
+----
+
+****
+Assume that the part of the list on the right is unsorted.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+| small   | | large         |
+=========== =================
+----
+
+****
+And assume that the elements in the sorted part are each _less than or equal to_ each of the elements in the unsorted part.
+
+Call this *Property 2*.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+|         | |               |
+=========== =================
+----
+
+****
+_Just assume_ that those properties are true in some current state.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+|         | |               |
+=========== =================
+----
+
+****
+We proceed as follows...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** ** ** **
+|         | |               |
+=========== =================
+----
+
+****
+We choose the _smallest element_ in the unsorted part of the list...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** XX ** **
+|         | |               |
+=========== =================
+----
+
+****
+Say this is the smallest.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** XX ** **
+|         | |               |
+=========== =================
+----
+
+****
+And swap it with $a[i]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+|         | |               |
+=========== =================
+----
+
+****
+And swap it with $a[i]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+| sorted  |    |            |
+===========    ==============
+----
+
+.That element:
+****
+- _is greater than or equal to_ all of the elements in the sorted part +
+  (because of *Property 2*)
+- so, when we append it to the sorted part, the sorted part remains sorted
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+| sorted     | |            |
+============== ==============
+----
+
+.That element:
+****
+- _is greater than or equal to_ all of the elements in the sorted part +
+  (because of *Property 2*)
+- so, when we append it to the sorted part, the sorted part remains sorted
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+|         | | larger values |
+=========== =================
+----
+
+.And, that element:
+****
+- _is less than or equal to_ all of the other elements in the unsorted part +
+  (because we chose the smallest element)
+- so, *Property 2* is maintained
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+|         |    | larger v.. |
+===========    ==============
+----
+
+.And, that element:
+****
+- _is less than or equal to_ all of the other elements in the unsorted part +
+  (because we chose the smallest element)
+- so, *Property 2* is maintained
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+|         | |               |
+=========== =================
+----
+
+.So:
+****
+- we can advance $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | i = 5
+               |
+** ** ** ** XX ** ** YY ** **
+|            | |            |
+============== ==============
+----
+
+.So:
+****
+- we can advance $i$
+- and the original properties remain true
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | i = 5
+               |
+** ** ** ** XX ** ** YY ** **
+|            | |            |
+============== ==============
+----
+
+****
+That is *why* selection sort works.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** YY ** ** XX ** **
+|         | |               |
+=========== =================
+----
+
+****
+If the properties described hold _before_ each iteration, ...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+            | i = 4
+            |
+** ** ** ** XX ** ** YY ** **
+|         | |               |
+=========== =================
+----
+
+****
+If the properties described hold _before_ each iteration:
+
+- then they also hold _after_ each iteration...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Properties
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+               | i = 5
+               |
+** ** ** ** XX ** ** YY ** **
+|            | |            |
+============== ==============
+----
+
+****
+If the properties described hold _before_ each iteration:
+
+- then they also hold _after_ each iteration.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Properties
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//             | i = 4
+//             |
+// ** ** ** ** XX ** ** ** ** **
+// |         | |               |
+// =========== =================
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Properties
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//             | i = 4
+//             |
+// ** ** ** ** XX ** ** ** ** **
+// |            | |            |
+// ============== ==============
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Properties
+//
+// .The loop invariants for selection sort are:
+// ****
+// . each of +a[0:i]+ is less than or equal to each of $a[i:N]$
+// . +a[0:i]+ is sorted
+// ****
+//
+// ----
+// 0  1  2  3  4  5  6  7  8  9
+//
+//                | i = 5
+//                |
+// ** ** ** ** XX ** ** ** ** **
+// |            | |            |
+// ============== ==============
+// ----
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .By always choosing the _smallest_ element in $a[i:N]$:
+// ****
+// - each of +a[0:i]+ remains less than or equal to each of $a[i:N]$
+// - because:
+// ** on each iteration, we move *exactly one* element from the unsorted part to the sorted part
+// ** and we always choose the smallest element
+// ** and that element is less than or equal to the remaining elements in the unsorted part
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Loop Invariants
+//
+// .By always choosing the _smallest_ element in $a[i:N]$:
+// ****
+// - +a[0:i]+ remains sorted
+// - because:
+// ** on each iteration, we append *exactly one* element to the sorted part
+// ** and _any_ element we choose from the unsorted part will be greater than or equal to the other elements in the sorted part
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+****
+We need to consider each position $i$ in $a$:
+
+- so, we use our _do-something-$n$-times_ pattern again.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < N:
+   # do something
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < N:
+   # do something
+   i = i + 1
+----
+
+****
+Here, $N$ is again the length of $a$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # do something
+   i = i + 1
+----
+
+****
+Here, $N$ is again the length of $a$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # do something
+   i = i + 1
+----
+
+****
+Next:
+
+- what does "_do something_" require here?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # do something
+   i = i + 1
+----
+
+****
+Well, it's:
+
+. find $p$, the position of the smallest element in $a[i:N]$
+. swap $a[i]$ and $a[p]$
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # find p, the position of
+   # the smallest element in a[i:N]
+
+   # swap a[i] and a[p]
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # find p, the position of
+   # the smallest element in a[i:N]
+
+   # swap a[i] and a[p]
+
+   i = i + 1
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:N]$:
+
+- but *that's what we did in Task 2*, previously!
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   # find p, the position of
+   # the smallest element in a[i:N]
+
+   # swap a[i] and a[p]
+
+   i = i + 1
+----
+
+****
+So, we can just re-use the fragment from Task 2...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Complete
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   #                  # find p, the
+   #                  # position of the
+   #                  # smallest element
+   #                  # in a[i:N]
+   #                  #
+   #                  #
+
+   #                  # swap a[i] and a[p]
+   #                  #
+   #                  #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i              # find p, the
+   j = i + 1          # position of the
+   while j < len(a):  # smallest element
+      if a[j] < a[p]: # in a[i:N]
+         p = j        #
+      j = j + 1       #
+
+   #                  # swap a[i] and a[p]
+   #                  #
+   #                  #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i              # find p, the
+   j = i + 1          # position of the
+   while j < len(a):  # smallest element
+      if a[j] < a[p]: # in a[i:N]
+         p = j        #
+      j = j + 1       #
+
+   tmp = a[p]         # swap a[i] and a[p]
+   #                  #
+   #                  #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i              # find p, the
+   j = i + 1          # position of the
+   while j < len(a):  # smallest element
+      if a[j] < a[p]: # in a[i:N]
+         p = j        #
+      j = j + 1       #
+
+   tmp = a[p]         # swap a[i] and a[p]
+   a[p] = a[i]        #
+   #                  #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Implementation
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i              # find p, the
+   j = i + 1          # position of the
+   while j < len(a):  # smallest element
+      if a[j] < a[p]: # in a[i:N]
+         p = j        #
+      j = j + 1       #
+
+   tmp = a[p]         # swap a[i] and a[p]
+   a[p] = a[i]        #
+   a[i] = tmp         #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Complete
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Note
+
+****
+Note to self, see:
+
+  ../misc/week-07/selection-sort-interactive.py
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+.Cost
+****
+How computationally expensive is that?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+.Cost
+****
+How computationally expensive is that?
+****
+
+.Alternatively
+****
+Find the part of the code which we execute _most often_, and count how many times we execute that code.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Complete
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Complete
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i
+   j = i + 1
+   while j < len(a):      # <-- This test is the "thing"
+      if a[j] < a[p]:     #     which we do most often.
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+.Cost
+****
+How computationally expensive is that?
+****
+
+.Alternatively
+****
+How many times do evaluate that test?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX # we loop 9 times
+i = 1 XXXXXXXX  # we loop 8 times
+i = 2 XXXXXXX   # and so on...
+i = 3 XXXXXX
+i = 4 XXXXX
+i = 5 XXXX
+i = 6 XXX
+i = 7 XX
+i = 8 X
+i = 9
+----
+
+****
+Each +X+ here represents a test of the condition in the inner loop.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX|
+i = 1 XXXXXXXX |
+i = 2 XXXXXXX  |
+i = 3 XXXXXX   |
+i = 4 XXXXX    |
+i = 5 XXXX     |
+i = 6 XXX      |
+i = 7 XX       |
+i = 8 X        |
+i = 9 ---------
+----
+
+****
+The cost is (approximately) half of a square of side $n-1$, where $n$ is the length of the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX|
+i = 1 XXXXXXXX |
+i = 2 XXXXXXX  |
+i = 3 XXXXXX   |
+i = 4 XXXXX    |
+i = 5 XXXX     |
+i = 6 XXX      |
+i = 7 XX       |
+i = 8 X        |
+i = 9 ---------
+----
+
+****
+Therefore, the cost is roughly $1/2(n-1)^2$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX|
+i = 1 XXXXXXXX |
+i = 2 XXXXXXX  |
+i = 3 XXXXXX   |
+i = 4 XXXXX    |
+i = 5 XXXX     |
+i = 6 XXX      |
+i = 7 XX       |
+i = 8 X        |
+i = 9 ---------
+----
+
+****
+Therefore, the cost is _proportional to_ $(n-1)^2$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX|
+i = 1 XXXXXXXX |
+i = 2 XXXXXXX  |
+i = 3 XXXXXX   |
+i = 4 XXXXX    |
+i = 5 XXXX     |
+i = 6 XXX      |
+i = 7 XX       |
+i = 8 X        |
+i = 9 ---------
+----
+
+****
+Therefore, the cost is proportional to $n^2-2n+1$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+----
+i = 0 XXXXXXXXX|
+i = 1 XXXXXXXX |
+i = 2 XXXXXXX  |
+i = 3 XXXXXX   |
+i = 4 XXXXX    |
+i = 5 XXXX     |
+i = 6 XXX      |
+i = 7 XX       |
+i = 8 X        |
+i = 9 ---------
+----
+
+****
+Therefore, the cost is proportional to $n^2$, for *large* $n$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+****
+There is a special notation for this:
+
+- we say that selection sort is $O(n^2)$
+
+This is known as _big-O notation_, and is pronounced _oh-$n$-squared_.
+****
+
+****
+Or, we say that selection sort is an _$n$-squared algorithm_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+****
+So,
+what does that mean in practice?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+****
+Selection sort is only practical on sequences of small-to-medium length:
+
+- say, up to a thousand elements, or so.
+****
+
+****
+On larger sequences (with, say, millions of elements):
+
+- selection sort will likely be *too slow*,
+  because $n^2$ is too big.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost
+
+****
+Also:
+
+- for *any* computer hardware,
+- and for *any* programming language,
+- and for *any* implementation...
+
+We can *predict* the (relative) running time of selection sort.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+****
+Note to self, see:
+
+  ../misc/week-07/selection-sort-interactive.py
+  ../misc/week-07/selection-sort.py -r N
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.This can be run as follows:
+----
+python selection-sort.py -r 4000
+----
+
+.Which:
+****
+- generates +4000+ random integers
+- sorts them using selection sort
+- and reports how long the sorting took (in milliseconds)
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 4000
+----
+
+.Output
+----
+875 (ms)
+----
+
+****
+So, it took 875ms to sort 4000 integers.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+How long might it take to sort 8000 integers?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+That's twice as many.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+Selection sort is $O(n^2)$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+So, *doubling* the size of the problem, should increase the run time by a *factor of four*.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+----
+  ----------------------
+ |           |          |
+ |                      |
+ | <------- 2n -------> |
+ |                      |
+ |           |          |
+ |-----------    ----   |
+ |           |          |
+ |           |          |
+ | <-- n --> |          |
+ |           |          |
+ |           |          |
+  ----------------------
+----
+
+****
+Doubling the length of the side of a square increases the area (the length of
+the side squared) by a factor of four.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+So, *doubling* the size of the problem, should increase the run time by a *factor of four*.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+So we predict $4 times 875$, which is $3500$ms.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 8000
+----
+
+.Output
+----
+3445 (ms)
+----
+
+****
+Which is pretty close to $3500$ms!
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 16000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+And with twice as many again?
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 16000
+----
+
+.Output
+----
+??? (ms)
+----
+
+****
+We predict $4 times 3445$, which is $13780$ms.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- Example
+
+[source, sh]
+.Invocation
+----
+python selection-sort.py -r 16000
+----
+
+.Output
+----
+13682 (ms)
+----
+
+****
+Which is *extraordinarily* close to $13780$ms!
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Cost -- To Reiterate
+
+****
+Being $O(n^2)$:
+
+- is *not* a property of the computer hardware (assuming enough memory),
+- and it's *not* a property of the programming language,
+- and it's *not* a property of the implementation...
+
+It is a property _of the selection-sort algorithm itself_.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Cost -- To Reiterate
+//
+// .And:
+// ****
+// - we can use complexity to compare algorithms
+//
+// You will see examples as the course progresses.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// == Complexity
+//
+// ****
+// The best general-purpose sorting algorithms are $$`O(n log(n))`$$.
+//
+// Which is considerably better than $$`O(n^2)`$$.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Complexity
+//
+// ****
+// With the algorithm we used, de-duplicating a list is  $$`O(n^2)`$$.
+//
+// Although that problem _can_ be solved in $$`O(n)`$$.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+****
+Selection sort:
+
+- requires only an ordering on the elements
+- and _any ordering_ will do:
+** e.g. _numerical order_, or _alphabetical order_, or _alphanumerical order_
+** or whatever.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+****
+Selection sort:
+
+- is an _in-place_ sorting algorithm.
+****
+
+****
+We sort the list:
+
+- by swapping elements in place, within the existing list.
+
+We do not make a copy of the list.
+
+Therefore, selection sort requires only a small (and constant) amount of extra memory.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Final Comments
+//
+// .Selection sort:
+// ****
+// - is *not* a _stable_ sorting algorithm
+//
+// Equal elements may (or may not) be swapped;
+// see https://en.wikipedia.org/wiki/Sorting_algorithm#Stability[here].
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Final Comments
+//
+// .Selection sort:
+// ****
+// - is *not* a _stable_ sorting algorithm
+//
+// Equal elements may (or may not) be swapped.
+// ****
+//
+// .But:
+// ****
+// - surely equal elements are identical!
+// - so that doesn't matter, right?
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Final Comments
+//
+// .Selection sort:
+// ****
+// - is *not* a _stable_ sorting algorithm
+//
+// Equal elements may (or may not) be swapped.
+// ****
+//
+// .No, it does matter:
+// ****
+// - consider sorting a group of people by height
+// - two people's heights may be equal, but the people are different
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Selection Sort -- Final Comments
+//
+// .Selection sort:
+// ****
+// - is *not* a _stable_ sorting algorithm
+//
+// Equal elements may (or may not) be swapped.
+// ****
+//
+// .In a stable sort:
+// ****
+// - people of equal height would remain in their original relative order
+//
+// With selection sort, people of equal height may (or may not) be swapped.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+****
+If you consider selection sort carefully:
+
+- you'll observe that the final iteration of the outer loop is unnecessary.
+****
+
+****
+.On the final iteration:
+
+- $p$ and $i$ are both +len(a)-1+
+- so we *always* swap +a[len(a)-1]+ with itself, which is unnecessary
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+[source, python]
+----
+i = 0
+while i < len(a):       # <-- We do one unnecessary iteration here.
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+[source, python]
+----
+i = 0
+while i < len(a) - 1:   # <-- So we could stop one iteration earlier.
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Final Comments
+
+****
+Frequently, you'll see selection sort presented with this "optimisation".
+****
+
+****
+However, it is not obvious that doing this extra calculation on _every
+iteration_ to save _one small iteration_ at the end is actually any better at all.
+****
+
+// //////////////////////////////////////////////////////////////
+== Done -- Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Done
+
+// For slidy, asciidoc doesn't seem to pull in the theme's JS, so we miss
+// the font; so load it manually here.
+++++
+<link rel="stylesheet" href="https://einstein.computing.dcu.ie/fonts/fonts.css"/>
+++++
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

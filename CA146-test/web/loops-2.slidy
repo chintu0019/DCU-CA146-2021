@@ -1,0 +1,1282 @@
+= Loops 2
+Stephen Blott <stephen.blott@dcu.ie>
+:data-uri:
+:theme: smblott
+
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #
+                                 #
+s = input()                      #
+while s != "end":                #
+   total = total + int(s)        #
+   s = input()                   #
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                         ? -----
+                                 #                           |   |
+s = input()                      #                           -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        # <--                     ? -----
+                                 #                           |   |
+s = input()                      #                           -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        # <-- 0                   ? -----
+                                 #                           |   |
+s = input()                      #                           -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        # <-- 0               total -----
+                                 #                           |   |
+s = input()                      #                           -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        # <-- 0               total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      # <--                       -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      # <--                       -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+19                                 <--
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      # <-- "19"                  -----
+while s != "end":                #                         ? -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      # <-- "19"                  -----
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           |     |
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      # <-- "19"                  -----
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                # <--                     s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                # <-- s != "end"          s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                # <-- "19" != "end"       s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                # <-- True                s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <--                       | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- total + int(s)        | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 0 + int(s)            | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 0 + int("19")         | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 0 + 19                | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total -----
+                                 #                           | 0 |
+s = input()                      #                           -----
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 19                    | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 19                    | 19  | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   # <--                       -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   # <--                       -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+7                                  <--
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 19  | (a string)
+   s = input()                   # <-- "7"                   -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   # <-- "7"                   -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   # <-- and back to the top   -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <--                     s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- s != "end"          s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- "7" != "end"        s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- True                s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <--                       | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- total + int(s)        | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 19 + int(s)           | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 19 + int("7")         | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 19 + 7                | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 19 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 26                    | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        # <-- 26                    | 7   | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   # <--                       -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   # <--                       -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+end                                <--
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | 7   | (a string)
+   s = input()                   # <-- "end"                 -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   # <-- "end"                 -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   # <-- and back to the top   -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <--                     s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- s != "end"          s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- "end" != "end"      s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- False!              s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                # <-- False!              s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     #
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     # <--
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     # <-- 26
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     # <-- 26
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+26
+----
+
+// //////////////////////////////////////////////////////////////
+== A search loop
+
+[source, python]
+----
+total = 0                        #                     total ------
+                                 #                           | 26 | (an integer)
+s = input()                      #                           ------
+while s != "end":                #                         s -------
+   total = total + int(s)        #                           | end | (a string)
+   s = input()                   #                           -------
+                                 #
+print(total)                     # <-- Done.
+----
+
+.Standard input:
+----
+----
+
+.Standard output:
+----
+26
+----
+
+include::misc/instrument.txt[]
+
+////
+vim: ft=asciidoc
+////
+

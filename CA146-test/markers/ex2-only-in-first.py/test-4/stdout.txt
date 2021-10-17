@@ -1,0 +1,1 @@
+This test will pass if linear search is used, but is expected to fail otherwise.

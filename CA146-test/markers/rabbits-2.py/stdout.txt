@@ -1,0 +1,10 @@
+rabbits: 10
+years: 2
+  executing...
+  variable rabbits is now 2560
+
+rabbits: 123
+years: 5
+  executing...
+  variable rabbits is now 128974848
+  that's a lot of rabbits!

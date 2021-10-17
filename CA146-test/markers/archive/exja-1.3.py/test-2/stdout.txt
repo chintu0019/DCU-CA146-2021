@@ -1,0 +1,6 @@
+python3 exja-1.3.py ab.txt
+cat ab.txt
+Mary had a little lamb,
+its fleece was white as snow.
+And everywhere that Mary went,
+the lamb was sure to go.

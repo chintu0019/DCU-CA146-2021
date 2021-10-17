@@ -1,0 +1,14 @@
+Below, lines 2 and 3 have trailing space characters.
+
+    1. Mary had a little lamb
+      2. its fleece was white as snow.    
+		kjha;h;khjh;jh;h
+        3. And everywhere that Mary went       
+          4. the lamb was sure to go.
+
+And, following this line, there are five newline characters.
+
+
+
+kjhfjkhskafjh;khkashf;kjhakjhkdjhfa;hakh
+

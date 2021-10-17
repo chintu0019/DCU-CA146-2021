@@ -1,0 +1,27 @@
+creating non-empty files...
+  410.txt
+  516.txt
+  2939.txt
+  3631.txt
+  7289.txt
+  4396.txt
+  9297.txt
+  2595.txt
+
+creating empty files...
+  8015.txt
+  7497.txt
+  1637.txt
+  5281.txt
+  5174.txt
+  6557.txt
+
+$ python3 ex3-non-empty-files.py 1637.txt 2595.txt 2939.txt 3631.txt 410.txt 4396.txt 516.txt 5174.txt 5281.txt 6557.txt 7289.txt 7497.txt 8015.txt 9297.txt
+2595.txt
+2939.txt
+3631.txt
+410.txt
+4396.txt
+516.txt
+7289.txt
+9297.txt

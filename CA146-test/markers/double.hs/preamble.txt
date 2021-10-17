@@ -1,0 +1,7 @@
+
+main = do
+   putStrLn ("double " ++ (show 3) ++ " is " ++ (show (double 3)))
+   putStrLn ("double " ++ (show 4) ++ " is " ++ (show (double 4)))
+   putStrLn ("double " ++ (show 5) ++ " is " ++ (show (double 5)))
+   putStrLn ("double " ++ (show 6) ++ " is " ++ (show (double 6)))
+

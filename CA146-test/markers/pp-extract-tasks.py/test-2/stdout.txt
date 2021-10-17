@@ -1,0 +1,2 @@
+pp-product-cl.py
+pp-product-stdin.py

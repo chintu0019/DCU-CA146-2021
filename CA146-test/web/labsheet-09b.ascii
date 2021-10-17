@@ -1,0 +1,421 @@
+= Lab Sheet 9b
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== Caesar cipher
+
+****
+A https://en.wikipedia.org/wiki/Caesar_cipher[Caesar cipher] is a rudimentary encryption system.
+
+Each letter is replaced by a letter a certain rotation around the alphabet from itself.
+
+Here, we will only consider a rotation of 13.
+
+For our purposes, the Caesar cipher is as follows:
+
+----
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+|                                                  |
+v                                                  v
+nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM
+----
+****
+
+.Example plaintext
+----
+Nobody expects the Spanish inquisition.
+----
+
+.Example ciphertext (encoded)
+----
+Abobql rkcrpgf gur Fcnavfu vadhvfvgvba.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Encrypt
+
+.Task
+****
+Standard input consists of a textual message (possibly over several lines).
+
+Write a Python script named +caesar-encrypt.py+ which writes the
+encrypted message to standard output.
+
+Encrypt alphabet characters; leave non-alphabet characters unencrypted.
+****
+
+.Example standard input
+----
+Nobody expects the Spanish inquisition.
+----
+
+.Example standard output
+----
+Abobql rkcrpgf gur Fcnavfu vadhvfvgvba.
+----
+
+[TIP]
+====
+Build this dictionary:
+
+[source, python]
+----
+{
+   "a": "n",
+   "b": "o",
+   "c": "p",
+   .
+   .
+   "Z": "M",
+}
+----
+
+Build the dictionary programmatically (do not enter all 52 character pairs manually).
+
+// The following character lists might prove helpful (click to copy to clipboard):
+//
+// ----
+// abcdefghijklmnopqrstuvwxyz
+// ----
+//
+// ----
+// ABCDEFGHIJKLMNOPQRSTUVWXYZ
+// ----
+
+Perhaps start like this...
+
+[source, python]
+----
+n = 13
+lower = "abcdefghijklmnopqrstuvwxyz"
+upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+src = lower + upper
+dst = lower[n:] + lower[:n] + upper[n:] + upper[:n]
+----
+====
+
+// //////////////////////////////////////////////////////////////
+=== Decrypt
+
+.Task
+****
+Standard input consists of an encrypted message.
+
+Write a Python script named +caesar-decrypt.py+ which writes the
+decrypted message to standard output.
+****
+
+.Standard input
+----
+Abobql rkcrpgf gur Fcnavfu vadhvfvgvba.
+----
+
+.Example standard output
+----
+Nobody expects the Spanish inquisition.
+----
+
+[TIP]
+====
+This should not take too long.
+====
+
+// //////////////////////////////////////////////////////////////
+== Other tasks
+
+// //////////////////////////////////////////////////////////////
+=== Count unique words
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.
+
+Write a Python script named +singleton-words.py+ which writes only the
+words which occur exactly once to standard output, one per line.
+
+The order of the output does not matter.
+****
+
+.Example standard input
+----
+dog
+cat
+mouse
+hat
+mouse
+horse
+dog
+----
+
+.Example standard output
+----
+cat
+hat
+horse
+----
+
+[NOTE]
+====
+The words "dog" and "mouse" are omitted because they occur _more than
+once_.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Names
+
+****
+Assume that the current working directory contains two files, +boys.txt+ and
++girls.txt+. These contain a sequence of boys names and a sequence of girls
+names, respectively, one name per line.
+
+Here are examples for the link:res/boys.txt[boys names] and for the link:res/girls.txt[girls names].
+
+  wget https://einstein.computing.dcu.ie/res/boys.txt
+
+  wget https://einstein.computing.dcu.ie/res/girls.txt
+
+All of the names consist of a single word.
+****
+
+.Task
+****
+Standard input consists of a sequence of names, one per line.
+
+Write a Python script named +names.py+ which, for each input name, writes the name and the
+sex usually associated with that name to standard output.
+
+The sex should be either "+boy+", "+girl+" or "+either+" (for names such as +Charlie+ which occur in both lists).
+****
+
+.Example standard input
+----
+Milo
+Josie
+Zoey
+Carlee
+Felipe
+Charlie
+Patricia
+Alaina
+Raiden
+----
+
+.Example standard output
+----
+Milo boy
+Josie girl
+Zoey girl
+Carlee girl
+Felipe boy
+Charlie either
+Patricia girl
+Alaina girl
+Raiden boy
+----
+
+// // //////////////////////////////////////////////////////////////
+// === Sum with Variables
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines.  Each line is in one of three forms:
+//
+// - an integer literal
+// - a variable name, or
+// - an assignment statement.
+//
+//
+// Assignment statements assign values to variables; the value is always just an integer literal.
+//
+// Write a Python script named +sum-with-variables.py+ which calculates the
+// sum of the values and variables encountered.
+// ****
+//
+// ****
+// .Example standard input -- 1
+// ----
+// 3
+// 4
+// -2
+// ----
+//
+// .Example standard output -- 1
+// ----
+// 5
+// ----
+// ****
+//
+// ****
+// .Example standard input -- 2
+// ----
+// aa=-3
+// bb = 4
+// aa
+// bb
+// ----
+//
+// .Example standard output -- 2
+// ----
+// 1
+// ----
+// ****
+//
+// ****
+// .Example standard input -- 3
+// ----
+// a= 3
+// b= 4
+// a
+// b
+// a= 10
+// a
+// 2
+// ----
+//
+// .Example standard output -- 3
+// ----
+// 19
+// ----
+// ****
+//
+// .Tip
+// ****
+// Recall the method +str.isdigit()+ for testing whether a string consists only of digits.
+//
+// There are three methods for stripping whitespace from a string: +str.rstrip()+, +str.lstrip()+ and +str.strip()+.
+//
+// Use a dictionary to store the variable values.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Plot points
+
+.Task
+****
+Standard input consists of a sequence of $x$, $y$ coordinates each in the
+range $0$ (inclusive) to $20$ (exclusive), one per line.  See the example,
+below.
+
+Write a Python script named +plot-points.py+ which writes a plot of those points on a
+two-dimensional graph to standard output.
+
+See the example.
+****
+
+.Example standard input
+----
+0 0
+2 10
+19 16
+19 17
+19 18
+19 19
+----
+
+.Example standard output
+----
+ --------------------
+|                   *|
+|                   *|
+|                   *|
+|                   *|
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|  *                 |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|*                   |
+ --------------------
+----
+
+.Details
+****
+The input points may be in any order.
+
+The first and last lines of the output consist of 21 characters, each a single space followed by 20 hyphens.
+
+All of the other lines consist 22 characters: a "+|+", 20 spaces or
+asterisks (depending upon the input), and another  "+|+".
+
+There are several ways to complete this task, some involving a dictionary and some not.
+
+One approach is to use a dictionary to store the points:
+have keys of the form +x-y+ (for example, +7-12+) for each point encountered.
+****
+
+// .Tips
+// ****
+// There are several ways to solve this problem, some involving a dictionary and some not.
+//
+// One approach is to store the points as keys in a dictionary in the form +"x-y"+, for example +"19-16"+.  This approach is attractive if the points are fairly sparse.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// === Task Summary -- 2
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines.  Each line contains an
+// upload result from _Einstein_.  An upload result is a name
+// constructed from a task name with either "+.correct+" or "+.incorrect+"
+// appended. See the examples, below.
+//
+// _Each upload result is actually a file in a directory associated with a particular
+// student._  In the example input, the students' names have been anonymized.
+//
+// The lines are in chronological order.  A task is considered to have been
+// _successfully completed_ only if the _last upload_ for that task was correct.
+//
+// Write a Python script named +task-summary-2.py+ which outputs, for each
+// student, their name and the total number of tasks which they have
+// successfully completed.
+//
+// Each line contains _exactly one_ "+/+" character and  _exactly two_ "+.+" characters, one for the
+// extension (+.py+, in the example) and one for the result (e.g. +.correct+).
+// ****
+//
+// .Example standard input
+// ----
+// user-1/word-translation.py.correct
+// user-3/reverse-text-on-lines.py.incorrect
+// user-2/diamond.py.incorrect
+// user-4/lines-to-list.py.correct
+// user-3/reverse-text-on-lines.py.correct
+// user-4/lines-to-list.py.incorrect
+// ----
+//
+// .Example standard output
+// ----
+// user-1 1
+// user-2 0
+// user-3 1
+// user-4 0
+// ----
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

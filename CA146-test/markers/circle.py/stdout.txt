@@ -1,0 +1,11 @@
+running circle.py multiple times...
+
+radius = 1 : circumference = 6.282 , area = 3.141
+radius = 2 : circumference = 12.564 , area = 12.564
+radius = 3 : circumference = 18.846 , area = 28.269
+radius = 4 : circumference = 25.128 , area = 50.256
+radius = 5 : circumference = 31.41 , area = 78.525
+radius = 6 : circumference = 37.692 , area = 113.076
+radius = 7 : circumference = 43.974 , area = 153.909
+radius = 8 : circumference = 50.256 , area = 201.024
+radius = 9 : circumference = 56.538 , area = 254.421

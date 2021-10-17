@@ -1,0 +1,7 @@
+horse cat
+mouse cat
+marmot dog
+snake dog
+dog frog
+cat zebra
+dog zebra

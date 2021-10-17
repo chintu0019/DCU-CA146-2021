@@ -1,0 +1,11 @@
+testing selection_sort: []
+   []
+testing selection_sort: [1]
+   [1]
+testing selection_sort: [3, 6, 423, 45, 87, 2, 4]
+   [2, 3, 4, 6, 45, 87, 423]
+testing selection_sort: ['one', 'two', 'three', 'four', 'five']
+   ['five', 'four', 'one', 'three', 'two']
+testing selection_sort: ['Mary', 'had', 'a', 'little', 'lamb', 'its', 'fleece', 'was', 'white', 'as', 'snow']
+   ['Mary', 'a', 'as', 'fleece', 'had', 'its', 'lamb', 'little', 'snow', 'was', 'white']
+Blind test: True

@@ -1,0 +1,458 @@
+= Labsheet 3a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+Name your Python script exactly as instructed for each task and
+upload it to _Einstein_ link:/einstein/[here].
+
+Here's the link:/termcast/[link] to _TermCast_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop patterns
+
+.Loop pattern 1
+****
+When we know _before entering a loop_ how many times that loop's body will
+be executed, we use the following pattern:
+
+[source, python]
+----
+i = 0
+while i < N:
+   # Do something.
+   i = i + 1
+----
+We call this _do-something-$n$-times_.
+
+You will have to tweak the condition ($N$) and the _do something_ part, but
+the other parts of the loop should be unchanged.footnote:[ If variable $i$ is
+already being used for some other purpose, then use $j$ instead.]
+
+However, *do not* fundamentally change the structure of the loop:
+
+- _always_ start counting at $0$,
+- _always_ ask if $i$ is less than $N$ (for some $N$), and
+- _always_ increment $i$ by exactly $1$,
+  and as the _very last_ statement in the body of the loop.
+****
+
+// .Loop pattern 2
+// ****
+// When we cannot use _do-something-$n$-times_, we use the following pattern:
+//
+// [source, python]
+// ----
+// # Set up first test
+// while CONDITION:
+//    # Do something.
+//    # Set up next text.
+// ----
+// We call this _do something an indeterminate number of times_.
+//
+// You will have to tweak each of these four parts to meet your needs.
+// ****
+//
+// ****
+// Only the final task here requires the second pattern.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Counting
+
+// //////////////////////////////////////////////////////////////
+=== Counting up
+
+.Task
+****
+Write a Python script named +counting-up.py+ which reads a positive integer $n$ from standard input and outputs all of
+the numbers from $0$ to $n-1$ (inclusive), one per line.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+0
+1
+2
+3
+----
+
+// //////////////////////////////////////////////////////////////
+=== Counting up again
+
+.Task
+****
+Write a Python script named +counting-up-2.py+ which reads a positive integer $n$ from standard input and outputs all of
+the numbers from $1$ to $n$ (inclusive), one per line.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+1
+2
+3
+4
+----
+
+[TIP]
+====
+In your solution to this task, do not change the loop structure.
+
+Your loop should still begin counting at zero, as always.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Counting down
+
+.Task
+****
+Write a Python script named +counting-down.py+ which reads a positive integer $n$ from standard input and outputs all of
+the numbers from $n$ to $1$ (inclusive), one per line.
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+4
+3
+2
+1
+----
+****
+
+[TIP]
+====
+$4 - 0$ is $4$,
+
+$4 - 1$ is $3$,
+
+$4 - 2$ is $2$,
+
+...and so on.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Counting down again
+
+.Task
+****
+Write a Python script named +counting-down-2.py+ which reads a positive integer $n$ from standard input and outputs all of
+the numbers from $n-1$ to $0$ (inclusive), one per line.
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+3
+2
+1
+0
+----
+****
+
+****
+The integer expression required for this task is important, it comes up
+frequently.
+****
+
+[TIP]
+====
+$4 - 0 - 1$ is $3$,
+
+$4 - 1 - 1$ is $2$,
+
+$4 - 2 - 1$ is $1$,
+
+...and so on.
+====
+
+// //////////////////////////////////////////////////////////////
+== Odd, even and friends
+
+// //////////////////////////////////////////////////////////////
+=== Counting even
+
+.Task
+****
+Write a Python script named +counting-even.py+ which reads a positive
+integer $n$ from standard input and outputs the first $n$ _even natural numbers_, one per line.
+
+(Take the natural numbers to be $1$, $2$, $3$, $4$, and so on.)
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+2
+4
+6
+8
+----
+
+// //////////////////////////////////////////////////////////////
+=== Counting odd
+
+.Task
+****
+Write a Python script named +counting-odd.py+ which reads a positive
+integer $n$ from standard input and outputs the first $n$ _odd natural numbers_, one per line.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+1
+3
+5
+7
+----
+
+// //////////////////////////////////////////////////////////////
+=== Counting seven
+
+.Task
+****
+Write a Python script named +counting-seven.py+ which reads a positive
+integer $n$ from standard input and outputs the first $n$ _natural numbers which are multiples of 7_, one per line.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+7
+14
+21
+28
+----
+
+// //////////////////////////////////////////////////////////////
+=== Counting multiples
+
+.Task
+****
+Write a Python script named +counting-multiples.py+ which first reads a positive
+integer $n$ and then a second positive integer $m$,
+and outputs the first $n$ natural numbers which are multiples of $m$.
+****
+
+.Example standard input
+----
+4
+9
+----
+
+.Example standard output
+----
+9
+18
+27
+36
+----
+
+// //////////////////////////////////////////////////////////////
+== Fizz-buzz
+
+****
+https://en.wikipedia.org/wiki/Fizz_buzz[Fizz-buzz] is a children's counting game.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Task
+
+.Task
+****
+Write a Python script named +fizz-buzz.py+ which reads a positive
+integer $n$ from standard input and outputs the first $n$ rounds of a game of fizz-buzz.
+****
+
+.Example standard input
+----
+10
+----
+
+.Example standard output
+----
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+----
+
+// //////////////////////////////////////////////////////////////
+== More sequences
+
+// // //////////////////////////////////////////////////////////////
+// === Weird sequence
+//
+// .Task
+// ****
+// Write a Python script named +weird-sequence.py+ which reads a positive
+// integer $n$ from standard input and outputs the first $n$ terms of the
+// sequence in the example, below, one per line.
+// ****
+//
+// .Example standard input
+// ----
+// 6
+// ----
+//
+// .Example standard output
+// ----
+// 0
+// -1
+// 2
+// -3
+// 4
+// -5
+// ----
+
+// //////////////////////////////////////////////////////////////
+=== Hailstone sequence
+
+.Task
+****
+Standard input consists of two positive integers, $n$ and $m$ respectively.
+
+Write a Python script named +hailstone-sequence-1.py+ which outputs the $n$
+terms of the
+https://plus.maths.org/content/mathematical-mysteries-hailstone-sequences[Hailstone sequence]
+beginning with $m$.
+****
+
+.Example standard input
+----
+5
+11
+----
+
+.Example standard output
+----
+11
+34
+17
+52
+26
+----
+
+// //////////////////////////////////////////////////////////////
+== Fibonacci series
+
+****
+The Fibonacci series proceeds as follows:
+
+----
+0 1 1 2 3 5 8 13 21 ...
+----
+
+Each new term is the sum of the preceding two terms; see https://www.livescience.com/37470-fibonacci-sequence.html[here].
+****
+
+// //////////////////////////////////////////////////////////////
+=== Task 1
+
+.Task
+****
+Write a Python script named +fib-n.py+ which reads a positive
+integer $n$ from standard input and outputs the first $n$ numbers in the Fibonacci series, one per line.
+****
+
+.Example standard input
+----
+6
+----
+
+.Example standard output
+----
+0
+1
+1
+2
+3
+5
+----
+
+[TIP]
+====
+This is possibly harder than the previous examples.  You will have to keep track of
+two values, the $"previous"$ value and the $"current"$ value.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Task 2
+
+.Note
+****
+This is different to all of the other tasks on this lab sheet.
+
+In this task, you *do not* know how many times your loop will iterate before beginning.
+
+Therefore, our _do-something-$n$-times_ loop pattern is not appropriate for this task.
+****
+
+.Task
+****
+Write a Python script named +fib-less-than-n.py+ which reads a positive
+integer $n$ from standard input and outputs the sequence of Fibonacci numbers which are less than $n$, one per line.
+****
+
+.Example standard input
+----
+10
+----
+
+.Example standard output
+----
+0
+1
+1
+2
+3
+5
+8
+----
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,1043 @@
+= CA116 - Computer Programming I
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// .Live January 2021 exam
+// ****
+// Live exam: link:./uaph5aiF.html[link].
+//
+// DCU's academic integrity policy is
+// https://www.dcu.ie/sites/default/files/policy/1%20-%20integrity_and_plagiarism_ovpaa_v2.pdf[here].
+//
+// You have until 11:50 to complete your work and upload it to _Einstein_.
+//
+// Check your email periodically (in case there are any changes or additions to the instructions).
+//
+// I will be available on the course Zoom link (see below) during the exam.
+// ****
+
+.Contacting me
+****
+The best way to contact me is by email, at the email address above.
+
+Please always put the module code (CA116) in the subject line (otherwise
+your email risks joining hundreds and hundreds of other unread emails).
+
+When I email you, I will always put the module code in the subject line
+(knowing that, you can create a
+https://support.google.com/mail/answer/6579?hl=en[GMail filter] to ensure
+that you always receive important messages).
+****
+
+// // //////////////////////////////////////////////////////////////
+// == August Exam
+//
+// ****
+// // The August exam will be posted here at precisely 14:00 (11/8/2021).
+// //
+// // You will have to refresh this page at that time.
+// //
+// The live exam is link:2021-ca116-august/[here].
+// ****
+
+// //////////////////////////////////////////////////////////////
+== News
+
+.Sample exam
+****
+Last year's online _Einstein_ exam is link:res/20CA116.pdf[here].
+
+This is a reasonable indication of the type of thing you should expect in
+January.
+
+Here are the main differences:
+
+- Last year we did Python 2, so there are a couple of small syntactic differences in the examples.
+
+- This year is an open-book exam, so you should not expect programming
+  tasks which can be copied from the notes.  Or -- put the other way around -- you
+  should expect programming tasks which are not in the notes.
+
+- One of the questions from last year refers to modules/functions.  We did
+  not cover that material this year, so that won't come up.
+
+- The live exam will be an HTML page (just like the lab sheets, not a PDF
+  document).
+
+There are no markers on _Einstein_ for these tasks.  This is simply FYI.
+
+I understand that the CA116 exam is on the morning of Friday the 8th of January.
+****
+
+.Lab exam info (27/10/2020)
+****
+See link:2021-ca116-lab-exams.html[here].
+****
+
+// //////////////////////////////////////////////////////////////
+== Important links
+
+.Zoom
+****
+All activities for this module which involve Zoom will use this Zoom link:
+
+- https://dcu-ie.zoom.us/j/96296887695[]
+****
+
+._Einstein_ and _TermCast_
+****
+_Einstein_:
+
+- link:/einstein/[upload page]
+- link:/einstein/solutions.html[model solutions]
+- you can download a zip of _all_ of your previous _Einstein_ uploads at any
+  time link:/einstein/get-zip-uploads[here]
+
+_TermCast_ (experimental):
+
+- use Chrome for TermCast (do not use Internet Explorer)
+- link:/termcast/[_TermCast_]
+- uploading to _Einstein_ from _TermCast_:
+  https://einstein.computing.dcu.ie/einstein-upload-script.html[how to]
+- notes on your choice of your link:running-your-scripts.html[software development environment]
+****
+
+.Videos
+****
+All video material will be posted to Google Drive:
+
+- https://drive.google.com/drive/folders/11EofvuJ_KaRTHRfq5Ai1mkUaec2ZrPhh?usp=sharing[here] +
+  (you must be logged in with your DCU account)
+****
+
+// //////////////////////////////////////////////////////////////
+== Introduction
+
+.Timetable
+****
+Wednesday morning at 9:00::
+   online synchronous material +
+   (you should anticipate that this session might extend beyond 10:00)
+Wednesday afternoon from 14:00 onwards::
+   online asynchronous material
+Thursday morning::
+   on-campus sessions
+
+Here's what you should expect in each of these slots...
+****
+
+.Wednesday morning (online, synchronous)
+****
+There will be a synchronous online Zoom session:
+
+- Zoom link: https://dcu-ie.zoom.us/j/96296887695[]
+- Calendar:
+  https://calendar.google.com/event?action=TEMPLATE&tmeid=NzNlbW9jM2Fzbm5xbjFidHZsamNodmxqZDdfMjAyMDEwMDdUMDgwMDAwWiBzbWJsb3R0QG0&tmsrc=smblott%40gmail.com&scp=ALL[link]
+
+In this slot we will review _new material_ and cover examples.
+
+New material will also be made available on this web site in the form of
+notes and/or slides.
+
+Zoom sessions will be recorded and posted to this web page.
+****
+
+.Wednesday afternoon (online, asynchronous)
+****
+On Wednesday afternoon you will be given lab work to complete:
+
+- Calendar:
+  https://calendar.google.com/event?action=TEMPLATE&tmeid=NDFxNnRydDhrc3M0MnYxNWwwam5wNmZ1cDRfMjAyMDEwMDdUMTMwMDAwWiBzbWJsb3R0QG0&tmsrc=smblott%40gmail.com&scp=ALL[link]
+
+New labsheets will be published at the bottom of this web page at the time
+of the lab.
+
+You will need an environment in which you can run Python scripts (this will
+be discussed in the first Wednesday AM slot).
+
+During these sessions, you should keep an eye on your email.  I will email
+the class group if -- for example -- I need to provide you with additional
+instructions.
+****
+
+// [NOTE]
+// ====
+// We will be using Python version 2 (python2.7), not Python version 3.
+// ====
+
+.Thursday morning (on campus)
+****
+You will be on campus, in the lab to which you have been allocated:
+
+- Calendar
+  https://calendar.google.com/event?action=TEMPLATE&tmeid=NDhjZThuZGEzY2Mzc2cxYmpmY2kzc3JpdjdfMjAyMDEwMDhUMDgwMDAwWiBzbWJsb3R0QG0&tmsrc=smblott%40gmail.com&scp=ALL[link]
+
+You will be given a combination of new material (video, notes, slides) and
+a new lab sheet to complete.
+
+*Bring earphones, for the case where there is new video material for you to review.*
+
+In addition, I (SB) will attempt to spent some time talking face-to-face
+with each pod, doing examples and addressing any concerns you may have.
+****
+
+.Unable to attend campus
+****
+All materials will be made available online on this web page.
+
+However, it may not always be possible to capture face-to-face
+interactions on campus.  (That would be an additional four hours of
+material each week, most of which would be repetitive and uninteresting.)
+****
+
+// //////////////////////////////////////////////////////////////
+== Assessment
+
+****
+This module is 60% continuous assessment (during the semester) and 40% exam (in January).
+****
+
+.Continuous assessment
+****
+There will be three "lab exams":
+
+- one in week four,
+- one in week seven, and
+- one in week ten
+
+Each lab exam will take place at 16:00 in that week's Wednesday-afternoon
+slot and last for 90 minutes.
+
+These will be open-book assessments, and will involve you completing a
+small number of computer programming tasks (and uploading your solutions to
+_Einstein_ -- link:/einstein/[link]).
+****
+
+.Exam
+****
+There will be an exam element to the assessment of this module.
+
+The exam will take place in January.
+
+More details to follow closer to the time.
+****
+
+// //////////////////////////////////////////////////////////////
+== Course material
+
+****
+Course material (including recordings of Zoom sessions and lab sheets) will
+be posted here in due course.
+****
+
+****
+All formal lectures will be recorded.
+
+All video material will be posted
+https://drive.google.com/drive/folders/11EofvuJ_KaRTHRfq5Ai1mkUaec2ZrPhh?usp=sharing[here]
+(and linked below).
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 1
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:01-notes-intro.html[Linux basics]
+- link:02-integer-expressions.html[integer expressions]
+- link:03-variables-notes.html[variables]
+- link:03-using-termcast.html[using TermCast]
+
+Videos:
+
+- https://drive.google.com/file/d/1fN6u_z_Sugzj9gsebvoTMvhlKSauByWv/view?usp=sharing[termcast, python3 and uploading to _Einstein_] +
+  (short video, about five minutes, new version -- updated 12/10/2020)
+- the video of this session has been posted to the module's
+  https://drive.google.com/drive/folders/11EofvuJ_KaRTHRfq5Ai1mkUaec2ZrPhh?usp=sharing[video folder]
+  on Google Drive
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-01a.html[labsheet 1a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-01a.html[labsheet 1a]
+  +
+  this is yesterday's labsheet +
+  complete it if you have not already done so +
+  skip the "trickier tasks", if necessary
+- link:labsheet-01b.html[labsheet 1b]
+- link:labsheet-01c.html[labsheet 1c]
+
+If you are unable to attend on campus, then:
+
+- complete this lab work at home,
+- check your email regularly (in case there are any further instructions),
+  and
+- visit this module's https://dcu-ie.zoom.us/j/96296887695[Zoom room] if
+  you need help from a tutor.
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 2
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:04-variables.html[variables again] (slides: variable examples)
+- link:05-types.html[more types] (notes: Booleans, strings and floating-point numbers)
+- link:06-if.html[if statements] (notes)
+
+The video of this session has been posted to the module's
+https://drive.google.com/drive/folders/11EofvuJ_KaRTHRfq5Ai1mkUaec2ZrPhh?usp=sharing[video folder]
+  on Google Drive.
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-02a.html[labsheet 2a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-02a.html[labsheet 2a] +
+  this is yesterday's labsheet; complete it if you have not already done so +
+  skip the "harder" tasks, if necessary
+- link:labsheet-02b.html[labsheet 2b]
+
+++++
+<hr>
+++++
+
+It is important that you develop a satisfactory workflow for software
+development.
+
+Some software-development environments are not suitable for you to develop those skills.
+
+Here are some notes on your choice of your link:running-your-scripts.html[software development environment].
+
+The bottom line... +
+For most of you, I recommend using _TermCast_: link:/termcast/[link].
+++++
+<hr>
+++++
+
+If you are unable to attend on campus, then:
+
+- sorry, this didn't work out last week
+- complete this lab work at home,
+- check your email regularly (in case there are any further instructions),
+  and
+- visit this module's https://dcu-ie.zoom.us/j/96296887695[Zoom room] if
+  you need help from a tutor.
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 3
+
+.Wednesday morning (online lecture)
+****
+Bonus material:
+
+- link:labsheet-02c.html[labsheet 2c] (extra lab sheet)
+
+Regular materials:
+
+- link:07-while-1.html[while loops] (notes)
+- link:loops-1.html[illustration] (slides, contains a while-loop example which you can tap your way through)
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-03a.html[labsheet 3a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-03a.html[labsheet 3a] (this is yesterday's labsheet)
+- link:labsheet-03b.html[labsheet 3b]
+
+Yesterday morning, I forgot to review this material; take a look now:
+
+- link:loops-1.html[illustration] (slides, contains a while-loop example which you can tap your way through)
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 4
+
+****
+We have a lab exam at 16:00 this afternoon (Wednesday).
+
+There is more information on what to expect link:2021-ca116-lab-exams.html[here].
+
+I will take any questions you might have regarding the exam at the start of this morning's lecture.
+****
+
+.Wednesday morning (online lecture)
+****
+A quiz of sorts:
+
+- link:errors-1.html[errors]
+
+Materials:
+
+- link:08-strings.html[strings] (notes)
+- link:07-while-2.html[search loops] (notes)
+- link:loops-2.html[illustration]
+  (slides, contains a search-loop example which you can tap your way through)
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-04a.html[labsheet 4a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-04a.html[labsheet 4a] (this is yesterday's labsheet)
+- link:labsheet-04b.html[labsheet 4b]
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 5
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:week-05-lecture-plan.txt[lecture plan] (these are just my notes to myself)
+- link:09-linear-search.html[linear search] (notes)
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-05a.html[labsheet 5a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-05a.html[labsheet 5a] +
+  this is yesterday's labsheet; the tasks all involve linear search
+- link:labsheet-05b.html[labsheet 5b] +
+  this labsheet contains a variety of loop tasks, and might be _quite
+  tricky_; if you don't know how to tackle one task, then perhaps just move on
+  to the next
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 6
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:10-lists.html[lists] (notes)
+
+There's _a lot_ to get through this week:
+
+- link:week-06-lecture-plan.txt[lecture plan] +
+  these are mainly my notes to myself, but you might find them helpful for
+   understanding where we stand
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:labsheet-06a.html[labsheet 6a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-06a.html[labsheet 6a] +
+  this is yesterday's labsheet
+- link:labsheet-06b.html[labsheet 6b] +
+  mainly fragment tasks involving lists
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 7
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+// - link:./ss-message.html[selection sort] (placeholder)
+- link:11-selection-sort.html[selection sort] (slides for a change, this week)
+****
+
+// .Lab exam
+// ****
+// Material:
+//
+// - link:labexam-2021-2.html[lab exam]
+// ****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:./labsheet-07a.html[Labsheet 7a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-07a.html[labsheet 7a] +
+  this is yesterday's labsheet (selection sort)
+- link:labsheet-07b.html[labsheet 7b] +
+  mainly fragment tasks involving lists (miscellaneous)
+****
+
+pass:[<hr>]
+
+// //////////////////////////////////////////////////////////////
+=== Week 8
+
+.Plan for the rest of the semester
+****
+This week:: string processing and files
+
+Week 9:: dictionaries
+
+Week 10:: an interesting algorithm and our final lab exam
+
+Due to the shortened semester, some material -- notably functions -- which
+would usually be covered in CA116 will now be covered in CA117.
+****
+
+.Lab exam penalty
+****
+Testing is an important part of the computer-programming process.
+
+_Einstein_ is not a platform for testing your work; you should test your
+work and have some confidence that it is correct _before_ uploading it to _Einstein_.
+
+For the week-ten lab exam, a penalty will be applied for _Einstein_ uploads
+which trigger either a _syntax error_ or an _indentation error_;
+the penalty will be 2 marks per upload, up to a maximum penalty of 10 marks per
+task.
+
+Please ensure that you develop a computer-programming workflow whereby you
+are able to test your work effectively before uploading it to _Einstein_.
+****
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:./12-string-processing.html[string processing] (notes)
+- link:./12-files.html[files] (notes)
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:./labsheet-08a.html[Labsheet 8a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-08a.html[labsheet 8a] +
+  this is yesterday's labsheet (string processing and files)
+- link:labsheet-08b.html[labsheet 8b]
+- link:labsheet-08c.html[labsheet 8c]
+****
+
+// //////////////////////////////////////////////////////////////
+=== Week 9
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:13-dictionaries.html[dictionaries] (notes)
+****
+
+.Wednesday afternoon (online lab)
+****
+Materials:
+
+- link:./labsheet-09a.html[Labsheet 9a]
+
+Please check your email regularly in case there are any corrections, or
+anything else I need to let you know about.
+****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-09a.html[labsheet 9a] +
+  this is yesterday's labsheet
+- link:labsheet-09b.html[labsheet 9b]
+****
+
+// //////////////////////////////////////////////////////////////
+=== Week 10
+
+.Wednesday morning (online lecture)
+****
+Materials:
+
+- link:14-bsearch-2021.html[binary search] (slides)
+****
+
+// .Lab exam
+// ****
+// - link:labexam-2021-3.html[link]
+// ****
+
+.Thursday morning (on campus)
+****
+Materials:
+
+- link:labsheet-10.html[labsheet 10]
++
+A small collection of tasks to end the semester.
+****
+
+// // // //////////////////////////////////////////////////////////////
+// // == August resit CA
+// //
+// // ****
+// // The resit CA will be here at 14:00 on Monday the 31st of August:
+// // link:exam.html[resit lab exam].
+// // ****
+//
+// // //////////////////////////////////////////////////////////////
+// == News and information
+//
+// .Note on January exam
+// ****
+// There are some notes on what to expect in the January exam
+// link:written-exam.html[here].
+// ****
+//
+// .Model Solutions
+// ****
+// There is a page on _Einstein_ listing all of the available link:/einstein/solutions.html[model solutions].
+// ****
+//
+// // .Git (extra curricular)
+// // ****
+// // The slides for git are link:git.html[here].
+// //
+// // This is not part of the CA116 curriculum.
+// // ****
+//
+// .Contact info
+// ****
+// Here's my
+// https://www.dcu.ie/computing/people/stephen-blott.shtml[contact information].
+//
+// If you send an mailto:stephen.blott@dcu.ie[email],
+// then please include the module code (ca116) in the subject line.
+// ****
+//
+// .Lab allocation
+// ****
+// Tuesday labs::
+//    Here is the Tuesday lab allocation ordered by
+//    link:lab-allocation-by-student-tuesday.txt[student],
+//    or by link:lab-allocation-by-lab-tuesday.txt[lab].
+// Thursday labs (updated 24/10/2019 for _programming together_)::
+//    Here is Thursday lab the allocation ordered by
+//    link:lab-allocation-by-student-thursday.txt[student],
+//    or by link:lab-allocation-by-lab-thursday.txt[lab].
+// ****
+//
+// .Timetabling
+// ****
+// Lectures::
+//   Tuesdays at 9:00 and Thursdays at 10:00.
+//
+// Labs::
+//   Tuesdays and Thursdays at 14:00 +
+//   (plus Wednesday at 10:00 in week 1 only)
+//
+// The lecture slot on Wednesdays at 10:00 will usually be used for
+// tutorial/revision and/or off-curriculum material. If you're having difficulty
+// with any aspect of the course, then please raise it during this slot (or email me in advance).
+//
+// There will be no lab on the Tuesday of week 1 (we will not have covered enough material for a lab session to be useful).
+// ****
+//
+// .Uploading and verifying your work
+// ****
+// The _Einstein_ upload page for verifying your solutions is link:/einstein/[here].
+//
+// It is important that you verify that the _your_ notion of "correct" and _my_ notion
+// of correct are the same.
+// ****
+//
+// .Lab exams
+// ****
+// *There will be three lab exams for this module.  +
+// These will take place during the Thursday lab slot in weeks 4, 8 and 12*.
+//
+// Each lab exam contributes equally to your continuous assessment mark.
+// See link:lab-exam-info.html[here].
+//
+// In addition, should it be necessary for you to resit the continuous
+// assessment, then the resit lab exam will take place on the first working day *after* the resit examination period in August.
+//
+// (Check the
+// https://www.google.com/search?q=dcu+academic+calendar[DCU academic
+// calendar] for the exact dates of the resit examination period.  At the time
+// of writing -- September, 2019 -- it appears that that will be Monday the
+// 24th of August, 2020.)
+//
+// [line-through]#Update 9/3/20:
+// The date for the resit CA will be Monday the 24th of August.
+// The exact time will be confirmed later by email.#
+//
+// Update 11/8/20:
+// In light of changes to the DCU academic calendar,
+// the date for the resit CA will be Monday the 31st of August.
+// The exact time will be confirmed later by email.
+// ****
+//
+// .Python Version
+// ****
+// We will be using Python 2, specifically Python 2.7.  We will _not_ be using Python 3.
+// Everything covered in this module is transferable, but there are small syntactic differences.
+//
+// (Python 3 is used for the follow-on module, _Computer Programming II_.)
+// ****
+//
+// // .Remote Access
+// // ****
+// // See the notes link:ssh-access.html[here] for accessing the School of Computing Linux machines from outside of the labs.
+// // ****
+//
+// .Important
+// ****
+// Academic integrity is of the utmost importance.
+// Please note DCU's policy on
+// https://www.dcu.ie/registry/examinations/plagiarism.shtml[plagiarism], and
+// specifically the
+// https://www4.dcu.ie/sites/default/files/graduate_research/Academic%20Integrity%20and%20Plagiarism%20Policy%20Oct%202014.pdf[DCU Academic Integrity and Plagiarism Policy].
+// ****
+//
+// // .Orientation
+// // ****
+// // Here are the
+// // http://www.computing.dcu.ie/~sblott/orientation.html[slides] that were used for orientation.
+// // ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Slides and Lab Sheets
+//
+// ****
+// Slides and lab sheets will appear here in due course.
+//
+// Course material is usually published shortly before it is used.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 1
+//
+// .Tuesday
+// ****
+// - link:./01-intro.html[Introduction]
+// - link:./03-integers.html[Integers]
+//
+// There is no lab this Tuesday afternoon; labs start on Thursday.
+// ****
+//
+// .Wednesday
+// ****
+// - link:./04-variables.html[Variables]
+// ****
+//
+// .Thursday morning
+// ****
+// - introduction to labs
+// - introduction to Linux
+// - introduction to _Einstein_
+// - sequence examples
+// ****
+//
+// .Thursday afternoon
+// ****
+// - link:./labsheet-01.html[Lab sheet 1]
+// // - there's a brief _cheat sheet_ covering the basics of using Linux from the
+// //   terminal link:shell-cheat-sheet.html[here]
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 2
+//
+// .Tuesday
+// ****
+// - link:./05-more-types.html[Booleans, strings, floating-point, print and input]
+// - link:./labsheet-02.html[Lab sheet 2]
+// ****
+//
+// .Thursday
+// ****
+// - link:./06-if.html[If statements]
+// - link:./labsheet-03.html[Lab sheet 3]
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 3
+//
+// .Tuesday
+// ****
+// - link:./07-while-1.html[While loops 1] (notes instead of slides, this week) (some link:07-while.html[slides too])
+// - link:./loops-1.html[Illustration] (of loops, and the _do-something-n-times_ pattern)
+// - link:./labsheet-04.html[Lab sheet 4]
+// ****
+//
+// // .Wednesday
+// // ****
+// // - link:errors.html[Errors]
+// // ****
+//
+// .Thursday
+// ****
+// - link:./09-strings.html[Strings]
+// - link:./labsheet-06.html[Lab sheet 6]
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 4
+//
+// .Tuesday
+// ****
+// - link:./07-while-2.html[While loops 2] (notes again this week, instead of slides)
+// - link:./loops-2.html[Illustration] (of loops, and the _search_ pattern)
+// - link:./labsheet-05.html[Lab sheet 5]
+// ****
+//
+// // .Wednesday
+// // ****
+// // - link:dec-to-x.html[Decimal to binary] (and hexadecimal)
+// // ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 5
+//
+// .Tuesday
+// ****
+// // - link:labsheet-06-extra.html[Lab sheet 6 extra (Ophelia special)]
+// - link:11-linear-search-notes.html[Linear search] (just notes again this week)
+// - link:labsheet-07.html[Lab sheet 7] (linear search)
+// ****
+//
+// .Thursday
+// ****
+// - Here is the new Thursday lab allocation ordered by link:lab-allocation-by-student-thursday.txt[student].
+// - link:labsheet-08.html[Lab sheet 8] (lots of loops, interesting -- I hope -- tasks)
+// - link:pt-special-instructions-1.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 6
+//
+// .Tuesday
+// ****
+// - link:./12-lists.html[Lists] (lists are sequences of elements of _any type_)
+// - link:./10-argv.html[Command-line arguments] (we may or may not get to this; it depends upon the time)
+// - link:labsheet-09.html[Lab sheet 9] (lists)
+// ****
+//
+// .Thursday
+// ****
+// - link:labsheet-10.html[Lab sheet 10] (lists and loops)
+// - link:/pt-special-instructions-2.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 7
+//
+// .Tuesday
+// ****
+// // - link:./ss-message.html[Selection sort] (placeholder)
+// - link:./14-selection-sort.html[Selection sort]
+// - link:./labsheet-12.html[Lab sheet 12]
+// // - link:/pt-special-instructions-3.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// .Thursday
+// ****
+// - link:./labsheet-12b.html[Lab sheet 12b]
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 8
+//
+// .Tuesday
+// ****
+// // - link:./is-message.html[Insertion sort] (placeholder)
+// - link:./16-insertion-sort.html[Insertion sort]
+// - link:./labsheet-13.html[Lab sheet 13]
+// // - link:/pt-special-instructions-4.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 9
+//
+// .Tuesday
+// ****
+// - link:./19-files.html[Text and file processing]
+// - link:./labsheet-14.html[Lab sheet 14]
+// - link:/pt-special-instructions-5.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// .Thursday
+// ****
+// - link:./labsheet-15.html[Lab sheet 15]
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 10
+//
+// .Tuesday
+// ****
+// - link:./18-dictionary-notes.html[Dictionaries]
+// - link:./labsheet-16.html[Lab sheet 16]
+// ****
+//
+// .Wednesday
+// ****
+// Here is the link:deduplicate-final.py.html[deduplicate example] used in this
+// morning's lecture.
+// ****
+//
+// .Thursday
+// ****
+// - link:./labsheet-17.html[Lab sheet 17]
+// - link:/pt-special-instructions-6.html[Additional instructions] (for _programming together_ in L125)
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 11
+//
+// .Tuesday (actually Wednesday, this year)
+// ****
+// - Functions and modules (link:./15-functions-notes.html[notes])
+// // - link:./labsheet-19.html[Lab sheet 19]
+// ****
+//
+// .Thursday
+// ****
+// - link:./labsheet-19.html[Lab sheet 19]
+// - link:/pt-special-instructions-7.html[Additional instructions] (for _programming together_ in L125)
+// // - link:./labsheet-20b.html[Lab sheet 20]
+// ****
+//
+// // // .Friday
+// // // ****
+// // // - link:./labsheet-21.html[Lab sheet 21] (programming together)
+// // // ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Week 12
+//
+// .Tuesday
+// ****
+// // - Binary-search slides will be replaced here later. The key to a correct
+// //   implementation is to ask the right question in the if statement: $q < a["mid"]$.
+// - link:./21-bsearch.html[Binary search]
+// - link:./labsheet-22.html[Lab sheet 22] (binary search)
+// // - link:/pt-special-instructions-8.html[Additional instructions] (for _programming together_ in L125)
+// - Due to missing Tuesday last week, we have skipped one labsheet.  It
+//   contains a couple of interesting problems, if you fancy link:./labsheet-20b.html[giving it a go].
+// ****
+//
+// // // .Thursday
+// // // ****
+// // // - link:./labsheet-23.html[Lab sheet 23] (programming together)
+// // // ****
+
+pass:[<hr>]
+
+[[bottom]]
+****
+End of page.
+
+Bookmark link:index.html#bottom[this link] to jump straight to the latest
+course material.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+//
+//vim: ft=asciidoc
+//
+

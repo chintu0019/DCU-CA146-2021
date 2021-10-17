@@ -1,0 +1,517 @@
+= CA114/CA116/CA177 - Linux basics
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Operating Systems
+
+****
+[quote, Wikipedia]
+____
+An operating system (OS) is system software that manages computer hardware
+and software resources and provides common services for computer programs
+____
+
+An operating system is the "glue" between computer hardware and the software systems which it runs.
+
+Examples of operating systems include Windows, macOS (OS X), iOS, Android and Linux.
+****
+
+****
+In this module, we will be using Linux.
+
+Linux is a member of a
+large family of Unix and Unix-like operating systems which share a common
+approach to the operating-system architecture and internal interfaces.
+
+We need to know a little bit about Linux to get started.
+****
+
+// // //////////////////////////////////////////////////////////////
+// === CA114
+//
+// ****
+// In CA114, we will be studying how we manage Unix and Unix-like systems.
+// footnote:[From here on, we will just say _Unix_, meaning _Unix and
+// Unix-like systems_.]
+//
+// Specifically, we will be studying the
+// https://en.wikipedia.org/wiki/Unix_shell[Unix shell] (or just _the shell_).
+//
+// The shell is a _command interpreter_ and is universally available on all
+// Unix systems.  It is used:
+//
+// - to issue commands at the command line,
+// - for scripting,
+// - for remote access, and
+// - for automation.
+//
+// For example, the shell can be used to access large fleets of remote servers
+// in a data centre, or to schedule processing on such systems.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== The File System
+
+****
+On Windows systems, files and folders are named by _paths_ beginning with
+the drive name, and followed by a sequence of components separated by
+backslashes.
+
+For example:
+
+----
+C:\Users\Jane\...
+----
+
+What is known as a "folder" on Windows systems, is known instead as a _directory_ on Linux systems.
+****
+
+****
+On Linux, files and directories are named similarly to on Windows, but with
+two main differences:
+
+- there is no drive name (+C:+) in the path, and
+- path components are separated by the +/+ character (pronounced "forward slash" or just "slash").
+
+Here are some examples:
+
+----
+/etc
+/etc/zshrc
+/home/blott
+/var/log/apache
+----
+****
+
+[NOTE]
+====
+You've seen this before.
+
+The use of forward slash on Unix and Unix-like
+systems is why we use forward-slash characters in URLs on the web.
+====
+
+// //////////////////////////////////////////////////////////////
+=== The Root Directory
+
+****
+The distinguished directory `/` is known as the _root directory_.  All
+other files and directories are reachable from the root directory.
+
+(There is no single root directory on windows systems; each drive is its own root.)
+****
+
+// //////////////////////////////////////////////////////////////
+=== Your Home Directory
+
+****
+Linux is a multi-user operating systems.  Many different users can be
+logged into a Linux system and using it at the same time.
+
+Typically, users needn't be aware that other users are using the same
+system at the same time.
+****
+
+****
+The keep each user's files separate from each other,
+each user owns a special directory known as their _home directory_.
+
+Normally, the user owns all of the files and directories in or under their home
+directory.  They can create or remove directories and subdirectories, or create, edit and remove files.
+****
+
+****
+A user's home directory is so important that there's a special
+single-character name for
+it, it's called +~+ (that is, the tilde character).
+
+For example, my home directory is +/home/blott+.  However, to avoid having to type that repeatedly, I can use the special name +~+.
+
+So, if there
+were a directory named +ca116+ in my home directory, then its full path
+would be:
+
+----
+/home/blott/ca116
+----
+
+But that's a lot to type; instead, I can just use the special name +~+:
+
+----
+~/ca116
+----
+
+These two paths refer to exactly the same directory, the second one is just
+easier to type.footnote:[Another advantage of +~+ is that it works even if
+you _don't know_ the path of your home directory.]
+****
+
+****
+On any Linux system, you each have your own home directory, and your home
+directories will be different from mine (and from each other).
+****
+
+// //////////////////////////////////////////////////////////////
+== Terminals, Shells and Processes
+
+****
+A _terminal_ is an application which presents a text and keyboard-based
+interface to a computer system.
+
+Generally, the user types commands into the
+terminal, those commands are executed, and any output is displayed in the terminal.
+****
+
+****
+By itself, a terminal does little of much use.  A program must run within the
+terminal to interpret what the user types.
+
+Normally (and by default) the type of program which runs within
+a terminal is known as a _shell_.
+
+A shell is a _command interpreter_. There are many shells (+sh+, +zsh+, +csh+,
++tcsh+, +fish+, etc.).
+
+In the lab and on link:/termcast/[termcast],
+the name of the default shell is +bash+.
+
++bash+ is a very widely-used shell on Linux systems.footnote:[+bash+ stands
+for _Bourne again shell_.  The name is a geeky joke, because one of the
+original shells from the 1970s was known as _the Bourne shell_.]
+****
+
+****
+When run in a terminal, the shell displays a prompt, then waits for the user to
+enter a command.
+
+When the user does so, the shell runs that command, waits for it to finish
+and displays any output, and then displays the prompt again.
+
+And so on.
+****
+
+****
+For users who are used to desktop point-and-click interfaces, this might
+seem like an unusual way to interact with a computer system.
+
+In practice, it is a very effective way of getting work done, and you will
+become used to it quite quickly.
+
+There are lots of
+https://www.howtogeek.com/howto/44997/how-to-use-bash-history-to-improve-your-command-line-productivity/[keyboard
+shortcuts] you can learn that can make working at the terminal fast.
+****
+
+// ****
+// In operating systems, a _process_ is the basic unit of work.  When the
+// shell runs a command, it creates a new process to run the command, waits
+// for that process to complete, and then waits for the next command.
+//
+// Some process take a very short amount of time to complete their work (microseconds or
+// milliseconds).  Others, such as those underlying a web browser session, may
+// run for hours, days or even longer.
+//
+// On Linux systems, you can view the current list of processes with the command:
+//
+// [source, sh]
+// ----
+// ps aux
+// ----
+//
+// At any time, there may be hundreds of processes running.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Opening a Terminal
+
+****
+If you have a Linux or https://apple.co/3nkO6Rb[MacOS] machine, then you
+can just use your local terminal.
+****
+
+****
+Alternatively, you can use link:/termcast/[_TermCast_] to access
+a terminal on one of the School of Computing servers.
+//
+// If you click on the green "add" under "Sessions" on the left-hand side,
+// then you can create an extra session.  Click the session name of the
+// left-hand side to change sessions.
+//
+// Type "exit" (and hit enter) to end a session.
+****
+
+****
+Try it now.
+
+To test if it's working, try the +date+ command.
+****
+
+.It should look something like this
+----
+$ date
+Tue  6 Oct 14:42:18 IST 2020
+$
+----
+
+[NOTE]
+====
+In this example, the dollar sign represents your prompt.  The shell
+displays this to indicate that it is waiting for you to enter a command.
+
+You do not type this dollar sign yourself.
+====
+
+[source, sh]
+.Here are some other simple commands which you can try
+----
+# Print the current working directory.
+pwd
+
+# List the contents of the current working directory.
+ls
+
+# List the contents of the current working directory (long style).
+ls -l
+
+# What is your username?
+whoami
+
+# What is the name of the current server?
+hostname
+----
+
+// ****
+// On the Linux desktop (on the lab machines) you can open a new terminal by:
+//
+// - clicking on _Activities_,
+// - typing _terminal_, and
+// - selecting _Gnome Terminal_.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Current Working Directory
+
+****
+Every process (including every shell process running in a terminal) has a _current working directory_ (CWD).
+
+The CWD is simply the directory in which to look for named files; it's like
+the current folder you have open in a file explorer.
+
+For example, if the CWD of a shell process is:
+
+----
+/home/blott
+----
+
+then a file name +test.txt+ refers to a file in that CWD, so to a file:
+
+----
+/home/blott/test.txt
+----
+****
+
+****
+Recall that your home directory is so important that the shell has a special name for it, +~+.
+
+Well, similarly, the CWD has a special name too, it's +.+ (that is, a single full stop).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Parent Directory
+
+****
+The last directory for which a special name exists is the _parent_ of the
+CWD.
+
+The special name is +..+ (that is, two full stops, with no space between
+them).
+
+For example, if the CWD were:
+
+----
+/home/blott
+----
+
+then the parent directory of the current directory would be +/home+, so the
+special name +..+ refers to that directory.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Special Directories
+
+****
+We have seen three special names for directories:
+
++~+:: your home directory
++.+:: the current work directory, and
++..+:: the parent of the current work directory.
+****
+
+****
+The significance of these three special names is that you can use them
+without knowing _specifically which_ directory is your home directory, or
+_specifically which_ directory is the CWD (or its parent).
+
+They are symbolic names which are always translated to the correct directory name,
+whatever that happens to be.
+****
+
+// //////////////////////////////////////////////////////////////
+== Commands
+
+****
+A command is a sequence of whitespace-separated tokens.  The first token is
+the name of the command.  Subsequent tokens are known as _arguments_.
+
+Here are some examples...
+****
+
+[source, sh]
+----
+# List the contents of the CWD.
+ls
+
+# Output a message.
+echo hello world
+
+# Output the current date and time.
+date
+
+# Sleep for five seconds.
+sleep 5
+----
+
+****
+In each of these examples, the command is a sequence of one or more
+whitespace-separated tokens.
+
+The first token is always the _command name_.  This is the name of the
+command we want to execute.
+
+The four command names above are +ls+ (which is short for _list_), +echo+,
++date+ and +sleep+.
+
+Some commands accept _arguments_.  The arguments are any additional tokens
+in the command after the command name.
+
+Above, +echo+ is used with two arguments (+hello+ and +world+) and +sleep+
+is used with one argument (+5+).
+****
+
+****
+Some commands can be used in many similar but different ways.
+
+One example is the +ls+ command.
+
+For example:
+
+[source, sh]
+----
+ls
+ls -l
+ls -l /etc
+----
+
+In all three cases, the command name is +ls+.  We are always using the same
+command.  It's just that we're using it in different ways.
+
+In the first case, +ls+ produces a simple listing of file and directory names in the CWD.
+
+In the second case, +ls+ produces a _long-style listing_ of file and
+directory names in the CWD. The +-l+ is an argument; however,
+it's a special type of argument: it's an argument which changes the
+behaviour of +ls+.  It tells +ls+ that we want it to do something slightly
+different.  Such an argument is sometimes called a _flag_ or an _option_.
+
+In the third case, we're using a further argument, a directory name.  So,
+the command name is +ls+ (so, _list_), we have +-l+ so we want a long-style
+listing, and the directory name +/etc+ indicates that we want a listing not
+of the CWD, but instead of the directory +/etc+.
+// (+/etc+ is perhaps an unusual name for a directory.  However, it just
+// happens to be the name of a directory which exists on almost all Linux
+// systems, so it's convenient here.)
+****
+
+// //////////////////////////////////////////////////////////////
+=== Common Commands
+
+****
+On Unix and Unix-like systems, there are hundreds or even thousands of
+commands.  Conveniently, the most basic and widely-used commands are
+standardised.  They have the same name and work in the same way across all
+Unix systems.
+
+Some of the most basic Linux commands are as follows.
+
++echo+:: print out the command's arguments
++pwd+:: print the (current) working directory
++cd+:: change the (current) working directory
++ls+:: list files and directories
++touch+:: can be used to create files (although technically it actually does something slightly different)
++rm+:: remove files
++mkdir+:: create directories
++rmdir+:: remove directories -- you can only remove empty directories
++cat+:: output the contents of a file for files
++less+:: page through the contents of files (use +q+ to exit)
++which+:: report which file implements a command
++sleep+:: sleep for a number of seconds
++man+:: look up the online manual
++nano+:: a terminal-based text editor
++sh+:: the Bourne shell
++bash+:: the +bash+ shell
+****
+
+// //////////////////////////////////////////////////////////////
+=== The Manual
+
+****
+All commands are fully described by online manual pages.  To look up a manual
+page, use the +man+ command.  For example:
+
+[source, sh]
+----
+man cat
+man ls
+----
+
+Use +q+ to exit the manual.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+== Launching a new shell
+
+[source, sh]
+.The first time
+----
+# Create a directory for your work.
+mkdir ca116
+
+# Change to that directory.
+cd ca116
+
+# Check that you are in the correct working directory.
+pwd
+----
+
+[source, sh]
+.Every subsequent time
+----
+# Check that the "ca116" directory exists.
+ls -l
+
+# Change to that directory.
+cd ca116
+
+# Check that you are in the correct working directory.
+pwd
+----
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// // //////////////////////////////////////////////////////////////
+

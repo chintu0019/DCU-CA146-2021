@@ -1,0 +1,3 @@
+running 100 test cases...
+
+ok

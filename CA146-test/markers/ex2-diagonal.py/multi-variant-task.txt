@@ -1,0 +1,5 @@
+ex2-diagonal-0.py
+ex2-diagonal-1.py
+ex2-diagonal-2.py
+ex2-diagonal-3.py
+ex2-diagonal-4.py

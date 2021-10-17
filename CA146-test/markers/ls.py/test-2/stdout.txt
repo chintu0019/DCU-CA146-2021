@@ -1,0 +1,9 @@
+f ball
+f bat
+d chicken
+d dog
+f fish
+d hen
+f ls.py
+d roof
+f runner.zsh

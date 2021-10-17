@@ -1,0 +1,10 @@
+$ python3 ex2-big-arguments.py 2 800 4 5 87 3 400 701 50
+800
+701
+$ python3 ex2-big-arguments.py 900 51 5 201 700
+900
+700
+$ python3 ex2-big-arguments.py 678 2 44 49 50 198 199 499 500 699 700
+678
+699
+700

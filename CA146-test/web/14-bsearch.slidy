@@ -1,0 +1,3630 @@
+= Binary Search
+Stephen Blott <stephen.blott@dcu.ie>
+:data-uri:
+:theme: morteratsch-slidy
+
+// //////////////////////////////////////////////////////////////
+== Today
+
+.Plan
+****
+. assertions
+. linear search (revisited)
+. binary search
+****
+
+// //////////////////////////////////////////////////////////////
+== Logarithms
+
+****
+Definition: if $y = 2^x$, then $log_2 y = x$.
+****
+
+image::./res/PltLog.png[block image,800,450]
+
+// //////////////////////////////////////////////////////////////
+== Logarithms
+
+****
+Example: $1024 = 2^10$, so $log_2 1024 = 10$.
+****
+
+image::./res/PltLog.png[block image,800,450]
+
+// //////////////////////////////////////////////////////////////
+== Logarithms (Aside)
+
+[NOTE]
+====
+In complexity, we generally don't care about the base, because:
+
+$log_b n  = log_x n / log_b x$
+
+$log_b x times log_b n  = log_x n$
+
+But $log_b x$ does not depend on $n$ so, given the two bases, it's a constant. +
+
+$C times log_b n  = log_x n$
+
+And constants like this do not affect complexity.
+====
+
+// //////////////////////////////////////////////////////////////
+== Aside
+
+.Put these in order (slowest to fastest):
+****
+. $O(n)$
+. $O(n!)$
+. $O(log n)$
+. $O(1)$
+. $O(n^3)$
+. $O(n log n)$
+. $O(2^n)$
+. $O(n^2)$
+****
+
+// //////////////////////////////////////////////////////////////
+== Aside
+
+.Put these in order (slowest to fastest):
+****
+. $O(n!)$
+. $O(2^n)$
+. $O(n^3)$
+  (we call this  and the _n_-squared case _polynomial_)
+. $O(n^2)$
+. $O(n log n)$
+. $O(n)$ (we call this _linear_)
+. $O(log n)$
+. $O(1)$ (the cost does not depend upon the size of the problem)
+****
+
+//  ////
+//  // //////////////////////////////////////////////////////////////
+//  == Debugging
+//
+//  .Techniques:
+//  ****
+//  - _careful thought_
+//  - running pre-worked examples, and verifying progress
+//  - additional print statements +
+//    (to verify that the data is as we expect, and that the computation proceeds as we expect)
+//  - `python -m trace --trace some-script.py`
+//  ****
+//  ////
+
+// //////////////////////////////////////////////////////////////
+== Assertions
+
+.An assertion is:
+****
+- a statement of something which is expected or required to be +True+
+****
+
+.Assertions can be used:
+****
+- to _document_ a program's logic
+- and to _verify_ assumptions
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example
+
+[source, python]
+----
+x = 1
+
+assert 0 < x
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example
+
+[source, python]
+----
+x = 1
+
+assert 0 < x
+----
+
+****
+The expression in an assert statement is a Boolean expression.
+
+It is *expected* to be true.
+
+And it is *required* to be true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example
+
+[source, python]
+----
+x = 1
+
+assert 0 < x
+----
+
+****
+When Python encounters an assertion:
+
+- it evaluates the expression
+- if it is +True+ then execution proceeds as normal
+- however, if it is +False+, then an `ExceptionError` is raised +
+  +
+  (which usually results in execution terminating immediately in failure)
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example
+
+[source, python]
+----
+x = 1
+
+assert x < 0
+----
+
+****
+Here, the assertion will fail.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example
+
+[source, python]
+----
+x = 1
+
+assert x < 0
+----
+
+----
+Traceback (most recent call last):
+  File "/home/blott/tmp/test.py", line 3, in <module>
+    assert x < 0
+AssertionError
+----
+
+****
+We see that an assertion has failed (+AssertionError+), which line it's on ($3$, here), and the
+text of the assertion itself.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example II
+
+[source, python]
+----
+def absolute_value(x):
+   if x < 0:
+      x = -x
+   #
+   return x
+----
+
+****
+A function to compute the absolute value of its argument.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example II
+
+[source, python]
+----
+def absolute_value(x):
+   if x < 0:
+      x = -x
+   assert 0 <= x
+   return x
+----
+
+****
+By adding an assertion, we:
+
+- document the property expected of +absolute_value+
+- and, when we run the program, we _verify_ that property
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example III
+
+[source, python]
+----
+def square(x):
+   x = x * x
+   assert 0 <= x
+   return x
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+.Selection Sort
+****
+Recall that, on each iteration:
+
+- we select the smallest element from the unsorted part of the list
+- and swap that element with the one at position $i$
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+      |                     |
+      |=====================|
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Find $p$, the position of the smallest element in $a[i:]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 39 32 30 49 14 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Then swap $a[i]$ and $a[p]$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+                  |
+                  | p = 6
+----
+
+****
+Then swap $a[i]$ and $a[p]$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+****
+$a[0:i+1]$ is now sorted...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+****
+And we can _verify_ that...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+[source, python]
+----
+assert a[i-1] <= a[i]
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+      | i = 2
+      |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+****
+So it is correct to advance $i$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort -- Illustration
+
+----
+0  1  2  3  4  5  6  7  8  9
+
+         | i = 3
+         |
+12 13 14 32 30 49 39 19 31 31
+|      |
+========
+----
+
+****
+So it is correct to advance $i$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                   # find p, the position of the smallest
+   j = i + 1               # element in a[i:]
+   while j < len(a):       #
+      if a[j] < a[p]:      #
+         p = j             #
+      j = j + 1            #
+
+   tmp = a[p]              # swap a[i] and a[p]
+   a[p] = a[i]             #
+   a[i] = tmp              #
+
+   #
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                   # find p, the position of the smallest
+   j = i + 1               # element in a[i:]
+   while j < len(a):       #
+      if a[j] < a[p]:      #
+         p = j             #
+      j = j + 1            #
+
+   tmp = a[p]              # swap a[i] and a[p]
+   a[p] = a[i]             #
+   a[i] = tmp              #
+
+   assert a[i-1] <= a[i]   # verify correctness
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                   # find p, the position of the smallest
+   j = i + 1               # element in a[i:]
+   while j < len(a):       #
+      if a[j] < a[p]:      #
+         p = j             #
+      j = j + 1            #
+
+   tmp = a[p]              # swap a[i] and a[p]
+   a[p] = a[i]             #
+   a[i] = tmp              #
+
+   assert a[i-1] <= a[i]   # but i could be 0!
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                   # find p, the position of the smallest
+   j = i + 1               # element in a[i:]
+   while j < len(a):       #
+      if a[j] < a[p]:      #
+         p = j             #
+      j = j + 1            #
+
+   tmp = a[p]              # swap a[i] and a[p]
+   a[p] = a[i]             #
+   a[i] = tmp              #
+
+   assert i == 0 or a[i-1] <= a[i]
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Assertions -- Example IV -- Selection Sort
+
+****
+This is the _key property_ required for selection sort to work.
+****
+
+****
+By adding an assertion, we both *document* that property, and *verify* it.
+****
+
+****
+If the property is ever +False+:
+
+- then our "selection sort" is incorrect
+- and the execution fails
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertion Execution
+
+[source, sh]
+----
+python3 some-script.py
+----
+
+****
+In normal execution,
+the Python interpreter evaluates and verifies all assertions.
+
+And there is a cost to doing so.
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertion Execution
+
+[source, sh]
+----
+python3 -O some-script.py
+----
+
+****
+With the +-O+ flag,
+the interpreter _ignores_ all assertions.
+
+So the cost of assertions need not be paid when the program is in production use.
+****
+
+****
+(That's a capital +O+, for _optimise_.)
+****
+
+// //////////////////////////////////////////////////////////////
+== Assertion Note
+
+****
+This _is not_ to encourage you to begin sprinkling assertions
+around your programs.
+****
+
+****
+Rather, we will use assertions to reason about today's programs...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Input
+****
+- a *sorted* list $a$
+- and a query $q$
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Input
+****
+- a *sorted* list $a$
+- and a query $q$
+****
+
+****
+Today, we always assume that we are working with _sorted_ lists.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Input
+****
+- a *sorted* list $a$
+- and a query $q$
+****
+
+.Goal
+****
+- test whether $q$ is in $a$
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Input
+****
+- a *sorted* list $a$
+- and a query $q$
+****
+
+.More specifically
+****
+- find the position $p$ at which $q$ would be found, if $q$ were in $a$
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Input
+****
+- a *sorted* list $a$
+- and a query $q$
+****
+
+.More specifically
+****
+- find the position $p$ at which $q$ would be found, if $q$ were in $a$
+****
+
+****
+We could use linear search...
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   #
+   #
+   #
+
+   #
+   #
+   return p
+----
+
+****
+We'll define a linear-search function...
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] != q:
+      p = p + 1
+
+   #
+   #
+   return p
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] != q:
+      p = p + 1
+
+   #
+   #
+   return p
+----
+
+****
+Not like this.
+
+We know that the list is sorted, so we can stop when we encounter any value greater than or equal to $q$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   #
+   #
+   return p
+----
+
+****
+Like this.
+
+We _keep going_ while the current value is _less than_ $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   #
+   #
+   return p
+----
+
+****
+Like this.
+
+And we stop when the current value _greater than or equal to_ $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   #
+   #
+   return p
+----
+
+****
+What do we know about $p$?
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   assert p == 0 or a[p-1] < q
+   #
+   return p
+----
+
+****
+If there is a value to the left of position $p$, then it is smaller than $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   #
+   assert p == len(a) or q <= a[p]
+   return p
+----
+
+****
+Either $p$ is at the end of $a$, or the value at position $p$ is greater than or equal to $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   assert p == 0 or a[p-1] < q
+   assert p == len(a) or q <= a[p]
+   return p
+----
+
+****
+Exactly one position $p$ in $a$ satisfies both of these properties (always).
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   assert p == 0 or a[p-1] < q
+   assert p == len(a) or q <= a[p]
+   return p
+----
+
+****
+And these properties _guarantee_ that our implementation of linear search is correct.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+   assert p == 0 or a[p-1] < q
+----
+
+****
+Either:
+
+- $p$ is position $0$
+- or the element to the left is _less than_ $q$
+****
+
+****
+If this _isn't_ true:
+
+- then we've gone too far to the right
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+   assert p == len(a) or q <= a[p]
+----
+
+****
+Either:
+
+- $p$ is position the position after the end of the list
+- or the element at position $p$ is _greater than or equal to_ $q$
+****
+
+****
+If this _isn't_ true:
+
+- then we haven't gone far enough to the right
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+   assert p == 0 or a[p-1] < q
+   assert p == len(a) or q <= a[p]
+----
+
+****
+And, if _both_ of these are true:
+
+- then we haven't gone too far to the right
+- and we have gone far enough to the right
+
+So we've found _exactly_ the right position.
+
+And _exactly one_ such position exists, for any $q$ and sorted $a$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+|
+|
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+|
+| p = 0
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+  |
+  | p = 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+    |
+    | p = 2
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+****
+The loop condition $a[p] < q$ is no longer true,
+so the loop stops.
+
+And $p$ is indeed the position we're looking for.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+#
+----
+
+****
+The element to the left ($7$) is less than $9$, so we haven't gone too far to the right.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+[source, python]
+----
+#
+assert p == len(a) or q <= a[p]
+----
+
+****
+The element at position $p$ is greater than or equal to $9$, so we have gone far enough to the right.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 9
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+We've found _exactly_ the correct position $p$, and the _only_ position $p$
+satisfying these properties (for $q$ being $9$).
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 0
+
+1 4 7 9 9 10
+|
+| p = 0
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+This is the position at which $q$ would be if $q$ were in the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 8
+
+1 4 7 9 9 10
+      |
+      | p = 3
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+This is the position at which $q$ would be if $q$ were in the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 12
+
+1 4 7 9 9 10
+             |
+             | p = 6
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+This is the position at which $q$ would be if $q$ were in the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search -- Examples
+
+----
+q = 12
+
+1 4 7 9 9 10
+             |
+             | p = 6
+----
+
+[source, python]
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+So, the correct position might actually be the position _after_ the end of the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   assert p == 0 or a[p-1] < q
+   assert p == len(a) or q <= a[p]
+   return p
+----
+
+.To reiterate:
+****
+These properties *guarantee* that our implementation of
+linear search is correct.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+[source, python]
+----
+def lsearch(a,q):
+   p = 0
+   while p < len(a) and a[p] < q:
+      p = p + 1
+
+   assert p == 0 or a[p-1] < q
+   assert p == len(a) or q <= a[p]
+   return p
+----
+
+.To reiterate:
+****
+The position we're looking for is the *only* position for which these two properties both hold.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear Search (in a Sorted List)
+
+****
+This approach gives us a stronger, more formal approach to reasoning about the correctness of our programs.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+****
+Linear search is $O(1)$ in the best case.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+****
+Unfortunately, though, the best case does not come up all that often.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+****
+Linear search is $O(n)$ in the average and worst cases.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+****
+Linear search is $O(n)$ in the average and worst cases.
+****
+
+****
+So it is often impractical for large lists.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+.Now
+****
+What is the cost of linear search?
+****
+
+****
+Linear search is $O(n)$ in the average and worst cases.
+****
+
+****
+Knowing that the list is sorted, can we do better?
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+|
+|
+----
+
+****
+Consider this example.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+|
+|
+----
+
+****
+With linear search,
+we would have to consider almost all of the elements in the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+|
+|
+----
+
+****
+But let's consider a different approach...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+****
+Initially, the position we're looking for could be _anywhere_ in the list.
+
+And it _could_ be the position beyond the end of the list (position $16$, here).
+
+So, anywhere between +low+ and +high+, inclusive.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+****
+But, recall that the list is sorted; we can use that information to our advantage...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+****
+Let's take a peek at the element in the middle of the list...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0        | mid = 8               | high = 16
+|----------------------------------------|
+----
+
+****
+Let's take a peek at the element in the middle of the list.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0        | mid = 8               | high = 16
+|----------------------------------------|
+----
+
+****
+The value in the middle is $11$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0        | mid = 8               | high = 16
+|----------------------------------------|
+----
+
+****
+The value in the middle is $11$.
+****
+
+****
+What does that tell us?
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0        | mid = 8               | high = 16
+|----------------------------------------|
+----
+
+****
+The value in the middle is $11$.
+****
+
+****
+$11$ is less than $21$.
+
+So the position we're looking for *cannot* be in the left part of the list.
+
+So we can _immediately eliminate that part of the list from consideration_...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                 | low = 8               | high = 16
+                 |-----------------------|
+----
+
+****
+The value in the middle is $11$.
+****
+
+****
+$11$ is less than $21$.
+
+So the position we're looking for *cannot* be in the left part of the list.
+
+So we can _immediately eliminate that part of the list from consideration_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                 | low = 8               | high = 16
+                 |-----------------------|
+----
+
+****
+Our problem just became half as big as it was before.
+
+That's pretty good progress.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                 | low = 8               | high = 16
+                 |-----------------------|
+----
+
+****
+However, we can do slightly better still...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                 | low = 8               | high = 16
+                 |-----------------------|
+----
+
+****
+We see that $11$ is *less than* our query $21$.
+
+So, in fact:
+
+- the position we're looking for _cannot_ be position $8$
+- so, we can advance +low+ one position further to the right...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+****
+We see that $11$ is *less than* our query $21$.
+
+So, in fact:
+
+- the position we're looking for _cannot_ be position $8$
+- so, we can advance +low+ one position further to the right.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+****
+And, we proceed again as before...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                       | mid = 12
+                             |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                       | mid = 12
+                             |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+****
+Now, the value at the +mid+ position is again *less than* $21$:
+
+- so we can advance +low+ again...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                       | low = 12
+                             |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                             |           | high = 16
+                             |-----------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                       | low = 12
+                             |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                             |           | high = 16
+                             |-----------|
+----
+
+****
+And advance one position further, as before...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |        | high = 16
+                                |--------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |        | high = 16
+                                |--------|
+----
+
+****
+And, again, we proceed as before...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |        | high = 16
+                                |--------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  |     | high = 16
+                 mid = 14       |--------|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  |     | high = 16
+                 mid = 14       |--------|
+----
+
+****
+Now:
+
+- the value at *that* position ($22$) is *not* less than $q$.
+- so, we can reduce +high+...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  | high = 14
+                 mid = 14       |--|
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  | high = 14
+                 mid = 13       |--|
+----
+
+****
+Finally, we again consider the position in the middle, which is now position $13$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  | high = 14
+                 mid = 13       |--|
+----
+
+****
+And:
+
+- the value at *that* position too ($21$) is *not* less than $q$.
+- so, again we reduce +high+...
+****
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+// //////////////////////////////////////////////////////////////
+== Search in a Sorted List
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+****
+Now:
+
+- +low+ and +high+ are equal, so we're done
+- and we've found the position we were looking for, position $13$
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+****
+This algorithm is known as _binary search_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+****
+With linear search, we would have considered 14 positions.
+
+How many did we consider with binary search?
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Positions Considered
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0        | mid = 8               | high = 16
+|----------------------------------------|
+----
+
+****
+We considered this position...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Positions Considered
+
+----
+q = 21                       | mid = 12
+                             |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+****
+And this position...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Positions Considered
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  |     | high = 16
+                 mid = 14       |--------|
+----
+
+****
+And this position...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Positions Considered
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  | high = 14
+                 mid = 13       |--|
+----
+
+****
+And this position.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+****
+With linear search, we would have considered 14 positions.
+
+How many did we consider with binary search?
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+****
+With linear search, we would have considered 14 positions.
+
+We considered _just 4_ positions, which is a substantial improvement.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Complexity
+
+****
+In general,
+the problem size roughly _halves_ on each iteration.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Complexity
+
+****
+In general,
+the problem size roughly _halves_ on each iteration.
+****
+
+****
+So,
+we consider approximately $log_2(n)$ positions.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Complexity
+
+****
+We consider approximately $log_2(n)$ positions.
+****
+
+****
+So, binary search is $O(log n)$.
+
+And, logarithms grow very slowly as $n$ increases:
+
+- so this is an efficient algorithm, even for *very large* lists
+
+E.g. $log_2$ of one billion is a little more than $30$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Linear versus Logarithmic
+
+image::./res/PltOs.png[height="70%",align="center"]
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+****
+Let's take a closer look at the positions we considered, again...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+****
+We started like this.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+If there is an element to the left of +low+, then it is *less than* $q$.
+
+If there is an element at position +high+, then it is *greater than or equal to* $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+| low = 0                                | high = 16
+|----------------------------------------|
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+Both of these properties are initially true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21
+
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                    | low = 9            | high = 16
+                    |--------------------|
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+These are still both true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |        | high = 16
+                                |--------|
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+And still true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                |  | high = 14
+                                |--|
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+And still true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+[source, python]
+.Observe:
+----
+assert low == 0 or a[low-1] < q
+assert high == len(a) or q <= a[high]
+----
+
+****
+And they're true when we're done.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- A Closer Look
+
+----
+q = 21                          | low = 13
+                                |
+1 4 5 5 8 7 9 10 11 11 12 18 20 21 22 25
+                                | high = 13
+                                |
+----
+
+[source, python]
+.Observe:
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+We have found the *only* position $p$ (taking $p$ to be either +low+ or +high+, they're the same)  for which these properties both hold.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+.So:
+****
+- how might we go about implementing binary search?
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+.Binary search is:
+****
+- easy to understand, and
+- only a few lines of code
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- WARNING!
+
+image::./res/warning-sign.png[width="70%",align="center"]
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- WARNING!
+
+.Nevertheless, binary search is also:
+****
+- *_notoriously difficult to get right!_*
+- https://reprog.wordpress.com/2010/04/19/are-you-one-of-the-10-percent/[link]
+// - http://www.sparknotes.com/cs/searching/binarysearch/section2/page/3/[example] +
+//   _(as of 2019/20, this example link is broken; it used to point to a prominent example of an incorrect
+//     example of a binary search implementation)_
+****
+
+****
+Many professional software engineers cannot code binary search correctly.
+// And, coding binary search is also a classic interview question.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- WARNING!
+
+.Complications
+****
+- the list may be empty
+- query may not be present
+- query may be present, but with duplicates +
+  (which one do you want?)
+- query may not be present, and be strictly less than all of the elements
+- query may not be present, and be strictly greater than all of the elements
+
+It is very easy to write a binary search implementation which works for
+most cases, but results in an infinite loop for some corner cases.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+****
+Write a function +bsearch(a,q)+ which:
+
+- accepts two parameters: $a$ a *sorted* list, and $q$ a query, and
+- returns the _first_ position $p$ at which $q$ would be positioned in $a$, if $q$ is or were present in $a$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+****
+Write a function +bsearch(a,q)+ which:
+
+- accepts two parameters: $a$ a *sorted* list, and $q$ a query, and
+- returns the _first_ position $p$ at which $q$ would be positioned in $a$, if $q$ is or were present in $a$.
+****
+
+.Note
+****
+If $q$ is greater than all of the elements in $a$, then:
+
+- $p$ will be the position _after_ the end of the list
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+****
+Write a function +bsearch(a,q)+ which:
+
+- accepts two parameters: $a$ a *sorted* list, and $q$ a query, and
+- returns the _first_ position $p$ at which $q$ would be positioned in $a$, if $q$ is or were present in $a$.
+****
+
+[source, python]
+.In other words, find position $p$ such that:
+----
+assert p == 0 or a[p-1] < q
+assert p == len(a) or q <= a[p]
+----
+
+****
+For any $q$ and sorted $a$, _exactly one_ position $p$ satisfies _both_ of these properties.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+****
+Let's get started...
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Binary Search -- Implementation
+//
+// [source, python]
+// ----
+// def bsearch(a,q):
+//    low = 0
+//    high = len(a)
+//
+//    assert low == 0 or a[low-1] < q
+//    assert high == len(a) or q <= a[high]
+// ----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   #
+   #
+----
+
+****
+The smallest possible position is $0$,
+and the largest is +len(a)+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   assert low == 0 or a[low-1] < q
+   assert high == len(a) or q <= a[high]
+----
+
+****
+Also,
+observe that these two properties hold.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   assert low == 0 or a[low-1] < q
+   assert high == len(a) or q <= a[high]
+----
+
+****
+For _space-on-the-slides_ reasons, we'll be dropping some assertions as we go along.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while SOMETHING:
+      # do something
+----
+
+****
+Clearly, we need a loop.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while SOMETHING:
+      # do something
+----
+
+****
+The candidate positions are those in the range +[low,high]+ (inclusive).
+
+And, we stop when _only one_ candidate position remains.
+
+So, we keep going while _more than one_ candidate position remains:
+
+- that is, while +low < high+...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      # do something
+----
+
+****
+The candidate positions are those in the range +[low,high]+ (inclusive).
+
+And, we stop when _only one_ candidate position remains.
+
+So, we keep going while _more than one_ candidate position remains:
+
+- that is, while +low < high+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      # do something
+
+   #
+----
+
+****
+And, when _only one_ candidate position remains, that's the result...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      # do something
+
+   return low # or high, they're the same
+----
+
+****
+And, when _only one_ candidate position remains, that's the result.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      # do something
+
+   return low # or high, they're the same
+----
+
+****
+Now, again for space reasons, let's focus just on the loop...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      # do something
+      #
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      # do something
+      #
+----
+
+.Our approach:
+****
+- find the midpoint (+mid+) between +low+ and +high+
+- then adjust either +low+ or +high+, depending upon the query $q$ and the value of +a[mid]+
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      #
+----
+
+****
+The midpoint is just the average of +low+ and +high+.
+
+Note, however, that this is integer division:
+
+- if there is a remainder, then it's rounded down
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+****
+This is _always_ true.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Example:
+****
+- +low+ is $5$, +high+ is $6$
+- +mid+ will be $5$ (from $(5+6)/2$)
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Example:
+****
+- +low+ is $6$, +high+ is $7$
+- +mid+ will be $6$ (from $(6+7)/6$)
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Example:
+****
+- +low+ is $0$, +high+ is $1000000$
+- +mid+ will be $500000$
+
+If the range is large, then we'll be making significant progress.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Important
+****
+- +mid < high+
+- in other words, +mid+ and +high+ _are never equal_
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Also
+****
+- +0 \<= low \<= mid < high \<= len(a)+
+- so, +mid+ is always a valid index in $a$
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+.Or, more simply
+****
+- +0 \<= mid < len(a)+
+- so, +mid+ is always a valid index in $a$
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if ???: # test a[mid]
+         #
+         #
+      else:
+         #
+         #
+----
+
+****
+We need to test the element at the midpoint.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if ???: # test a[mid]
+         #
+         #
+      else:
+         #
+         #
+----
+
+****
+We'll test whether the element at the midpoint is strictly less than $q$...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         # the element at position mid
+         # is less than q
+      else:
+         # the element at position mid
+         # is greater than or equal to q
+----
+
+****
+We'll test whether the element at the midpoint is strictly less than $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         # low is "too low"
+         # so move low to the right
+      else:
+         # the element at position mid
+         # is greater than or equal to q
+----
+
+****
+We'll test whether the element at the midpoint is strictly less than $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         # low is "too low"
+         # so move low to the right
+      else:
+         # high is "too high"
+         # so move high to the left
+----
+
+****
+We'll test whether the element at the midpoint is strictly less than $q$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         # low is "too low"
+         # so move low to the right
+      else:
+         # high is "too high"
+         # so move high to the left
+----
+
+****
+Watch out, _we're about to make a mistake_...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         low = mid    # move low to the right
+         #
+      else:
+         high = mid   # move high to the left
+         #
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+If these two properties _held before_, then they also _hold now_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Consider first the case that the condition in the if statement is false...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid           # then we do this
+         assert q <= a[high]
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid           # we know that q <= a[mid]
+         assert q <= a[high]
+----
+
+****
+Because the condition is false, we know that +q \<= a[mid]+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid           # we know that q <= a[mid]
+         assert q <= a[high]  # so this remains true
+----
+
+****
+Therefore, after the else branch: +q \<= a[high]+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+That's good, but there's more...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid           # then this *reduces* high
+         assert q <= a[high]
+----
+
+****
+Because +mid < high+, this reduces +high+, so we are *guaranteed to have made progress*.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+So we can be pretty confident that the +else+ branch is correct.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is false
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Now, what if the condition is true...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Now, what if the condition is true?
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid            # then we do this
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Because the condition is true, we know that +a[mid] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+So, because $a$ is sorted: +mid == 0+ or +a[mid-1] \<= a[mid] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q  # here
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Therefore, after the if branch, +low == 0 or a[low-1] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+That's good too.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+The last thing we need to check is that we are *guaranteed* to make progress...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Unfortunately, we are *not guaranteed* to make progress.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+If +low == mid+, then we will have an infinite loop.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+Example: initially +low+ is $5$ and +high+ is $6$; then +mid+ is $5$ too.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+How can we fix this?
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+We know +a[mid] < q+, and we require +a[low-1] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid            # here
+         assert low == 0 or a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+So it is safe (and correct) to add an extra +1+ to +low+...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid + 1        # here
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+So it is safe (and correct) to add an extra +1+ to +low+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+This guarantees progress.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+And we know +a[mid] < q+, therefore +a[mid+1-1] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+And we know +a[mid] < q+, therefore +a[(mid+1)-1] < q+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:          # if this is true
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+And we know +a[mid] < q+, therefore +a[low-1] < q+, as required.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Implementation
+
+[source, python]
+----
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+----
+
+****
+So, this is *correct* in both cases, and *guaranteed to make progress* in both cases too.
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Complete
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- With Assertions
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+      assert low <= mid < high
+
+      if a[mid] < q:
+         low = mid + 1
+         assert a[low-1] < q
+      else:
+         high = mid
+         assert q <= a[high]
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+.Binary search is:
+****
+- easy to understand +
+  (it's like looking up telephone numbers in a phone book)
+- and just a few lines of code
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+.Binary search is:
+****
+- easy to understand +
+  (it's like looking up telephone numbers in a phone book)
+- and just a few lines of code
+****
+
+.However
+****
+There are _many many_ ways to get binary search wrong...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Correct
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Wrong
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid           # Infinite loop.
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Correct
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Wrong
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a) - 1         # Cannot find position len(a).
+
+   while low <= high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Correct
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Correct
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      #
+      #
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Non-Optimisation
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      elif a[mid] == q:
+         return mid
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+****
+Stick to this version...
+****
+
+// //////////////////////////////////////////////////////////////
+== Binary Search -- Correct
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+// //////////////////////////////////////////////////////////////
+== Binary Search
+
+****
+And *never* blindly trust anything you find on the Internet.
+****
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+****
+The following problems
+all assume that the input list is sorted.
+
+They can be solved using binary search...
+****
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+.Task
+****
+Write a Python function +contains(a,q)+ which:
+
+- returns a Boolean indicating whether $a$ contains $q$ (or not)
+****
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+[source, python]
+----
+def contains(a,q):
+   p = bsearch(a,q)
+
+   return ???
+----
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+[source, python]
+----
+def contains(a,q):
+   p = bsearch(a,q)
+
+   return p < len(a) and a[p] == q
+----
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+.Task
+****
+Write a Python function +index_of(a,q)+ which:
+
+- if $q$ is contained in $a$, then it returns the position $p$ of the first occurrence of $q$ in $a$
+- otherwise, it returns +-1+
+****
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+[source, python]
+----
+def index_of(a,q):
+   p = bsearch(a,q)
+
+   #
+   #
+   #
+   #
+----
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+[source, python]
+----
+def index_of(a,q):
+   p = bsearch(a,q)
+
+   if p < len(a) and a[p] == q:
+      return p
+   else:
+      return -1
+----
+
+// //////////////////////////////////////////////////////////////
+== Related Problems
+
+****
+Both of these are also $O(log n)$.
+****
+
+// //////////////////////////////////////////////////////////////
+== Summary
+
+.Summary
+****
+- assertions
+- linear search (revisited)
+- binary search
+****
+
+// //////////////////////////////////////////////////////////////
+== Summary
+
+.Binary Search
+****
+Binary search is _very easy_ to get wrong.
+
+Your should:
+
+- either: +
+  learn how to derive the version here
+- or: +
+  memorise the key decisions in this implementation
+****
+
+// [NOTE]
+// ====
+// And it's not often I encourage anybody to simply memorise something!
+// ====
+
+// //////////////////////////////////////////////////////////////
+== Done
+
+[source, python]
+----
+def bsearch(a,q):
+   low = 0
+   high = len(a)
+
+   while low < high:
+      mid = (low + high) // 2
+
+      if a[mid] < q:
+         low = mid + 1
+      else:
+         high = mid
+
+   return low
+----
+
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

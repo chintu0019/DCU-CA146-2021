@@ -1,0 +1,3 @@
+
+install:
+	$(MAKE) -C .. install

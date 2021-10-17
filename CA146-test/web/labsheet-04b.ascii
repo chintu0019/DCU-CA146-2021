@@ -1,0 +1,643 @@
+= Labsheet 4b
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+[TIP]
+====
+The following tasks all involve loops.
+
+In some cases, your will use the _do-something-$n$-times_ pattern,
+while in others you use the _search loop_ pattern.
+====
+
+[TIP]
+====
+From time to time you will unintentionally write an _infinite loop_.
+
+To stop a Python script with an infinite loop, type _Control-c_.
+
+Do not use _Control-z_.  That might seem to stop your script, but in fact it does
+https://superuser.com/questions/476873/what-is-effect-of-ctrl-z-on-a-unix-linux-application[something else].
+====
+
+
+// // //////////////////////////////////////////////////////////////
+// == All non-negative Integers
+//
+// .Task
+// ****
+// Write a Python script named +all-integers.py+ which outputs _all_ non-negative integers.
+//
+// .Output:
+// ----
+// 0
+// 1
+// 2
+// 3
+// 4
+// 5
+// .
+// .
+// .
+// ----
+// Your script should involve an infinite loop (that is, a loop which runs forever -- or until manually stopped).
+// ****
+//
+// .Tips
+// ****
+// The expression in the condition of a +while+ loop can be _any_ Boolean
+// expression, including something very simple like a Boolean constant -- and
+// there are only two Boolean constants.
+//
+// You can stop your program by typing +Ctrl-c+ in the terminal.
+// ****
+//
+// .Note
+// ****
+// It is not at all common to deliberately write infinite loops.  It does
+// sometimes happen by accident, though.  So it's helpful to know that
+// +Ctrl-c+ kills the currently-running job.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Loop types
+
+****
+There are two variants of each task in this section
+
+- the first variant requires the _do-something-$n$-times_ pattern,
+- while the second requires the _search loop_ pattern.
+
+Other than that, the tasks in each pair are basically the same.
+
+Nevertheless, despite this seemingly small difference, the solutions in
+each case must be structured quite differently.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sum numbers
+
+.Task
+****
+Write a Python script named +sum-five.py+ which
+reads _exactly five_ integers from standard input and outputs the sum of those integers.
+****
+
+.Example standard input
+----
+5
+3
+9
+9
+1
+----
+
+.Example standard output
+----
+27
+----
+
+[NOTE]
+====
+Your solution _must_ make good use of a +while+ loop.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum numbers 2
+
+.Task
+****
+Write a Python script named +sum-five-0.py+ which
+is the same as that for the previous task, except that it reads an unknown number of integers.
+
+Your script should stop when it encounters a $0$.
+
+(The "$0$" in the file name above and in the example below is a zero, not the letter "Oh".)
+****
+
+.Example standard input
+----
+5
+3
+9
+9
+0
+----
+
+.Example standard output
+----
+26
+----
+
+[TIP]
+====
+You do not know how many numbers your script will read.
+
+You are _searching_ for the first $0$.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum abs. values
+
+.Task
+****
+Write a Python script named +sum-five-abs.py+ which
+reads _exactly five_ integers from standard input and outputs the sum of the _absolute values_ of those integers.
+****
+
+.Example standard input
+----
+5
+-3
+9
+-9
+1
+----
+
+.Example standard output
+----
+27
+----
+
+[TIP]
+====
+The _absolute value_ of $3$ is $3$; the absolute value is $-3$ is also $3$.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum abs. values 2
+
+.Task
+****
+Write a Python script named +sum-five-abs-0.py+ which
+is the same as that for the previous task, except that it reads an unknown
+number of integers.
+
+Your script should stop when it encounters a $0$.
+****
+
+.Example standard input
+----
+5
+-3
+9
+-9
+1
+0
+----
+
+.Example standard output
+----
+27
+----
+
+// //////////////////////////////////////////////////////////////
+=== Sum pos/neg
+
+.Task
+****
+Write a Python script named +sum-five-pos-neg.py+ which
+reads _exactly five_ integers from standard input and outputs
+exactly two numbers: the sum of the _negative numbers_ encountered and the sum of the _positive numbers_ encountered (on the same line).
+****
+
+.Example standard input
+----
+5
+-3
+9
+-9
+1
+----
+
+.Example standard output
+----
+-12 15
+----
+
+[TIP]
+====
+You will have to keep track of _two_ totals as you go along:
+the sum of the negative numbers encountered, and the sum of the positive numbers encountered.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum pos/neg 2
+
+.Task
+****
+Write a Python script named +sum-five-pos-neg-0.py+ which
+is the same as that for the previous task, except that it reads an unknown
+number of integers.
+
+Your script should stop when it encounters a $0$.
+****
+
+.Example standard input
+----
+5
+-3
+9
+-9
+0
+----
+
+.Example standard output
+----
+-12 14
+----
+
+// //////////////////////////////////////////////////////////////
+=== Higher/lower
+
+.Task
+****
+Write a Python script named +higher-lower.py+ which:
+
+- first reads exactly one integer from standard input ($10$, in the example below),
+- then reads _exactly five_ more integers from standard input and
+- for each of those five values, outputs the message +higher+, +lower+ or
+  +equal+ depending upon whether the new value is higher than, lower than
+  or equal to the *immediately preceding* value.
+****
+
+.Example standard input
+----
+10
+20
+10
+8
+8
+12
+----
+
+.Example standard output
+----
+higher
+lower
+lower
+equal
+higher
+----
+
+[TIP]
+====
+You will have to keep track of the _current value_ and the _previous value_.
+
+In the example:
+
+- 20 is higher than 10,
+- 10 is lower than 20,
+- 8 is lower than 10,
+- 8 is equal to 8, and
+- 12 is higher than 8.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Higher/Lower 2
+
+.Task
+****
+Write a Python script named +higher-lower-0.py+ which
+is the same as that for the previous task, except that it reads an unknown
+number of integers.
+
+Your script should stop when it encounters a 0.
+****
+
+.Example standard input
+----
+10
+20
+10
+8
+0
+----
+
+.Example standard output
+----
+higher
+lower
+lower
+----
+
+// //////////////////////////////////////////////////////////////
+== Firsts
+
+// //////////////////////////////////////////////////////////////
+=== First musical note
+
+****
+The musical notes are usually represented by the first seven letter of the
+alphabet, so $a$ through to $g$.
+****
+
+.Task
+****
+Standard input consists of a single line of text (without any upper-case
+letters).
+
+Write a Python script named +first-musical-note.py+ which writes the first
+character of that text which is a musical note to standard output.
+
+You should assume that a musical-note character does indeed occur within the text.
+****
+
+.Example standard input
+----
+its fleece was white as snow.
+----
+
+.Example standard output
+----
+f
+----
+
+// //////////////////////////////////////////////////////////////
+=== First capital letter
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +first-capital-letter.py+ which writes _the
+position of_ the first capital letter in the text to standard output.
+
+You should assume that a capital letter does indeed exist within the text.
+****
+
+.Example standard input
+----
+and the band played Waltzing Matilda.
+----
+
+.Example standard output
+----
+20
+----
+
+[TIP]
+====
+$20$ is the position of the $W$ in the example.
+====
+
+// //////////////////////////////////////////////////////////////
+== Other tasks
+
+// //////////////////////////////////////////////////////////////
+=== Bin to dec
+
+.Task
+****
+Standard input consists of a single _binary_ number.
+
+Write a Python script named +bin-to-dec.py+ which outputs that binary number in its _decimal_ representation.
+****
+
+.Example standard input
+----
+10011
+----
+
+.Example standard output
+----
+19
+----
+
+// //////////////////////////////////////////////////////////////
+=== Dec to bin
+
+.Task
+****
+Standard input consists of a single _decimal_ number.
+
+Write a Python script named +dec-to-bin.py+ which outputs that decimal number in its _binary_ representation.
+****
+
+.Example standard input
+----
+19
+----
+
+.Example standard output
+----
+10011
+----
+
+// //////////////////////////////////////////////////////////////
+=== Euclid's algorithm
+
+.Greatest Common Divisor
+****
+The _greatest common divisor_ (GCD) of two positive integers is the largest positive integer which divides both without a remainder.
+
+For example, the GCD of 75 and 30 is 15.
+****
+
+.Euclid's Algorithm
+****
+- Start with two positive integers $a$ and $b$.
+- Repeat the following steps:
+** the new $a$ is the old $b$
+** the new $b$ is the remainder after dividing the old $a$ by the old $b$
+- Stop when $b$ is $0$; the final value of $a$ is the answer.
+****
+
+.Example
+****
+[width="30%", options="header"]
+|====
+| $a$ | $b$
+| $819$ | $490$
+| $490$ | $329$
+| $329$ | $161$
+| $161$ | $7$
+| $7$   | $0$
+|====
+
+The GCD of $819$ and $490$ is $7$.
+
+Observe, in each case, the new $a$ is the old $b$, and the new $b$ is the
+remainder after dividing the old $a$ by the old $$.
+****
+
+.Task
+****
+Write a Python script named +gcd.py+ which
+reads two positive integers and outputs their greatest common divisor.
+****
+
+.Example standard input
+----
+819
+490
+----
+
+.Example standard output
+----
+7
+----
+
+[TIP]
+====
+Treat this as a _search_ problem.
+The rule to apply on each iteration is described above.
+
+You are searching for the case that $b$ is $0$; therefore, you _keep going_ while $b$ is not $0$.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Dec to hex
+
+****
+https://en.wikipedia.org/wiki/Hexadecimal[Hexadecimal] (or "hex") is a
+base-16 number system in which we use the letters $a$ through $f$ to
+represent the base-16 "digits" 10 though 15.
+****
+
+
+.Task
+****
+Standard input consists of a single *decimal* number.
+
+Write a Python script named +dec-to-hex.py+ which outputs that decimal number as a _hexadecimal_ number.
+****
+
+****
+.Example standard input 1
+----
+19
+----
+
+.Example standard output 1
+----
+13
+----
+****
+
+
+****
+.Example standard input 2
+----
+255
+----
+
+.Example standard output 2
+----
+ff
+----
+****
+
+[TIP]
+====
+Devise a simple scheme to implement the following mapping,
+but *without* using an if statement:
+
+[width="20%"]
+|====
+| $0$ | "$0$"
+| $1$ | "$1$"
+| $2$ | "$2$"
+| ... | ...
+| $9$ | "$9$"
+| $10$ | "$a$"
+| $11$ | "$b$"
+| $12$ | "$c$"
+| $13$ | "$d$"
+| $14$ | "$e$"
+| $15$ | "$f$"
+|====
+====
+
+
+// // //////////////////////////////////////////////////////////////
+// === Is Prime?
+//
+// .Task
+// ****
+// Write a Python script named +is-prime-simple.py+ which reads exactly one
+// positive integer $n$ from standard input, and outputs either the message +True+ (if $n$ is a
+// prime number), or +False+ (if $n$ is not a prime number).
+// ****
+//
+// .Example standard input -- 1
+// ----
+// 19
+// ----
+//
+// .Example standard output -- 1
+// ----
+// True
+// ----
+//
+// .Example standard input -- 2
+// ----
+// 20
+// ----
+//
+// .Example standard output -- 2
+// ----
+// False
+// ----
+//
+// .Approach
+// ****
+// We will use the brute-force approach:
+//
+// - Use a loop with $i$ starting at $2$ this time (not $0$), and check on each iteration whether $n$ is divisible by $i$.
+// - You should *stop* iterating either
+// ** if $i$ becomes too large, or
+// ** if $n$ _is_ in fact divisible by $i$.
+// - So you should *keep going* so long as: +i < n and n % i != 0+.
+//
+// The loop finishes when one of those two conditions becomes `False`.  If $i$
+// became too large, then $n$ is a prime, otherwise it is not.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// === Base conversion (Optional)
+//
+// .Note
+// ****
+// There is a solution to this task in the link:notes-161005.html[notes] circulated this morning (6/10/16).
+//
+// This task is *hard*, and only for those who feel they really must have a go at base conversion on their own.
+// ****
+//
+// .Task
+// ****
+// Write a Python script named +base-conversion.py+ which
+// reads two positive integers -- a number $n$ and a base +base+ --
+// and outputs the digits of $n$ in base +base+, one per line.
+// ****
+//
+// .Example standard input
+// ----
+// 33
+// 3
+// ----
+//
+// .Example standard output
+// ----
+// 1
+// 0
+// 2
+// 0
+// ----
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

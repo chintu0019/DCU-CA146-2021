@@ -1,0 +1,744 @@
+= File Input and Output
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Input and output
+
+[source, python]
+----
+# command-line arguments...
+
+import sys
+args = sys.argv[1:]
+----
+
+[source, python]
+----
+# standard input...
+
+s = input()
+n = int(input())
+----
+
+[source, python]
+----
+# standard output...
+
+s = "Goodbye,"
+print(s, "and thanks for all the fish!")
+----
+
+****
+Thus far, we have not considered reading from or writing to files.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Background
+
+.System calls
+****
+A _system call_ is like a function, except it is a special kind of
+function.
+
+It is a function whereby a user program (such as your Python script) is
+asking the *operating system* to do something on its behalf.
+
+System calls are one of the main mechanisms whereby user programs
+communicate with the operating system.
+****
+
+.Reading
+****
+When a user program reads data from a file, it uses a sequence of three
+system calls:
+
++open()+::
+  Open a file and return what is called a _file descriptor_.
++read()+::
+  Read data from a file descriptor.
++close()+::
+  Close a file descriptor.
+****
+
+.Writing
+****
+Writing to a file is similar:
+
++open()+::
+  Open a file and return a file descriptor (this time opened for writing).
++write()+::
+  Write data to a file descriptor.
++close()+::
+  Close a file descriptor.
+****
+
+****
+It is the programmer's responsibility to keep track for the file
+descriptors which have been allocated.
+
+In particular, if a program opens many files to read or write but
+omits to close them again, then eventually the program will run out of file
+descriptors, and fail.
+
+Here's an example...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+a = []
+
+i = 0
+while i < 100000000:
+   print(i)
+   a.append(open("/etc/passwd"))
+   i = i + 1
+----
+
+.Standard output
+----
+.
+.
+.
+1018
+1019
+1020
+1021
+Traceback (most recent call last):
+  File "test.py", line 8, in <module>
+OSError: [Errno 24] Too many open files: '/etc/passwd'
+$
+----
+
+****
+With 1021 files already open, the next request to open a file fails.
+
+Programs which perform file input and/or output, must ensure
+that all files which have been opened are closed again.
+****
+
+[NOTE]
+====
+Why 1021, above?
+
+1021 + 3 is 1024, which is a power of 2.
+
+The three are standard input, standard output and standard error.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Shell example
+
+****
+Consider the following shell fragment...
+****
+
+[source, sh]
+----
+echo "hello world" > message.txt
+----
+
+****
+"+>+",  here, is an input/output redirection operator;
+the shell arranges that the standard-output of
+the +echo+ command is written to the file +message.txt+.
+
+The shell arranges that the file is opened before the command is executed,
+and then that it is closed afterwards.
+
+This is helpful, because it means that
+the programmer cannot inadvertently forget to close the file.
+****
+
+****
+It is common to write shell scripts which open and close thousands of files, but
+this convenient syntax (and the under-the-covers work done by the shell
+itself) ensures that files are opened and closed in a disciplined way.
+****
+
+// //////////////////////////////////////////////////////////////
+== Reading Files
+
+// //////////////////////////////////////////////////////////////
+=== The +open()+ function
+
+****
+In Python, the built-in function +open()+ opens a file...
+****
+
+[source, python]
+----
+f = open("/etc/passwd")
+----
+
+****
+The Python interpreter opens the indicated file -- in the example, this is
++/etc/passwd+, the password file -- and returns a _file object_ representing
+the open file.
+
+The file object is a Python wrapper around the underlying file descriptor.
+****
+
+// //////////////////////////////////////////////////////////////
+=== The +close()+ method
+
+****
+Later, we use the file's +close()+ method to close the file...
+****
+
+[source, python]
+----
+f = open("/etc/passwd")
+
+# Read data from f.
+
+f.close()
+----
+
+****
+The +open()+ function and the +file.close()+ method map more or less
+directly to the corresponding underlying system calls.
+****
+
+// //////////////////////////////////////////////////////////////
+=== The +with+ statement
+
+****
+The important point from the discussion above about system calls is this:
+
+- _every time we open a file we must make sure that it is closed again_.
+
+If we don't do this, then our program might fail.
+****
+
+****
+To _enforce_ this symmetry, Python provides a special syntax for reading
+and writing files, a syntax which allows the Python interpreter to ensure that files
+are opened and closed correctly.
+
+Here is an example...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   some_lines = f.readlines()
+
+print(some_lines)
+----
+
+****
+Explanation:
+
+- +open()+ is a built-in function.
+
+- +open("some-file.txt")+ is an expression, it evaluates to a _file object_.
++
+The argument is the name of the file to open (a string), and the result is
+a file object representing the open file.
+
+- Python interpreter arranges that the variable +f+ is assigned to our newly-opened file object.
++
+This can be any variable name of your choice.
+
+- The "+with ... as ...:+" is a new Python statement which encloses a block
+of code.
++
+As with other Python statements, the extent of the block of code
+is delimited by indentation.
+
+The Python interpreter _guarantees_ that
+the file will be closed when the body of the +with+ statement exits.
+****
+
+****
+In the example above, there is just one
+statement within the body of the +with+ statement, but in general there
+can be as many as are required.
+****
+
+****
+File objects implement several methods for reading data;
+however, for our purposes, we will consider just three...
+****
+
+// //////////////////////////////////////////////////////////////
+=== +file.readlines()+
+
+.Read all of the remaining lines of a text file
+****
++file.readlines()+ reads _all of the remaining lines_ of a text file,
+returning a list containing those lines as strings.
+
+*Newline characters are retained at the end of each line.*
+****
+
+****
+Here is an example...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("test.txt") as f:
+   lines = f.readlines()
+
+i = 0
+while i < len(lines):
+   print(len(lines[i]), lines[i])
+   i = i + 1
+
+print("done")
+----
+
+.+test.txt+
+----
+dog
+cat
+mouse
+----
+
+.Standard output
+----
+4 dog
+
+4 cat
+
+6 mouse
+
+done
+----
+
+****
+Observe that the length of the "dog" string is 4, and the length of the
+"mouse" string is 6.
+
+Observe also that there appear to be extra empty lines in the output.
+****
+
+****
+Both of these artefacts arise because each line contains the characters of
+the word at hand, and also a trailing newline character.
+
+That trailing newline character is often unhelpful, so we can remove it
+like this...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("test.txt") as f:
+   lines = f.readlines()
+
+i = 0
+while i < len(lines):
+   lines[i] = lines[i].rstrip()
+   print(len(lines[i]), lines[i])
+   i = i + 1
+
+print("done")
+----
+
+.Standard output
+----
+3 dog
+3 cat
+5 mouse
+done
+----
+
+// //////////////////////////////////////////////////////////////
+=== +file.readline()+
+
+.Read just the next line of text from a file
+****
+It is also possible to read just a single line from a file...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   print(f.readline().rstrip())    # Print just the first line from the file.
+----
+
+****
+Note that this is +file.readline()+, without an "+s+".
+
+As with +file.readlines()+, newline characters are retained.
+****
+
+// //////////////////////////////////////////////////////////////
+=== +file.read()+
+
+****
+The +file.read()+ method reads an arbitrary amount of data from a file.
+
+With no arguments, +file.read()+ reads the entire file...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   print(f.read().rstrip())       # Copy the entire file to standard output (almost).
+----
+
+****
+With an integer argument, +file.read(n)+ reads up to $n$ characters...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   print(f.read(4))               # Print just the first four characters from the file.
+   print(f.read(6))               # And print the next six characters.
+----
+
+****
++file.read(n)+ returns a string;
+the length of the string is the number of characters which were actually read.
+
+That may not be as many as were requested, because there
+may not be the requested number of characters left to read in the file.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   data = f.read(1000000000)       # Read however many characters are available, up to
+                                   # a maximum of one billion.  Most likely, far fewer
+                                   # than one billion characters will actually be read.
+----
+
+****
+When the end of file is reached, +file.read()+ and +file.readline()+ return a string of length +0+.
+
+For example...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt") as f:
+   ch = f.read(1)
+   while 0 < len(ch):
+      print(ch)
+      ch = f.read(1)
+----
+
+****
+This copies characters from the file to standard output, one character per line.
+
+When there are no characters left, +len(ch)+ is +0+, and our loop stops
+iterating.
+****
+
+// //////////////////////////////////////////////////////////////
+== Writing Files
+
+****
+We can also open a file for writing, and write to it...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("some-file.txt", "w") as f:
+   f.write("Hello world.\n")
+----
+
+****
+The additional argument +"w"+ here tells +open()+ to open the file for writing
+(not reading, which is the default).
+
+The +file.write()+ method writes data (usually a string) to a file.
+
+In the example, we write just one line to the file;
+in general, however, we can write as many lines as are required.
+
+When +file.write()+ is called
+repeatedly, the new output is simply appended to the existing output...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+with open("mary.txt", "w") as f:
+   f.write("Mary had a little lamb,\n")
+   f.write("its fleece was white as snow.\n")
+   f.write("And everywhere that Mary went\n")
+   f.write("the lamb was sure to go.\n")
+----
+
+****
+Unlike +print+, +file.write()+ _does not append a newline character_ to
+the output.
+
+If you require a newline character, then you must add one manually.
+Within a string literal, the escape sequence "+\n+" is replaced with a
+newline character.
+
+See the example above.
+****
+
+// //////////////////////////////////////////////////////////////
+== Examples
+
+// //////////////////////////////////////////////////////////////
+=== Concatenate files
+
+.Task
+****
+Assume that:
+
+- the first command-line argument is the name of an output file, and
+- all subsequent command-line arguments are the names of input files.
+
+Write a Python script which copies the contents of all of the input files
+to the output file.
+****
+
+[source, sh]
+.Example invocation
+----
+$ python3 concatenate.py out_file.txt in_file_1.txt in_file_2.txt ...
+
+# The contents of all of the input files should be written to out_file.txt.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Solution 1
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import sys
+
+out_file = sys.argv[1]               # The output file.
+in_files = sys.argv[2:]              # The input files.
+
+with open(out_file, "w") as f_out:
+   i = 0
+   while i < len(in_files):
+      with open(in_files[i]) as f_in:
+         f_out.write(f_in.read())    # Copy the entire input file to the output file.
+      i = i + 1
+----
+
+****
+The body of the outer +with+ statement here contains more than one
+statement; in fact, it contains an entire loop.
+
+There is no consideration of lines here.  We just read read the _entire
+contents_ of the file, and then write the entire contents of the file.
+Unlike all of the scripts which we have written previously, this script will work
+for binary data too.
+
+We have two files open at the same time, one for reading and one for
+writing.  We have to give the file objects different names (we cannot
+just use +f+ for both).  Here, we choose the suitably descriptive names
++f_in+ and +f_out+.
+
+Even if there are thousands of input files, we only ever have two files open
+at the same time.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Solution 2
+
+****
+The solution above works well if the files are small.
+
+However, for large
+files, solution 1 reads the _entire file contents_ of each file into memory before
+writing those contents to the output file.
+
+Since files can be very large
+indeed, hundred of megabytes or even gigabytes, this can be slow and
+wasteful of memory.
+****
+
+****
+An alternative, would be to copy data from the input files to the output
+file in reasonably-sized chunks.
+
+This is illustrated below...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import sys
+
+chunk_size = 4096 * 8
+out_file = sys.argv[1]
+in_files = sys.argv[2:]
+
+with open(out_file, "w") as f_out:
+   i = 0
+   while i < len(in_files):
+      with open(in_files[i]) as f_in:
+         chunk = f_in.read(chunk_size)
+         while 0 < len(chunk):
+            f_out.write(chunk)
+            chunk = f_in.read(chunk_size)
+      i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+=== Observation
+
+****
+The examples above included the following two loops...
+****
+
+[source, python]
+----
+ch = f.read(1)                     # Set up the first test.
+while 0 < len(ch):
+   print ch                        # Do something
+   ch = f.read(1)                  # Set up the next test.
+----
+
+[source, python]
+----
+chunk = f_in.read(chunk_size)      # Set up the first test.
+while 0 < len(chunk):
+   f_out.write(chunk)              # Do something
+   chunk = f_in.read(chunk_size)   # Set up the next test.
+----
+
+****
+The first iterates over the individual characters of a file, and the second
+iterates over "chunks" of size 4096 times 8 bytes.
+****
+
+****
+Now, consider the following loop...
+****
+
+[source, python]
+----
+line = raw_input():                # Set up the first test.
+while line != "end":               # Do test.
+   print line                      # Do something
+   line = raw_input():             # Set up the next test.
+----
+
+****
+Observe that -- while the details differ -- the structures of the new loops
+are identical to those of the loops with which we are already familiar.
+****
+
+// //////////////////////////////////////////////////////////////
+== Standard input and output
+
+****
+Standard input and output are also represented by files objects...
+****
+
+[source, python]
+----
+import sys
+
+sys.stdin                         # A file object representing standard input.
+sys.stdout                        # A file object representing standard output.
+sys.stderr                        # A file object representing standard error.
+----
+
+.Task
+****
+Copy standard input to standard output...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+import sys
+
+sys.stdout.write(sys.stdin.read())
+----
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+chunk_size = 4096 * 8
+
+chunk = sys.stdin.read(chunk_size)
+while 0 < len(chunk):
+   sys.stdout.write(chunk)
+   chunk = sys.stdin.read(chunk_size)
+----
+
+// //////////////////////////////////////////////////////////////
+== Starter Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Task 1
+
+.Task
+****
+Write a Python script named +write-hello.py+ which writes the message
+indicated below into a file named +hello.txt+.
+****
+
+.+hello.txt+
+----
+Hello world.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Task 2
+
+.Task
+****
+Assume a file named +input.txt+ in the current working directory.
+
+Write a Python script named +read-file.py+ which copies the contents of a
+that file to standard output.
+****
+
+.+input.txt+
+----
+Mary had a little lamb
+its fleece was white as snow.
+And everywhere that Mary went
+the lamb was sure to go.
+----
+
+.Example standard output
+----
+Mary had a little lamb
+its fleece was white as snow.
+And everywhere that Mary went
+the lamb was sure to go.
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

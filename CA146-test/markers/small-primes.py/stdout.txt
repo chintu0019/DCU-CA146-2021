@@ -1,0 +1,21 @@
+testing values 1 through 19...
+
+testing 1: not prime
+testing 2: prime
+testing 3: prime
+testing 4: not prime
+testing 5: prime
+testing 6: not prime
+testing 7: prime
+testing 8: not prime
+testing 9: not prime
+testing 10: not prime
+testing 11: prime
+testing 12: not prime
+testing 13: prime
+testing 14: not prime
+testing 15: not prime
+testing 16: not prime
+testing 17: prime
+testing 18: not prime
+testing 19: prime

@@ -1,0 +1,80 @@
+* ****************************************************************
+= Part 1 -- Workflow
+
+- basics (cd, nano, python3, einstein)
+
+- common mistakes:
+  * stuck in REPL
+  * case sensitivity
+  * entering password for einstein command
+  * Python error messages:
+    ** syntax error
+    ** name error
+    ** EOF
+    ** others?
+
+* ****************************************************************
+= Part 2 -- Review of week 1 work
+
+- variables (see slides)
+
+* ****************************************************************
+= Part 3 -- Examples from week 1
+
+- focus:
+  * getting started writing, running and uploading scripts
+  * working with integer division and modulus
+
+- examples:
+ * the-three-digits.py
+ * odd-value-or-zero.py
+
+* ****************************************************************
+= Part 4 -- The Boolean type
+
+- comparison operators
+- Boolean operators
+
+- examples:
+  * standard input consists of a single number, a day of the week (where
+    Monday is represented by 1, Tuesday by 2, and so on
+
+    write a Python script is-weekend-1.py which outputs True if the day is
+    a weekend day, and False otherwise
+
+  * standard input consists of a single integer, a year (e.g. 2021)
+
+    write a Python script named is-leap-year-1.py which out puts True if
+    the year is a leap year, and False otherwise
+
+* ****************************************************************
+= Part 5 -- Strings and floating-point numbers
+
+- strings
+  * literals
+  * string comparison
+  * len()
+
+- floating-point numbers
+
+* ****************************************************************
+= Part 6 -- If statements
+
+- syntax
+  * if
+  * if-else
+
+- examples:
+  * is-weekend-2.py (same as above, except write the message "weekend" or
+    "weekday")
+  * is-leap-year-2.py (same as above, except write the message "leap year"
+    or "normal year" as appropriate)
+
+- syntax
+  * if-elif-else
+  * example:
+    standard input consists of a single integer representing a day of the
+    week as before.
+
+    write a python script name "day-of-the-week.py" which outputs the name
+    of the corresponding day of the week (e.g. "Monday")

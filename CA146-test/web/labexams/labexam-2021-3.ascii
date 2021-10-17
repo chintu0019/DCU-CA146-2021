@@ -1,0 +1,293 @@
+= Lab Exam 3
+Stephen Blott <stephen.blott@dcu.ie>
+:numbered:
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+[source, python]
+.Shebang
+----
+#!/usr/bin/env python3
+----
+
+.Rules
+****
+This is an examination; DCU examination regulations apply.
+
+*For the duration of the exam, you should not be in contact with anybody
+(other than your lecturer, by email).  This includes WhatsApp, Discord and
+any other communication channel.*
+
+If you encounter any issues, please contact your lecturer by email.
+
+You have until 17:30 to complete and upload your work.
+
+All questions are worth equal marks.
+
+You _may not_ use features of Python in your solutions which have _not_ been covered in this module.
+
+None of the tasks here require the use of a for loop.
+****
+
+.Upload
+****
+Name your Python files _exactly_ as instructed, and
+then upload your solutions to _Einstein_.
+
+It is recommended that you upload your work as you go along.  Before
+leaving, you should also upload work that you know remains incorrect.
+
+You may upload your work as many times as you like.  If you upload the
+_same file name_ more than once, then only the final upload counts.
+Earlier uploads will be logged, but otherwise ignored.
+
+Before signing off, ensure that you have uploaded all of your work, even that
+work which you know to be incorrect.
+****
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Count capitals
+
+.Task
+****
+Standard input consists for a sequence of lines of text.
+
+Write a Python script named +ex3-count-capitals.py+ which writes a count of the
+number of capital letters in the text to standard output.
+****
+
+.Example standard input
+----
+Mary had a little lamb
+its fleece was white as snow,
+and everywhere that Mary went
+the lamb was sure to go.
+
+So much for Mary.
+----
+
+.Example standard output
+----
+4
+----
+
+[TIP]
+====
+There is no end marker in the input, so you will have to use +sys.stdin+ to
+read the input.
+
+This is not a line-oriented task, so it is unlikely to be helpful to handle the
+input line by line.
+
+There are four capital letters in the example input.
+
+You can recognise capital letters by
+using string comparison; all of the capital letters are bigger than or
+equal to "+A+" and less than or equal to "+Z+".
+====
+
+// //////////////////////////////////////////////////////////////
+=== Non-empty files
+
+.Task
+****
+The command-line arguments consist of a sequence of file names.
+
+You should assume that each such file exists.
+
+Write a Python script named +ex3-non-empty-files.py+ which writes the name
+of each of those files _which is non-empty_ to standard output, one per line.
+
+An empty file is any file whose contents are of length 0, and a non-empty
+files is any other file.
+****
+
+.Example invocation
+----
+$ python3 ex3-non-empty-files.py file-1.txt file-2.py file-3 file-4.sql
+----
+
+.Example standard output
+----
+file-1.txt
+file-3
+----
+
+[NOTE]
+====
+In the example, the Python and SQL files must be empty.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Cat
+//
+// .Task
+// ****
+// Assume a single command-line argument, that argument being the name of a file.
+//
+// Write a Python script named +ex3-cat.py+ which copies the contents of that file to standard output.
+// ****
+//
+// .Example invocation
+// ----
+// $ python3 ex3-cat.py some-file.txt
+// ----
+//
+// .Example standard output
+// ----
+// # The standard output will be whatever the content
+// # of "some-file.txt" is.
+// ----
+//
+// [NOTE]
+// ====
+// Your solution must not strip or otherwise alter any whitespace characters
+// encountered.
+//
+// The name used here ("cat") comes from the Unix command +cat+, short for "conCATenate", which performs a similar task.
+// ====
+
+// //////////////////////////////////////////////////////////////
+=== First century
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line.
+
+Write a Python script named +ex3-first-century.py+ which outputs only the first number encountered which is
+greater than or equal to 100.
+
+If no such number is encountered, then your script must output the text "none".
+****
+
+****
+.Example standard input
+----
+1
+12
+99
+101
+65
+110
+----
+
+.Example standard output
+----
+101
+----
+****
+
+****
+.Example standard input
+----
+1
+12
+99
+1
+65
+10
+----
+
+.Example standard output
+----
+none
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// === First century again
+//
+// .Task
+// ****
+// Repeat the previous task, naming your script +ex3-first-century-again.py+.
+//
+// This time, your script must accommodate the possibility that the input is very, very large.
+//
+// In particular, your script must not read all of the input into memory.
+// ****
+//
+// [TIP]
+// ====
+// Your solution must read one line at a time.
+// ====
+
+// //////////////////////////////////////////////////////////////
+=== Redacted
+
+.Definition
+****
+To redact::
+  _to obscure text from a document prior to publication or release_.
+****
+
+.Task
+****
+The current working directory contains a file named +banned.txt+.
+
+That file contains a sequence of banned words, one per line.
+
+Write a Python script name +ex3-redacted.py+ which copies standard input to
+standard output, replacing any banned words encountered with asterisks.
+
+Use as many asterisks as there are characters in the banned word.
+
+See further notes below.
+****
+
+.Example +banned.txt+
+----
+Mary
+lamb
+fleece
+----
+
+.Example standard input
+----
+Mary had a little lamb
+its fleece was white as snow,
+and everywhere that Mary went
+the lamb was sure to go.
+
+So much for Mary.
+----
+
+.Example standard output
+----
+**** had a little ****
+its ****** was white as snow,
+and everywhere that **** went
+the **** was sure to go.
+
+So much for Mary.
+----
+
+[NOTE]
+====
+Where the task statement refers to "words", your solution should work just
+in terms of whitespace-delimited tokens.  This is a simplification.
+
+Observe the treatment of the final token "Mary.", above.  It is _not_ redacted, because
+that token, which includes its final full stop, is not on the banned list.
+
+Also, observe that "Mary" and "lamb" are replaced with four asterisks in the output, whereas "fleece" is replaced with six asterisks.
+
+You should assume that there are no extraneous whitespace characters in the input.  This too is a simplification.
+====
+
+// //////////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,7 @@
+rabbit
+dog
+cat
+mouse
+elephant
+elk
+moose

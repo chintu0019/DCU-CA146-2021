@@ -1,0 +1,4 @@
+double 3 is 6
+double 4 is 8
+double 5 is 10
+double 6 is 12

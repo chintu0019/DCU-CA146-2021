@@ -1,0 +1,300 @@
+:theme: morteratsch
+
+++++
+<style>
+  body {
+    width: 850px;
+    margin: 20px;
+  }
+</style>
+++++
+
+[frame="none",grid="none",cols="^1"]
+|==================================================
+| image:res/dcu-logo.png[width="150px"]
+| *[big]#August Resit Examinations 2020/2021#*
+|==================================================
+
+:theme: smblott-exam
+
+[frame="none",cols="2,8"]
+|==================================================
+|*Module*         | CA116 -- Computer Programming I
+|*Programmes*     | BSc in Computer Applications +
+                    Study Abroad (ECSAX) +
+                    Study Abroad (ECSAO)
+| *Year of Study* | 1
+| *Examiner*      | Dr Stephen Blott (ext. 5984 +
+                    Dr Hitesh Tewari (external examiner for CA)
+| *Instructions*  | Answer _all four_ questions. +
+                    All questions carry equal marks.
+|==================================================
+
+_The use of programmable or text storing calculators is expressly forbidden.  +
+Please note that where a candidate answers more than the required number of questions, the
+examiner will mark all questions attempted and then select the highest scoring ones._
+
+_Requirements for this paper (please mark (X) as appropriate):_ +
+[frame="none", cols="6,1,6,1"]
+|===
+| _Log tables_         |  | _Thermodynamic tables_      |
+| _Graph paper_        |  | _Actuarial tables_          |
+| _Dictionaries_       |  | _MCQ only (do not publish)_ |
+| _Statistical tables_ |  | _Attached answer sheet_     |
+|===
+
+++++
+<span class="question">
+  <span>Additional Instructions</span>
+</span>
+++++
+
+****
+Instructions:
+
+- Upload all answers to _Einstein_: link:/einstein/[here].
++
+_TermCast_ is link:/termcast/[here].
+
+- You may upload your answers as many times as you like.  If you upload
+  answers to _the same question multiple times_, then _only the last upload
+  will be considered_.
+- For Python programming tasks, upload and verify your solutions on
+  _Einstein_ as usual:
+** If _Einstein_ does not report your solution as correct, then attempt
+  marks will be awarded subsequently as part of the marking process, as merited.
+- For other tasks:
+** You are told the name to use for your upload;
+   this will be a *text file*, with a "+.txt+" extension.
+** Create such a file using a *text editor* (such as _nano_, or _gedit_, or _sublime_; do not use a word
+   processor), and upload the resulting file to _Einstein_, as usual.
+** _Einstein_ simply accepts and stores such uploads;
+   it does not correct your work.
++
+Such uploads will be assessed manually later as part of the marking process.
+
+- You have *two hours and 20 minutes* to complete your work.
+
+Only the work which you upload to _Einstein_ will be considered.
+// Any files you leave on the local desktop *will not* be collected.  Any
+// written work you do in exam scripts *will not* be assessed.
+****
+
+[source, python]
+.The Python shebang (for reference)
+----
+#!/usr/bin/env python3
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 1</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+.Task
+****
+Standard input consists of a single integer, $n$ say.
+
+Write a Python script named +exau-three.py+ which writes the message "+yes+"
+to standard output
+if the least-significant digit of $n$ is $3$, and writes the message "+no+"
+otherwise.
+****
+
+****
+.Example standard input 1
+----
+123
+----
+
+.Example standard output 1
+----
+yes
+----
+****
+
+****
+.Example standard input 2
+----
+124
+----
+
+.Example standard output 2
+----
+no
+----
+****
+
+****
+.Example standard input 3
+----
+-13
+----
+
+.Example standard output 3
+----
+yes
+----
+****
+
+[TIP]
+====
+The _least-significant digit_ of an integer is just the last digit of the
+integer, the number of units.
+
+You can use the modulus operator to get the least-significant digit.
+
+Think carefully about the case that $n$ is negative, you have to treat this
+case differently.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 2</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+.Task
+****
+Assume a single command-line argument, a positive integer $n$.
+
+Standard input consists of a sequence of positive integers, one per line.
+
+Write a Python script named +exau-filter.py+ which copies standard input to
+standard output, but including only those integers which are divisible by
+$n$.
+****
+
+.Example standard input
+----
+123
+2369
+5
+1234
+23
+1203
+----
+
+.Example invocation
+----
+$ python3 exau-three.py 23
+----
+
+.Example standard output
+----
+2369
+23
+----
+
+[TIP]
+====
+Here, $n$ is $23$, so only those integers which are divisible by $23$ are
+included in the output.  That leaves just the two integers listed above.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 3</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+.Task
+****
+Standard input consists of a sequence of lines of text, with each line
+consisting of exactly two words (space separated).
+
+Write a Python script named +exau-sort.py+ which copies standard input to
+standard output, but with the output sorted by the _second word_ (and then
+by the first words, if the second words happen to be the same).
+****
+
+.Example standard input
+----
+dog frog
+mouse cat
+horse cat
+dog zebra
+snake dog
+marmot dog
+cat zebra
+----
+
+.Example standard output
+----
+horse cat
+mouse cat
+marmot dog
+snake dog
+dog frog
+cat zebra
+dog zebra
+----
+
+[TIP]
+====
+Observe that the output lines are sorted by their second words.
+
+Observe also that, where the second words are the same, the order of the
+lines is resolved by further considering the first words.
+
+You should already have an implementation of selection sort; this should
+prove helpful.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 4</span> <span class="mark">25 Marks</span>
+</span>
+<div>&nbsp</div>
+++++
+
+****
+The HTML generator _markdown_ uses asterisks for emphasis.
+
+This input text:
+
+- The thunder went \*boom*!
+
+is rendered like this:
+
+- The thunder went _boom_!
+
+Text enclosed within asterisks is rendered using italics for emphasis.
+****
+
+.Task
+****
+Standard input consists of a single line of text +s+.
+
+Write a Python script named +exau-first.py+ which writes the first
+emphasised text in +s+ to standard output.
+
+Take _emphasised text_ to be any text in +s+ contained within matched asterisks.
+
+Your script should produce no output if +s+ does not contain any emphasised
+text.
+****
+
+.Example standard input
+----
+The thunder went *boom*!
+----
+
+.Example standard output
+----
+boom
+----
+
+// //////////////////////////////////////////////////////////////
+include::../../web/misc/instrument.txt[]
+include::../../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

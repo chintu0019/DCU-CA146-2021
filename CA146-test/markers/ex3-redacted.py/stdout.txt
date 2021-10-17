@@ -1,0 +1,12 @@
+showing banned.txt:
+   |Mary
+   |lamb
+   |fleece
+
+running your script:
+   |**** had a little ****
+   |its ****** was white as snow,
+   |and everywhere that **** went
+   |the **** was sure to go.
+   |
+   |So much for Mary.

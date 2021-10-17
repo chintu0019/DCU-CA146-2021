@@ -1,0 +1,5 @@
+gitlab-runner /bin/bash
+root /bin/bash
+mysql /bin/false
+mediatomb /usr/sbin/nologin
+games /usr/sbin/nologin

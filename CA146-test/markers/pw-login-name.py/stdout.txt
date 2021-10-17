@@ -1,0 +1,7 @@
+root
+bin
+games
+blott
+mysql
+mediatomb
+gitlab-runner

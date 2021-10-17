@@ -1,0 +1,14 @@
+higher
+higher
+lower
+equal
+equal
+higher
+higher
+equal
+lower
+lower
+higher
+higher
+lower
+higher

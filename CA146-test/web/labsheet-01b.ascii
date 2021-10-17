@@ -1,0 +1,194 @@
+= Labsheet 1b
+Stephen Blott <stephen.blott@dcu.ie>
+// :numbered:
+:toc2:
+:theme: morteratsch
+
+****
+_Einstein_ is link:/einstein/[here], and
+_TermCast_ is link:/termcast/[here].
+****
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Add ten numbers
+
+.Task
+****
+Standard input consists of _exactly ten integers_, one per line.
+
+Write a Python script named +add-ten-numbers.py+ which
+outputs the sum of those numbers.
+****
+
+.Example standard input
+----
+8
+0
+15
+-17
+11
+19
+-8
+2
+9
+18
+----
+
+.Example standard output
+----
+57
+----
+
+// //////////////////////////////////////////////////////////////
+=== Area of rectangle
+
+.Task
+****
+Standard input consists of _exactly four integers_, first +x1+ and +y1+, the
+coordinates of the bottom-left corner of a rectangle, then +x2+ and +y2+,
+the coordinates of the top-right corner.
+
+Write a Python script named +area-of-rectangle.py+ which outputs the rectangle's area.
+****
+
+.Example standard input
+----
+4
+1
+7
+3
+----
+
+.Example standard output
+----
+6
+----
+
+// //////////////////////////////////////////////////////////////
+=== Rabbits everywhere
+
+****
+Assume that the rabbit population doubles every year.
+****
+
+.Task
+****
+Standard input consists of two integers, one per line: the first is an initial
+rabbit population, and the second is a number of years.
+
+Write a Python script named +rabbits-everywhere.py+ which outputs the final
+rabbit population after the indicated number of years.
+****
+
+.Example standard input
+----
+100
+3
+----
+
+.Example standard output
+----
+800
+----
+
+.Explanation
+****
+Initially there are $100$ rabbits.
+
+After $3$ years there are $800$ rabbits.
+****
+
+[TIP]
+====
+Recall the exponent operator: +n ** m+, or $n$ raised to the power $m$.
+
+If you cannot work out the correct formula, then do some examples on
+a piece of paper.  Try to work out the general rule.
+====
+
+// //////////////////////////////////////////////////////////////
+== Trickier tasks
+
+// ****
+// Think of a three digit number.
+//
+// Got one?
+//
+// Now:
+//
+// - divide that number by ten, using integer division,
+// - and then take the remainder after division by ten.
+//
+// The resulting number is the middle digit of your original number.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== The three digits
+
+.Task
+****
+Standard input consists of a single three-digit integer, that is an integer in the range 100 to 999.
+
+Write a Python script named +the-three-digits.py+ which outputs each of the
+three digits of that number, one digit per line.
+****
+
+.Example standard input
+----
+926
+----
+
+.Example standard output
+----
+9
+2
+6
+----
+
+[TIP]
+====
+If you do not immediately see the correct solution, then try some examples
+on paper.
+
+Consider how you can use the modulus operator.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Add ten odd numbers
+
+.Task
+****
+Standard input consists of _exactly ten integers_, one per line.
+
+Write a Python script named +add-ten-odd-numbers.py+ which outputs the sum
+of _just the odd numbers_.
+****
+
+.Example standard input
+----
+8
+0
+15
+-17
+11
+19
+-8
+2
+9
+18
+----
+
+.Example standard output
+----
+37
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// // //////////////////////////////////////////////////////////////

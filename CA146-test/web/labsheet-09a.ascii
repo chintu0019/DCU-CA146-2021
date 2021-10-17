@@ -1,0 +1,538 @@
+= Labsheet 9a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== Intro
+
+// //////////////////////////////////////////////////////////////
+=== Fruit
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.
+
+Write a Python script named +fruit.py+ which outputs only those words encountered which
+are fruits, one per line.
+
+For our purposes, there are only five fruits: _apple_, _pear_, _orange_, _banana_ and _cherry_.
+
+Your solution must make good use of a dictionary.
+****
+
+.Example standard input
+----
+dog
+cat
+apple
+snake
+cherry
+dog
+cherry
+cat
+pear
+horse
+----
+
+.Example standard output
+----
+apple
+cherry
+cherry
+pear
+----
+
+[source, python]
+.Tip, start as follows:
+----
+fruit = {
+   "apple": True,
+   "pear": True,
+   "orange": True,
+   "banana": True,
+   "cherry": True,
+}
+----
+
+.Why is using a dictionary better than storing the fruit in a list?
+****
+...because looking up a value in a dictionary is $O(1)$, whereas looking up a value in a list is $O(n)$.
+****
+
+.Why is using a dictionary better an if/elif/else statement?
+****
+...because then you're mixing data with logic.
+
+Data is usually easier to maintain than logic, so less logic is better.
+
+With the approach advocated above, you don't have to change any logic in order to add or remove fruits; you just change the dictionary.
+****
+
+// //////////////////////////////////////////////////////////////
+== Translation
+
+// //////////////////////////////////////////////////////////////
+=== German numbers
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.  Each word is
+an English-language number word; for example "+three+".
+
+Write a Python script named +german-numbers.py+ which translates each
+English-language number word into the corresponding German-language number
+word.
+
+All of the number words are in the range +one+ to +ten+, and all are lower
+case.
+
+Your solution must make good use of dictionary.
+****
+
+.Example standard input
+----
+one
+three
+seven
+one
+----
+
+.Example standard output
+----
+eins
+drei
+sieben
+eins
+----
+
+.German numbers
+----
+eins zwei drei vier funf sechs sieben acht neun zehn
+----
+
+[TIP]
+====
+Use a dictionary to store the word translations: the keys are the English
+number words, and the values are the corresponding German number words.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Word translation
+
+.Task
+****
+The current working directory contains a file named +translation.txt+.
+That file defines word translations.
+
+Each line contains two words; the first word translates to the second word.  See the example, below.
+
+Write a Python script named +word-translation.py+ which reads a sequence of
+words from standard input (one per line) and, for each word, outputs the
+translated word.
+****
+
+.Example +translation.txt+
+----
+one eins
+two zwei
+three drei
+four vier
+five funf
+six sechs
+seven sieben
+eight acht
+nine neun
+ten zehn
+----
+
+.Example standard input
+----
+one
+three
+seven
+one
+----
+
+.Example standard output
+----
+eins
+drei
+sieben
+eins
+----
+
+[TIP]
+====
+This task is the same as the previous task except that, in this case, you
+cannot hard-wire the translation into your script, you must instead read the
+translation from a file.
+
+The _Einstein_ marker tests French too.
+====
+
+// //////////////////////////////////////////////////////////////
+== Other tasks
+
+// //////////////////////////////////////////////////////////////
+=== Super snap
+
+****
+_Super snap_ is like the game snap except that the matching cards (or
+words, in our case) need not be adjacent; there may be intervening cards
+(or words).
+****
+
+.Task
+****
+Standard input consists of a sequence of words, one per line.
+
+Write a Python script named +super-snap.py+ which outputs the message
+indicated in the first example below when it encounters the first super snap.
+
+Your script should produce no output if no super snap is encountered.
+****
+
+****
+.Example standard input 1
+----
+rabbit
+dog
+cat
+mouse
+elephant
+dog
+cat
+----
+
+.Example standard output 1
+----
+snap: dog
+----
+****
+
+****
+.Example standard input 2
+----
+rabbit
+dog
+cat
+mouse
+elephant
+mole
+sheep
+goat
+----
+
+.Example standard output 2 (empty)
+----
+----
+****
+
+[TIP]
+====
+The solution to this problem can be structured in several ways; however, fundamentally, it's always linear search.
+
+Use a dictionary to store the words which have been seen previously.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Task summary 1
+
+.Task
+****
+Standard input consists of a sequence of lines.  Each line contains an
+upload result from _Einstein_.
+
+An upload result is a name constructed from a task name with
+either "+.correct+" or "+.incorrect+" appended. See the examples, below.
+
+The lines are in chronological order.
+
+A task is considered to have been
+_successfully completed_ only if the _last upload_ for that task was correct.
+
+Write a Python script named +task-summary-1.py+ which outputs only the
+names of the tasks which have been _successfully completed_, one per line.
+
+Each line contains _exactly two_ "+.+" characters, one for the
+extension (+.py+, in the example) and one for the result (e.g. +.correct+).
+****
+
+****
+.Example standard input 1
+----
+count-up-to-odd.py.incorrect
+count-up-to.py.correct
+add.py.incorrect
+concat-lines.py.correct
+add.py.correct
+count-up-to-odd.py.correct
+add.py.incorrect
+less-than.py.correct
+----
+
+.Example standard output 1
+----
+concat-lines.py
+count-up-to-odd.py
+count-up-to.py
+less-than.py
+----
+****
+
+****
+.Example standard input 2
+----
+a.py.correct
+b.py.incorrect
+c.py.correct
+c.py.incorrect
+d.py.incorrect
+d.py.correct
+----
+
+.Example standard output 2
+----
+a.py
+d.py
+----
+
+Observe that +c.py+ is missing.
+
+Although this task was originally correct, it later became incorrect.
+****
+
+[TIP]
+====
+Use a dictionary to store the current state of each task.
+
+The keys should be the task names.
+
+Use Booleans values to indicate whether the task has been completed successfully.
+
+A good solution will not contain the literals +True+ and +False+.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Employee names
+//
+// ****
+// Take a look again at link:/labsheet-12.html#_employee_names[this task].
+//
+// In all likelihood, with $N$ employees and $M$ queries, the complexity of your previous solution was $O(M times N)$.
+//
+// By using a dictionary (rather than a list) to store the employee records, you can reduce the complexity to $O(M + N)$.
+//
+// Go ahead and do this.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Sets
+
+// //////////////////////////////////////////////////////////////
+=== Union
+
+.Task
+****
+The current working directory contains two files, +a.txt+ and +b.txt+, each containing a list of words, one per line.
+
+Write a Python script named +set-union.py+ which outputs every word
+which occurs in either file (without duplicates, and in no particular
+order).
+****
+
+.Example a.txt
+----
+dog
+hat
+mouse
+dog
+----
+
+.Example b.txt
+----
+dog
+mouse
+cat
+cat
+----
+
+.Example standard output
+----
+dog
+hat
+mouse
+cat
+----
+
+[TIP]
+====
+Use a dictionary to store the words you have seen; the key should be the word, the associated value does not matter.
+
+The order of the output does not matter.  _Einstein_ sorts the output
+itself.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Intersection
+
+.Task
+****
+The current working directory contains two files, +a.txt+ and +b.txt+, each containing a list of words, one per line.
+
+Write a Python script named +set-intersection.py+ which outputs every word
+which occurs in _both files_ (without duplicates, and in no particular
+order).
+****
+
+.Example a.txt
+----
+dog
+hat
+mouse
+dog
+----
+
+.Example b.txt
+----
+dog
+mouse
+cat
+cat
+----
+
+.Example standard output
+----
+dog
+mouse
+----
+
+// //////////////////////////////////////////////////////////////
+=== Difference
+
+.Task
+****
+The current working directory contains two files, +a.txt+ and +b.txt+, each containing a list of words, one per line.
+
+Write a Python script named +set-difference.py+ which outputs every word
+which occurs in +a.txt+ but not in +b.txt+ (without duplicates, and in no particular
+order).
+****
+
+.Example a.txt
+----
+dog
+hat
+mouse
+dog
+----
+
+.Example b.txt
+----
+dog
+mouse
+cat
+cat
+----
+
+.Example standard output
+----
+hat
+----
+
+// //////////////////////////////////////////////////////////////
+=== Disjoint
+
+.Task
+****
+The current working directory contains two files, +a.txt+ and +b.txt+, each containing a list of words, one per line.
+
+Write a Python script named +set-disjoint.py+ which outputs
+either the message +disjoint+ or the message +intersecting+ depending upon
+whether the two lists are disjoint or not.
+
+Lists are disjoint if they have no elements (words, here) in common.
+****
+
+.Example a.txt
+----
+dog
+hat
+mouse
+dog
+----
+
+.Example b.txt
+----
+dog
+mouse
+cat
+cat
+----
+
+.Example standard output
+----
+intersecting
+----
+
+// //////////////////////////////////////////////////////////////
+== Finally
+
+// //////////////////////////////////////////////////////////////
+=== Task summary 2
+
+****
+This is similar to the other task-summary task, above.
+
+Standard input is as follows...
+****
+
+.Example standard input
+----
+user-1/word-translation.py.correct
+user-3/reverse-text-on-lines.py.incorrect
+user-2/diamond.py.incorrect
+user-4/lines-to-list.py.correct
+user-3/reverse-text-on-lines.py.correct
+user-4/lines-to-list.py.incorrect
+----
+
+****
+For each upload, we also know which user the upload is associated with.
+
+The definition of correctness is as before: for each user and task,
+correctness is determined by whether the _final upload_ for that task is
+correct or not.
+****
+
+.Task
+****
+Write a Python script named +task-summary-2.py+ which, for each user,
+outputs a count of the number of correctly-completed tasks.
+
+The order of the output does not matter.
+****
+
+.Example standard output
+----
+user-1 1
+user-2 0
+user-3 1
+user-4 0
+----
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,649 @@
+= More Types
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Types
+
+****
+In computer programming, all values, expressions and variables have a _type_.
+
+The type defines:
+
+- a set of values,
+- the literals for those values, and
+- the available operators and operations
+
+For integers:
+
+- the values/literals are ..., $-3$ $-2$ $-1$ $0$ $1$ $2$ $3$ ..., and
+- the operators are the normal operations of everyday arithmetic (plus +%+ and +**+).
+****
+
+****
+In Python, we can query the type of any value:
+
+----
+>>> type(3)
+<type 'int'>
+
+>>> x = 3
+>>> type(x)
+<type 'int'>
+
+>>> type(x+7)
+<type 'int'>
+----
+
+The built-in Python function +type()+ returns the type of any value.
+
++int+ is Python's internal name for the integer type.
+****
+
+.More types:
+****
+Here, we introduce three more Python types:
+
+- Booleans (+bool+)
+- strings (+str+)
+- floating-point numbers (+float+)
+****
+
+// //////////////////////////////////////////////////////////////
+== Booleans
+
+****
+Our first new type is the _Boolean_ type.
+
+There are lots of different integer values, about $2^64$ different values.  That really is _a lot_.
+
+For Booleans, there are _only two_ values.
+
+The literals are:
+
+- +True+
+- +False+
+
+Note the capital +T+ and the capital +F+.
+****
+
+****
+As before, we can query the type of Boolean values too:
+
+----
+>>> type(True)
+<type 'bool'>
+
+>>> type(False)
+<type 'bool'>
+
+>>> x = True
+>>> type(x)
+<type 'bool'>
+----
+
+We see that Python's internal name for the Boolean type is +bool+.
+****
+
+****
+A _integer expression_ is an expression which evaluates to a integer value.
+
+Similarly, a _Boolean expression_ is an expression that evaluates to a
+Boolean value.
+
+Here, we cover two important forms of Boolean expressions:
+
+1. comparison operators, and
+2. Boolean operators.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Comparison operators
+
+****
+Comparisons are expressions; they evaluate to values, Boolean values.
+****
+
+[source, python]
+.Examples 1:
+----
+3 < 5         # True.
+
+x = 3         # Assignment statement (not a comparison)!
+
+x < 5         # True.
+x > 5         # False.
+----
+
+****
+Just as integer expressions evaluate to integer values, Boolean expressions
+(including comparisons) evaluate to Boolean values.
+****
+
+[source, python]
+.Examples 2:
+----
+4 <= 4        # True.
+
+a = 3         # Assignment statement (not a comparison)!
+b = 4         # Assignment statement (not a comparison)!
+
+a <= b        # True.
+a >= b        # False.
+
+a == b        # False.
+a != b        # True.
+----
+
+****
+There are six comparison operators in Python:
+
+[source, python]
+----
+a <  b        # True if value a is less than value b, False otherwise.
+a <= b        # True if value a is less than or equal to value b, False otherwise.
+
+a >  b        # True if value a is greater than value b, False otherwise.
+a >= b        # True if value a is greater than or equal to value b, False otherwise.
+
+a == b        # True if values a and b are equal, False otherwise.
+a != b        # False if values a and b are equal, True otherwise.
+----
+****
+
+.Gotcha
+****
+These are different:
+
+[source, python]
+----
+x == 3        # This is a Boolean expression, it evaluates to either True or False.
+
+x = 3         # This is an assignment statement.
+----
+
+In Python, a single equals sign is _always_ an assignment statement, and a
+double equals sign is always a comparison operator.
+
+It is a common error for beginner and expert alike to mix these two up.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Boolean operators
+
+****
+A second way to construct Boolean expressions is via _Boolean operators_.
+
+There are three Boolean operators: +and+, +or+ and +not+:
+
+[source, python]
+----
+              # Assume existing Boolean variables a and b.
+
+a and b       # True if *both* a and b are True, False otherwise.
+a or b        # True if *either* of a and b is True (or both), False otherwise.
+not a         # True if a is False, False otherwise.
+----
+****
+
+****
+These Boolean operators can be defined using truth tables:
+
+.Truth table for +and+
+[width="50%", options="header"]
+|====
+| +a+ | +b+ | +a and b+
+| +False+ | +False+ | +False+
+| +False+ | +True+ | +False+
+| +True+ | +False+ | +False+
+| +True+ | +True+ | +True+
+|====
+
+.Truth table for +or+
+[width="50%", options="header"]
+|====
+| +a+ | +b+ | +a or b+
+| +False+ | +False+ | +False+
+| +False+ | +True+ | +True+
+| +True+ | +False+ | +True+
+| +True+ | +True+ | +True+
+|====
+
+.Truth table for +not+
+[width="50%", options="header"]
+|====
+| +a+ | +not a+
+| +False+ | +True+
+| +True+ | +False+
+|====
+****
+
+// //////////////////////////////////////////////////////////////
+=== Examples I
+
+****
+Assume that integer variables $x$ and $y$ are the lengths of the bottom and
+side (respectively) of an axis-aligned rectangle.
+
+Below, in each case, we are looking for Boolean expression which will be
++True+ if the stated condition holds, and is +False+ otherwise.
+****
+
+[source, python]
+.Is the rectangle also a square?
+----
+x == y       # This will evaluate to True if the rectangle happens to
+             # be a square, and False otherwise.
+----
+
+[source, python]
+.Is the rectangle *not* a square?
+----
+x != y
+----
+
+[source, python]
+.Is the rectangle taller than it is wide?
+----
+x < y
+----
+
+[source, python]
+.Is the rectangle wider than it is tall?
+----
+y < x
+----
+
+[source, python]
+.Is the rectangle's area less than 100?
+----
+x * y < 100
+----
+
+[source, python]
+.Is the rectangle's area no more than 100:
+----
+x * y <= 100
+----
+
+****
+Each of these evaluates to a Boolean value, either +True+ or +False+,
+depending upon the lengths of the sides, as represented by the
+values of variables $x$ and $y$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Examples II
+
+****
+Assume an existing integer variable +month+ representing a month (in the range [1..12]).
+****
+
+[source, python]
+.Is the month February?
+----
+month == 2
+----
+
+[source, python]
+.Does the month have thirty days?
+----
+month == 4 or month == 6 or month == 9 or month == 11
+----
+
+[source, python]
+.Does the month have thirty days?
+----
+# NOT LIKE THIS!
+
+month == 4 or 6 or 9 or 11    # WRONG!!!
+
+# "or" is a Boolean operator.
+#
+# The values on the left and right must be Boolean values; here,
+# they are integers (so this is wrong).
+----
+
+// //////////////////////////////////////////////////////////////
+=== Examples III
+
+****
+Assume an integer variable +year+ is a year (e.g. $2005$).
+
+Leap years:
+
+- years which are divisible by $400$ are leap years,
+- otherwise, all years which are divisible by $4$ are leap years, unless they are also divisible by $100$.
+
+(Complicated, isn't it?)
+****
+
+.Is +year+ a leap year?
+----
+(divisible by 400) or (divisible by 4 but not by 100)
+----
+
+****
+We can check divisibility by checking whether the remainder after division by a number is $0$.
+
+For example:
+
+- $21$ is divisible by $7$ because the remainder after dividing $21$ by $7$ is $0$, and
+- $22$ is _not_ divisible by $7$ because the remainder after dividing $22$ by $7$ is not $0$ (it's $1$).
+
+For leap years, we can check -- for example -- whether
+a number is divisible by $400$ as follows:
+
+[source, python]
+----
+year % 400 == 0
+----
+
+[source, python]
+.Examples
+----
+1998 % 400 == 0      # False (the remainder is 398).
+1999 % 400 == 0      # False (the remainder is 399).
+2000 % 400 == 0      # True  (the remainder is 0).
+2001 % 400 == 0      # False (the remainder is 1).
+2002 % 400 == 0      # False (the remainder is 2).
+----
+****
+
+.Is +year+ a leap year?
+****
+To test whether a year is a leap year, we need to test all of the cases
+given in the definition above.
+
+[source, python]
+----
+# A year is leap year if it is:
+#
+#    (divisible by 400) or (divisible by 4 but not by 100)
+
+year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Examples -- IX
+//
+// [source, python]
+// .Is +year+ a leap year?
+// ----
+// year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
+// ----
+//
+// .Can that be correct?  Let's try some examples:
+// ****
+// - +2015+
+// - +2000+
+// - +1900+
+// - +1904+
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// == Examples -- IX
+//
+// [source, python]
+// .Is +year+ a leap year?
+// ----
+// year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
+// ----
+
+// // //////////////////////////////////////////////////////////////
+// == Where do we stand?
+//
+// .Types
+// ****
+// - integers
+// - Booleans
+//
+// And their associated operators, and comparison operators.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// == Aside
+//
+// [source, python]
+// .We can ask what type a value has:
+// ----
+// type(3)
+//
+// type(True)
+//
+// x = 3
+// type(x)
+// ----
+//
+// .Output:
+// ----
+// <type 'int'>
+// <type 'bool'>
+// <type 'int'>
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Aside
+//
+// [source, python]
+// .We can also ask whether a value has a particular type:
+// ----
+// type(3) == int
+// type(3) == bool
+// type(True) == bool
+// ----
+//
+// .Output:
+// ----
+// True
+// False
+// True
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Aside
+//
+// ****
+// This can be useful for debugging
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Observation
+
+****
+There are two Boolean values, and two Boolean literals, +True+ and +False+.
+
+In practice, however, it is *uncommon* for those Boolean literals to appear in
+Python scripts.
+
+Rather, Python scripts more commonly include Boolean expressions
+which -- when evaluated -- evaluate to Boolean values.
+****
+
+// //////////////////////////////////////////////////////////////
+== Strings
+
+****
+It is common for computer programs to represent textual data.
+
+The Python type for textual data is _string_.
+
+The name "string" may perhaps appear unusual, but the name which is widely
+used for textual data types across many programming languages.
+
+A string is a sequence of characters.
+
+The internal Python name for the string type is +str+.
+****
+
+[source, python]
+.String literals:
+----
+"Hello world!"
+"January"
+"Tuesday"
+"Python"
+"Programming Fundamentals I"
+"One flew over the cuckoo's nest"
+----
+
+****
+String literals are enclosed in either double quotes (+"+) or single quotes (+'+).
+
+Usually, you should prefer double quotes (unless the textual data itself contains double quotes).
+
+But be consistent: _choose one, and stick to it_.
+****
+
+[source, python]
+.Examples
+----
+s = "Who's afraid of Virginia Woolf?"
+
+t = 'And the band played "Waltzing Matilda".'
+----
+
+// //////////////////////////////////////////////////////////////
+=== What can we do with strings?
+
+[source, python]
+.We can store textual data values in variables:
+----
+module_code = "CA177"
+module_title = "Programming Fundamentals I"
+----
+
+[source, python]
+.We can print strings:
+----
+print("Hello!")
+print("Welcome to", module_title)
+----
+
+.Output:
+----
+Hello!
+Welcome to Programming Fundamentals I
+----
+
+[source, python]
+.We can ask how long they are:
+----
+len("Hello")                 # 5
+len("Hello World!")          # 12
+len(module_title)            # 26
+----
+
+****
++len()+ is a built-in function in Python; we use it for querying how long
+something is.
+****
+
+[source, python]
+.We can use comparisons:
+----
+month = "January"            # Assignment (not a comparison)!
+
+month == "January"           # True
+month == "February"          # False
+month != "February"          # True
+
+"abc" < "def"                # True (alphanumerical ordering)
+"def" < "abc"                # False (alphanumerical ordering)
+"100" < "9"                  # True (alphanumerical ordering!)
+----
+
+// // //////////////////////////////////////////////////////////////
+// == What can we do with strings?
+//
+// [source, python]
+// .We can ask what type they are:
+// ----
+// type("Hello")                 # <type 'str'>
+// type("Hello") == str          # True
+// type(3) == str                # False
+// ----
+
+// //////////////////////////////////////////////////////////////
+== Floating-point numbers
+
+****
+Floating-point numbers are Python's approximation to decimal-point numbers
+in arithmetic.
+
+Perhaps surprisingly, floating-point numbers come up only in very
+particular types of computational problem.
+****
+
+[source, python]
+.Literals
+----
+3.14          # Floating-point number.
+3.0           # Floating-point number.
+1.0           # Floating-point number.
+0.0           # Floating-point number.
+1             # Integer.
+123           # Integer.
+----
+
+[source, python]
+.Example
+----
+pi = 3.14
+
+radius = int(input())
+print "the area of this circle is", pi * radius * radius
+----
+
+.Arithmetic operators
+****
+In a numeric expression:
+
+- if _all_ of the terms are integers, then the result will be an integer,
+- but, if _any one of_ the terms is a floating-point number, then the result
+  will be a floating-point number.
+****
+
+// //////////////////////////////////////////////////////////////
+== More About +print+
+
+[source, python]
+.Example:
+----
+months = 12
+print("there are", months, "months")    # "there are 12 months\n"
+
+# (Here, "\n" represents a newline character.)
+----
+
+****
++print+:
+
+- accepts 0, 1 or more comma-separated arguments
+- converts each argument to a string
+- joins each argument together, separating them with a space
+- adds a new-line character to the end,
+- and writes the resulting text to standard output.
+
+We can +print+ integers, Booleans and strings, and +print+ produces more or
+less the output you would expect.
+****
+
+[source, python]
+.Example
+----
+print(3 < 4)
+# Prints True.
+
+print(4 < 3)
+# Prints False.
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

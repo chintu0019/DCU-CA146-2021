@@ -1,0 +1,74 @@
+// //////////////////////////////////////////////////////////////
+== Task: CL product
+
+.Task
+****
+Write a Python script name +pp-product-cl.py+ which accepts exactly one
+command-line argument (+digits+, say) which consists only of digits, and
+outputs only _the product of those digits_.
+****
+
+.Example invocation
+----
+python pp-product-cl.py 41231
+----
+
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went
+// the lamb was sure to go.
+// end
+// ----
+
+.Example standard output
+----
+24
+----
+
+// //////////////////////////////////////////////////////////////
+== Task: stdin product
+
+.Task
+****
+Standard input consists of a sequence of lines terminated by a line
+containing only the text +end+.  Each line consists only of a sequence of
+digits.
+
+Write a Python script name +pp-product-stdin.py+ which, for each line,
+outputs only _the product of that line's digits_.
+****
+
+// .Example invocation
+// ----
+// python pp-product-cl.py 41231
+// ----
+
+.Example standard input
+----
+231
+121314
+1213140
+
+end 
+----
+
+.Example standard output
+----
+6
+24
+0
+1
+----
+
+----
+# For the task above to work, this file better end
+# with a line containing only the text
+end
+----
+
+// /////////////////////////////////////////////////////////
+// Verify: +this is not a file name+.
+// include::../../misc/asciimath.txt[]
+

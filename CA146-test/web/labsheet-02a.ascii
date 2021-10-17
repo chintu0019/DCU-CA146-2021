@@ -1,0 +1,794 @@
+= Labsheet 2a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+Name your Python script exactly as instructed for each task and
+upload it to _Einstein_: link:/einstein/[here].
+
+Here's the link:/termcast/[link] to _TermCast_.
+****
+
+****
+This lab sheet covers:
+
+- miscellaneous tasks
+- Boolean expressions
+
+Tomorrow's lab sheet will cover if statements.
+****
+
+[source, python]
+.The Python 3 shebang
+----
+#!/usr/bin/env python3
+----
+
+// //////////////////////////////////////////////////////////////
+== Background
+
+// //////////////////////////////////////////////////////////////
+=== Strings
+
+****
+Python uses the _string_ type to represent _textual data_.
+
+We skipped over string types during this morning's lecture (14/10/20), but
+there's not much to it.
+
+The notes are link:/05-types.html#_strings[here].
+****
+
+[source, python]
+.String basics
+----
+# Read a string from standard input.
+s = input()
+
+# Print a string literal.
+print("hello")
+
+# Print a string variable.
+print(s)
+
+# The length of a string (the number of characters it contains).
+len(s)          # returns the length of s, whatever it happens to be
+
+# Example.
+len("hello")    # 5
+
+# The empty string (a string of length 0).
+s = ""
+len(s)          # 0
+----
+
+[source, python]
+.Example script
+----
+#!/usr/bin/env python3
+
+name = input()
+print("hello", name)
+----
+
+// //////////////////////////////////////////////////////////////
+=== Floating point
+
+****
+Floating-point numbers are Pythons type for approximating real numbers.
+
+The notes are link:/05-types.html#_floating_point_numbers[here].
+****
+
+[source, python]
+.Floating-point basics
+----
+# Floating point literals.
+pi = 3.14
+
+# Read a floating-point number from standard input.
+f = float(input())
+----
+
+****
+And that's about all there is to say.
+
+Perhaps surprisingly, floating-point numbers don't arise that commonly in
+computer programming.
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Echo tasks
+//
+// ****
+// The following two tasks just involve copying data from standard
+// input to standard output.
+// ****
+
+// // //////////////////////////////////////////////////////////////
+// === Echo Integer
+//
+// .Task
+// ****
+// Standard input consists of a single line containing a single integer.
+//
+// Write a Python script named +echo-integer.py+ which copies the integer from standard input to standard output.
+// ****
+//
+// .Example standard input
+// ----
+// 13
+// ----
+//
+// .Example standard output
+// ----
+// 13
+// ----
+//
+// ****
+// Your solution must make good use of the built-in +input()+ function (and may not use the built-in +raw_input()+ function).
+// ****
+
+// //////////////////////////////////////////////////////////////
+== String tasks
+
+// //////////////////////////////////////////////////////////////
+=== Echo string
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +echo-string.py+ which copies that line of text from standard input to standard output
+****
+
+.Example standard input
+----
+Mary had a little lamb.
+----
+
+.Example standard output
+----
+Mary had a little lamb.
+----
+
+[TIP]
+====
+Read a single line of text like this:
+
+[source, python]
+----
+s = input()
+----
+====
+
+// //////////////////////////////////////////////////////////////
+=== String length
+
+.Task
+****
+Standard input consists of a single line of text, +s+ say.
+
+Write a Python script named +string-length.py+ writes the length of +s+ to
+standard output.
+****
+
+.Example standard input
+----
+Mary had a little lamb.
+----
+
+.Example standard output
+----
+23
+----
+
+[TIP]
+====
+The Python built-in function for getting the length of a string is
+explained above.
+====
+
+// //////////////////////////////////////////////////////////////
+== Geometry Tasks
+
+[NOTE]
+====
+We have seen some of these tasks before, possibly with different names.
+
+It does no harm to repeat them here, though; it helps get us into the
+programming workflow which we need to work effectively.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Square Area
+
+.Task
+****
+Standard input consists of a single positive integer, $n$ say.
+
+$n$ is the length of the side of a square.
+
+Write a Python script named +square-area.py+ which outputs the area of the square.
+****
+
+.Example standard input
+----
+3
+----
+
+.Example standard output
+----
+9
+----
+
+// //////////////////////////////////////////////////////////////
+=== Square Perimeter
+
+.Task
+****
+Standard input consists of a single positive integer, $n$ say.
+
+As above, $n$ is the length of the side of a square.
+
+Write a Python script named +square-perimeter.py+ which outputs the perimeter of the square.
+****
+
+.Example standard input
+----
+3
+----
+
+.Example standard output
+----
+12
+----
+
+// //////////////////////////////////////////////////////////////
+=== Rectangle Area
+
+.Task
+****
+Standard input consists of two positive integers, one per line.
+
+These are the length and width of a rectangle.
+
+Write a Python script named +rectangle-area.py+ which outputs the area of the rectangle.
+****
+
+.Example standard input
+----
+3
+5
+----
+
+.Example standard output
+----
+15
+----
+
+[TIP]
+====
+To read _two_ numbers from standard input, first read the first number using +int(input())+, and then read the second.
+
+The first +int(input())+ consumes the first line of standard input, and the second consumes the second line.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Circle Area
+
+.Task
+****
+Standard input consists of a single positive initeger.
+
+Take that number to be the radius of a circle.
+
+Write a Python script named +circle-area.py+ which outputs the area of the circle.
+
+Take $pi$ to be $3.141$.
+****
+
+.Example standard input
+----
+6
+----
+
+.Example standard output
+----
+113.076
+----
+
+// //////////////////////////////////////////////////////////////
+=== Right-Angled Triangle
+
+.Task
+****
+Standard input consists of exactly three positive integers: first the
+length of the longest side of a triangle, and then the lengths of the other
+two sides.
+
+Each integer is on a separate line.
+
+Write a Python script named +right-angled-triangle.py+ which outputs +True+ if the triangle is a right-angled triangle, and +False+ otherwise.
+****
+
+****
+.Example standard input 1
+----
+5
+4
+3
+----
+
+.Example standard output 1
+----
+True
+----
+****
+
+****
+.Example standard input 2
+----
+6
+4
+3
+----
+
+.Example standard output 2
+----
+False
+----
+****
+
+[TIP]
+====
+The Pythagorean theorem states that, for a right-angled triangle, the
+square on the hypotenuse is equal to the sum of the squares on the other
+two sides.
+
+Square root is not required for this task, and should not be used.
+====
+
+// //////////////////////////////////////////////////////////////
+== Text Tasks
+
+
+// //////////////////////////////////////////////////////////////
+=== Swap Two Lines
+
+.Task
+****
+Standard input consists of exactly two lines of text.
+
+Write a Python script named +swap-two-lines.py+ which outputs those same two lines, but in the _opposite order_.
+****
+
+.Example standard input
+----
+it's fleece was white as snow.
+Mary had a little lamb,
+----
+
+.Example standard input
+----
+Mary had a little lamb,
+it's fleece was white as snow.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Join Two Lines
+
+.Task
+****
+Standard input consists of exactly two lines of text.
+
+Write a Python script named +join-two-lines.py+ which outputs those two lines on a single line (separated by a space).
+****
+
+.Example standard input
+----
+Nobody expects
+the Spanish Inquisition!
+----
+
+.Example standard output
+----
+Nobody expects the Spanish Inquisition!
+----
+
+[TIP]
+====
+The +print()+ command just does the right thing for you here.
+====
+
+// //////////////////////////////////////////////////////////////
+== Miscellaneous Tasks
+
+// // //////////////////////////////////////////////////////////////
+// === Gaelic Score
+//
+// .Task
+// ****
+// Standard input consists of two positive integers, respectively the number of goals scored by a team in a gaelic football match and the number of points.
+//
+// Write a Python script named +gaelic-score.py+ which outputs the teams total score.
+// ****
+//
+// .Example standard input
+// ----
+// 2
+// 5
+// ----
+//
+// .Example standard output
+// ----
+// 11
+// ----
+//
+// [TIP]
+// ====
+// In gaelic football, a goal is worth three points, so the calculation in the example above is $2 times 3 + 5$.
+// ====
+
+// //////////////////////////////////////////////////////////////
+=== Degree Classifications
+
+.Task
+****
+Standard input consists of a single positive integer, $"mark"$ say.  This is a student's mark in an examination.
+
+Any mark greater than or equal 70% is a first, from 50% to 69%
+is a second, from 40% to 49% is a third, and anything less than
+40% is a fail.
+
+Write a Python script named +classifications.py+ which outputs four lines,
+one for each classification, as indicated in the examples below.
+****
+
+****
+.Example standard input 1
+----
+65
+----
+
+.Example standard output 1
+----
+first: False
+second: True
+third: False
+fail: False
+----
+****
+
+****
+.Example standard input 2
+----
+32
+----
+
+.Example standard output 2
+----
+first: False
+second: False
+third: False
+fail: True
+----
+****
+
+.Explanation
+****
+In the first example above, $65$ is a second, so the second line contains +True+,
+and the others contain +False+.
+
+In the second example, $32$ is a fail, so the last line contains +True+, and the others contain +False+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Leap Year
+
+.Task
+****
+Standard input consists of a single positive integer, +year+ say.  This is a year.
+
+Write a Python script named +leap-year.py+ which outputs a single Boolean: +True+ if +year+ is a leap year, and +False+ otherwise.
+****
+
+****
+.Example standard input 1
+----
+2016
+----
+
+.Example standard output 1
+----
+True
+----
+****
+
+****
+.Example standard input 2
+----
+2018
+----
+
+.Example standard output 2
+----
+False
+----
+****
+
+[TIP]
+====
+A year is a leap year if:
+
+- it is divisible by $400$, or
+- it is divisible by $4$ but not by $100$.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Weekday
+//
+// .Task
+// ****
+// Assume that the first of January is a Monday.
+//
+// Standard input consists of a positive integer, +days+ say, representing the
+// _number of days since the first of January_.
+//
+// For example, +1+ would be Tuesday the second of January, and -- for a non-leap
+// year -- +364+ would be the last day of the year.
+//
+// Write a Python script name +weekday.py+ which outputs +True+ if the day is a weekday and +False+ otherwise.
+// ****
+//
+// .Examples
+// ****
+// The following inputs would be weekdays: +0+, +4+, +7+, +9+, +36+; the output would be +True+.
+//
+// The following inputs would _not_ be weekdays: +6+, +139+; the output would be +False+.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== More Tasks (Harder)
+
+****
+These tasks are harder.
+
+If the solution doesn't come to you after a little thought, then move on to
+the next task.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Is Even
+
+.Task
+****
+Standard input consists of a single integer, $n$ say.
+
+Write Python script named +is-even.py+ which outputs +True+ if $n$ is even and +False+ otherwise.
+
+Your solution **may not** use +%+, the modulus operator (and may only use
+elements of Python which have been covered in the module thus far).
+****
+
+****
+.Example standard input 1
+----
+4
+----
+
+.Example standard output 1
+----
+True
+----
+****
+
+****
+.Example standard input 2
+----
+5
+----
+
+.Example standard output 2
+----
+False
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Circle Overlaps Origin
+
+.Task
+****
+Standard input consists of three integers, one per line.  Take these to be
+$x$, $y$, and $r$, respectively the centre point of a circle and the radius
+of that circle.
+
+Write a Python script named +circle-overlaps-origin.py+ which outputs
++True+ if the origin is strictly contained within the circle, and +False+
+otherwise.
+****
+
+.Example standard input 1
+----
+1
+1
+10
+----
+
+.Example standard output 1
+----
+True
+----
+
+.Example standard input 2
+----
+10
+10
+1
+----
+
+.Example standard output 2
+----
+False
+----
+
+.Example standard input 3
+----
+2
+0
+2
+----
+
+.Example standard output 3
+----
+False
+----
+
+[TIP]
+====
+Again, square root is not required for this task.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Odd or Zero
+//
+// .Task
+// ****
+// Standard input consists of a single line containing a single integer.
+//
+// Write a Python script named +odd-or-zero.py+ which outputs the number itself _if it is odd_, but instead outputs $0$ _if it is even_.
+// ****
+//
+// ****
+// .Example standard input 1
+// ----
+// 13
+// ----
+//
+// .Example standard output 1
+// ----
+// 13
+// ----
+// ****
+//
+// ****
+// .Example standard input 2
+// ----
+// 14
+// ----
+//
+// .Example standard output 2
+// ----
+// 0
+// ----
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Picker
+
+.Task
+****
+Standard input consists of three integers, one per line.  Call these $a$, $b$ and $c$, respectively.
+
+Write a Python script named +picker.py+ which outputs:
+
+- $a$ if $c$ is even, and
+- $b$ if $c$ is odd.
+****
+
+****
+.Example standard input 1
+----
+1
+2
+10
+----
+
+.Example standard output 1
+----
+1
+----
+****
+
+****
+.Example standard input 2
+----
+1
+2
+11
+----
+
+.Example standard output 2
+----
+2
+----
+****
+
+[TIP]
+====
+It's going to have something to do with the remainder after dividing by
+two, isn't it?
+====
+
+// //////////////////////////////////////////////////////////////
+=== Pick Digit
+
+.Background
+****
+Consider the number $9876$.
+
+Here, we will define:
+
+- $6$ to be the 0th digit,
+- $7$ to be the 1st digit,
+- $8$ to be the 2nd digit, and
+- $9$ to be the 3rd digit
+
+In other words, we're counting the digits backwards, and starting from $0$.
+****
+
+.Task
+****
+Standard input consists of two positive integers, one per line.
+
+Take $n$ to be the first integer, and $p$ to be the second.
+
+Write a Python script named +pick-digit.py+ which outputs the $p$-th digit of $n$.
+****
+
+****
+.Example standard input 1
+----
+9876
+0
+----
+
+.Example standard output 1
+----
+6
+----
+****
+
+****
+.Example standard input 1
+----
+87564
+3
+----
+
+.Example standard output 1
+----
+7
+----
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

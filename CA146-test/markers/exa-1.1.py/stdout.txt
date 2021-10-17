@@ -1,0 +1,7 @@
+a = ['dog', 'cat', 'mouse', 'hen']
+running your script...
+
+hen
+mouse
+cat
+dog

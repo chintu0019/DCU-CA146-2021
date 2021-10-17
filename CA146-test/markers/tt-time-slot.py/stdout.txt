@@ -1,0 +1,12 @@
+1 10:00 10:50 ca277 lg26 Programming Fundamentals I
+1 11:00 12:50 ca222 qg27 Enterprise Information Systems
+1 14:00 14:50 ca277 lg26 Programming Fundamentals I
+1 15:00 15:50 ca200 qg22 Quantitative Analysis for Business Decisions
+2 11:00 11:50 ca214 hg22 Systems Analysis
+2 13:00 13:50 ca200 cg86 Quantitative Analysis for Business Decisions
+2 14:00 15:50 ca200 l114 Quantitative Analysis for Business Decisions
+3 9:00 9:50 ca227 l101 Business Data Management I
+3 11:00 12:50 ca277 lg26 Programming Fundamentals I
+4 10:00 11:50 ca227 c114 Business Data Management I
+4 13:00 13:50 ca214 hg23 Systems Analysis
+4 14:00 16:50 ca214 xg19 Systems Analysis

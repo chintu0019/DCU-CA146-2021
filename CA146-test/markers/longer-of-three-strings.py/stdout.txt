@@ -1,0 +1,198 @@
+testing:
+   because
+   range
+   counting
+   your output:
+      counting
+testing:
+   dcu
+   inclusive
+   value
+   your output:
+      inclusive
+testing:
+   classification
+   it
+   take
+   your output:
+      classification
+testing:
+   spanish
+   hello
+   the
+   your output:
+      spanish
+testing:
+   various
+   length
+   day
+   your output:
+      various
+testing:
+   initialises
+   add
+   be
+   your output:
+      initialises
+testing:
+   match
+   else
+   something
+   your output:
+      something
+testing:
+   buzz
+   input
+   itself
+   your output:
+      itself
+testing:
+   running
+   strictly
+   triangles
+   your output:
+      triangles
+testing:
+   b
+   nobody
+   would
+   your output:
+      nobody
+testing:
+   degree
+   draw
+   so
+   your output:
+      degree
+testing:
+   values
+   classified
+   tasks
+   your output:
+      classified
+testing:
+   output
+   for
+   do
+   your output:
+      output
+testing:
+   where
+   txt
+   multiple
+   your output:
+      multiple
+testing:
+   your
+   single
+   three
+   your output:
+      single
+testing:
+   use
+   python
+   best
+   your output:
+      python
+testing:
+   did
+   below
+   home
+   your output:
+      below
+testing:
+   and
+   another
+   long
+   your output:
+      another
+testing:
+   covered
+   first
+   inquisition
+   your output:
+      inquisition
+testing:
+   indicators
+   longer
+   maths
+   your output:
+      indicators
+testing:
+   too
+   print
+   fail
+   your output:
+      print
+testing:
+   syntax
+   way
+   write
+   your output:
+      syntax
+testing:
+   conditional
+   rule
+   based
+   your output:
+      conditional
+testing:
+   age
+   expects
+   y
+   your output:
+      expects
+testing:
+   younger
+   append
+   st
+   your output:
+      younger
+testing:
+   m
+   rd
+   quite
+   your output:
+      quite
+testing:
+   week
+   football
+   mathematical
+   your output:
+      mathematical
+testing:
+   scores
+   following
+   said
+   your output:
+      following
+testing:
+   couldn
+   r
+   blott
+   your output:
+      couldn
+testing:
+   lengths
+   to
+   messages
+   your output:
+      messages
+testing:
+   replaced
+   number
+   third
+   your output:
+      replaced
+testing:
+   sides
+   have
+   org
+   your output:
+      sides
+testing:
+   children
+   equal
+   term
+   your output:
+      children

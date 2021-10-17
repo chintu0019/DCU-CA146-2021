@@ -1,0 +1,6 @@
+ex2-inputs-1.txt
+ex2-inputs-2.txt
+ex2-inputs-3.txt
+ex2-inputs-4.txt
+ex2-inputs-5.txt
+ex2-inputs-6.txt

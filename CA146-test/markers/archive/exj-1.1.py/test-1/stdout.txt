@@ -1,0 +1,11 @@
+a = ['dog', 'chicken', 'cat', 'mouse', 'stoat', 'hen', 'weasel', 'squirrel']
+running your script...
+
+dog
+chicken
+cat
+mouse
+stoat
+hen
+weasel
+squirrel

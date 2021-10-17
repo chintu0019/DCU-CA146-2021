@@ -1,0 +1,6 @@
+{-# LANGUAGE FlexibleContexts #-}
+
+module IsPalindrome where
+
+import System.Environment
+

@@ -1,0 +1,455 @@
+:theme: smblott-exam
+
+[frame="none",grid="none",cols="^1"]
+|==================================================
+| image:res/dcu-logo.png[width="150px"]
+| *[big]#Semester 1 Examinations 2019/2020#*
+|==================================================
+
+:theme: smblott-exam
+
+[frame="none",cols="2,8"]
+|==================================================
+|*Module*         | CA116 -- Computer Programming I
+|*Programmes*     | BSc in Computer Applications +
+                    BSc in Data Science +
+                    Study Abroad (ECSAX) +
+                    Study Abroad (ECSAO)
+| *Year of Study* | 1
+| *Examiner*      | Dr Stephen Blott (ext. 5984 +
+                    Dr Hitesh Tewari (external examiner for CA) +
+                    Prof Mathieu d'Aquin (external examiner for DS)
+| *Instructions*  | Answer _all four_ questions. +
+                    All questions carry equal marks.
+|==================================================
+
+_The use of programmable or text storing calculators is expressly forbidden.  +
+Please note that where a candidate answers more than the required number of questions, the
+examiner will mark all questions attempted and then select the highest scoring ones._
+
+_Requirements for this paper (please mark (X) as appropriate):_ +
+[frame="none", cols="6,1,6,1"]
+|===
+| _Log tables_         |  | _Thermodynamic tables_      |
+| _Graph paper_        |  | _Actuarial tables_          |
+| _Dictionaries_       |  | _MCQ only (do not publish)_ |
+| _Statistical tables_ |  | _Attached answer sheet_     |
+|===
+
+++++
+<span class="question">
+  <span>Additional Instructions</span>
+</span>
+++++
+
+****
+Instructions:
+
+- Upload all answers to _Einstein_: link:/einstein/[here].
+- You may upload your answers as many times as you like.  If you upload
+  answers to _the same question multiple times_, then _only the last upload
+  will be considered_.
+- For Python programming tasks, upload and test your solutions on
+  _Einstein_ as usual:
+** If _Einstein_ does not report your solution as correct, then attempt
+  marks will be awarded subsequently as part of the marking process, as
+merited.
+- For other questions:
+** You are told the name to use for your upload;
+   this will be a *text file*, with a ".txt" extension.
+** Create such a file using a *text editor* (such as _gedit_ or _sublime_; do not use a word
+   processor), and upload the resulting file to _Einstein_, as usual.
+** _Einstein_ simply accepts and stores such uploads;
+   it does not correct your work. All such uploads will be assessed
+   manually later as part of the marking process.
+
+Only the work which you upload to _Einstein_ will be considered.
+Any files you leave on the local desktop *will not* be collected.  Any
+written work you do in exam scripts *will not* be assessed.
+****
+
+[source, python]
+.The Python shebang (for reference)
+----
+#!/usr/bin/env python
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 1</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+The following five fragments of Python code each contain errors.
+
+Correct the errors.
+
+Where you are instructed to "_assume an existing variable ..._", _Einstein_
+will provide a value for that variable when you upload your solution.
+****
+
+// [TIP]
+// ====
+// When you upload your work to _Einstein_, you will see most of the test
+// cases.
+// ====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.1</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* list variable $a$.
+
+Print out each element of the list, one element per line.
+
+Name your Python fragment +exj-1.1.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+i = 0
+while i <= len(a):
+   print a[i]
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.2</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume *existing* integer variables +home_goals+, +home_points+ +away_goals+ and +away_points+.
+
+These are the goals and points scored respectively by the home and away
+teams in a gaelic football match.
+
+Print out the result of the match.  The result is either
+"home win", "away win" or "draw".
+
+Name your Python fragment +exj-1.2.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+home_score = home_goals * (7 + home_points)
+away_score = away_goals * (7 + away_points)
+
+if home_score < away_score
+   print "away win"
+elif away_score < home_score
+   print "home win"
+else
+   print "draw"
+----
+
+[TIP]
+====
+In gaelic football, one goal is worth seven points, so 1 goal and 2 points
+(for a total of 9) is better than 0 goals and 6 points (for a total of just 6).
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.3</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+The command-line arguments consist of exactly one argument, a file name.
+
+Copy the contents of that file to standard output.
+
+Name your Python script +exj-1.3.py+.
+****
+
+[source, python]
+.Initial script (contains errors)
+----
+#!/usr/bin/env python
+
+import sys
+
+file_name = sys.argv[1]
+
+with open(file_name) as f:
+   sys.write(f.read)
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.4</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* dictionary variable $d$.
+
+Print out each key-value pair in the dictionary, one pair per line, separated by
++-\->+.
+
+Name your Python fragment +exj-1.4.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+for key in sorted(d):
+   write key, "-->", d{key}
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.5</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* string variable $s$.
+
+$s$ consists of a sequence of
+whitespace-separated tokens.
+
+Print the number of tokens contained in $s$.
+
+Name your Python fragment +exj-1.5.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+print len(s.strip(" "))
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 2</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>2.1 Largest position</span> <span class="markpart">15 Marks</span>
+</span>
+++++
+
+****
+In a module (file) named +exj_21.py+, write a Python function named
++largest_position+ which accepts exactly one argument, a non-empty list, and returns
+the position of the largest element in that list.
+
+$5$ of the available $15$ marks will be awarded for having included
+suitable test cases in your upload.
+****
+
+[source, python]
+.Example
+----
+import exj_21
+
+print exj_21.largest_position([7, 12, 20, 14, 20])   # 2
+----
+
+[NOTE]
+====
+In the case of multiple candidate positions, choose the lowest-numbered
+position.  See the case of $20$ in the example, which first occurs at
+position $2$.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>2.2 Reverse</span> <span class="markpart">10 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* list $a$.
+
+Write a Python fragment named +exj-2.2.py+ which reverses the elements of
+$a$ _in place_.
+
+Your script should produce no output.
+****
+
+[NOTE]
+====
+_Einstein_ will provide values for $a$ when you upload your solution.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 3</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+Standard input consists of a sequence of $x$, $y$ coordinates each in the
+range $0$ (inclusive) to $20$ (exclusive), one per line.  See the example,
+below.
+
+Write a Python script named +exj-3.py+ which plots those points on a
+two-dimensional graph.  See the example.
+****
+
+.Example standard input
+----
+0 0
+2 10
+19 16
+19 17
+19 18
+19 19
+----
+
+.Example standard output
+----
+ --------------------
+|                   *|
+|                   *|
+|                   *|
+|                   *|
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|  *                 |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|                    |
+|*                   |
+ --------------------
+----
+
+.Details
+****
+The input points may be in any order.
+
+The first and last lines of the output consist of 21 characters: each a single space followed by 20 hyphens.
+
+All of the other lines consist 22 characters: a +|+, 20 spaces or asterisks (depending upon the input), and another  +|+.
+****
+
+[NOTE]
+====
+We have encountered this problem in labs.  There, it was named "plot
+points".
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 4</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+++++
+<span class="questionpart">
+  <span>4.1 Index error</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Write a Python script named +exj-4.1.py+ which, when run, generates an
+index error (list index out of range).
+****
+
+++++
+<span class="questionpart">
+  <span>4.2 Key error</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Write a Python script named +exj-4.2.py+ which, when run, generates a
+key error.
+****
+
+++++
+<span class="questionpart">
+  <span>4.3 Sorting</span> <span class="markpart">15 Marks</span>
+</span>
+++++
+
+****
+For the remaining three question parts, write your answers in a single text file named
++exj-4.3.txt+ and upload them to _Einstein_.
+****
+
+.4.3.1
+****
+++++
+ <span class="markpart">5 Marks</span>
+++++
+
+Consider the following list:
+
+[source, python]
+----
+a = [12, 6, 5, 8, 10, 3, 8, 2]
+----
+
+Give the state of the list after the first three iterations of the
+main/outer loop of the selection-sort algorithm.
+****
+
+.4.3.2
+****
+++++
+ <span class="markpart">5 Marks</span>
+++++
+
+Considering the same initial list again (see question 4.3.1, above),
+give the state of the list after the first three iterations of the
+main/outer loop of the insertion-sort algorithm.
+****
+
+
+.4.3.3
+****
+++++
+ <span class="markpart">5 Marks</span>
+++++
+
+Using big-oh notation, state the complexity of binary search.
+****
+
+// //////////////////////////////////////////////////////////////
+include::../web/misc/instrument.txt[]
+include::../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

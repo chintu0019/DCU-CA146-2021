@@ -1,0 +1,895 @@
+= While loops 1
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+._To iterate_, definition:
+[quote, Cambridge Dctionary]
+____
+To repeat a process, especially as part of a computer program.
+____
+
+// //////////////////////////////////////////////////////////////
+== Loops
+
+****
+In computer programming, a _loop_ is a sequence of statements which is _executed repeatedly_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== If statements
+
+****
+Consider an +if+ statement:
+
+[source, python]
+----
+if BOOLEAN_EXPRESSION:
+   STATEMENTS...
+----
+
+The +STATEMENTS+ within the +if+ block are executed either _exactly once_ or _not at all_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== While loops
+
+****
+Syntactically, +while+ loops are very similar to +if+ statements:
+
+[source, python]
+----
+while CONDITION:
+   STATEMENTS...
+----
+
+The +CONDITION+ is a Boolean expression known as the _loop condition_, or
+just the _condition_; it evaluates to either +True+ or +False+.
+
+The +STATEMENTS+ within the block are known as the _body of the loop_, or the _loop body_.
+
+The body of the loop may be executed:
+
+- _not at all_,
+- _exactly once_, or
+- _many times_,
+
+depending upon the condition.
+****
+
+****
+
+When, the Python interpreter encounters a +while+ loop it:
+
+. evaluates the condition (a Boolean expression)...
+. if this evaluates to +True+, then:
+** execute the statements in the body of the loop, then
+** go back to 1 +
+   (that is, go back to the top of the loop and start again)
+. otherwise:
+** skip the loop and continue with the following statements
+
+A +while+ loop continues iterating (that is, repeatedly executing the body of
+the loop) until eventually the condition evaluates to +False+, and the loop
+stops.
+****
+
+.Illustration
+****
+We can illustrate this with a flowchart.
+
+[source, python]
+----
+while CONDITION:
+   STATEMENTS...
+----
+
+----
+                                  ---------------   The Python interpreter
+                   ------------> |   CONDITION   |  evaluates the condition;
+                  |               ---------------   it evaluate to either
+                  |               /             \   True or False.
+The condition and |        True  /         False \
+the statements    |             /                 \
+repeat, until     |      ------------------        |
+eventually the    |     |  STATEMENTS...  |        |
+condition is      |      ------------------        |
+False.            |            |                   |
+                  |            |                   |
+                   ------------                    |
+                                                   |
+                                                   V
+                                          following statements
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example loops
+
+[source, python]
+.Example 1
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   print(i)                                              # Body of the loop.
+   i = i + 1                                             #
+----
+
+.Example standard output
+----
+0
+1
+2
+3
+4
+----
+
+[source, python]
+.Example 2
+----
+#!/usr/bin/env python3
+
+n = int(input())
+
+i = 0
+while i < n:
+   print("2 to the power of", i, "is", 2 ** i)           # Body of the loop.
+   i = i + 1                                             #
+----
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+2 to the power of 0 is 1
+2 to the power of 1 is 2
+2 to the power of 2 is 4
+2 to the power of 3 is 8
+----
+
+// //////////////////////////////////////////////////////////////
+=== Syntactic details
+
+****
+Observe that, as with +if+ statements:
+
+- the colon after the condition is _required_, and
+- the extent of the body of the loop is determined by indentation.
+
+In both _Example 1_ and _Example 2_, above, there are two statements inside
+the body of the loop, because there are two indented statements following
+the +while+ line.
+****
+
+// //////////////////////////////////////////////////////////////
+== Examples with constants
+
+// //////////////////////////////////////////////////////////////
+=== Counting up
+
+.Example task
+****
+Write a Python script which outputs the digits from $0$ to $4$, one per line.
+****
+
+.Expected standard output
+----
+0
+1
+2
+3
+4
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   print(i)
+   i = i + 1
+----
+
+.Explanation
+****
+Initially, $i$ is $0$ and the condition evaluates to +True+
+(because $0$ is less than $5$), so the body of the loop is executed.  The
+value of $i$ is printed ($0$) and $i$ is incremented, so now $i$ is $1$.
+
+Returning to the top of the loop, the condition is again evaluated, and
+again it evaluates to +True+
+(because $1$ is also less than $5$),
+so the body of the loop is executed again.  The value of $i$ ($1$, now) is
+printed, and $i$ is incremented again, so $i$ is now $2$.
+
+And so on.  The next time around, $2$ is printed, and the next $3$, and the next $4$.
+
+Eventually, the loop body has been executed five times and $i$ is $5$.
+
+The condition now evaluates to +False+ (because $i < 5$, or $5 < 5$ is false).
+
+At this point, iteration stops, and execution proceeds to any statement following the +while+ loop.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Counting up in twos
+
+.Example task
+****
+Repeat the previous task, except this time count up in steps of two (see the output, below).
+****
+
+.Expected standard output
+----
+0
+2
+4
+6
+8
+----
+
+[source, python]
+.Solution 1 (preferred)
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   print(2 * i)
+   i = i + 1
+----
+
+[source, python]
+.Solution 2 (not preferred)
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 10:
+   print(i)
+   i = i + 2
+----
+
+****
+Solution 1 (preferred)::
+   $i$ takes on, respectively, the values $0$, $1$, $2$, $3$ and $4$. +
+   Each time around the loop we print out _two times_ $i$, so we get $0$, $2$, $4$, $6$ and $8$ as required. +
+   Eventually, $i$ is $5$ and iteration stops.
+
+Solution 2::
+   $i$ takes on, respectively, the values $0$, $2$, $4$, $6$ and $8$. +
+   Each time around the loop we print out just $i$, so we get $0$, $2$, $4$, $6$ and $8$ as required. +
+   Eventually, $i$ is $10$ and iteration stops.
+****
+
+[NOTE]
+====
+Both of these solutions are correct.
+
+For our purposes, however, we will generally prefer the first form.
+
+In particular, _we always write loops in the same way_.
+
+This simplifies how we write loops, and separates the logic of the
+loop from that of what what the loop does (what happens inside of the
+loop).
+
+In the following examples, you will notice that the structure of the loop
+is always the same.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Counting down to one
+
+.Expected standard output
+----
+5
+4
+3
+2
+1
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   print(5 - i)
+   i = i + 1
+----
+
+.Explanation
+[width="60%",options="header"]
+|=======
+| iteration | $i$ | $5 - i$
+|$1$ |$0$ |$5$
+|$2$ |$1$ |$4$
+|$3$ |$2$ |$3$
+|$4$ |$3$ |$2$
+|$5$ |$4$ |$1$
+|=======
+
+// //////////////////////////////////////////////////////////////
+=== Counting down to zero
+
+.Expected standard output
+----
+4
+3
+2
+1
+0
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   print(5 - i - 1)
+   i = i + 1
+----
+
+.Explanation
+[width="60%",options="header"]
+|=======
+| iteration | $i$ | $5 - i - 1$
+|$1$ |$0$ |$4$
+|$2$ |$1$ |$3$
+|$3$ |$2$ |$2$
+|$4$ |$3$ |$1$
+|$5$ |$4$ |$0$
+|=======
+
+[TIP]
+====
+This expression $N - i - 1$ (where $N$ is $5$, here) is important; it
+arises frequently in computer programming.
+
+If $i$ takes on each of the values from $0$ to $N - 1$ in turn, then this
+expression takes on each of the values from $N - 1$ to $0$ in turn.
+
+If a computer-programming task involves counting down or backwards,
+then its solution will often involve an expression of the form $N - i - 1$,
+as above.
+====
+
+// //////////////////////////////////////////////////////////////
+== Examples with input
+
+****
+In the examples above, the number of iterations ($5$) was _hard-wired_ into
+the scripts.  Our loops _always_ iterated _exactly five times_.
+
+More commonly, the number of iterations is provided as input
+(or calculated from values provided as input).
+
+In this case, the number of times that the loop iterates depends upon
+that input.
+
+The examples below illustrate this.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Counting up to $n$ minus one
+
+.Example task
+****
+Write a Python script which reads a positive integer $n$ from standard
+input and outputs the digits from $0$ to $n-1$ to standard output, one per
+line.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+0
+1
+2
+3
+----
+
+[NOTE]
+====
+$n$ is $4$ in this example, so $n-1$ is $3$, so we're counting from $0$ up to $3$.
+====
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+n = int(input())
+
+i = 0
+while i < n:
+   print(i)
+   i = i + 1
+----
+
+.Explanation
+****
+In all of these loops, $i$ takes on the values from $0$ up to _something minus 1_.
+
+In the condition, we're asking if $i$ is less than that _something_ (just
+as we asked if $i$ was less than $5$ in the previous examples).
+
+The value _something_ -- the value that we're comparing $i$ to --
+determines how many times the loop iterates.
+
+In our first examples, above, that value was always $5$.
+
+Here, though, that value will be some positive integer which we read from
+standard input, and store in the variable $n$.
+
+It doesn't matter what particular value $n$ ends up having; for whatever
+value $n$ has, that is the number of times that our loop will iterate.
+****
+
+****
+For the task and solution above, here's another example input and output...
+
+.Example standard input
+----
+2
+----
+
+.Example standard output
+----
+0
+1
+----
+****
+
+****
+And another example...
+
+.Example standard input
+----
+7
+----
+
+.Example standard output
+----
+0
+1
+2
+3
+4
+5
+6
+----
+
+Whatever value $n$ is read from standard input, our script will count from $0$ to $n - 1$.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Counting down from $n$ minus one
+
+.Example task
+****
+As above, except counting down from +n-1+ to $0$.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+3
+2
+1
+0
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+n = int(input())
+
+i = 0
+while i < n:
+   print(n - i - 1)
+   i = i + 1
+----
+
+[TIP]
+====
+Observe that
+$n - i - 1$ is the _same expression_ that we used for counting down (or backwards)
+previously.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sum the first $n$ numbers
+
+.Example task
+****
+Write a Python script which reads a positive integer $n$ from standard
+input and outputs the sum of the numbers from $1$ to $n$.
+****
+
+.Example standard input
+----
+4
+----
+
+.Example standard output
+----
+10
+----
+
+[NOTE]
+====
+The sum of the numbers $1$, $2$, $3$ and $4$ is $10$
+====
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+total = 0
+n = int(input())
+
+i = 0
+while i < n:
+   total = total + (i + 1)
+   i = i + 1
+
+print(total)
+----
+
+.Explanation
+****
+We keep track of the current total in an extra variable named +total+ as we
+go along.
+
+Initially, +total+ is zero (because we haven't seen any numbers yet).
+
+Each time the loop goes around, the current value of $i + 1$ is added to
+total:
+
+- we add $0 + 1$ or $1$ on the first iteration,
+- we add $1 + 1$ or $2$ on the second iteration,
+- we add $2 + 1$ or $3$ on the third iteration,
+- and so on...
+
+When our loop finally stops, the value stored in +total+ is the sum of the
+first $n$ numbers, as required.
+
+So we print that.
+****
+
+[width="60%",options="header"]
+|=======
+| iteration | $i$ | $i + 1$ | +total+
+|$1$ |$0$ |$1$ | $1$
+|$2$ |$1$ |$2$ | $3$
+|$3$ |$2$ |$3$ | $6$
+|$4$ |$3$ |$4$ | $10$
+|=======
+
+// //////////////////////////////////////////////////////////////
+== A loop pattern
+
+.Observation
+****
+In *all* of the example solutions above:
+
+- the structure of the while loop is the same,
+- and the loop *always* counts from $0$ to _something minus $1$_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Do something $n$ times
+
+****
+It is common to know _before entering a
+loop_ exactly how many times that loop will iterate.
+
+All of the examples above are of this form:
+
+- the first group of examples all required a loop which iterated _exactly
+  $5$_ times, and
+- the second group of examples all required a loop which iterated _exactly
+  $n$_ times, for some value $n$ read from standard input.
+
+In such cases, there is a standard loop pattern which we can use; in
+particularly, our loop is _always_ structured as follows:
+
+[source, python]
+----
+i = 0
+while i < N:
+   # Do something.
+   i = i + 1
+----
+
+For any particular task,
+we begin like this, and then change *only* the following two parts:
+
+- we change $N$ to be whatever is the required number of iterations, and
+- we add whatever statements are necessary at the position marked _Do something_ to achieve whatever is required.
+
+The first line (+i = 0+) and the last line (+i = i + 1+, indented) are
+always exactly as presented here, and the condition is always while $i$ is
+less than _something_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop execution
+
+// //////////////////////////////////////////////////////////////
+=== Example with constants
+
+****
+Consider the following Python script.
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+i = 0                  # A. ??
+while i < 5:           # B. ??
+   print(i)            # C. ??
+   i = i + 1           # D. ??
+
+print(i)               # E. ??
+----
+
+How many times will each line of the script be visited by the Python
+interpreter?
+****
+
+****
+A.::
+  The Python interpreter executes statements from top to bottom.  It
+  encounters statement _A_ only once (at the start), so this statement is executed only once.
+C and D.::
+  This loops iterate $5$ times, so each of these statements is executed $5$
+  times.
+B.::
+  The first five times that the condition is evaluated, it evaluates to +True+,
+  causing the body of the loop to be executed $5$ times. +
+  The last time that the condition is executed, it evaluates to +False+. +
+  So the condition is evaluated six times in total.
+E.::
+  This is similar to _A_, it is executed only once.
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+i = 0                  # A. 1
+while i < 5:           # B. 6
+   print(i)            # C. 5
+   i = i + 1           # D. 5
+
+print(i)               # E. 1
+----
+
+// //////////////////////////////////////////////////////////////
+=== Example with input
+
+[source, python]
+.Similarly
+----
+#!/usr/bin/env python3
+
+n = int(input())       # Executed once.
+
+i = 0                  # A. 1
+while i < n:           # B. n + 1
+   print(i)            # C. n
+   i = i + 1           # D. n
+
+print(i)               # E. 1
+----
+
+// //////////////////////////////////////////////////////////////
+=== In general
+
+****
+In general, for a loop which iterates $n$ times:
+
+- statements which are before or after the loop are executed once, and
+- statements which are inside the body of the loop are executed $n$ times.
+****
+
+****
+Therefore, we can make some important observations:
+
+. If a task requires you to read _exactly one_ line from standard input,
+  then the line which reads the input will be _outside of the loop_.
+. Whereas if a task requires you to read $n$ lines from standard input,
+  then the line which reads the input will be _inside of the loop_ (so that
+  it happens $n$ times).
+. If a task requires _exactly one_ line of output, then the print statement
+  will be _outside of the loop_.
+. Whereas if a task requires $n$ lines of output, then the print statement
+  will be _inside of the loop_ (so that it happens $n$ times).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example 1
+
+.Task
+****
+Write a Python script which reads _exactly five_ integers from standard
+input, and writes each of those numbers doubled to standard output.
+****
+
+.Example standard input
+----
+4
+12
+3
+0
+10
+----
+
+.Example standard output
+----
+8
+24
+6
+0
+20
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < 5:
+   n = int(input())       # A.
+   print(n * 2)           # B.
+   i = i + 1
+----
+
+.Explanation
+****
+We must _do something five times_, therefore we can use our loop pattern,
+with our loop iterating $5$ times.
+
+There are $n$ ($5$, here) lines of input (not just one, as in previous
+examples), therefore we have to read those lines _inside the body of the loop_.
+
+There are five lines of output, therefore the print statement
+has to be inside of the loop too.
+
+On each iteration:
+
+- we read the next number from standard input (line A), and
+- print that number doubled (line B).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Example 2
+
+.Task
+****
+Write a Python script which reads _exactly five_ integers from standard
+input, and writes _the sum of those numbers_ to standard output.
+****
+
+.Example standard input
+----
+4
+12
+3
+0
+10
+----
+
+.Example standard output
+----
+29
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+total = 0
+
+i = 0
+while i < 5:
+   n = int(input())       # A.
+   total = total + n      # B.
+   i = i + 1
+
+print(total)
+----
+
+.Explanation
+****
+We must _do something five times_, therefore we can use our loop pattern,
+with our loop iterating $5$ times, as before.
+
+There are $n$ ($5$, here) lines of input, therefore we have to read those
+lines _inside the body of the loop_, also as before.
+
+There is always _just one_ line of output.  Therefore
+the print statement _cannot be_ inside of the loop too, it must follow the
+loop (where it will be executed exactly once).
+
+So, we will have to keep track of the sum of the numbers which we have
+encountered so far.
+
+We use an additional variable called +total+.  That total is initially
+$0$, and we add each new number encountered as we go along.
+
+When we're done, we print out the total (just once).
+
+On each iteration:
+
+- we read the next number from standard input (line A), and
+- add that number to the total (line B).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Rules of thumb
+
+****
+You can often work out whether to read input before a while loop or within the
+body of the while loop based on the number of lines of _standard input_ in
+the task description:
+
+- if there is only one line of input, then you will read it before your loop,
+- if there are multiple lines of input, then you will read them within the body of your loop.
+****
+
+****
+Similarly,
+you can often work out whether a print statement should be within the body of
+a while loop or after it based on the number of lines of _standard output_ in the task description:
+
+- if there is only one line of output, then your print statement will
+  follow your loop,
+- if there are multiple lines of output, then your print statement will be within the body of your loop.
+****
+
+// //////////////////////////////////////////////////////////////
+== Observation
+
+****
+In computer programming, we usually start counting at $0$, not at $1$.
+
+This might seem odd at first, but it becomes natural quite quickly.
+
+And, as we'll see later, there is a good reason for starting counting at $0$.
+****
+
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

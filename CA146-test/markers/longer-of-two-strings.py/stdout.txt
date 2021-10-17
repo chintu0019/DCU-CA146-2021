@@ -1,0 +1,235 @@
+testing:
+   because
+   range
+   your output:
+      because
+testing:
+   counting
+   then
+   your output:
+      counting
+testing:
+   next
+   include
+   your output:
+      include
+testing:
+   dcu
+   inclusive
+   your output:
+      inclusive
+testing:
+   value
+   classification
+   your output:
+      classification
+testing:
+   it
+   take
+   your output:
+      take
+testing:
+   integer
+   execution
+   your output:
+      execution
+testing:
+   mysteries
+   task
+   your output:
+      mysteries
+testing:
+   if
+   name
+   your output:
+      name
+testing:
+   spanish
+   hello
+   your output:
+      spanish
+testing:
+   the
+   various
+   your output:
+      various
+testing:
+   length
+   day
+   your output:
+      length
+testing:
+   related
+   initialises
+   your output:
+      initialises
+testing:
+   add
+   be
+   your output:
+      add
+testing:
+   ft
+   everest
+   your output:
+      everest
+testing:
+   product
+   match
+   your output:
+      product
+testing:
+   else
+   something
+   your output:
+      something
+testing:
+   buzz
+   input
+   your output:
+      input
+testing:
+   itself
+   copy
+   your output:
+      itself
+testing:
+   sequence
+   were
+   your output:
+      sequence
+testing:
+   running
+   strictly
+   your output:
+      strictly
+testing:
+   triangles
+   b
+   your output:
+      triangles
+testing:
+   nobody
+   would
+   your output:
+      nobody
+testing:
+   assume
+   indicator
+   your output:
+      indicator
+testing:
+   draw
+   so
+   your output:
+      draw
+testing:
+   values
+   classified
+   your output:
+      classified
+testing:
+   tasks
+   output
+   your output:
+      output
+testing:
+   for
+   do
+   your output:
+      for
+testing:
+   where
+   txt
+   your output:
+      where
+testing:
+   divisible
+   touching
+   your output:
+      divisible
+testing:
+   your
+   single
+   your output:
+      single
+testing:
+   three
+   plus
+   your output:
+      three
+testing:
+   world
+   find
+   your output:
+      world
+testing:
+   use
+   python
+   your output:
+      python
+testing:
+   best
+   did
+   your output:
+      best
+testing:
+   below
+   home
+   your output:
+      below
+testing:
+   and
+   another
+   your output:
+      another
+testing:
+   long
+   theme
+   your output:
+      theme
+testing:
+   names
+   an
+   your output:
+      names
+testing:
+   covered
+   first
+   your output:
+      covered
+testing:
+   inquisition
+   indicators
+   your output:
+      inquisition
+testing:
+   longer
+   maths
+   your output:
+      longer
+testing:
+   too
+   print
+   your output:
+      print
+testing:
+   fail
+   asciimath
+   your output:
+      asciimath
+testing:
+   sequences
+   are
+   your output:
+      sequences
+testing:
+   syntax
+   way
+   your output:
+      syntax
+testing:
+   write
+   conditional
+   your output:
+      conditional

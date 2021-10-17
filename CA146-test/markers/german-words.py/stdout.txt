@@ -1,0 +1,1 @@
+{'four': 'vier', 'tent': 'zehn', 'seven': 'sieben', 'five': 'funf', 'three': 'drei', 'eight': 'acht', 'nine': 'neun', 'six': 'sechs', 'two': 'zwei', 'one': 'eins'}

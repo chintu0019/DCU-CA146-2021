@@ -1,0 +1,14 @@
+abcgitlab-runner /bin/bash
+abcroot /bin/bash
+abcmysql /bin/false
+abcmediatomb /usr/sbin/nologin
+abcroot /bin/bash
+abcmysql /bin/false
+abcmediatomb /usr/sbin/nologin
+abcroot /bin/bash
+abcmysql /bin/false
+abcmediatomb /usr/sbin/nologin
+abcroot /bin/bash
+abcmysql /bin/false
+abcmediatomb /usr/sbin/nologin
+abcgames /usr/sbin/nologin

@@ -1,0 +1,1 @@
+LatD,LatM,LatS,LonD,LonM,LonS,City,State

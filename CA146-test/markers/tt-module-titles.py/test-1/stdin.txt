@@ -1,0 +1,7 @@
+1 10 1 ca277 lg26 Programming Fundamentals I
+1 14 1 ca277 lg26 Programming Fundamentals I
+2 11 1 ca214 hg22 Systems Analysis
+3 11 2 ca277 lg26 Programming Fundamentals I
+4 13 1 ca214 hg23 Systems Analysis
+4 14 2 ca214 xg19 Systems Analysis
+end

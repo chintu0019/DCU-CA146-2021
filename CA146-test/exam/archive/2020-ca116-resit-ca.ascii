@@ -1,0 +1,214 @@
+= CA116 -- Lab Exam (Resit)
+Stephen Blott <stephen.blott@dcu.ie>
+:numbered:
+:toc2:
+:toclevels=4:
+:theme: smblott
+
+[source, python]
+.Shebang
+----
+#!/usr/bin/env python
+----
+
+.Rules
+****
+This is an examination; DCU examination regulations apply.
+
+You have until 16:00 to complete and upload your work.
+
+All questions are worth equal marks.
+
+You _may not_ use features of Python in your solutions which have _not_ been covered in this module.
+
+None of the tasks here require the use of a for loop.
+****
+
+.Upload
+****
+Name your Python files _exactly_ as instructed, and
+then upload your solutions to _Einstein_: link:/einstein/[here].
+
+You may upload your work as many times as you like.  If you upload the
+_same file name_ more than once, then only the final upload counts.
+Earlier uploads will be logged, but otherwise ignored.
+
+Before finishing, ensure that you have uploaded all of your work, even that
+work which you know to be incorrect.
+****
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Count digits
+
+.Task
+****
+Standard input consists for a sequence of lines of text.
+
+Write a Python script named +ex4-count-digits.py+ which writes a count of the
+number of digits in the text to standard output.
+****
+
+.Example standard input
+----
+Scotland has
+222 Corbetts and 228 Munros,
+making 450 in total.
+----
+
+.Example standard output
+----
+9
+----
+
+[TIP]
+====
+There are three numbers in the input, each containing three digits, so nine
+digits in all.
+
+Using string comparison, all of the digits are bigger than or
+equal to "0" and less than or equal to "9".
+====
+
+// //////////////////////////////////////////////////////////////
+=== Cat
+
+.Task
+****
+Assume a single command-line argument, that being the name of a file.
+
+Write a Python script named +ex4-cat.py+ which copies the contents of that file to standard output.
+****
+
+.Example invocation
+----
+python ex4-cat.py some-file.txt
+----
+
+.Example standard output
+----
+# The standard output will be whatever the content
+# of "some-file.txt" is.
+----
+
+[NOTE]
+====
+Your solution must not strip or otherwise alter the whitespace characters
+encountered.
+
+The name used here ("cat") comes from the Unix command +cat+, short for "concatenate", which performs a similar task.
+====
+
+// //////////////////////////////////////////////////////////////
+=== First four digit
+
+.Task
+****
+Standard input consists of a sequence of positive integers, one per line.
+
+Write a Python script named +ex4-four-digit.py+ which outputs only the first four-digit number encountered.
+
+If no such number is encountered, then your script must output the text "none".
+****
+
+****
+.Example standard input
+----
+999
+3
+58913
+1234
+78
+5873
+2
+----
+
+.Example standard output
+----
+1234
+----
+****
+
+****
+.Example standard input
+----
+1
+12
+99
+1
+65
+10
+----
+
+.Example standard output
+----
+none
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// === First century again
+//
+// .Task
+// ****
+// Repeat the previous task, naming your script +ex3-first-century-again.py+.
+//
+// This time, your script must accommodate the possibility that the input is very, very large.
+//
+// In particular, your script must not read all of the input into memory.
+// ****
+//
+// [TIP]
+// ====
+// Your solution must read one line at a time.
+// ====
+
+// //////////////////////////////////////////////////////////////
+=== Four-letter words
+
+.Task
+****
+Standard input contains a sequence of lines of text.
+
+Write a Python script named +ex4-four-letter-words.py+ which copies
+standard input to standard output, replacing each four-letter word with
+four asterisks.
+
+You should assume that the input contains no extraneous whitespace
+characters.
+
+Take a "word" to be any sequence of non-whitespace characters.  So, in
+the example below, the "words" include "snow," and "Mary." (both of which
+contain five characters).  This is a simplification.
+****
+
+.Example standard input
+----
+Mary had a little lamb
+its fleece was white as snow,
+and everywhere that Mary went
+the lamb was sure to go.
+
+So much for Mary.
+----
+
+.Example standard output
+----
+**** had a little ****
+its fleece was white as snow,
+and everywhere **** **** ****
+the **** was **** to go.
+
+So **** for Mary.
+----
+
+// //////////////////////////////////////////////////////////////
+include::../web/misc/instrument.txt[]
+include::../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

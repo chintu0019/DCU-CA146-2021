@@ -1,0 +1,3 @@
+...---...
+call count for dot(): 6
+call count for dash(): 3

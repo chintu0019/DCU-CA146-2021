@@ -1,0 +1,10 @@
+even
+odd
+even
+odd
+odd
+odd
+odd
+even
+even
+even

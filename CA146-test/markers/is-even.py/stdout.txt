@@ -1,0 +1,18 @@
+Check for use of %, the remainder operator: ok.
+
+test -5: False
+test -4: True
+test -3: False
+test -2: True
+test -1: False
+test 0: True
+test 1: False
+test 2: True
+test 3: False
+test 4: True
+test 5: False
+test 6: True
+test 7: False
+test 8: True
+test 9: False
+test 10: True

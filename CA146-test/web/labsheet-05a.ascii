@@ -1,0 +1,809 @@
+= Labsheet 5a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+
+.Important
+****
+Your solutions to the tasks in sections 1, 2 and 3 _must make good use of linear search_,
+as described in the link:09-linear-search.html[linear search] notes.
+****
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+[source, python]
+.Character classes
+----
+# Test whether s[i] is a digit.
+#
+"0" <= s[i] and s[i] <= "9"
+
+# Test whether s[i] is not a digit.
+#
+s[i] < "0" or "9" < s[i]
+
+# Test whether s[i] is a lower-case letter.
+#
+"a" <= s[i] and s[i] <= "z"
+
+# Test whether s[i] is an upper-case letter.
+#
+"A" <= s[i] and s[i] <= "Z"
+
+# Test whether s[i] is a letter (upper or lower case).
+#
+("a" <= s[i] and s[i] <= "z") or ("A" <= s[i] and s[i] <= "Z")
+----
+
+[NOTE]
+====
+These tests work because string comparison uses the https://en.wikipedia.org/wiki/ASCII[ASCII]
+character ordering, in which the various character classes are contiguous.
+
+Also, perhaps read the ASCII manual page.
+
+In the terminal, type "man ascii" (use "q" to quit).
+====
+
+// //////////////////////////////////////////////////////////////
+== First characters
+
+// //////////////////////////////////////////////////////////////
+=== First digit
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-digit.py+ which writes the first digit in $s$ and its position to standard output.
+
+Your script should produce no output if $s$ does not contain a digit.
+****
+
+****
+.Example standard input
+----
+abc 188 efg
+----
+
+.Example standard output 1
+----
+1 4
+----
+
+The $1$ in the input text is at position $4$.
+****
+
+****
+.Example standard input 2
+----
+abc efg
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+
+There are no digits in the input, therefore the output is empty.
+****
+
+// //////////////////////////////////////////////////////////////
+=== First capital
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-capital.py+ which writes the first
+upper-case letter in $s$ and its position to standard output
+
+Your script should produce no output if $s$ does not contain a capital letter.
+****
+
+****
+.Example standard input 1
+----
+and everywhere that Mary went
+----
+
+.Example standard output 1
+----
+M 20
+----
+****
+
+****
+.Example standard input 2
+----
+the lamb was sure to go.
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== First space
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-space.py+ which writes **just the
+position** of the first space character in $s$ to standard output.
+
+Your script should output -1 if $s$ does not contain a space character.
+****
+
+****
+.Example standard input 1
+----
+and everywhere that Mary went
+----
+
+.Example standard output 1
+----
+3
+----
+****
+
+****
+.Example standard input 2
+----
+the_lamb_was_sure_to_go.
+----
+
+.Example standard output 2
+----
+-1
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== First non-space
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-non-space.py+ which writes
+just the position of the first _non-space character_ in $s$ to standard
+output.
+
+Your script should output -1 if $s$ does not contain a non-space character.
+****
+
+****
+.Example standard input 1
+----
+    everywhere that Mary went
+----
+
+.Example standard output 1
+----
+4
+----
+****
+
+****
+.Example standard input 2
+----
+                        # <-- (there are no non-space characters here)
+----
+
+.Example standard output 2
+----
+-1
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Sequences of characters
+
+// //////////////////////////////////////////////////////////////
+=== First number
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-number.py+ which writes the first number in $s$ and its position to standard output.
+
+Your script should produce no output if $s$ does not contain a number.
+
+Take a number to be any contiguous sequence of one or more digits.  You must include all contiguous digits in your output.
+****
+
+****
+.Example standard input 1
+----
+abc 188 efg 911
+----
+
+.Example standard output 1
+----
+188 4
+----
+
+$188$ is the first number, and it appears at position $4$.
+****
+
+****
+.Example standard input 2
+----
+abc efg
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+
+There are no digits in the input, so your script should produce no output.
+****
+
+[TIP]
+====
+First search for the position of the first digit; call that position $i$.
+
+Then, *continuing from that position* (so, not in general from position 0), search
+for the position of the next _non-digit_; call that position $j$.
+
+The characters between these two positions, so $s[i:j]$,  constitute the number.
+====
+
+// //////////////////////////////////////////////////////////////
+=== First acronym
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-acronym.py+ which writes the first acronym in $s$ and its position to standard output.
+
+Your script should produce no output if $s$ does not contain an acronym.
+
+Take an acronym to be any contiguous sequence of one or more upper-case letters.  You must include all contiguous capital letters in your output.
+****
+
+****
+.Example standard input 1
+----
+call the FBI, Skippy
+----
+
+.Example standard output 1
+----
+FBI 9
+----
+****
+
+****
+.Example standard input 2
+----
+abc efg
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== First pair
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +first-pair.py+ which writes the first pair of
+adjacent identical characters in $s$ to standard output.
+
+Your script should produce no output if $s$ does not contain such a pair.
+****
+
+****
+.Example standard output 1
+----
+Mary had a little lamb,
+----
+
+.Example standard output 1
+----
+tt
+----
+****
+
+****
+.Example standard output 2
+----
+abc efg
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+****
+
+[TIP]
+====
+Start at position 1 instead of 0, and on each iteration consider the characters at positions $i$ and $i-1$.
+
+You are searching for the position $i$ of the first character such that the
+characters at positions $i$ and $i-1$ are the same.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Second number
+
+.Task
+****
+Standard input consists of a single line of text $s$.
+
+Write a Python script named +second-number.py+ which writes the _second
+number_ in $s$ and its position to standard output.
+
+Your script should produce no output if $s$ does not contain at least two numbers.
+
+Take a number to be as defined above.
+****
+
+****
+.Example standard input 1
+----
+abc 188 efg 911 abc 123
+----
+
+.Example standard output 1
+----
+911 12
+----
+****
+
+****
+.Example standard input 2
+----
+abc efg
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+****
+
+// // //////////////////////////////////////////////////////////////
+// == Task: lstrip-lines
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +lstrip-lines.py+ which copies the lines from standard input to standard output, _removing any leading whitespace_.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// .Example standard input
+// ----
+//    Mary had a little lamb,
+//      it's fleece was white as snow.
+//    And everywhere that Mary went
+//      the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went
+// the lamb was sure to go.
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Task: grep
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +grep-lines.py+ which accepts exactly one command-line argument (+pattern+, say) and
+// copies the lines of standard input to standard output, omitting lines in which +pattern+ _does not occur_.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// .Example invocation
+// ----
+// python grep-lines.py Mary
+// ----
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went
+// the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Mary had a little lamb,
+// And everywhere that Mary went
+// ----
+//
+// [source, python]
+// .Tips
+// ----
+// # Recall:
+// import sys
+// pattern = sys.argv[1]
+//
+// # Also, the following Boolean expression is True if the sub-string at position i in line
+// # matches pattern:
+// line[i:i+len(pattern)] == pattern
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Task: find-lines-1
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +find-lines-1.py+ which accepts exactly one command-line argument (+pattern+, say) and
+// outputs, for each line, only the text +yes+ or +no+ to indicate whether the line contains +pattern+.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// .Example invocation
+// ----
+// python find-lines-1.py Mary
+// ----
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went
+// the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// yes
+// no
+// yes
+// no
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Task: find-lines-2
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +find-lines-2.py+ which accepts exactly one command-line argument (+pattern+, say) and
+// outputs, for each line, only the position at which +pattern+ occurs in the line, or -1 if the pattern does not occur in the line.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// .Example invocation
+// ----
+// python find-lines-2.py Mary
+// ----
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,
+// it's fleece was white as snow.
+// And everywhere that Mary went
+// the lamb was sure to go.
+// end
+// ----
+//
+// .Example standard output
+// ----
+// 0
+// -1
+// 20
+// -1
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// == Task: palindrome
+//
+// ****
+// Write a Python script named +is-palindrome.py+ which accepts exactly one
+// command-line argument ($s$, say), and outputs the message +yes+ or the
+// message +no+, depending upon whether $s$ is a palindrome or not.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// .Example invocation -- 1
+// ----
+// python is-palindrome.py rotator
+// ----
+//
+// .Example standard output -- 1
+// ----
+// yes
+// ----
+//
+// .Example invocation -- 2
+// ----
+// python is-palindrome.py rotators
+// ----
+//
+// .Example standard output -- 2
+// ----
+// no
+// ----
+
+// // //////////////////////////////////////////////////////////////
+// == Task: rstrip-lines
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +rstrip-lines.py+ which copies the lines from standard input to standard output, _removing any trailing whitespace_.
+//
+// You can verify your solution by uploading it link:/upload/[here].
+// ****
+//
+// ****
+// Spaces are not normally visible, which makes illustrating trailing spaces tricky.
+//
+// Below, the symbol +<+ indicates the end of the line, and is _not_ itself part of the input.  It is only there to show where the trailing spaces are.
+// ****
+//
+// .Example standard input
+// ----
+// Mary had a little lamb,         <
+// it's fleece was white as snow.         <
+// And everywhere that Mary went<
+// the lamb was sure to go.         <
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Mary had a little lamb,<
+// it's fleece was white as snow.<
+// And everywhere that Mary went<
+// the lamb was sure to go.<
+// ----
+//
+// .Tip
+// ****
+// Save your test input in a file +stdin.txt+ (with lines containing trailing whitespace, and an +end+ marker).
+//
+// Then run your script as follows:
+//
+// ----
+// python rstrip-lines.py < stdin.txt | tr ' ' 'X'
+// ----
+//
+// This converts all space characters to +X+, which helps to see where they are.
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Additional tasks
+
+// //////////////////////////////////////////////////////////////
+=== Palindrome
+
+____
+A _palindrome_ is a word or text which reads the same backwards and forwards.
+
+For example: "_rotator_".
+____
+
+.Task
+****
+Standard input consists of a single line of text containing a word $w$.
+
+Write a Python script named +palindrome-string.py+ which writes the
+message "palindrome" to standard output if $w$ is a palindrome, and produces no output
+otherwise.
+****
+
+.Example standard input 1
+----
+rotator
+----
+
+.Example standard output 1
+----
+palindrome
+----
+
+.Example standard input 2
+----
+rotators
+----
+
+.Example standard output 2
+----
+                                                 # Empty!
+----
+
+[TIP]
+====
+Do *not* reverse the string and then compare.
+
+That would be unnecessary, and expensive for long strings.
+
+Use linear search.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Parse float
+
+.Task
+****
+Standard input consists of a single line of text, that text being a floating-point number $f$.
+
+Write a Python script named +parse-float.py+ which writes the integer part
+of $f$ and the fractional part of $f$ to standard output, each on its own line.
+
+Assume that neither the integer part nor the fractional part of $f$ is ever empty.
+
+The following words _may not_ appear in your solution: "int", "float" and "split".
+****
+
+.Example standard input
+----
+3.14
+----
+
+.Example standard output
+----
+3
+14
+----
+
+// //////////////////////////////////////////////////////////////
+=== Parse date
+
+.Task
+****
+Standard input consists of a single line of text, a date (see the example for the format).
+
+Write a Python script named +parse-date.py+ which writes the date in the
+format indicated in the example to standard output.
+****
+
+.Example standard input
+----
+Tuesday 23rd October, 2018
+----
+
+.Example standard input
+----
+October 23rd, 2018 (Tuesday)
+----
+
+[TIP]
+====
+You should assume that the spacing and punctuation in the input is exactly as indicated in the example, above.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Replace First
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +replace-first.py+ which accepts exactly two command-line arguments (+pattern+ and +replacement+, say) and
+// copies the lines of standard input to standard output, replacing, on each line, the first occurrence of +pattern+ with +replacement+ (if +pattern+ is present).
+// ****
+//
+// .Example invocation
+// ----
+// python replace-first Mary Barry
+// ----
+//
+// .Example standard input
+// ----
+// Mary, Mary, quite contrary,
+// How does your garden grow?
+// Mistress Mary, Quite contrary,
+// How does your garden grow?
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Barry, Mary, quite contrary,
+// How does your garden grow?
+// Mistress Barry, Quite contrary,
+// How does your garden grow?
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// === Count Matches
+//
+// .Task
+// ****
+// Standard input consists of a sequence of lines terminated by a line containing only the text +end+.
+//
+// Write a Python script named +count-matches.py+ which accepts exactly one command-line argument (+pattern+, say) and
+// outputs, for each line, _a count of the number of times_ +pattern+ _occurs in the line_.
+// ****
+//
+// .Example invocation -- 1
+// ----
+// python count-lines.py Mary
+// ----
+//
+// .Example standard input -- 1
+// ----
+// Mary, Mary, quite contrary,
+// How does your garden grow?
+// Mistress Mary, Quite contrary,
+// How does your garden grow?
+// end
+// ----
+//
+// .Example standard output -- 1
+// ----
+// 2
+// 0
+// 1
+// 0
+// ----
+//
+// .Example invocation -- 2
+// ----
+// python count-lines.py aa
+// ----
+//
+// .Example standard input -- 2
+// ----
+// aa
+// aaaa
+// aaaaaa
+// end
+// ----
+//
+// .Example standard output -- 2
+// ----
+// 1
+// 2
+// 3
+// ----
+//
+// .Note
+// ****
+// In the third line of the second example, the output is +3+ (not +5+).
+// ****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

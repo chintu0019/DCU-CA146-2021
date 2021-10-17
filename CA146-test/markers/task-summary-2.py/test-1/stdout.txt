@@ -1,0 +1,14 @@
+user-10 1
+user-11 2
+user-12 1
+user-13 3
+user-14 1
+user-1 6
+user-2 1
+user-3 1
+user-4 1
+user-5 1
+user-6 1
+user-7 1
+user-8 1
+user-9 3

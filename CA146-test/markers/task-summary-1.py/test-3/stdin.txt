@@ -1,0 +1,6 @@
+a.sh.correct
+b.sh.incorrect
+c.sh.correct
+c.sh.incorrect
+d.sh.incorrect
+d.sh.correct

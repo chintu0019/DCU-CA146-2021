@@ -1,0 +1,480 @@
+:theme: smblott-exam
+
+[frame="none",grid="none",cols="^1"]
+|==================================================
+| image:res/dcu-logo.png[width="150px"]
+| *[big]#August Resit CRA Examinations 2019/2020#*
+|==================================================
+
+[frame="none",cols="2,8"]
+|==================================================
+|*Module*         | CA116 -- Computer Programming I
+|*Programmes*     | BSc in Computer Applications +
+                    BSc in Data Science +
+                    Study Abroad (ECSAX) +
+                    Study Abroad (ECSAO)
+| *Year of Study* | 1
+| *Examiner*      | Dr Stephen Blott (ext. 5984) +
+                    Dr Hitesh Tewari (external examiner for CA) +
+                    Prof Mathieu d'Aquin (external examiner for DS)
+| *Instructions*  | Answer _all four_ questions. +
+                    All questions carry equal marks.
+|==================================================
+
+++++
+<span class="question">
+  <span>Additional Instructions</span>
+</span>
+++++
+
+.Instructions
+****
+- Upload all solutions and answers to _Einstein_, link:/einstein/[here]:
+** You may upload as many times as you like.
+** If you upload _the same task multiple times_, then
+   _only the last upload_ will normally be considered.
+- For Python programming tasks:
+** Upload and test your solutions on _Einstein_ as usual.
+** If _Einstein_ reports your solution as "incorrect", then *attempt
+  marks will be awarded* later.
+** So, do not get _green light fever_:
+*** Ensure that you allocate an appropriate amount of time to each task (even if a
+    previous task remains "incorrect").
+- For non-Python questions:
+** You are told the name to use for your upload;
+   this will be a *text file*, with a ".txt" extension.
+** Create such a file using a *text editor* (such as _gedit_ or
+  _sublime_; do not use a word processor), and upload the resulting file
+  to _Einstein_, as usual.
+** _Einstein_ simply accepts and stores such uploads;
+   it does not correct or mark your work.
+** All such uploads will be assessed manually later as part of the marking
+   process.
+
+- Check your email periodically (e.g. every ten or fifteens minutes, or so) during
+  the exam.  If there are additional instructions required during the exam,
+  then you will be notified by email.
+
+- A number of students may be called for interview in order fully assess
+  the merit and validity of their submitted exam work.
+****
+
+[source, python]
+.The Python shebang (for reference)
+----
+#!/usr/bin/env python
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 1</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+The following five fragments of Python code each contain errors.
+
+Correct the errors.
+
+Where you are instructed to "_assume an existing variable ..._", _Einstein_
+will provide a value for that variable when you upload your solution.
+****
+
+// [TIP]
+// ====
+// When you upload your work to _Einstein_, you will see most of the test
+// cases.
+// ====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.1</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* list variable $a$.
+
+Print out each element of the list, one element per line _in reverse order_.
+
+Name your Python fragment +exa-1.1.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+i = 0
+while i < len(a):
+   print a[len(a) - 1]
+   i = i + 1
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.2</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume *existing* integer variables +home_goals+, +home_points+ +away_goals+ and +away_points+.
+
+These are the goals and points scored respectively by the home and away
+teams in a gaelic football match.
+
+Print out the result of the match.  The result is either
+"home win", "away win" or "draw".
+
+Name your Python fragment +exa-1.2.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+home_score = home_goals * (3 + home_points)
+away_score = away_goals * (3 + away_points)
+
+if home_score < away_score
+   print "away win"
+elif away_score < home_score
+   print "home win"
+else
+   print "draw"
+----
+
+[TIP]
+====
+In gaelic football, one goal is worth three points, so 1 goal and 2 points
+(for a total of 5) is better than 0 goals and 4 points (for a total of just 4).
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.3</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+The command-line arguments consist of exactly one argument, a file name.
+
+Write a Python script named +exa-1.3.py+ which outputs either the message
++empty+ or the message +non-empty+ depending upon whether the indicated
+file is empty or not.
+****
+
+[source, python]
+.Initial script (contains errors and incomplete)
+----
+#!/usr/bin/env python
+
+file_name = sys.argv[1]
+
+with open(file_name) as f:
+  # Now what?
+----
+
+[NOTE]
+====
+You should assume that the indicated file exists and is a regular file.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.4</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* dictionary variable $d$.
+
+Print out each key-value pair in the dictionary, one pair per line, separated by
++-\->+.
+
+Name your Python fragment +exa-1.4.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+for key in sorted(d):
+   write key, "-->", d{key}
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.5</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* string variable $s$.
+
+$s$ consists of a sequence of
+whitespace-separated tokens.
+
+Print the number of tokens contained in $s$.
+
+Name your Python fragment +exa-1.5.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python
+
+print length(s.strip(" "))
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 2</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>2.1 First odd position</span> <span class="markpart">15 Marks</span>
+</span>
+++++
+
+****
+In a module (file) named +exa_21.py+, write a Python function named
++first_odd_position+ which accepts exactly one argument, a non-empty list of integers, and returns
+the position of the first odd number in the list.
+
+You should assume that the list contains at least one odd number.
+
+$5$ of the available $15$ marks will be awarded for having included
+suitable test cases in your upload.
+****
+
+[source, python]
+.Example
+----
+import exa_21
+
+print exa_21.first_odd_position([12, 20, 7, 14, 19])   # 2
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>2.2 Reverse</span> <span class="markpart">10 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* list $a$.
+
+Write a Python fragment named +exa-2.2.py+ which reverses the elements of
+$a$ _in place_.
+
+Your script should produce no output.
+****
+
+[NOTE]
+====
+_Einstein_ will provide values for $a$ when you upload your solution.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 3</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+++++
+<span class="questionpart">
+  <span>3.1 Cross in a box</span> <span class="markpart">15 Marks</span>
+</span>
+++++
+
+.Task
+****
+Standard input consists of a single positive integer, $n$ say.  Assume that
+$n$ is odd.
+
+Write a Python script named +exa-3.1.py+ which outputs a cross in a box, as
+illustrated in the example below.
+****
+
+.Example standard input
+----
+9
+----
+
+.Example standard output
+----
+***********
+*    *    *
+*    *    *
+*    *    *
+*    *    *
+***********
+*    *    *
+*    *    *
+*    *    *
+*    *    *
+***********
+----
+
+[TIP]
+====
+Ignoring the box, the length of each part of the cross is $9$ (in general,
+$n$) units.
+
+The height and width of the box itself, therefore, is $11$ (in general, $n+2$) units.
+====
+
+++++
+<span class="questionpart">
+  <span>3.2 Diagonal</span> <span class="markpart">10 Marks</span>
+</span>
+++++
+
+.Task
+****
+Standard input consists of a single positive integer, $n$ say.
+
+Write a Python script named +cra-diagonal.py+ which outputs a grid of dots
+(full stops) with a diagonal line of asterisks as illustrated in the example.
+
+There are $n$ lines each containing $n$ characters in the output.
+
+Upload your solution link:/einstein/[to _Einstein_].
+****
+
+.Example standard input
+----
+15
+----
+
+.Example standard output
+----
+*..............
+.*.............
+..*............
+...*...........
+....*..........
+.....*.........
+......*........
+.......*.......
+........*......
+.........*.....
+..........*....
+...........*...
+............*..
+.............*.
+..............*
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 4</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+++++
+<span class="questionpart">
+  <span>4.1 Derive input 1</span> <span class="markpart">10 Marks</span>
+</span>
+++++
+
+****
+Consider the following Python script:
+
+[source, python]
+----
+#!/usr/bin/env python
+
+value = 0
+
+n = input()
+while n != 0:
+   if n % 2 == 0:
+      value = value + ((n - 100) % 10) * 2
+   else:
+      value = value + (4 - n)
+   n = input()
+
+print value
+----
+****
+
+.Task
+****
+Devise an example standard input which, when provided for this script,
+produces the output $21$.
+
+Save your standard input in a file named +exa-4.1.txt+ and upload it to
+link:/einstein/[_Einstein_].
+
+A good solution will be the _simplest solution_ for which the output is as
+stated above.
+****
+
+++++
+<span class="questionpart">
+  <span>4.2 Derive input 2</span> <span class="markpart">15 Marks</span>
+</span>
+++++
+
+****
+Consider the following Python script:
+
+[source, python]
+----
+#!/usr/bin/env python
+
+s = raw_input()
+n = 0
+
+i = 0
+while i < len(s):
+   if "0" <= s[i] and s[i] < "5":
+      n = n + int(s[i])
+   elif "5" <= s[i] and s[i] <= "9":
+      n = n + (int(s[i]) - 5) * 10
+   else:
+      n = n / 0  # Division by zero causes execution to fail, so this must not happen.
+   i = i + 1
+
+print n
+----
+****
+
+.Task
+****
+Devise an example standard input which, when provided for this script,
+produces the output $26$.
+
+Save your standard input in a file named +exa-4.2.txt+ and upload it to
+link:/einstein/[_Einstein_].
+
+A good solution will be the _simplest solution_ for which the output is as
+stated above.
+****
+
+// //////////////////////////////////////////////////////////////
+include::../web/misc/instrument.txt[]
+include::../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

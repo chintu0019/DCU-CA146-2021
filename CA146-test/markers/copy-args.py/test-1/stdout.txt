@@ -1,0 +1,7 @@
+moose
+elephant
+cat
+crocodile
+dog
+mouse
+snake

@@ -1,0 +1,22 @@
+a = ['cat', 'elephant', 'mouse', 'lizard', 'horse', 'mongoose']
+elephant
+lizard
+mongoose
+
+a = ['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef', 'abcdefg']
+abcdef
+abcdefg
+
+a = ['87654321', '7654321', '654321', '54321', '4321', '321', '21', '2']
+87654321
+7654321
+654321
+
+a = ['', '', '', '', '', '', '', '', '', '']
+
+a = []
+
+a = ['mongoose']
+mongoose
+
+a = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']

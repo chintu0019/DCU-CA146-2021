@@ -1,0 +1,2 @@
+3 09 1 ca227 l101 Business Data Management I
+3 11 2 ca277 lg26 Programming Fundamentals I

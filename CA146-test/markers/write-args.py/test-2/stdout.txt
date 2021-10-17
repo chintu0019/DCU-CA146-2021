@@ -1,0 +1,21 @@
+running upload...
+ok
+
+testing that 'some-other-file.txt' exists...
+ok
+
+testing that 'some-other-file.txt' is non-empty...
+ok
+
+outputing 'some-other-file.txt' contents...
+Mary
+had
+a
+little
+lamb,
+its
+fleece
+was
+white
+as
+snow.

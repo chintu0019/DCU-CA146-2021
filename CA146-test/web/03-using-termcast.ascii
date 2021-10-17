@@ -1,0 +1,123 @@
+= Using TermCast
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Working locally
+
+****
+If you are able to write and run Python 3 scripts locally, then you should
+do so.
+
+You are not required to use _TermCast_.
+****
+
+.Run Python scripts locally like this
+----
+$ python3 hello.py
+----
+
+****
+When ready, upload your work to _Einstein_: link:/einstein/[here].
+****
+
+// //////////////////////////////////////////////////////////////
+== Using _TermCast_
+
+****
+If you are not able to run Python scripts locally, then you should use
+_TermCast_ to develop and run your Python scripts on the school's Linux
+server:
+
+- _TermCast_ is here: link:/termcast/[link]
+- https://drive.google.com/file/d/1QNfU1ESzIaV2Ycd7QszQIRRtfrFiQyGz/view?usp=sharing[_TermCast_,
+  python3 and uploading to _Einstein_]
+  (short video, about five minutes)
+
+*You must use Chrome!*
+
+Other browsers might not work (it is known that IE and Safari do not work).
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sessions
+
+****
+When using _TermCast_, you can create two _sessions_.
+
+To create a second session, either:
+
+- click "split" at the top-left-hand side of the screen, or
+- use "Control-\#" (hold down the "Control" key and hit "#" +
+  (this shortcut also jumps back and forwards between sessions).
+****
+
+****
+A typical workflow involves using one session for running
+Python scripts, and a second session for editing those scripts.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Editor (nano)
+
+****
+To write Python scripts, you will need a text editor.
+
+On _TermCast_, use the "nano" text editor.
+
+You can launch the nano text editor like this:
+
+----
+$ nano hello.py
+----
+****
+
+****
+In nano:
+
+- use "Control-o" to save (or "write Out") your file, and
+- use "Control-x" to exit the editor.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Running Python scripts
+
+****
+Run Python scripts at the terminal prompt like this:
+
+----
+$ python3 hello.py
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Uploading Python scripts
+
+****
+On _TermCast_, there is a command named "einstein" for uploading your work to
+_Einstein_.
+****
+
+****
+Use this command like this:
+
+----
+$ einstein hello.py
+----
+
+The command will report whether your script is correct or incorrect.
+
+You can view the resulting report on the course web site:
+
+- link:/einstein/report.html[]
+
+You will have to reload this page every time you upload a new script.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

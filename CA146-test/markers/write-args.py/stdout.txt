@@ -1,0 +1,13 @@
+running upload...
+ok
+
+testing that 'some-file.txt' exists...
+ok
+
+testing that 'some-file.txt' is non-empty...
+ok
+
+outputing 'some-file.txt' contents...
+one
+two
+three

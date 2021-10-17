@@ -1,0 +1,5 @@
+LatM,LatS,NS,LonD,City,State,LatD,LonM,LonS,EW
+Youngstown,OH,41,5,59,N,80,39,0,W
+Yankton,SD,42,52,48,N,97,23,23,W
+Yakima,WA,46,35,59,N,120,30,36,W
+Worcester,MA,42,16,12,N,71,48,0,W

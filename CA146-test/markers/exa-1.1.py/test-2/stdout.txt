@@ -1,0 +1,3 @@
+a = []
+running your script...
+

@@ -1,0 +1,5 @@
+*.correct
+*.incorrect
+*.marked
+*.email.txt
+*.pyc

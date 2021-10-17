@@ -1,0 +1,6 @@
+
+main = do 
+       args <- getArgs
+       let [arg1] = map read args
+       putStrLn (show (stringToUpper arg1))
+

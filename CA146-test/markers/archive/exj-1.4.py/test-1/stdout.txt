@@ -1,0 +1,7 @@
+d = {'fish': 'school', 'dogs': 'pack', 'sheep': 'flock', 'cows': 'herd'}
+running your script...
+
+cows --> herd
+dogs --> pack
+fish --> school
+sheep --> flock

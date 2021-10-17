@@ -1,0 +1,614 @@
+= Labsheet 4a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+[NOTE]
+====
+Today's lab exam will be posted to the course web site at 16:00.
+====
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+[NOTE]
+====
+This labsheet is on strings, and involves while loops of the
+_do-something-$n$-times_ form.
+
+We will do tasks involving the search loop pattern tomorrow.
+====
+
+// //////////////////////////////////////////////////////////////
+== Review
+
+[source, python]
+.Reading textual data
+----
+s = input()                            # read a line of text from standard input
+----
+
+[source, python]
+.Reading integers
+----
+n = int(input())                       # read an integer from standard input
+----
+
+[source, python]
+.Building new strings
+----
+s = "abra"
+t = "cad"
+
+s + t + s                              # "abracadabra"  (concatenation)
+s * 3                                  # "abraabraabra" (multiplication)
+----
+
+[source, python]
+.Indexing
+----
+s = "abra"
+
+s[0]                                   # "a"
+s[1]                                   # "b"
+s[2]                                   # "r"
+s[3]                                   # "a"
+s[4]                                   # error!
+----
+
+[source, python]
+.Slicing
+----
+s = "abracadabra"
+
+s[0:4]                                 # "abra"
+s[4:7]                                 # "cad"
+s[:7]                                  # "abracad"
+s[4:]                                  # "cadabra"
+----
+
+[source, python]
+.Convert strings to integers
+----
+s = "123"
+
+type(s)                                # str
+type(int(s))                           # int
+
+int(s[0]) + int(s[1]) + int(s[2])      # 6
+----
+
+// //////////////////////////////////////////////////////////////
+== String operators
+
+// //////////////////////////////////////////////////////////////
+=== Three copies
+
+.Task
+****
+Write a Python script named +three-copies.py+ which reads a single line of
+text from standard input ($s$, say) and outputs _three copies_ of $s$ on a single line
+(with no intervening space characters).
+****
+
+.Example standard input
+----
+abra
+----
+
+.Example standard output
+----
+abraabraabra
+----
+
+// //////////////////////////////////////////////////////////////
+=== N copies
+
+.Task
+****
+Standard input consists of a single line of text ($s$, say) followed on the
+next line by a non-negative integer ($n$, say).
+
+Write a Python script named +n-copies.py+ which
+outputs $n$ copies of $s$ on a single line (with no intervening space characters).
+****
+
+.Example standard input
+----
+abra
+6
+----
+
+.Example standard output
+----
+abraabraabraabraabraabra
+----
+
+// .Tip
+// ****
+// In the example, that's _five_ copies of +abra-+ concatenated with +abra+.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Swap first and last
+
+.Task
+****
+Standard input consists of a single non-empty line of text.
+
+Write a Python script named +swap-first-and-last.py+ writes that text to
+standard output
+with its _first and last characters swapped_.
+****
+
+.Example standard input
+----
+oellh
+----
+
+.Example standard output
+----
+hello
+----
+
+[NOTE]
+====
+You should assume that the text contains two or more characters.
+====
+
+// //////////////////////////////////////////////////////////////
+== String characters
+
+// //////////////////////////////////////////////////////////////
+=== Print vertically
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +print-vertically.py+ which
+writes _the characters of_ that text to standard output _individually_, one per line.
+****
+
+.Example standard input
+----
+abacus
+----
+
+.Example standard output
+----
+a
+b
+a
+c
+u
+s
+----
+
+// //////////////////////////////////////////////////////////////
+=== Print vertically again
+
+.Task
+****
+Repeat the previous task. This time, however, write the characters in _reverse order_.
+
+Name your script +print-vertically-reversed.py+.
+****
+
+.Example standard input
+----
+abacus
+----
+
+.Example standard output
+----
+s
+u
+c
+a
+b
+a
+----
+
+[source, python]
+.Tip
+----
+s[i]                 # the element at position i
+s[len(s) - i - 1]    # the corresponding character, but counting back from the end
+----
+
+// // //////////////////////////////////////////////////////////////
+// === Even positioned characters
+//
+// .Task
+// ****
+// Write a Python script named +even-positioned-chars.py+ which reads a single line
+// of text from standard input ($s$, say) and outputs only the _even-positioned characters_ from $s$ (on a single line).
+// ****
+//
+// .Example standard input
+// ----
+// abacus
+// ----
+//
+// .Example standard output
+// ----
+// aau
+// ----
+//
+// ****
+// +a+, +a+ and +u+ are at positions $0$, $2$ and $4$ in +abacus+ -- the even positions.
+// ****
+//
+// // .Tip
+// // ****
+// // You will need a loop.  Within the body of the loop you will have to
+// // construct a new string (+t+, perhaps) containing the even-positioned
+// // characters which you have encountered so far.
+// // ****
+
+// //////////////////////////////////////////////////////////////
+=== All suffixes
+
+****
+A _suffix_ is any sequence of characters appearing at the end of a string.
+
+For example, "stein" is a suffix of "Einstein".
+
+A string of length $n$ has $n$ suffixes, including the string itself.
+****
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +all-suffixes.py+
+writes each suffix of that text to standard output, one per line (from
+longest to shortest).
+****
+
+.Example standard input
+----
+hello
+----
+
+.Example standard output
+----
+hello
+ello
+llo
+lo
+o
+----
+
+// .Tip
+// ****
+// If $i$ were $3$, say, then the following prints the characters from position $3$ to the end of $s$:
+//
+// [source, python]
+// ----
+// print s[i:]
+// ----
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Sum digits
+
+.Task
+****
+Standard input consists of a single line of text.
+
+All of the characters in the text are digits.
+
+Write a Python script named +sum-digits.py+ which writes the sum of those
+digits to standard output.
+****
+
+.Example standard input
+----
+6429
+----
+
+.Example standard output
+----
+21
+----
+
+[TIP]
+====
+Use the built-in function +int()+ to convert strings to integers.
+
+For example, +int("3")+ evaluates to the integer $3$.
+====
+
+// //////////////////////////////////////////////////////////////
+== Building strings
+
+****
+In the following tasks, you will have to build a new string before printing it out at the end.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Reverse a string
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +reverse-string.py+ which
+writes that same text to standard output, but reversed.
+****
+
+.Example standard input
+----
+olleh
+----
+
+.Example standard output
+----
+hello
+----
+
+[TIP]
+====
+You will need a loop.
+
+Within the body of the loop you will have to
+construct a new string ($t$, perhaps) containing the characters you have encountered so far, but in reverse order.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Palindrome string
+//
+// .Task
+// ****
+// Write a Python script named +palindrome-string.py+ which reads a single line
+// of text from standard input ($s$, say) and
+//
+// - if $s$ is a _palindrome_, then output $s$,
+// - otherwise, produce _no output at all_.
+// ****
+//
+// .Example standard input -- 1
+// ----
+// rotator
+// ----
+//
+// .Example standard output -- 1
+// ----
+// rotator
+// ----
+//
+// .Example standard input -- 2
+// ----
+// rotators
+// ----
+//
+// .Example standard output -- 2 (not a palindrome, so no output)
+// ----
+// ----
+//
+// ****
+// A _palindrome_ is a word or text which reads the same backwards and forwards.
+// ****
+
+// //////////////////////////////////////////////////////////////
+=== Remove spaces
+
+.Task
+****
+Standard input consists of a single line of text.
+
+Write a Python script named +remove-whitespace.py+ which
+writes that text to standard output, but with all of the space characters
+removed.
+****
+
+****
+.Example standard input -- 1
+----
+the cat sat on the mat
+----
+
+.Example standard output -- 1
+----
+thecatsatonthemat
+----
+****
+
+****
+.Example standard input -- 2
+----
+    aa bb cc
+----
+
+.Example standard output -- 2
+----
+aabbcc
+----
+****
+
+[source, python]
+.Tip
+----
+""          # This is the empty string.
+" "         # This is a string containing exactly one character, a space character.
+----
+
+// .Tips
+// ****
+// [source, python]
+// ----
+// s[i].isspace()     # the character at position i is a whitespace character
+// not s[i].isspace() # the character at position i is not a whitespace character
+// ----
+// ****
+
+// //////////////////////////////////////////////////////////////
+== Histograms
+
+// //////////////////////////////////////////////////////////////
+=== Histograms 1
+
+.Task
+****
+Standard input consists of a sequence of exactly ten non-negative integers.
+
+Write a Python script named +histogram-1.py+ to output this data as a histogram, that is, in the format illustrated by the example, below.
+****
+
+.Example standard input
+----
+2
+1
+10
+5
+12
+2
+6
+3
+5
+12
+----
+
+.Example standard output
+----
+**
+*
+**********
+*****
+************
+**
+******
+***
+*****
+************
+----
+
+[TIP]
+====
+The first output line contains two asterisks because the first input is $2$.
+
+The second output line contains one asterisk because the second input is $1$.
+
+And so on.
+
+The histogram is on its side.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Histograms 2
+
+.Task
+****
+Repeat the previous task.
+
+This time, standard input begins with a line containing an integer, $n$ say.
+
+There then follow $n$ additional lines, each containing a non-negative integer (these being the data for your histogram).
+
+Name your Python script +histogram-2.py+.
+****
+
+.Example standard input
+----
+5
+2
+1
+10
+5
+12
+----
+
+.Example standard output
+----
+**
+*
+**********
+*****
+************
+----
+
+[TIP]
+====
+The first line is $5$, so there are five integer values to read, from which you build your histogram.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Histograms 3
+
+.Task
+****
+Standard input consists of a single line of text.  All of the characters in the text are digits.
+
+Write a Python script named +histogram-3.py+ which outputs a histogram of the digits within the text.
+
+See the example, below.
+****
+
+.Example standard input
+----
+6429
+----
+
+.Example standard output
+----
+******
+****
+**
+*********
+----
+
+[TIP]
+====
+Use the built-in function +int()+ to convert strings to integers.
+
+For example, +int("3")+ evaluates to the integer $3$.
+====
+
+// //////////////////////////////////////////////////////////////
+== Harder tasks (maybe)
+
+// //////////////////////////////////////////////////////////////
+=== N copies again
+
+.Task
+****
+Repeat the _N Copies_ task from above.
+
+This time, however, each copy of $s$ must be separated from adjacent copies
+with a hyphen.
+
+Name your script +n-copies-2.py+
+****
+
+.Example standard input
+----
+abra
+6
+----
+
+.Example standard output
+----
+abra-abra-abra-abra-abra-abra
+----
+
+[NOTE]
+====
+There is no trailing hyphen, above.
+
+Your solution may not contain either of the words "while" or "if".
+====
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

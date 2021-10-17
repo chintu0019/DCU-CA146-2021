@@ -1,0 +1,563 @@
+= Labsheet 7a
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== Sorting tasks
+
+// //////////////////////////////////////////////////////////////
+=== Selection sort 1
+
+.Task
+****
+Standard input consists of a non-empty sequence of _integers_ terminated by a line containing only the text "end".
+
+Write a Python script named +selection-sort-1.py+ which reads those
+integers *into a list*, and then writes only _the *position* of the smallest
+element in that list_ to standard output.
+
+In the case of duplicate smallest values, the prefer lowest-numbered position.
+****
+
+.Example standard input
+----
+49
+32
+39
+31
+30
+12
+14
+19
+13
+31
+end
+----
+
+.Example standard output
+----
+5
+----
+
+[NOTE]
+====
+Above, the element at position $5$ (which is $12$) is the smallest value in the list.
+
+It is not technically necessary to use a list to complete this task; however, you _must_ nevertheless do so.  It matters for subsequent tasks.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Selection sort 2
+
+.Task
+****
+Standard input consists of a non-empty sequence of _integers_ terminated by
+a line containing only the text "end", and followed then by exactly one further
+integer, $i$ say.
+
+Write a Python script named +selection-sort-2.py+ which
+writes only the *position* of the smallest element in the list _from position_ $i$ _to the end_ to standard output.
+
+In the case of duplicate smallest values, prefer the lowest-numbered position.
+****
+
+.Example standard input
+----
+49
+32
+39
+31
+30
+12
+14
+19
+13
+31
+end
+6
+----
+
+.Example standard output
+----
+8
+----
+
+[TIP]
+====
+We only consider the values from position $6$ to the end, so $14$, $19$, $13$ and $31$.
+
+Of these, $13$ is the smallest; and $13$ is at position $8$.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Selection sort
+
+****
+Selection sort is a general-purpose, in-place sorting algorithm.
+
+To sort a list $a$, selection sort proceeds as follows.
+
+Consider each position $i$ in $a$ in turn: $0$, $1$, $2$, and so on.
+
+For each such position $i$:
+
+1. locate the _position of the smallest element_ in that portion of the list from position $i$ to the end +
+    (call this position $p$), and then,
+2. swap the elements at positions $i$ and $p$.
+
+The first step above is your solution to the second task, above.
+
+There's an illustration of selection sort in operation
+https://en.wikipedia.org/wiki/Selection_sort#/media/File:Selection-Sort-Animation.gif[here].
+****
+
+.Task
+****
+Standard input consists of a sequence of _integers_ terminated by a line containing only the text "end".
+
+Write a Python script named +selection-sort.py+ which outputs those numbers in _increasing numerical order_.
+
+Your solution must make good use of the selection-sort algorithm.
+****
+
+.Example standard input
+----
+49
+32
+39
+31
+30
+12
+14
+19
+13
+31
+end
+----
+
+.Example standard output
+----
+12
+13
+14
+19
+30
+31
+31
+32
+39
+49
+----
+
+// //////////////////////////////////////////////////////////////
+=== Selection sort (strings)
+
+.Task
+****
+Standard input consists of a sequence of *lines* terminated by a line containing only the text "end".
+
+Write a Python script named +selection-sort-strings.py+ which outputs those
+lines in increasing _lexicographical_ order.
+****
+
+.Example standard input 1
+----
+dog
+cat
+mouse
+horse
+balloon
+end
+----
+
+.Example standard output 1
+----
+balloon
+cat
+dog
+horse
+mouse
+----
+
+[TIP]
+====
+Lexicographical order is the default order for Python's comparison operators when the
+operands are strings.
+
+You do not need to do anything special in this regard.
+
+This task should not take long to complete.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Median
+
+****
+The _median_ of a data set is the middle value in the data set -- the value
+which most-equally partitions the data set into high values and low values.
+****
+
+.Task
+****
+Standard input consists of a non-empty sequence of integers terminated by a line containing only the text "end".
+
+Write a Python script named +median.py+ which writes only _the median value_ to standard output.
+
+If there are two equally-good candidates (i.e. if there is an even number
+of values), then choose the higher value of the two.  See both examples
+below.  (This is a simplification; it should not make matters more
+complicated.)
+****
+
+****
+.Example standard input 1
+----
+9
+6
+3
+1
+7
+8
+3
+end
+----
+
+.Example standard output 1
+----
+6
+----
+
+[TIP]
+====
+There are three values greater than $6$ in the list ($7$, $8$ and $9$), and three values less than $6$ ($1$, $3$ and $3$).  So, $6$ most-equally partitions the list into high values and low values.
+====
+****
+
+****
+.Example standard input 2
+----
+9
+6
+3
+1
+10
+7
+8
+3
+end
+----
+
+.Example standard output 2
+----
+7
+----
+
+[TIP]
+====
+Here, $6$ and $7$ are equally-good median candidates.  The task statement requires that you choose the higher value, so you choose $7$.
+====
+****
+
+[TIP]
+====
+The stipulation that you choose _the higher of two equally good candidates_ is actually the simplest possible version of this problem.
+
+If you find yourself writing significant logic to do this, then you are doing it wrong.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Merge sorted lists (again)
+
+****
+Recall link:/labsheet-06b.html#_merge_sorted_lists [this task] from labsheet 6b.
+
+You now know how to sort a list, so perhaps another solution might come to mind.
+
+So, it _might_ footnote:[Or it might not be a good idea; you decide.] be a good idea to repeat that task.
+
+Name your script +merge-sorted-lists-2.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sorted by age
+
+.Task
+****
+Standard input consists of a sequence of lines terminated by a line containing only the
+text "end" (see the example).
+Each line contains a person's date of birth followed by their name.
+
+Write a Python script named +sorted-by-age.py+ which writes each person's
+name to standard output, _ordered by their date of birth_.
+****
+
+****
+You should assume the following:
+
+- The day, month and year of birth are always given with _exactly two_ digits; so, for somebody born on the eighth of the month, the day will be "$08$" (never just "$8$").
+- The lines _do not_ contain any extraneous whitespace; so, the first character of each person's name is always at position $9$.
+****
+
+.Example standard input
+----
+08/01/35 Elvis Presley
+01/02/68 Lisa Marie Presley
+24/05/41 Robert Allen Zimmerman
+05/05/88 Adele Laurie Blue Adkins
+18/12/75 Sia Kate Isobelle Furler
+01/03/94 Justin Bieber
+10/05/60 Paul David Hewson
+end
+----
+
+.Example standard output
+----
+Elvis Presley
+Robert Allen Zimmerman
+Paul David Hewson
+Lisa Marie Presley
+Sia Kate Isobelle Furler
+Adele Laurie Blue Adkins
+Justin Bieber
+----
+
+[TIP]
+====
+Do not rush in to this task; think about it.
+
+A good solution does not require any change to your sorting algorithm at all.
+
+It is sometimes better to manipulate the data to fit the logic, rather than changing the logic itself.
+====
+
+// // //////////////////////////////////////////////////////////////
+// == Other tasks
+//
+// ****
+// Here are a couple of tasks from lab sheet 11 (which we are otherwise skipping).
+//
+// These tasks _do not_ involve sorting.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Above average
+//
+// .Task
+// ****
+// Standard input consists of a sequence of _integers_ terminated by a line containing only the text "end".
+//
+// Write a Python script named +above-average.py+ which reads those numbers and outputs _only those that are (strictly) above the average_.
+//
+// Calculate the average as a floating-point number.
+// ****
+//
+// .Example standard input
+// ----
+// 5
+// 2
+// 1
+// 4
+// 3
+// end
+// ----
+//
+// .Example standard output
+// ----
+// 5
+// 4
+// ----
+//
+// ****
+// Above, the average is $3.0$.
+// ****
+//
+// // //////////////////////////////////////////////////////////////
+// === Employee names
+//
+// .Task
+// ****
+// Standard input consists of _two sequences_ of lines:
+//
+// - first a sequence of employee records, each consisting of an employee number (which is always exactly eight digits) and the employee name, and
+// - then a further sequence of employee numbers.
+//
+// Both sequences are terminated by a line containing only the text "end".
+//
+// Write a Python script named +employee-names.py+ which, for each employee number in the second sequence, outputs the corresponding employee name.
+//
+// No two employees have the same employee number.  The second sequence may
+// contain employee numbers which do not occur in the first list.
+// There is no extraneous whitespace.
+//
+// Your solution should make good use of linear search.
+// ****
+//
+// .Example standard input
+// ----
+// 83752966 Elvis Presley
+// 33861978 Lisa Marie Presley
+// 95328665 Robert Allen Zimmerman
+// 38688732 Adele Laurie Blue Adkins
+// 90997832 Sia Kate Isobelle Furler
+// 66679437 Justin Bieber
+// 74588421 Paul David Hewson
+// end
+// 90997832
+// 95328665
+// 12345678               <-- Note: there is no employee with this number.
+// 74588421
+// 95328665
+// end
+// ----
+//
+// .Example standard output
+// ----
+// Sia Kate Isobelle Furler
+// Robert Allen Zimmerman
+// Paul David Hewson
+// Robert Allen Zimmerman
+// ----
+
+// //////////////////////////////////////////////////////////////
+== Bonus tasks
+
+// //////////////////////////////////////////////////////////////
+=== Diamond (Off Topic)
+
+****
+This sounds simple, but may require some thought.
+
+This task _does not_ involve the use of lists (or sorting).
+****
+
+****
+Write a Python script named +diamond.py+ which accepts exactly one command-line argument, _an odd positive integer_.
+
+Your script should write a text diamond to standard output (see the
+examples below) of the size indicated by the command-line argument.
+****
+
+****
+[source, python]
+.Example invocation 1
+----
+python diamond.py 5
+----
+
+.Example standard output 1
+----
+  *
+ ***
+*****
+ ***
+  *
+----
+****
+
+****
+[source, python]
+.Example invocation 2
+----
+python diamond.py 25
+----
+
+.Example standard output 2
+----
+            *
+           ***
+          *****
+         *******
+        *********
+       ***********
+      *************
+     ***************
+    *****************
+   *******************
+  *********************
+ ***********************
+*************************
+ ***********************
+  *********************
+   *******************
+    *****************
+     ***************
+      *************
+       ***********
+        *********
+         *******
+          *****
+           ***
+            *
+
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Print CSV Fields
+
+.Task
+****
+Standard input consists of:
+
+- first a sequence of CSV values (one per line, terminated by "end"), and
+- then a single integer.
+
+Write a Python script named +print-csv-fields.py+  which, for each CSV line, outputs only the field indicated by the final integer.
+//
+// _Comma-separated values_ (or CSVs) is a textual data representation in
+// which data items are represented one per line, with the fields for each item separated by commas.  See the example below.
+****
+
+****
+.Example standard input 1
+----
+Los Angeles,34°03′N,118°15′W
+New York City,40°42′46″N,74°00′21″W
+Paris,48°51′24″N,2°21′03″E
+end
+0
+----
+
+.Example standard output 1
+----
+Los Angeles
+New York City
+Paris
+----
+****
+
+****
+.Example standard input 2
+----
+Los Angeles,34°03′N,118°15′W
+New York City,40°42′46″N,74°00′21″W
+Paris,48°51′24″N,2°21′03″E
+end
+1
+----
+
+.Example standard output 2
+----
+34°03′N
+40°42′46″N
+48°51′24″N
+----
+****
+
+// /////////////////////////////////////////////////////////
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

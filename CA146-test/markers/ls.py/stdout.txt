@@ -1,0 +1,7 @@
+d etc
+f ls.py
+f main.c
+f makefile
+f runner.zsh
+d src
+f test.py

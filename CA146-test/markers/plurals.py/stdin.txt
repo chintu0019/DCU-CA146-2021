@@ -1,0 +1,7 @@
+horse
+horses
+cat
+cats
+pass
+path
+end

@@ -1,0 +1,7 @@
+Testing unary operators...
+100
+-100
+100
+10.0
+64
+10.0

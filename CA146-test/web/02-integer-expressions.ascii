@@ -1,0 +1,376 @@
+= Integer Expressions
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== The Python Interpreter
+
+[NOTE]
+====
+We will be using version 3 of the Python interpreter, known as Python 3.
+====
+
+****
+Python is an interpreted programming language.
+
+The name of the Python interpreter is +python3+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Python Scripts
+
+****
+A Python script is just a text file containing a Python program.
+
+Say we have a Python script in a file named +hello.py+ as follows:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+print "hello"
+----
+
+Then, we run this program (in the terminal) as follows:
+
+[source, sh]
+----
+$ python3 hello.py
+----
+
+That is:
+
+- +python3+ is the Python interpreter, and
+- we pass the name of the Python script to run as an argument (+hello.py+, here).
+
+[NOTE]
+====
+You do not type the dollar sign, here.  That's your shell prompt.
+====
+****
+
+****
+Typically, when we write a Python script, we:
+
+- use a text editor to write the script in a suitably-named text file, and
+  then
+- use the +python3+ command in a terminal to run/test it.
+****
+
+// //////////////////////////////////////////////////////////////
+=== The Python REPL
+
+****
+We can also use the Python interpreter is interactively.
+
+This is less common, but can be useful for quickly testing ideas.
+
+In this case, when invoking the Python interpreter, we simply omit the script name:
+
+[source, sh]
+----
+$ python3
+----
+****
+
+****
+When run interactively like this, the Python interpreter implements a _REPL_.
+
+REPL stands for _read, evaluate, print loop_.
+
+The Python REPL reads an expression from the terminal, evaluates it, prints
+the resulting value, then reads the next expression, ..., and so on.
+
+Here's an example session:
+
+----
+$ python3
+Python 3.5.3 (default, Jul  9 2020, 13:00:10)
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 3 + 4
+7
+>>> 100 - 2
+98
+>>> (100 - 2) // 2
+49
+>>>
+----
+
+The three greater-than signs (+>>>+) are the REPL's prompt.
+
+At the prompt, we enter integer expressions, and the Python interpreter
+evaluates them and prints the result.
+
+We can enter any Python expressions in the Python REPL.
+****
+
+****
+To exit the Python REPL, use +^D+ (that is, hold down the control key and
+type +d+).
+****
+
+// //////////////////////////////////////////////////////////////
+== Integer Expressions
+
+****
+Integer calculations perform a central role in all programming languages.
+
+Consider the following example:
+
+[source, python]
+----
+(100 - 2) // 2
+----
+
+This is an example of an _integer expression_.
+
+When the Python interpreter encounters an integer expression it evaluates
+it to yield a _value_.
+
+The integer expression above evaluates to the value $49$.
+****
+
+****
+Consider this example in more detail.
+
+- The example contains three numbers: $100$, $2$ and $2$ (again).  +
+  These are _integer literals_.  +
+  A literal is the textual representation that we
+  use within a Python program to represent a value, an integer value in this case.
+- The example contains two special symbols: +-+ for subtraction and +//+ for integer division. +
+  These are known as _operators_, in this case _integer operators_. +
+  Other integer operators include +++ for addition and +*+ for multiplication.
+- The parentheses +(+ and +)+ influence the order of evaluation.  Here, the
+  expression within the parentheses is evaluated first.
+****
+
+// //////////////////////////////////////////////////////////////
+== Precedence
+
+****
+Precedence defines the order in which the parts of an expression are evaluated.
+
+Here's an example:
+
+[source, python]
+----
+100 + 1 * 2
+----
+
+The order of evaluation matters.
+
+This expression could evaluate to either $202$ or $102$ depending on
+whether the addition happens before ($202$) or after ($102$) the
+multiplication.
+****
+
+****
+In Python, each operator has an associated precedence.  Higher-precedence
+operators are evaluated before lower-precedence operators.
+
+The operator precedence, from high precedence to low precedence, is as follows:
+
+- +(+ and +)+
+- +*+, +/+ and +//+
+- +++ and +-+
+
+The Python interpreter first evaluates expressions within parentheses, then
+multiplication and division, then addition and subtraction.
+****
+
+[TIP]
+====
+The precedence rules in Python are more or less the same as those that we
+use in everyday arithmetic.
+====
+
+// //////////////////////////////////////////////////////////////
+== Associativity
+
+****
+Consider the following integer expression:
+
+[source, python]
+----
+1 - 2 - 3
+----
+
+Once again, the result depends upon the order of evaluation:
+
+[source, python]
+----
+(1 - 2) - 3                        # -4
+1 - (2 - 3)                        # 2
+----
+****
+
+****
+_Associativity_ defines the order of evaluation of operators of equal precedence.
+
+Most integer operators are _left associative_, meaning they are evaluated
+from left to right.
+
+The example above is evaluated like this:
+
+[source, python]
+----
+((1 - 2) - 3)                      # -4
+----
+
+This is probably unexpected; again it's what we're familiar with from
+everyday arithmetic.
+****
+
+// //////////////////////////////////////////////////////////////
+== Division
+
+****
+There are two division operators in Python 3: +/+ and +//+.
+
++/+ is the division operator which you are probably already familiar with: $7 / 2$ is $3.5$.
+
+Observe that, while $7$ and $2$ are integers, $3.5$ _is not_ an
+integer. It is what is known as a _floating point_ number.
+
+Perhaps surprisingly, floating point numbers are not used that commonly in
+computer programming.
+
+We tend to use integers far more frequently.
+****
+
+****
+The +//+ operator is integer division.
+
+Observer, the following Python examples:
+
+[source, python]
+----
+3 // 3          # 1
+4 // 3          # 1
+5 // 3          # 1
+6 // 3          # 2
+7 // 3          # 2
+8 // 3          # 2
+9 // 3          # 3
+----
+
+For integer division, the result is *always* an integer.
+
+Any remainder is discarded (so, we always round down).
+****
+
+[TIP]
+====
+In most Python programming, when you need to perform division, most often
+you require integer division (+//+), not regular division (+/+).
+
+So nearly always you will be using +//+.
+====
+
+// //////////////////////////////////////////////////////////////
+== More Integer Operators
+
+// //////////////////////////////////////////////////////////////
+=== The Exponent Operator
+
+****
+The exponent operator -- represented by +**+ in Python -- raises one number
+to the power of another.
+
+Here are some examples:
+
+[source, python]
+----
+2 ** 3         # 8
+2 ** 8         # 256
+3 ** 3         # 27
+10 ** 2        # 100
+10 ** 6        # 1000000
+----
+
+The general case is that +a ** b+ evaluates to $a^b$.
+
+This is known as the _exponent operator_ (or _power operator_).
+****
+
+****
+The +**+ operator has higher precedence than multiplication and division.
+****
+
+[TIP]
+====
+These calculations are the same:
+
+[source, python]
+----
+18 ** 2                             # 324
+18 * 18                             # 324
+----
+
+Which should you prefer?
+
+Prefer the second form.
+
+Reserve the use of the exponent operator for cases which cannot be
+expressed concisely and clearly using just multiplication.
+====
+
+// //////////////////////////////////////////////////////////////
+=== The Modulus Operator
+
+****
+The modulus operator -- represented by +%+ in Python -- evaluates to the
+remainder of dividing one integer by integer.
+
+Here are some examples:
+
+[source, python]
+----
+10 % 5         # 0
+11 % 5         # 1
+12 % 5         # 2
+13 % 5         # 3
+14 % 5         # 4
+15 % 5         # 0
+
+100 % 2        # 0
+101 % 2        # 1
+102 % 2        # 0
+103 % 2        # 1
+104 % 2        # 0
+----
+
+The general case is that +a % b+ evaluates to the remainder after dividing $a$ by $b$.
+
+Observe that:
+
+- in the first block of examples above, the remainder is always in the range $0$ to $4$, and
+- in the second block the remainder is always in the range $0$ to $1$.
+
+In general, taking the remainder +a % b+ to be $r$, we have $0 \<= r < b$.
+****
+
+[NOTE]
+====
+While modulus comes up infrequently in everyday arithmetic, it comes up
+very frequently in computer programming.
+====
+
+[NOTE]
+====
+Assume we have some integer $n$:
+
+- if $n$ is even, then +n % 2+ is $0$, whereas
+- if $n$ is odd, then +n % 2+ is $1$.
+
+This will come up later.
+====
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

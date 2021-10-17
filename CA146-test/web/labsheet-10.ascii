@@ -1,0 +1,248 @@
+= Lab Sheet 10
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== Sentences
+
+// //////////////////////////////////////////////////////////////
+=== Sentences 1
+
+.Task
+****
+Standard input consists of a sequence of lines and each line consists of a
+sequence of whitespace-separated words.
+
+Take any word which ends with a _full stop_, a _question mark_ or an _exclamation mark_ to mark the end of a sentence.
+
+Write a Python script named +sentences-1.py+ which outputs each sentence encountered, one per line.
+****
+
+.Example standard input
+----
+Mary had a little lamb. Its fleece
+was white as snow! And everywhere
+
+that Mary went?  The              lamb
+
+was sure
+
+to go.
+----
+
+.Example standard output
+----
+Mary had a little lamb.
+Its fleece was white as snow!
+And everywhere that Mary went?
+The lamb was sure to go.
+----
+
+[TIP]
+====
+This task is greatly simplified if you make the correct choice about how to
+read the input, and the correct approach overall.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sentences 2
+
+.Capitalize
+****
+The string method +str.capitalize()+ capitalizes the first character of a string, and makes the
+remaining characters lower case.
+
+[source, python]
+----
+s = "maRY"
+s.capitalize()    # "Mary"
+----
+****
+
+.Task
+****
+Repeat the previous task.  This time, however, additionally ensure that the
+first character of the first word of each sentence is capitalized in the
+output.
+
+Name your Python script +sentences-2.py+.
+****
+
+.Example standard input
+----
+mary had a little lamb. its fleece
+was white as snow! and everywhere
+that Mary went? the lamb was sure to go.
+----
+
+.Example standard output
+----
+Mary had a little lamb.
+Its fleece was white as snow!
+And everywhere that Mary went?
+The lamb was sure to go.
+----
+
+[NOTE]
+====
+Observe that the "Mary" on line three remains capitalised.
+====
+
+// //////////////////////////////////////////////////////////////
+== Secret messages
+
+****
+Spies send and receive secret messages.
+
+Here is a coding scheme for secret messages.
+****
+
+****
+The sender of a secret message and the recipient both have identical copies of the same book.
+
+Each character in the message is encoded by finding an instance of that
+character within the book, and encoding the character as a triplet: page
+number, line number and character number.
+
+All numbering starts at 0, so the first page is page 0.
+****
+
+****
+For example, if line 4 of page 3 were as follows:
+
+----
+Nobody expects the Spanish Inquisition!
+----
+
+then the letter "x" could be encoded as:
+
+----
+3 4 8
+----
+
+Or, it could be encoded using the position of any other "x" within the book.
+****
+
+****
+For the following tasks, you should assume that the current working directory contains exactly these ten files:
+
+- +page-0.txt+
+- +page-1.txt+
+- ...
+- +page-9.txt+
+
+These contain the text of the ten pages of the shared book.
+****
+
+****
+You will probably need some pages for testing.
+
+In the same directory in which you store your Python scripts, execute the following shell commands:
+
+  $ wget https://einstein.computing.dcu.ie/res/jane-eyre-pages.zip
+  $ unzip jane-eyre-pages.zip
+  $ rm jane-eyre-pages.zip
+
+You should then have the ten page files required:
+
+  $ ls -l page-*.txt
+****
+
+// //////////////////////////////////////////////////////////////
+=== Book decoder
+
+.Task
+****
+Standard input consists of a message encoded using the scheme described
+above, one triplet (that is, one encoded character) per line.
+
+Write a Python script named +book-decoder.py+ which decodes the message,
+writing the decoded message to standard output.
+****
+
+.Example standard input
+----
+4 1 22
+4 7 23
+7 10 10
+6 0 12
+3 10 37
+9 17 57
+3 11 40
+7 7 1
+7 12 7
+4 2 63
+9 6 65
+5 0 56
+1 7 54
+4 9 19
+0 3 49
+6 8 61
+7 20 0
+6 14 5
+8 16 34
+5 10 0
+7 19 30
+7 6 12
+0 9 39
+7 10 49
+1 5 43
+9 17 12
+1 1 37
+3 9 8
+7 9 69
+1 6 62
+7 10 11
+5 15 37
+4 6 53
+6 8 56
+5 19 28
+4 6 14
+6 2 1
+0 2 9
+6 7 25
+9 4 67
+----
+
+.Example standard output
+----
+Nobody expects the Spanish Inquisition!
+----
+
+// //////////////////////////////////////////////////////////////
+=== Book encoder
+
+.Task
+****
+Standard input consists of a message.
+
+Write a Python script named +book-encoder.py+ which encodes that message, writing the encoded message to standard output.
+
+If your encoder were to always encode "e", say, using the same triplet, then anybody intercepting the message might easily and quickly
+guess your code.
+
+Therefore, your encoder may not re-use any triplet.  If you use one triplet
+the first time you encounter an "e", then you must use a different one the
+next time.
+****
+
+[TIP]
+====
+You can use your own decoder for testing.
+====
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,14 @@
+dog
+cat
+apple
+snake
+cherry
+pear
+dog
+cherry
+banana
+cat
+cherry
+pear
+horse
+banana

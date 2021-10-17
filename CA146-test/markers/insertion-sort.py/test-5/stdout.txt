@@ -1,0 +1,4 @@
+This test will pass for insertion sort, but should time out if selection
+sort were used instead.
+
+0e10426a1d5bddffcef02f1345787128  -

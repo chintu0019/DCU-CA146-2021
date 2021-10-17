@@ -1,0 +1,16 @@
+testing 1 1 10 2 2 10: yes
+testing 1 1 1 10 10 1: no
+testing 0 0 1 2 2 1: no
+testing 0 0 1 2 0 1: no
+testing 0 0 1 2 0 2: yes
+testing 0 0 1 2 0 2: yes
+testing 1 1 2 4 5 3: no
+testing 1 1 3 4 5 3: yes
+testing 55 26 3 50 20 1: no
+testing 55 26 3 50 20 2: no
+testing 55 26 3 50 20 3: no
+testing 55 26 3 50 20 4: no
+testing 55 26 3 50 20 5: yes
+testing 55 26 3 50 20 6: yes
+testing 55 26 3 50 20 7: yes
+testing 55 26 3 50 20 8: yes

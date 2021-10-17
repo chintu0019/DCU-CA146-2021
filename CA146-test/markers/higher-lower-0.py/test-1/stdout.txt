@@ -1,0 +1,8 @@
+higher
+lower
+lower
+higher
+higher
+equal
+lower
+higher

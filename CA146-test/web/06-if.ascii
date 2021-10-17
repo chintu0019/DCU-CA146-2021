@@ -1,0 +1,461 @@
+= If Statements
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Review
+
+.Expressions
+****
+An expression evaluates to a value.
+
+An integer expression evaluates to an integer value,
+and a Boolean expression evaluates to a Boolean value.
+****
+
+.Comparison operators
+****
+- +<+, +\<=+, +>=+, +>+
+- +==+, +!=+
+
+These six comparison operators compare integers (or strings) for equality or inequality.
+
+They evaluate to a Boolean value.
+
+[NOTE]
+====
+The equality operator uses *two* equals signs.
+
+(A single equals sign would be an assignment statement.)
+====
+****
+
+.Boolean operators
+****
+The Boolean operators are: +and+, +or+ and +not+.
+****
+
+.Variables and assignments
+****
+An assignment is always of the following form:
+
+[source, python]
+----
+VARIABLE = EXPRESSION
+----
+
+The expression on the right is evaluated, and the resulting value is assigned to the variable on the left.
+
+Note that assignment always uses _a single_ equals sign.
+****
+
+.Statements
+****
+Thus far, we have only seen two kinds of statement: assignments statements and +print+ statements.
+
+Statements do not evaluate to a value.
+
+They are executed for their side effects only, usually from top to bottom.
+****
+
+// //////////////////////////////////////////////////////////////
+== Conditional Execution
+
+****
+Conditional execution means that we define a block of statements which _may or may not be executed_, depending upon some condition.
+
+An +if+ statements is used for conditional execution.
+
+The general form of an +if+ statement is:
+
+[source, python]
+----
+if BOOLEAN_EXPRESSION:
+   STATEMENT_1
+   STATEMENT_2
+   ...
+----
+
++BOOLEAN_EXPRESSION+, above, is any Boolean expression.
+
+When the Python interpreter encounters an +if+ statement, it evaluates the Boolean expression:
+
+- if the resulting value is +True+, then the statements within the +if+ block are evaluated,
+- otherwise they are skipped.
+****
+
+.Example Task
+****
+Assume that we represent a day as an integer, with $0$ representing Monday and $6$ representing Sunday.
+
+Write a Python script which reads a day and outputs the message +weekend+ if that day is Saturday or Sunday (and nothing otherwise).
+****
+
+[source, python]
+.Example Solution
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print("weekend")
+----
+
+****
+In this case, there is only one statement within +if+ block.
+
+The condition is a Boolean expression.  It will evaluate to either +True+
+or +False+:
+
+- if it evaluates to +True+, then the +print+ statement will be executed,
+  otherwise
+- if it evaluates to +False+, then the +print+ statement will skipped.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Syntax and indentation
+
+// //////////////////////////////////////////////////////////////
+==== Syntax
+
+[source, python]
+.Example
+----
+if day == 5 or day == 6:
+   print("weekend")
+----
+
+****
+An if statement always begins with the word "if".
+****
+
+****
+Note the trailing colon (":") following the condition.
+
+This colon is required by the Python programming language.
+****
+
+// //////////////////////////////////////////////////////////////
+==== Indentation
+
+[source, python]
+.Example
+----
+if day == 5 or day == 6:
+   print("weekend")
+----
+
+****
+In Python, the extent of a block (such as an +if+ block, here) is
+determined by indentation.
+
+The first statement within the block is indented, and subsequent statements
+of equal (or, possibly greater) indentation are also within the block.
+
+In the example, there is only one statement within the if block.
+****
+
+[source, python]
+.Example 1 (two statements with the if block)
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print("weekend")
+   print("done")
+
+# The two prints above are both indented, so they are both within
+# the if block.  They will either both executed, or both skipped.
+----
+
+[source, python]
+.Example 2
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print "weekend"
+
+print("done")
+
+# Here, only one print is indented, the other is not.  So the first
+# print is inside the if block (it will either be executed or skipped),
+# but the second print is not indented, so it follows the if statement,
+# and will *always* be executed.
+----
+
+[source, python]
+.Example 3
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print("weekend")
+      print("done")
+
+# This is a syntax error; the execution of this script will fail.
+#
+# The indentation on the last +print+ statement neither continues with the
+# indentation of the previous statement nor ends the block.
+----
+
+[source, python]
+.Example 4
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print "weekend"
+  print "done"
+
+# This is a syntax error too.
+#
+# The indentation of the second print statement neither matches that of the
+# if block, not that following the if statement.
+----
+
+// //////////////////////////////////////////////////////////////
+=== Tabs vs spaces
+
+****
+Always use space characters for indentation:
+
+- use either three or four space characters.
+
+*Never use tab characters.*
+
+Using tab characters is correct, however it can lead to bugs which can be
+difficult to find.
+
+[NOTE]
+====
+On _TermCast_, the nano editor is configured to replace tab characters
+with spaces.
+====
+****
+
+// //////////////////////////////////////////////////////////////
+== Two Cases
+
+****
+A second form of conditional execution is where we want to do one thing *or something else*.
+
+For this case, we use an +if+ statement with an +else+ block:
+
+[source, python]
+----
+if BOOLEAN_EXPRESSION:
+   STATEMENT_1
+   STATEMENT_2
+   ...
+else:
+   OTHER_STATEMENT_1
+   OTHER_STATEMENT_2
+   ...
+----
+
+As before, the Boolean expression is evaluated:
+
+- if it is +True+, then the +if+ block is evaluated (as before) and the +else+ block is skipped,
+- otherwise, the +if+ block is skipped and the +else+ block is evaluated.
+****
+
+[NOTE]
+====
+Note the colon following the word "else".
+
+Note also that the indentation of the "if" line matches that of the "else"
+line.
+
+This is required by the Python syntax rules; we can see
+visually that the "if" and the "else" are part of the same if statement.
+====
+
+.Example Task
+****
+Assume that we represent a day as an integer, with $0$ representing Monday and $6$ representing Sunday.
+
+Write a Python script which reads a day and outputs either the message +weekend+ (if that day is Saturday or Sunday), or the message +weekday+.
+****
+
+[source, python]
+.Example Solution
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 5 or day == 6:
+   print("weekend")
+else:
+   print("weekday")
+----
+
+****
+If +day+ is $5$ or $6$, then the condition evaluates to +True", and
+we output +weekend+; otherwise we output +weekday+.
+
+The +if+ branch will be executed, or the +else+ branch will be executed;
+the Python interpreter never executes _both_ branches.
+****
+
+****
+As before, the extent of the +if+ and +else+ blocks are both determined by indentation.
+
+The +if+ and the +else+ must have the same amount of indentation, as follows:
+
+[source, python]
+----
+if day == 5 or day == 6:
+   print "weekend"
+else:
+   print "weekday"
+----
+
+Not like this:
+
+[source, python]
+----
+if day == 5 or day == 6:
+   print "weekend"
+   else:                   # Error!
+   print "weekday"
+----
+
+And not like this:
+
+[source, python]
+----
+if day == 5 or day == 6:
+   print "weekend"
+ else:                     # Error!
+   print "weekday"
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== Multiple Cases
+
+****
+Finally, it can happen that we must execute exactly one of _some number_ of blocks (more than two).
+
+We _could_ do this by nesting +if+ statements.
+
+Here is an example.
+****
+
+.Example Task
+****
+Assume, again, that we represent a day as an integer, with $0$ representing Monday and $6$ representing Sunday.
+
+Write a Python script which reads a day and outputs the name of the corresponding day (+Monday+, +Tuesday+, an so on).
+****
+
+[source, python]
+.Poor solution (do not copy this!)
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 0:
+   print "Monday"
+else:
+   if day == 1:
+      print "Tuesday"
+   else:
+      if day == 2:
+         print "Wednesday"
+      else:
+         if day == 3:
+            print "Thursday"
+         else:
+            if day == 4:
+               print "Friday"
+            else:
+               if day == 5:
+                  print "Saturday"
+               else:
+                  print "Sunday"
+----
+
+.Yuck!
+****
+This is ugly; it is hard to get syntactically correct because of the complex indentation, and hard to maintain.
+
+Moreover, the symmetry of the solution is not visually apparent.
+****
+
+****
+Because this is a common case, and Python provides a special syntax for such cases: the +elif+ block.
+
+Here's a better solution.
+****
+
+[source, python]
+.Better solution
+----
+#!/usr/bin/env python3
+
+day = int(input())
+
+if day == 0:
+   print "Monday"
+elif day == 1:
+   print "Tuesday"
+elif day == 2:
+   print "Wednesday"
+elif day == 3:
+   print "Thursday"
+elif day == 4:
+   print "Friday"
+elif day == 5:
+   print "Saturday"
+else:
+   print "Sunday"
+----
+
+****
+There is a condition (a Boolean expression) in the if part, and in each
+elif part.
+
+The Python interpreter evaluates each condition in turn:
+
+- if the condition evaluates to +True+, then it executes the corresponding
+  branch, and skips the rest of the if statement, otherwise
+- if the condition evaluates to +False+, then it moves on to the next elif
+  branch.
+
+If _all of the conditions_ evaluate to +False+, then the else branch is
+executed.
+****
+
+// //////////////////////////////////////////////////////////////
+== Colons
+
+****
+In all of the above, observe that lines beginning +if+, +elif+ and +else+
+are all terminated with a colon.
+
+These colons *are always required*:  the Python interpreter will fail with a
+_syntax error_ if you omit the colon.
+
+This is a fundamental (and recurring) detail of Python's syntax.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

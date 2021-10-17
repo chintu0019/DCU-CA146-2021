@@ -1,0 +1,165 @@
+= Software Development
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== The problem
+
+****
+An important part of computer programming and software development is the
+workflow you use around writing, testing and debugging your Python
+scripts.
+
+This is a skill which you must develop,
+and it is important that you develop good practices from the start.
+****
+
+****
+Therefore, it is required that you test your scripts properly before
+uploading it them _Einstein_.
+
+In fact, you should not normally upload your work to _Einstein_ at all until you
+have a reasonable expectation that it is correct.
+
+Do not debug your work just by uploading it to _Einstein_.
+****
+
+****
+To test and debug your scripts, you need to write them in an environment
+suitable for software development.
+
+This means that you need a reasonable text editor, of course, but it also
+means that you need a fully functioning terminal for testing your work.
+
+*Any development environment in which you run your scripts by pressing a button is _not satisfactory_.*
+****
+
+// //////////////////////////////////////////////////////////////
+== Your options
+
+****
+Here are some of your options.
+
+The bottom line is that, for many of you, I recommend using _TermCast_:
+link:/termcast/[link].
+****
+
+=== MacOS or Linux
+
+****
+If you have either of these operating systems, then you are good to go.
+
+Use the built-in terminal app for testing your scripts.
+
+You will probably have to install Python 3, and you might have to install a
+good text editor.
+
+https://www.sublimetext.com/[Sublime Text] is a good
+choice.footnote:[Sublime Text is a good choice of text editor on Windows too.]
+****
+
+=== Windows
+
+****
+Windows is more difficult, because Windows is not natively designed as
+a software-development platform.
+
+There are a number of good choices, but they each require you to install and
+configure relatively complex software packages:
+
+Cygwin::
+  This is a port of a large number of standard Linux utilities to Windows. +
+  See the Cygwin web site: https://www.cygwin.com/[].
+
+Windows subsystem for Linux::
+  This is a virtual-machine infrastructure for running
+  an entire Linux OS under Windows 10.  It provides a full Linux VM
+  running inside of Windows itself. +
+  See https://docs.microsoft.com/en-us/windows/wsl/install-win10[here].
+
+Either of these approaches are satisfactory, although both are moderately
+complex to configure and/or maintain correctly.
+
+Therefore, I recommend these only if you feel confident taking on the task
+of installing these packages and configuring them correctly yourself.
+****
+
+=== Dual boot and virtual machines
+
+****
+Dual boot::
+  It is possible to configure a Windows system to dual boot into either
+  Windows or Linux. +
+  *I do not recommend this.*
+Virtual machines::
+  It is possible to install Linux as a virtual machine (VM) running under the
+  native Windows host. +
+  I recommend this only if you are confident that you can install and
+  maintain that VM satisfactorily.
+****
+
+=== SSH
+
+****
+You can use an SSH client on any operating system to access the School of
+Computing's student SSH server: +student.computing.dcu.ie+.
+
+If you don't already know what SSH is, then this probably isn't a good starting
+place.
+****
+
+=== _TermCast_
+
+****
+_TermCast_ is a web-based interface which provides terminal access to the
+school's student server in a browser tab.
+
+See link:/termcast/[].
+
+The student server has all of the software which you need for your
+computer-programming modules.
+
+A short video describing your programming workflow on _TermCast_ is
+https://drive.google.com/file/d/1fN6u_z_Sugzj9gsebvoTMvhlKSauByWv/view?usp=sharing[here]
+(five minutes).
+
+If none of the solutions above work for you, then I recommend trying _TermCast_.
+
+*Use Chrome for accessing _TermCast_.*
+
+(Safari requires special configuration to work correctly, and IE is just
+broken.)
+****
+
+._TermCast_ and online learning
+****
+This semester, a large amount of your learning has been moved online.
+
+_TermCast_ allows *me* as your lecturer *to view your terminal online*, so
+I and other tutors can provide help via _TermCast_ and Zoom in a way that
+isn't possible with any of the other approaches mentioned above.
+
+In fact, I can even type to your terminal and fix errors for you.
+****
+
+=== Labs
+
+****
+_Labs_ is another interface through which you can access the school's servers (Windows and Linux) online.
+
+See https://labs.computing.dcu.ie/[].
+
+_Labs_ also provides access to entire Windows and Linux desktops in a browser tab.
+
+You will use _Labs_ for modules which require you to use specialised
+desktop software packages.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+//
+//vim: ft=asciidoc
+//
+

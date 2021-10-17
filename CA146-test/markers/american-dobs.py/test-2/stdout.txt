@@ -1,0 +1,16 @@
+running upload...
+ok
+
+testing that 'american-dobs.txt' exists...
+ok
+
+testing that 'american-dobs.txt' is non-empty...
+ok
+
+outputing 'american-dobs.txt' contents...
+5/24/41 Robert Allen Zimmerman
+5/5/88 Adele Laurie Blue Adkins
+2/18/75 Sia Kate Isobelle Furler
+2/1/68 Lisa Marie Presley
+5/10/60 Paul David Hewson
+11/8/35 Elvis Presley

@@ -1,0 +1,4 @@
+scheme: http
+host: ca116.computing.dcu.ie
+path: /einstein/report.html
+query: select-first-failed-test True

@@ -1,0 +1,14 @@
+moose
+moose
+moose
+elephant
+cat
+crocodile
+dog
+crocodile
+dog
+cat
+crocodile
+dog
+mouse
+snake

@@ -1,0 +1,18 @@
+testing values 1 through 19...
+
+testing 0 0: Draw.
+testing 0 1: Away win.
+testing 0 2: Away win.
+testing 0 3: Away win.
+testing 1 0: Home win.
+testing 1 1: Draw.
+testing 1 2: Away win.
+testing 1 3: Away win.
+testing 2 0: Home win.
+testing 2 1: Home win.
+testing 2 2: Draw.
+testing 2 3: Away win.
+testing 3 0: Home win.
+testing 3 1: Home win.
+testing 3 2: Home win.
+testing 3 3: Draw.

@@ -1,0 +1,178 @@
+= Labsheet 2c
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_ is link:/einstein/[here].
+****
+
+// //////////////////////////////////////////////////////////////
+== Introduction
+
+****
+Below, you will _not_ be writing complete Python scripts.
+
+Rather, you are instructed to write a _fragment_ of Python code, just a single assignment statement.
+
+You will not be able to run these fragments locally as Python scripts.
+
+However, when you upload your fragment to _Einstein_, _Einstein_ will fill
+in the rest of the script for testing.
+****
+
+****
+For each task, below, you will be given a sequence of integers.
+
+Your goal is to derive a *single assignment statement* such that, if the
+variable $x$ initially has one of the values in the sequence, and that
+assignment statement is executed, then $x$
+subsequently has the next value in the sequence.
+
+And, if the
+assignment statement were executed repeatedly, then $x$ would cycle through
+all of the values in the sequence.
+****
+
+.Example Task
+****
+.Sequence
+----
+0 1 2 3 4 5 6 7 8 9 10 ...
+----
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+x = x + 1
+----
+****
+
+.Explanation
+****
+If $x$ is initially $0$, then after executing this assignment statement,
+$x$ will be $1$.
+
+Then, if $x$ is $1$, then after executing this assignment statement,
+$x$ will be $2$.
+
+And so on.
+
+As the assignment statement is executed repeatedly, $x$ takes on each value
+in the sequence in turn.
+****
+
+[TIP]
+====
+Observe that this is not a complete Python script, it is a fragment.
+
+You cannot run this script in the terminal on its own.
+====
+
+// //////////////////////////////////////////////////////////////
+== Sequence Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 1
+
+****
+----
+0 2 4 6 8 10 12 14 ...
+----
+
+Name your upload file +sequence-1.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 2
+
+****
+----
+0 -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 ...
+----
+
+Name your upload file +sequence-2.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 3
+
+****
+----
+5 -5 5 -5 5 -5 5 -5 ...
+----
+
+Name your upload file +sequence-3.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 4
+
+****
+----
+1 2 4 8 16 32 64 128 ...
+----
+
+Name your upload file +sequence-4.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 5
+
+****
+----
+0 1 2 0 1 2 0 1 2 0 ...
+----
+
+Name your upload file +sequence-5.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+== Harder Sequences
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 6
+
+****
+----
+0 2 4 0 2 4 0 2 4 0 ...
+----
+
+Name your upload file +sequence-6.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 7
+
+****
+----
+100 101 102 100 101 102 100 101 102 100 ...
+----
+
+Name your upload file +sequence-7.py+.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sequence Task 8
+
+****
+----
+-1 2 -3 4 -5 6 -7 8 -9 10 -11 12 -13...
+----
+
+Name your upload file +sequence-8.py+.
+
+(This task is *very, very* hard.)
+****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

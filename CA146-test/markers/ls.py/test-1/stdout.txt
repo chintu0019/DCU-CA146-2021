@@ -1,0 +1,7 @@
+d cron.d
+f crontab
+f fstab
+d init.d
+f ls.py
+f passwd
+f runner.zsh

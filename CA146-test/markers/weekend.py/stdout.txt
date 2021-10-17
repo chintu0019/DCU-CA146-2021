@@ -1,0 +1,7 @@
+testing 0: weekday
+testing 1: weekday
+testing 2: weekday
+testing 3: weekday
+testing 4: weekday
+testing 5: weekend
+testing 6: weekend

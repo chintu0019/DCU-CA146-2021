@@ -1,0 +1,21 @@
+= Selection Sort Placeholder
+Stephen Blott <stephen.blott@dcu.ie>
+:theme: smblott
+
+****
+Today's lab task are _too easy_ if you can simply copy the code from the slides.
+
+Given a description of the algorithm (and its steps), you should be able to
+put together your own implementation.  It is (almost) never correct to be
+copying Python code verbatim.
+
+This placeholder will be replaced with the selection-sort slides in due course.
+****
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+//
+//vim: ft=asciidoc
+//
+

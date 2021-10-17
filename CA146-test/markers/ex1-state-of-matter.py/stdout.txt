@@ -1,0 +1,17 @@
+testing -3 solid
+testing -2 solid
+testing -1 solid
+testing 0 liquid
+testing 1 liquid
+testing 2 liquid
+testing 3 liquid
+testing 4 liquid
+testing 5 liquid
+testing 50 liquid
+testing 97 liquid
+testing 98 liquid
+testing 99 liquid
+testing 100 liquid
+testing 101 gas
+testing 102 gas
+testing 103 gas

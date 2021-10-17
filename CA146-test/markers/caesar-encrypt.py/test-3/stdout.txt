@@ -1,0 +1,49 @@
+ebbg:k:0:0:ebbg:/ebbg:/ova/onfu
+qnrzba:k:1:1:qnrzba:/hfe/fova:/hfe/fova/abybtva
+ova:k:2:2:ova:/ova:/hfe/fova/abybtva
+flf:k:3:3:flf:/qri:/hfe/fova/abybtva
+flap:k:4:65534:flap:/ova:/ova/flap
+tnzrf:k:5:60:tnzrf:/hfe/tnzrf:/hfe/fova/abybtva
+zna:k:6:12:zna:/ine/pnpur/zna:/hfe/fova/abybtva
+yc:k:7:7:yc:/ine/fcbby/ycq:/hfe/fova/abybtva
+znvy:k:8:8:znvy:/ine/znvy:/hfe/fova/abybtva
+arjf:k:9:9:arjf:/ine/fcbby/arjf:/hfe/fova/abybtva
+hhpc:k:10:10:hhpc:/ine/fcbby/hhpc:/hfe/fova/abybtva
+cebkl:k:13:13:cebkl:/ova:/hfe/fova/abybtva
+jjj-qngn:k:33:33:jjj-qngn:/ine/jjj:/hfe/fova/abybtva
+onpxhc:k:34:34:onpxhc:/ine/onpxhcf:/hfe/fova/abybtva
+yvfg:k:38:38:Znvyvat Yvfg Znantre:/ine/yvfg:/hfe/fova/abybtva
+vep:k:39:39:vepq:/ine/eha/vepq:/hfe/fova/abybtva
+tangf:k:41:41:Tangf Oht-Ercbegvat Flfgrz (nqzva):/ine/yvo/tangf:/hfe/fova/abybtva
+abobql:k:65534:65534:abobql:/abarkvfgrag:/hfe/fova/abybtva
+ninuv-nhgbvcq:k:101:104:Ninuv nhgbvc qnrzba,,,:/ine/yvo/ninuv-nhgbvcq:/ova/snyfr
+zrffntrohf:k:102:106::/ine/eha/qohf:/ova/snyfr
+pbybeq:k:103:107:pbybeq pbybhe znantrzrag qnrzba,,,:/ine/yvo/pbybeq:/ova/snyfr
+Qrovna-rkvz:k:104:110::/ine/fcbby/rkvz4:/ova/snyfr
+ninuv:k:105:113:Ninuv zQAF qnrzba,,,:/ine/eha/ninuv-qnrzba:/ova/snyfr
+ucyvc:k:106:7:UCYVC flfgrz hfre,,,:/ine/eha/ucyvc:/ova/snyfr
+fgngq:k:107:65534::/ine/yvo/asf:/ova/snyfr
+fnarq:k:108:115::/ine/yvo/fnarq:/ova/snyfr
+oybgg:k:1000:1000:Fgrcura Oybgg,,,:/ubzr/oybgg:/hfe/ybpny/ova/mfu
+agc:k:109:117::/ubzr/agc:/ova/snyfr
+zlfdy:k:110:119:ZlFDY Freire,,,:/abarkvfgrag:/ova/snyfr
+zcq:k:111:29::/ine/yvo/zcq:/ova/snyfr
+agbc:k:112:121::/ine/yvo/agbc:/ova/snyfr
+chyfr:k:113:122:ChyfrNhqvb qnrzba,,,:/ine/eha/chyfr:/ova/snyfr
+egxvg:k:114:124:ErnygvzrXvg,,,:/cebp:/ova/snyfr
+qnisf2:k:115:126::/ine/pnpur/qnisf2:/ova/snyfr
+trbpyhr:k:116:128::/ine/yvo/trbpyhr:/ova/snyfr
+hzy-arg:k:117:129::/ubzr/hzy-arg:/ova/snyfr
+cbfgterf:k:118:130:CbfgterFDY nqzvavfgengbe,,,:/ine/yvo/cbfgterfdy:/ova/onfu
+erqvf:k:119:131::/ine/yvo/erqvf:/ova/snyfr
+hfozhk:k:120:46:hfozhk qnrzba,,,:/ine/yvo/hfozhk:/ova/snyfr
+hhvqq:k:100:101::/eha/hhvqq:/ova/snyfr
+zrqvngbzo:k:121:132:ZrqvnGbzo Freire,,,:/ine/yvo/zrqvngbzo:/hfe/fova/abybtva
+flfgrzq-gvzrflap:k:122:133:flfgrzq Gvzr Flapuebavmngvba,,,:/eha/flfgrzq:/ova/snyfr
+flfgrzq-argjbex:k:123:134:flfgrzq Argjbex Znantrzrag,,,:/eha/flfgrzq/argvs:/ova/snyfr
+flfgrzq-erfbyir:k:124:135:flfgrzq Erfbyire,,,:/eha/flfgrzq/erfbyir:/ova/snyfr
+flfgrzq-ohf-cebkl:k:125:136:flfgrzq Ohf Cebkl,,,:/eha/flfgrzq:/ova/snyfr
+fdhrrmrobkfreire:k:126:65534:Ybtvgrpu Zrqvn Freire,,,:/hfe/funer/fdhrrmrobkfreire:/ova/snyfr
+cyrk:k:127:139::/ine/yvo/cyrkzrqvnfreire:/ova/onfu
+ffuq:k:128:65534::/ine/eha/ffuq:/hfe/fova/abybtva
+tvgyno-ehaare:k:999:998:TvgYno Ehaare:/ubzr/tvgyno-ehaare:/ova/onfu

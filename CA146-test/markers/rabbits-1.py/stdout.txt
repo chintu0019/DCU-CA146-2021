@@ -1,0 +1,7 @@
+rabbits: 10
+  executing...
+  variable rabbits is now 160
+
+rabbits: 123
+  executing...
+  variable rabbits is now 1968

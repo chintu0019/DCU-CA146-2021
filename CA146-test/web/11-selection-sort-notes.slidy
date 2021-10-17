@@ -1,0 +1,213 @@
+= CA116/Selection Sort Notes
+Stephen Blott <stephen.blott@dcu.ie>
+:data-uri:
+:theme: smblott
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i               # Find the position of
+   j = i + 1           # the smallest element.
+   while j < len(a):   #
+      if a[j] < a[p]:  #
+         p = j         #
+      j = j + 1        #
+
+   tmp = a[p]          # And swap.
+   a[p] = a[i]         #
+   a[i] = tmp          #
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+****
+Let's just look at the _so-something_ part of the outer loop...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+         #
+         #
+         #
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+----
+
+****
+Not like this...
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+         tmp = a[p]
+         a[p] = a[i]
+         a[i] = tmp
+      j = j + 1
+
+   #
+   #
+   #
+----
+
+****
+Not like this.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+         tmp = a[p]
+         a[p] = a[i]
+         a[i] = tmp
+      j = j + 1
+
+   #
+   #
+   #
+----
+
+****
+This swaps _every time_ a new lowest value is found.
+****
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i
+   j = i + 1
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                 # First find the position of the smallest
+   j = i + 1             # value in a[0:i].
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]
+   a[p] = a[i]
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                 # First find the position of the smallest
+   j = i + 1             # value in a[0:i].
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]            # And *only then* swap.
+   a[p] = a[i]           #
+   a[i] = tmp
+
+   i = i + 1
+----
+
+// //////////////////////////////////////////////////////////////
+== Selection Sort
+
+[source, python]
+----
+i = 0
+while i < len(a):
+   p = i                 # First find the position of the smallest
+   j = i + 1             # value in a[0:i].
+   while j < len(a):
+      if a[j] < a[p]:
+         p = j
+      j = j + 1
+
+   tmp = a[p]            # And *only then* swap.
+   a[p] = a[i]           # Just once per iteration.
+   a[i] = tmp
+
+   i = i + 1
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

@@ -1,0 +1,9 @@
+module TriangleArea where
+
+import System.Environment
+
+main = do 
+       args <- getArgs
+       let [arg1,arg2,arg3] = map read args
+       putStrLn (show (triangleArea arg1 arg2 arg3))
+

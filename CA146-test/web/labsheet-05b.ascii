@@ -1,0 +1,547 @@
+= Labsheet 5b
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+****
+These tasks require you to use loops in various ways, and in various combinations.
+
+Your solutions _may not_ use any Python string methods, or any other aspect
+of Python which has not been covered in the module.
+
+(To do so would be to sidestep the intent of the exercises.)
+****
+
+// //////////////////////////////////////////////////////////////
+== Addition
+
+// //////////////////////////////////////////////////////////////
+=== Additions 1
+
+.Task
+****
+Standard input consists of a sequence of exactly ten additions, one per line.
+
+See the example, below, for the format.
+
+Write a Python script named +additions-1.py+ which, for each addition,
+writes the resulting sum to standard output.
+
+All of the numbers are positive integers, and there is no extraneous whitespace.
+****
+
+.Example standard input
+----
+28371+197
+30+30813
+5+197
+32682+3
+18291+12
+20260+311
+22448+16
+4061+27872
+2+9
+2005+22335
+----
+
+.Example standard output
+----
+28568
+30843
+202
+32685
+18303
+20571
+22464
+31933
+11
+24340
+----
+
+[TIP]
+====
+Your solution must involve _exactly two while loops_, one nested inside the other.
+
+The outer loop simply counts to ten, and the inner loop is linear search.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Additions 2
+
+.Task
+****
+Standard input consists of a single addition on a single line involving
+_exactly five_ integer terms.
+
+Write a Python script named +additions-2.py+ which writes the resulting sum
+to standard output.
+****
+
+.Example standard input
+----
+271+9730+30+813+5
+----
+
+.Example standard output
+----
+10849
+----
+
+[TIP]
+====
+Your solution must involve _exactly two while loops_, one nested inside the other.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Additions 3
+
+.Task
+****
+Standard input consists of a sequence of additions, one per line.
+
+Write a Python script named +additions-3.py+ which, for each addition,
+writes the resulting sum to standard output.
+
+Stop when you encounter the first sum which is exactly 1000.
+****
+
+.Example standard input
+----
+28371+197
+30+30813
+5+197
+32682+3
+18291+12
+500+500
+----
+
+.Example standard output
+----
+28568
+30843
+202
+32685
+18303
+1000
+----
+
+[TIP]
+====
+As in the first task, above, each addition involves exactly two integer terms.
+====
+
+// //////////////////////////////////////////////////////////////
+== Cities
+
+****
+The following tasks involve a
+https://en.wikipedia.org/wiki/Comma-separated_values[CSV] data set
+describing the geographical location of various North American cities.
+****
+
+.Sample
+----
+City,State,LatD,LatM,LatS,NS,LonD,LonM,LonS,EW
+Youngstown,OH,41,5,59,N,80,39,0,W
+Yankton,SD,42,52,48,N,97,23,23,W
+Wisconsin Dells,WI,43,37,48,N,89,46,11,W
+Yakima,WA,46,35,59,N,120,30,36,W
+Rock Springs,WY,41,35,24,N,109,13,48,W
+.
+.
+.
+Ravenna,OH,41,9,35,N,81,14,23,W
+end
+----
+
+****
+For each of the following tasks, standard input consists of data in this format.
+
+Note the presence of the header line.  The input is terminated by a line containing only the text "end".
+
+The space character only occurs in city names, and there is no extraneous whitespace.
+
+For testing, it might be helpful to have the link:res/cities-1.txt[full data set].
+****
+
+.The test data is also available here...
+----
+wget https://einstein.computing.dcu.ie/res/cities-1.txt
+----
+
+// //////////////////////////////////////////////////////////////
+=== Wisconsin 1
+
+.Task
+****
+
+Write a Python script named +wisconsin-1.py+ which writes the name of each
+city in Wisconsin to standard output, one city per line.
+
+****
+
+.Example standard output
+----
+Wisconsin Dells
+Wausau
+----
+
+[TIP]
+====
+The exact cities in the output will depend upon the actual input.
+
+You should verify that the output from your script matches the data set which you are using.
+
+The two-letter code for Wisconsin is WI.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Wisconsin 2
+
+.Task
+****
+Write a Python script named +wisconsin-2.py+ which writes only a count of
+the number of cities in Wisconsin to standard output.
+****
+
+.Example standard output
+----
+2
+----
+
+// //////////////////////////////////////////////////////////////
+=== City cities
+
+.Task
+****
+The last word in some of the city names is "City"; for example, _Salt Lake City_.
+
+Write a Python script named +city-cities.py+ which writes only the name of
+each such city to standard output.
+****
+
+.Example standard output
+----
+Valley City
+Salt Lake City
+----
+
+[TIP]
+====
+You could do a linear search looking for the positions of space characters.
+
+However, this approach becomes complicated because there can be multiple space characters in a city name.
+
+So, a different approach might be better.
+====
+
+// //////////////////////////////////////////////////////////////
+=== CSV fields
+
+****
+With CSV data, it is common that the first line is a header.
+
+The header describes the meaning of each field.
+****
+
+.Task
+****
+Write a Python script named +csv-fields.py+ which writes the name of each
+header field to standard output.
+****
+
+.Example standard input
+----
+City,State,LatD,LatM,LatS,NS,LonD,LonM,LonS,EW
+----
+
+.Example standard output
+----
+City
+State
+LatD
+LatM
+LatS
+NS
+LonD
+LonM
+LonS
+EW
+----
+
+// //////////////////////////////////////////////////////////////
+== Password file
+
+****
+On Unix-like systems, some details of user accounts are traditionally stored in the _password file_.
+
+The password file is always located in the file +/etc/passwd+.
+
+You can view the contents of the password file with the command:
+
+----
+$ cat /etc/passwd
+----
+
+Here is a sample.
+****
+
+----
+root:x:0:0:root:/root:/bin/bash
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+blott:x:1000:1000:Stephen Blott,,,:/home/blott:/usr/local/bin/zsh
+mysql:x:110:119:MySQL Server,,,:/nonexistent:/bin/false
+mediatomb:x:121:132:MediaTomb Server,,,:/var/lib/mediatomb:/usr/sbin/nologin
+gitlab-runner:x:999:998:GitLab Runner:/home/gitlab-runner:/bin/bash
+end
+----
+
+****
+Each line is colon delimited.
+
+To see
+the details of the format, type +man 5 passwd+ in the terminal.
+****
+
+****
+For the following tasks, the standard input is such a password file.
+
+The input is terminated by a line containing only the text "end".
+****
+
+.Sample data
+****
+You can generate a test file on any Unix-like system as follows:
+
+----
+$ cp /etc/passwd passwd.txt        # Make a copy of the password file in the
+                                   # current working directory.
+
+$ echo end >> passwd.txt           # Append the word "end".
+                                   # Note: there are TWO greater than signs.
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Login name
+
+.Task
+****
+
+Write a Python script named +pw-login-name.py+ which, for each account,
+writes only the _login name_ to standard output.
+
+****
+
+.Example standard output
+----
+root
+bin
+games
+blott
+mysql
+mediatomb
+gitlab-runner
+----
+
+// //////////////////////////////////////////////////////////////
+=== Login shell
+
+.Task
+****
+Write a Python script named +pw-login-shell.py+ which, for each account,
+outputs only the _login name_ and the _optional user command interpreter_
+(the user's shell).
+****
+
+.Example standard output
+----
+root /bin/bash
+bin /usr/sbin/nologin
+games /usr/sbin/nologin
+blott /usr/local/bin/zsh
+mysql /bin/false
+mediatomb /usr/sbin/nologin
+gitlab-runner /bin/bash
+----
+
+[TIP]
+====
+To locate the command interpreter, search backwards through each line to locate the final colon.
+
+Although it is optional, you should assume that the command interpreter field is in fact present.
+====
+
+// //////////////////////////////////////////////////////////////
+== Strings
+
+// //////////////////////////////////////////////////////////////
+=== Lower Case
+
+.Task
+****
+Standard input consists of a sequence of lines of text terminated by a line containing only the text "end".
+
+Write a Python script named +to-lower-case.py+ which copies the text to
+standard output, converting _each upper case letter_ on each line to lower case.
+****
+
+.Example standard input
+----
+Mary had a little Lamb,
+Its fleece was white as snow,
+And everywhere that Mary went,
+The Lamb was SURE TO GO.
+end
+----
+
+.Example standard input
+----
+mary had a little lamb,
+its fleece was white as snow,
+and everywhere that mary went,
+the lamb was sure to go.
+----
+
+[TIP]
+====
+Begin your script like this:
+
+[source, python]
+----
+upper = "ABCDEFGHIFKLMNOPQRSTUVWXYZ"
+lower = "abcdefghifklmnopqrstuvwxyz"
+----
+====
+
+// //////////////////////////////////////////////////////////////
+== Einstein uploads
+
+.Background
+****
+When you upload your work to _Einstein_, the uploaded file is stored in a
+directory named by date, module and user.
+
+For each upload, the upload itself is stored, together with a second file
+indicating whether the upload was judged _correct_ or _incorrect_.
+
+Here is an example.
+****
+
+----
+2018-10-24/ca116/reynaj25/first-pair.py
+2018-10-24/ca116/reynaj25/first-pair.py.correct
+2018-10-24/ca116/reynaj25/second-number.py
+2018-10-24/ca116/reynaj25/second-number.py.incorrect
+2018-10-25/ca116/sblott/additions-1.py
+2018-10-25/ca116/sblott/additions-1.py.correct
+2018-10-25/ca116/sblott/additions-2.py
+2018-10-25/ca116/sblott/additions-2.py.incorrect
+2018-10-25/ca116/sblott/additions-3.py
+2018-10-25/ca116/sblott/additions-3.py.correct
+2018-10-25/ca116/sblott/city-cities.py
+2018-10-25/ca116/sblott/city-cities.py.incorrect
+2018-10-25/ca116/sblott/city-fields.py
+2018-10-25/ca116/sblott/city-fields.py.correct
+----
+
+****
+For these tasks, standard input will consist of a sequence of such lines,
+terminated by a line containing only the text "end".
+
+All of the lines pertaining to each individual user are adjacent.
+
+There is an anonymized sample link:res/uploads-1.txt[here].
+****
+
+.The test data is also available here...
+----
+wget https://einstein.computing.dcu.ie/res/uploads-1.txt
+----
+
+// //////////////////////////////////////////////////////////////
+=== Task names
+
+.Task
+****
+
+Write a Python script named +einstein-task-names.py+ which, for each
+upload, writes only the task name to standard output.
+
+****
+
+.Example standard output
+----
+first-pair.py
+second-number.py
+additions-1.py
+additions-2.py
+additions-3.py
+city-cities.py
+city-fields.py
+----
+
+[TIP]
+====
+All task names end with the suffix +.py+.
+
+That should simplify finding the lines you are interested in.
+
+If you can get your mind around it, then the simplest way to find the start
+of the task names is to do linear search backwards.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Correct count
+
+.Task
+****
+Write a Python script named +einstein-correct-count.py+ which writes only
+a count of total number of correct uploads to standard output.
+****
+
+.Example standard output
+----
+4
+----
+
+// // //////////////////////////////////////////////////////////////
+// === Mark uploads
+//
+// .Task
+// ****
+// Write a Python script named +einstein-mark-uploads.py+ which, for each
+// user, outputs a count of the number of that user's uploads which are
+// correct.
+// ****
+//
+// .Example standard output
+// ----
+// reynaj25 1
+// sblott 3
+// ----
+//
+// [TIP]
+// ====
+// You may assume that the date is always ten characters, and that the module is always five characters.
+//
+// You should also assume that all of the entries for a particular user are
+// contiguous.
+// ====
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

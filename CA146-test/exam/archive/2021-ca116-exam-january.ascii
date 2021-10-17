@@ -1,0 +1,404 @@
+:theme: morteratsch
+
+++++
+<style>
+  body {
+    width: 850px;
+    margin: 20px;
+  }
+</style>
+++++
+
+[frame="none",grid="none",cols="^1"]
+|==================================================
+| image:res/dcu-logo.png[width="150px"]
+| *[big]#Semester 1 Examinations 2020/2021#*
+|==================================================
+
+:theme: smblott-exam
+
+[frame="none",cols="2,8"]
+|==================================================
+|*Module*         | CA116 -- Computer Programming I
+|*Programmes*     | BSc in Computer Applications +
+                    Study Abroad (ECSAX) +
+                    Study Abroad (ECSAO)
+| *Year of Study* | 1
+| *Examiner*      | Dr Stephen Blott (ext. 5984 +
+                    Dr Hitesh Tewari (external examiner for CA)
+| *Instructions*  | Answer _all four_ questions. +
+                    All questions carry equal marks.
+|==================================================
+
+_The use of programmable or text storing calculators is expressly forbidden.  +
+Please note that where a candidate answers more than the required number of questions, the
+examiner will mark all questions attempted and then select the highest scoring ones._
+
+_Requirements for this paper (please mark (X) as appropriate):_ +
+[frame="none", cols="6,1,6,1"]
+|===
+| _Log tables_         |  | _Thermodynamic tables_      |
+| _Graph paper_        |  | _Actuarial tables_          |
+| _Dictionaries_       |  | _MCQ only (do not publish)_ |
+| _Statistical tables_ |  | _Attached answer sheet_     |
+|===
+
+++++
+<span class="question">
+  <span>Additional Instructions</span>
+</span>
+++++
+
+****
+Instructions:
+
+- Upload all answers to _Einstein_: link:/einstein/[here].
++
+_TermCast_ is link:/termcast/[here].
+
+- You may upload your answers as many times as you like.  If you upload
+  answers to _the same question multiple times_, then _only the last upload
+  will be considered_.
+- For Python programming tasks, upload and verify your solutions on
+  _Einstein_ as usual:
+** If _Einstein_ does not report your solution as correct, then attempt
+  marks will be awarded subsequently as part of the marking process, as merited.
+- For other tasks:
+** You are told the name to use for your upload;
+   this will be a *text file*, with a "+.txt+" extension.
+** Create such a file using a *text editor* (such as _nano_, or _gedit_, or _sublime_; do not use a word
+   processor), and upload the resulting file to _Einstein_, as usual.
+** _Einstein_ simply accepts and stores such uploads;
+   it does not correct your work.
++
+Such uploads will be assessed manually later as part of the marking process.
+
+- You have *two hours and 20 minutes to complete your work*.
+
+Only the work which you upload to _Einstein_ will be considered.
+// Any files you leave on the local desktop *will not* be collected.  Any
+// written work you do in exam scripts *will not* be assessed.
+****
+
+[source, python]
+.The Python shebang (for reference)
+----
+#!/usr/bin/env python3
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 1</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+The following five fragments of Python code each contain errors.
+
+Correct the errors.
+
+Where you are instructed to "_assume an existing variable ..._", _Einstein_
+will provide a value for that variable when you upload your solution.
+
+Do not assign your own value to that variable.
+****
+
+// [TIP]
+// ====
+// When you upload your work to _Einstein_, you will see most of the test
+// cases.
+// ====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.1</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* list variable $a$, a list of integers.
+
+Print out each element of $a$ for which the least significant digit is +3+.
+
+Name your Python fragment +exja-1.1.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python3
+
+i = 0
+while i < len(a)
+   if a[i] < 0
+      digit = 3  # 3 is wrong here
+   else
+      digit = 3
+   if a[i] % 10 == digit
+      print a[i]
+   i = i + 1
+----
+
+[TIP]
+====
+The _least significant digit_ is the digit in the units position.
+
+For example, the least significant digit of +123+ is +3+.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.2</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume *existing* variables $x$, $y$ and $z$, these being the lengths of the
+sides of a triangle.
+
+Write the message "equilateral", "isosceles" or "scalene" to standard
+output, as appropriate.
+
+Name your Python fragment +exja-1.2.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/urs/bin/env python3
+
+if x == y or y == z:
+   print("equilateral")
+else if x == y or x == z:
+   print("isosceles')
+else if True:
+   print("scalene")
+----
+
+[TIP]
+====
+"Equilateral", "isosceles" and "scalene" are types of triangle.
+
+You can google them, if you don't know what they are.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.3</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+The command-line arguments consist of exactly one argument, a file name.
+
+Write the contents of standard input to a file of the indicated name.
+
+Name your Python script +exja-1.3.py+.
+****
+
+[source, python]
+.Initial script (contains errors)
+----
+#!/usr/bin/env python3
+
+name = sys.argv[0]
+
+with open(name, "w") as f:
+   f.read(sys.stdin.write())
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.4</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* dictionary variable +d+.
+
+Print out each key-value pair in the dictionary, one pair per line, separated by
++-\->+.
+
+Name your Python fragment +exja-1.4.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python3
+
+for key in sorted(d):
+   write key, "-->", d{key}
+----
+
+[TIP]
+====
+Above +sorted()+ is a Python built-in function which yields the keys in
+sorted order.
+
+Leave that part as is (it is correct as is).
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="questionpart">
+  <span>1.5</span> <span class="markpart">5 Marks</span>
+</span>
+++++
+
+****
+Assume an *existing* string variable +s+.
+
+Write the number of times that the character "+/+" occurs in +s+ to
+standard output.
+
+Name your Python fragment +exja-1.5.py+.
+****
+
+[source, python]
+.Initial fragment (contains errors)
+----
+#!/usr/bin/env python3
+
+print(length(s.strip("/")) - 0)
+----
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 2</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+Assume a single command-line argument, a positive integer $n$.
+
+Standard input consists of a sequence of integers, one per line.
+
+Write a Python script named +exja-2.py+ which copies standard input to
+standard output, but omitting numbers with the trailing digits $n$.
+****
+
+.Example standard input
+----
+123
+5
+1234
+23
+1203
+----
+
+.Example invocation
+----
+$ python3 exja-2.py 23
+----
+
+.Example standard output
+----
+5
+1234
+1203
+----
+
+[TIP]
+====
+These are the integers on standard input, but with those integers ending in +23+ omitted.
+
+If you think about it, you may observe that this isn't really a question about integers at all.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 3</span> <span class="mark">25 Marks</span>
+</span>
+++++
+
+****
+Standard input consists of a sequence of lines of text, with each line
+consisting of exactly two words (space separated).
+
+Write a Python script named +exja-3.py+ which copies standard input to
+standard output, but with the output sorted by the _second word_ (and then
+by the first words, if the second words happen to be the same).
+****
+
+.Example standard input
+----
+dog frog
+mouse cat
+horse cat
+dog zebra
+snake dog
+marmot dog
+cat zebra
+----
+
+.Example standard output
+----
+horse cat
+mouse cat
+marmot dog
+snake dog
+dog frog
+cat zebra
+dog zebra
+----
+
+[TIP]
+====
+Observe that the output lines are sorted by their second words.
+
+Observe also that, where the second words are the same, the order of the
+lines is resolved by further considering the first words.
+
+You should already have an implementation of selection sort; this should
+prove helpful.
+
+It should not be necessary to make any changes whatsoever to your
+selection sort implementation; rather, perhaps think carefully about how best to store each line internally.
+====
+
+// ///////////////////////////////////////////////////////////////////////
+++++
+<span class="question">
+  <span>Question 4</span> <span class="mark">25 Marks</span>
+</span>
+<div>&nbsp</div>
+++++
+
+****
+Standard input consists of a single line of text +s+.
+
+Write a Python script named +exja-4.py+ which writes the first quoted text
+in +s+ to standard output.
+
+Take _quoted text_ to be text in +s+ contained within matched double quotes.
+
+Your script should produce no output if +s+ does not contain any quoted
+text.
+****
+
+.Example standard input
+----
+And the band played "Waltzing Matilda".
+----
+
+.Example standard output
+----
+Waltzing Matilda
+----
+
+// //////////////////////////////////////////////////////////////
+include::../web/misc/instrument.txt[]
+include::../web/misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

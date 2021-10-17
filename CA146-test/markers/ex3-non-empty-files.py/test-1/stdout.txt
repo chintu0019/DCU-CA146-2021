@@ -1,0 +1,19 @@
+creating non-empty files...
+  6572.txt
+  3302.txt
+  8303.txt
+  7067.txt
+
+creating empty files...
+  8015.txt
+  7497.txt
+  1637.txt
+  5281.txt
+  5174.txt
+  6557.txt
+
+$ python3 ex3-non-empty-files.py 1637.txt 3302.txt 5174.txt 5281.txt 6557.txt 6572.txt 7067.txt 7497.txt 8015.txt 8303.txt
+3302.txt
+6572.txt
+7067.txt
+8303.txt

@@ -1,0 +1,616 @@
+= Labsheet 6b
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+****
+
+// //////////////////////////////////////////////////////////////
+== Important preamble
+
+// //////////////////////////////////////////////////////////////
+=== Python fragments
+
+****
+For most of these tasks, you _will not_ be writing a full Python script.
+
+Instead, you will be writing just a _Python fragment_.
+
+A fragment is just the sequence of python statements necessary to complete some task, but
+without the surrounding paraphernalia necessary to read input, for example.
+****
+
+****
+When you upload your work, _Einstein_ will fill in the missing parts.
+
+For example, you will be told to "_assume an *existing* list_ $a$".
+
+_Einstein_ will then provide a suitable list named $a$ when you upload your work.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Testing fragments
+
+****
+The required upload is just a fragment; it is not a self-contained Python script.
+
+Therefore, we must consider how
+you can test your fragment locally before uploading it to _Einstein_.
+
+To that end, you will always include an if statement at the start of your fragment as follows...
+****
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+if __name__ == "__main__":
+   a = ["dog", "cat", "mouse"]
+
+# And the rest of your fragment goes here.
+#
+#
+----
+
+****
+The unusual variable name pass:[<i>__name__</i>]
+above starts and ends with two underscore characters,
+as does the string which follows:
+
+- when you run your script locally, the assignment statement in the if
+  branch will be executed, and the rest of your fragment will use the value
+  of $a$ provided there;
+
+- however, when you upload your script to _Einstein_, the assignment statement will be
+  skipped, and the rest of your fragment will use the value of $a$ provided
+  by _Einstein_.
+
+You can copy this example to your clipboard and use it as the starting
+point for the following tasks.
+
+(Use _Control-Shift-v_ to paste on _TermCast_.)
+
+You will have to tweak the value assigned to $a$ depending upon the task at hand.
+****
+
+[source, python]
+.DO NOT DO THIS
+----
+#!/usr/bin/env python3
+
+a = ["dog", "cat", "mouse"]
+
+# And the rest of your fragment goes here.
+#
+#
+----
+
+****
+In this latter case, it will be impossible for _Einstein_ to set $a$ to
+different values for testing.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Fragment example
+
+.Example Task
+****
+Assume an **existing** list of strings $a$.
+
+Write a Python *fragment* which writes each string in $a$ to standard output, one per line.
+****
+
+[TIP]
+====
+The key words to look out for in the task statement are "existing" and "fragment".
+
+These tell you that you will not be writing an entire stand-alone script.
+====
+
+[source, python]
+.Example solution
+----
+#!/usr/bin/env python
+
+if __name__ == "__main__":
+   a = ["dog", "cat", "mouse"]
+
+i = 0
+while i < len(a):
+   print a[i]
+   i = i + 1
+----
+
+.Explanation
+****
+When you run this locally, the output will be _dog_, _cat_ and _mouse_, one word per line.
+
+However, when you upload it to _Einstein_, the output will depend upon the value of $a$ provided by _Einstein_.
+****
+
+// //////////////////////////////////////////////////////////////
+== Loop tasks
+
+****
+In these tasks, you will be writing _Python fragments_.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Non-empty 1
+
+.Task
+****
+Assume an *existing* list of strings named $a$.
+
+Write a Python *fragment* named +non-empty-1.py+ which writes _a count of
+the number of non-empty strings_ in $a$ to standard output.
+****
+
+[source, python]
+.Example list
+----
+a = ["", "", "dog", "", "", "cat", "", "", "", "mouse"]
+----
+
+.Example standard output
+----
+3
+----
+
+// //////////////////////////////////////////////////////////////
+=== Non-empty 2
+
+.Task
+****
+Assume an *existing* list of strings named $a$.
+
+Write a Python *fragment* named +non-empty-2.py+ which writes _the first
+non-empty string_ in $a$ to standard output.
+
+If $a$ does not contain a non-empty string, then your fragment should produce no output.
+****
+
+[source, python]
+.Example list
+----
+a = ["", "", "dog", "", "", "cat", "", "", "", "mouse"]
+----
+
+.Example standard output
+----
+dog
+----
+
+[TIP]
+====
+Linear search.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Long words 1
+
+.Task
+****
+Assume an existing list of words (strings) named $a$.
+
+Write a Python fragment named +long-words-1.py+ which writes each _long
+word_ in $a$ to standard output, one word per line.
+
+Take a _long word_ to be any word with six or more characters.
+****
+
+[source, python]
+.Example list
+----
+a = ["cat", "elephant", "mouse", "lizard", "horse", "mongoose"]
+----
+
+.Example standard output
+----
+elephant
+lizard
+mongoose
+----
+
+// //////////////////////////////////////////////////////////////
+=== Long words 2
+
+.Task
+****
+Assume an existing list of words (strings) named $a$.
+
+Write a Python fragment named +long-words-2.py+ which writes _the first long word_ in $a$ to standard output.
+
+As before, take a long word to be any word with six or more characters.
+
+Your script should produce no output if $a$ does not contain any long words.
+****
+
+[source, python]
+.Example list
+----
+a = ["cat", "elephant", "mouse", "lizard", "horse", "mongoose"]
+----
+
+.Example standard output
+----
+elephant
+----
+
+// //////////////////////////////////////////////////////////////
+=== Prefix 1
+
+.Task
+****
+Assume an existing list of words (strings) named $a$ and another string $s$.
+
+Write a Python fragment named +prefix-1.py+ which writes each word in $a$
+for which $s$ is a prefix to standard output, one per line.
+****
+
+[source, python]
+.Example list and string
+----
+a = ["mountain", "montagne", "mont", "mo", "montages", "zebra", "monthly"]
+s = "mont"
+----
+
+.Example standard output
+----
+montagne
+mont
+montages
+monthly
+----
+
+// //////////////////////////////////////////////////////////////
+=== Prefix 2
+
+.Task
+****
+Assume an existing list of words (strings) named $a$ and another string $s$.
+
+Write a Python fragment named +prefix-2.py+ which writes the first word in
+$a$ for which $s$ is a prefix to standard output.
+
+Your script should produce no output if $a$ does not contain any matching words.
+****
+
+[source, python]
+.Example list and string
+----
+a = ["mountain", "montagne", "mont", "mo", "montages", "zebra", "monthly"]
+s = "mont"
+----
+
+.Example standard output
+----
+montagne
+----
+
+// // //////////////////////////////////////////////////////////////
+// === Primes 1
+//
+// ****
+// For this and the following task, you should assume the existence of a
+// function named `isprime()`.
+//
+// You call this function much as you would one
+// of the Python built-in functions which we have encountered previously:
+//
+// [source, python]
+// ----
+// isprime(5)      # True
+// isprime(6)      # False
+// isprime(a[i])   # It depends on the value of a[i].
+// ----
+// ****
+//
+// .Task
+// ****
+// Assume an existing list of integers named $a$.
+//
+// Write a Python fragment named +primes-1.py+ which outputs each integer in $a$ which is a prime number, one per line.
+// ****
+//
+// [source, python]
+// .Example list
+// ----
+// a = [5, 6, 7, 10, 11, 12]
+// ----
+//
+// .Example standard output
+// ----
+// 5
+// 7
+// 11
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// === Primes 2
+//
+// .Task
+// ****
+// Assume an existing list of integers named $a$.
+//
+// Write a Python fragment named +primes-2.py+ which outputs the first integer in $a$ which is a prime number.
+//
+// Your script should produce no output if $a$ does not contain any prime numbers.
+// ****
+//
+// [source, python]
+// .Example list
+// ----
+// a = [8, 9, 4, 7, 2, 11]
+// ----
+//
+// .Example standard output
+// ----
+// 7
+// ----
+
+// //////////////////////////////////////////////////////////////
+== List swap tasks
+
+// //////////////////////////////////////////////////////////////
+=== Swap first and last
+
+.Task
+****
+Assume an existing non-empty list $a$.
+
+Write a Python fragment named +swap-list-first-and-list.py+ which swaps the first and last elements in $a$.
+****
+
+[source, python]
+.Example list
+----
+a = [8, 9, 4, 7, 2, 11]
+----
+
+[source, python]
+.Example list after execution
+----
+a = [11, 9, 4, 7, 2, 8]
+----
+
+[NOTE]
+====
+You should do the swap in place, within the existing list $a$.
+
+You should not create a new list.
+
+Your fragment should not write any output.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Swap $i$ and $j$
+
+.Task
+****
+Assume an existing non-empty list $a$, and two existing integer variables $i$ and $j$.
+
+Write a Python fragment named +swap-list-i-and-j.py+ which swaps the elements in $a$ at positions $i$ and $j$.
+****
+
+[source, python]
+.Example list
+----
+a = [8, 9, 4, 7, 2, 11]
+i = 1
+j = 2
+----
+
+[source, python]
+.Example list after execution
+----
+a = [8, 4, 9, 7, 2, 11]
+----
+
+[NOTE]
+====
+You should do the swap in place, within the existing list $a$.
+
+You should not create a new list.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Sort three
+
+.Task
+****
+Standard input consists of exactly three lines, each containing a single integer.
+
+Write a Python *script* named +sort-three.py+ which writes each of the three values to standard output, one per line, in _increasing numeric order_.
+****
+
+.Example standard input
+----
+67
+8
+9
+----
+
+.Example standard input
+----
+8
+9
+67
+----
+
+[NOTE]
+====
+You may not use any of Python's build-in sorting functions.
+====
+
+// //////////////////////////////////////////////////////////////
+== Other tasks
+
+// //////////////////////////////////////////////////////////////
+=== Position of smallest
+
+.Task
+****
+Assume an existing non-empty list of integers, $a$.
+
+Write a python *fragment* named +position-of-smallest.py+ which writes only
+the position of the smallest value in $a$ to standard output.
+****
+
+[source, python]
+.Example list
+----
+a = [49, 32, 39, 13, 30, 12, 14, 19, 31, 31]
+----
+
+.Example standard output
+----
+5                     # a[5] (12) is the smallest value in a
+----
+
+[NOTE]
+====
+If the same smallest value is at two positions, then choose the first
+position at which that value occurs.
+====
+
+// // //////////////////////////////////////////////////////////////
+// === Insert in position
+//
+// .Task
+// ****
+// Standard input consists of a list of integers in increasing numerical order, one per line, terminated by
+// a line containing only the text "end", followed by one more line containing
+// one further integer, $n$ say.
+//
+// Write a Python *script* named +insert-in-position.py+ which writes all of
+// the integers (so, the list and $n$) to standard output in increasing numerical order.
+// ****
+//
+// .Example standard input
+// ----
+// 2
+// 6
+// 10
+// 10
+// 13
+// 15
+// end
+// 12
+// ----
+//
+// .Example standard input
+// ----
+// 2
+// 6
+// 10
+// 10
+// 12
+// 13
+// 15
+// ----
+//
+// // //////////////////////////////////////////////////////////////
+// === Insert at position
+//
+// .Task
+// ****
+// Assume an *existing* list of integers $a$, position $p$ and value $v$.
+//
+// Write a Python *fragment* named +insert-at-position.py+ which
+// inserts $v$ into $a$ at position $p$
+// ****
+//
+// .Example list, position and value
+// ----
+// a = [1, 5, 6, 6, 10, 12]
+// p = 4
+// v = 8
+// ----
+//
+// .Example list after execution
+// ----
+// a = [1, 5, 6, 6, 8, 10, 12]
+// ----
+//
+// [TIP]
+// ====
+// You will have to move the elements after position $p$ up in order to make space for $v$.
+//
+// You must insert the new element into the list _in place_; do not create a new list.
+// ====
+
+// //////////////////////////////////////////////////////////////
+=== Merge sorted lists
+
+.Task
+****
+Standard input consists of *two* lists of integers, both individually
+sorted into _increasing numerical order_.  Both lists are terminated by a
+line containing only the text "end".
+
+See the example.
+
+Write a Python *script* named +merge-sorted-lists.py+ which writes the
+numbers from both lists combined in _sorted order_ to standard output.
+****
+
+.Example standard input
+----
+2
+8
+23
+89
+end
+3
+23
+23
+67
+90
+end
+----
+
+.Example standard output
+----
+2
+3
+8
+23
+23
+23
+67
+89
+90
+----
+
+// .Tips
+// ****
+// You will need to iterate over _both lists at the same time_.
+//
+// The start of your main loop will look something like:
+//
+// [source, python]
+// ----
+// i = 0
+// j = 0
+// while i < len(a) and j < len(b):
+//    # Print either a[i] or b[j], depending upon which is the smaller; then
+//    # increment either i or j (but not both).
+// ----
+//
+// When that's done, one of the two lists will still contain some numbers; output those.
+// ****
+
+// /////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+////
+vim: ft=asciidoc
+////
+

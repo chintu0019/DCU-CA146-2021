@@ -1,0 +1,61 @@
+# ###########################################################
+# 1 - mutability
+
+Integer, string, Boolean and float are immutable types in Python.
+
+An existing value never mutates (or changes) to a dfferent value.
+
+Instead, new values are created:
+
+i = i + 1
+s = s + "x"
+
+The new value of i is a new integer (the old value of i didn't mutate into the new value).
+
+The new value of s is a new string (the old value of s didn't mutate into the new value).
+
+# ###########################################################
+# 2 - lists
+
+A list is a sequence of values (elements) of any type.
+
+Details:
+  - literals
+  - length
+  - concatenation
+  - indexing
+  - slicing
+  - appending elements
+  - removing (popping) elements
+  - changing elements in place
+
+# ###########################################################
+# 3 - examples
+
+- read a list
+- write a list
+- maximum of a (non-empty) list of integers
+- sum a list of integers
+- reverse IN PLACE
+- larger than average
+
+# ###########################################################
+# 4 - lists and cost
+
+The cost of building a new list is proportional to the length of the new list.
+
+This has a big impact on what is practical and what is impractical.
+
+See ../misc/week-06/build-list-*.py.
+
+# ###########################################################
+# 5 - example from labsheet
+
+- even then odd
+
+# ###########################################################
+# 6 - command-line arguments
+
+- import sys
+- sys.argv
+- sum command-line arguments

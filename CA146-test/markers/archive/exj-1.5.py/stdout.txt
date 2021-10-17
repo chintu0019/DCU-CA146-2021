@@ -1,0 +1,4 @@
+s = "dog  cat   mouse hen"
+running your script...
+
+4

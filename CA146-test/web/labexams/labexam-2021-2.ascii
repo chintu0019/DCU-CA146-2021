@@ -1,0 +1,169 @@
+= Lab exam 2
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:toclevels=4:
+:theme: morteratsch
+
+[NOTE]
+====
+Earlier this afternoon there was an issue on _TermCast_ whereby some people
+couldn't connect.
+
+There was a new class group on _TermCast_  today, and we maxed
+out the number of concurrent connections on the web server.
+
+I bumped the configuration numbers up (a lot) and it seems to be fine now.
+====
+
+****
+_Einstein_: link:/einstein/[link].
+
+_TermCast_: link:/termcast/[link].
+
+You should be aware of DCU's
+https://www.dcu.ie/sites/default/files/policy/1%20-%20integrity_and_plagiarism_ovpaa_v2.pdf[academic
+integrity and plagiarism] policy.
+****
+
+.Rules
+****
+This is an examination; examination rules apply.
+
+You have until 17:30 to complete and upload your work.
+
+All four questions are worth equal marks.
+
+Your solutions may not involve features of Python which have not been covered in this module.
+****
+
+.Einstein Upload
+****
+Name your Python files _exactly_ as instructed in each of the tasks below, and
+then upload your solutions to _Einstein_, link:/einstein/[here].
+
+You may upload your work as many times as you like.  Later uploads (of the
+same file name) replace earlier ones.
+
+For the record, you should upload all of your work.
+****
+
+[source, python]
+.Tips
+----
+#!/usr/bin/env python3
+
+import sys
+
+first_argument = sys.argv[1]         # This is the first command-line argument (always as string).
+args = sys.argv[1:]                  # These are all of the command-line arguments.
+
+# Note: sys.argv is always a list of strings.
+----
+
+// //////////////////////////////////////////////////////////////
+== Inputs
+
+// ++++
+// <div class="task" task="ex2-inputs-1.txt"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-inputs-2.txt"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-inputs-3.txt"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-inputs-4.txt"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-inputs-5.txt"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-inputs-6.txt"></div>
+// ++++
+
+++++
+<div class="mvt" task="ex2-inputs.txt"></div>
+++++
+
+// //////////////////////////////////////////////////////////////
+== Tasks
+
+// //////////////////////////////////////////////////////////////
+=== Diagonal
+
+// ++++
+// <div class="task" task="ex2-diagonal-0.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-diagonal-1.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-diagonal-2.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-diagonal-3.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-diagonal-4.py"></div>
+// ++++
+
+++++
+<div class="mvt" task="ex2-diagonal.py"></div>
+++++
+
+// //////////////////////////////////////////////////////////////
+=== Big arguments
+
+// ++++
+// <div class="task" task="ex2-big-arguments-0.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-big-arguments-1.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-big-arguments-2.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-big-arguments-3.py"></div>
+// ++++
+
+++++
+<div class="mvt" task="ex2-big-arguments.py"></div>
+++++
+
+// //////////////////////////////////////////////////////////////
+=== First character
+
+// ++++
+// <div class="task" task="ex2-first-0.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-first-1.py"></div>
+// ++++
+//
+// ++++
+// <div class="task" task="ex2-first-2.py"></div>
+// ++++
+
+++++
+<div class="mvt" task="ex2-first.py"></div>
+++++
+
+// //////////////////////////////////////////////////////////////
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+

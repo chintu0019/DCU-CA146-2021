@@ -1,0 +1,6 @@
+scheme: https
+host: projects.computing.dcu.ie
+path: /project.html
+query: module ca400
+query: mine True
+query: user ryans98

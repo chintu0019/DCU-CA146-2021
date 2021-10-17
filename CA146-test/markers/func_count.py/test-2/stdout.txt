@@ -1,0 +1,3 @@
+a contains 10000 integers.
+running 32767 tests
+ok

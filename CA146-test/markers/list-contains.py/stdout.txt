@@ -1,0 +1,23 @@
+s = fish
+a = ['dog', 'cat', 'fish', 'mouse']
+True
+
+s = dog
+a = ['dog', 'cat', 'fish', 'mouse']
+True
+
+s = flee
+a = ['dog', 'cat', 'fish', 'mouse', 'elephant', 'flee']
+True
+
+s = moose
+a = ['dog', 'cat', 'fish', 'mouse', 'elephant', 'flee']
+False
+
+s = moose
+a = ['dog', 'cat', 'fish', 'mouse', 'elephant', 'flee', 'dog', 'cat', 'fish', 'mouse', 'elephant', 'flee']
+False
+
+s = moose
+a = ['dog', 'cat', 'fish', 'mouse', 'elephant', 'flee', 'moose', 'dog', 'cat', 'fish', 'mouse', 'elephant', 'flee']
+True

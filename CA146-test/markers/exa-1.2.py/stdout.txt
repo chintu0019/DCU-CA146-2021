@@ -1,0 +1,83 @@
+running your script with various combinations of goals and points...
+
+0 0 0 0 draw
+0 0 0 1 away win
+0 0 0 2 away win
+0 0 1 0 away win
+0 0 1 1 away win
+0 0 1 2 away win
+0 0 2 0 away win
+0 0 2 1 away win
+0 0 2 2 away win
+0 0 0 0 home win
+0 0 0 1 draw
+0 0 0 2 away win
+0 0 1 0 away win
+0 0 1 1 away win
+0 0 1 2 away win
+0 0 2 0 away win
+0 0 2 1 away win
+0 0 2 2 away win
+0 0 0 0 home win
+0 0 0 1 home win
+0 0 0 2 draw
+0 0 1 0 away win
+0 0 1 1 away win
+0 0 1 2 away win
+0 0 2 0 away win
+0 0 2 1 away win
+0 0 2 2 away win
+1 1 0 0 home win
+1 1 0 1 home win
+1 1 0 2 home win
+1 1 1 0 draw
+1 1 1 1 away win
+1 1 1 2 away win
+1 1 2 0 away win
+1 1 2 1 away win
+1 1 2 2 away win
+1 1 0 0 home win
+1 1 0 1 home win
+1 1 0 2 home win
+1 1 1 0 home win
+1 1 1 1 draw
+1 1 1 2 away win
+1 1 2 0 away win
+1 1 2 1 away win
+1 1 2 2 away win
+1 1 0 0 home win
+1 1 0 1 home win
+1 1 0 2 home win
+1 1 1 0 home win
+1 1 1 1 home win
+1 1 1 2 draw
+1 1 2 0 away win
+1 1 2 1 away win
+1 1 2 2 away win
+2 2 0 0 home win
+2 2 0 1 home win
+2 2 0 2 home win
+2 2 1 0 home win
+2 2 1 1 home win
+2 2 1 2 home win
+2 2 2 0 draw
+2 2 2 1 away win
+2 2 2 2 away win
+2 2 0 0 home win
+2 2 0 1 home win
+2 2 0 2 home win
+2 2 1 0 home win
+2 2 1 1 home win
+2 2 1 2 home win
+2 2 2 0 home win
+2 2 2 1 draw
+2 2 2 2 away win
+2 2 0 0 home win
+2 2 0 1 home win
+2 2 0 2 home win
+2 2 1 0 home win
+2 2 1 1 home win
+2 2 1 2 home win
+2 2 2 0 home win
+2 2 2 1 home win
+2 2 2 2 draw

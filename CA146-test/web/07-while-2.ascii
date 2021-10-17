@@ -1,0 +1,593 @@
+= While loops 2
+Stephen Blott <stephen.blott@dcu.ie>
+:toc2:
+:theme: morteratsch
+
+// //////////////////////////////////////////////////////////////
+== Background
+
+****
+Recall that, syntactically, +while+ loops are very similar to +if+ statements:
+
+[source, python]
+----
+while CONDITION:
+   STATEMENTS...
+----
+
+The +STATEMENTS+ within the block are known as the _body of the loop_, or the _loop body_.
+
+The condition, a Boolean expression, is evaluated
+
+- if it is +False+, then the loop body is skipped; however,
+- if it is +True+, then the body of the loop is executed, and then control returns
+  to the start of the +while+ loop and the condition is tested again.
+
+This is repeated until eventually the condition is +False+.
+****
+
+****
+One commonly occurring special case is that we know, _before entering the loop_, how many iterations are required.  In this case we always use the following pattern:
+
+[source, python]
+----
+i = 0
+while i < N:
+   # Do something.
+   i = i + 1
+----
+
+See the previous link:07-while-1.html[notes on loops].
+****
+
+// //////////////////////////////////////////////////////////////
+== Example tasks
+
+****
+Consider the following two example tasks.
+
+These two are used as examples throughout, below.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sum
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line, terminated by a line containing only $0$.
+
+Write a Python script which writes the sum of the numbers encountered to standard output.
+****
+
+.Example standard input
+----
+3
+5
+2
+3
+5
+2
+2
+0
+----
+
+.Example standard output
+----
+22
+----
+
+.Discussion
+****
+Clearly we need a while loop here, because we must repeatedly read and check each
+input line.
+
+However, _we do not know how many times our loop must iterate_;  that depends upon the actual input.
+
+Therefore, we cannot use the _do-something-$n$-times_ loop pattern
+discussed previously.
+
+We will need an alternative approach.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Snap
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line.
+
+Write a Python script which writes the message indicated in the example
+below when it encounters the first adjacent duplicate pair of lines.
+
+This is like the card game snap.
+
+You should assume that such a duplicate pair exists.
+****
+
+.Example standard input
+----
+3
+45
+2
+3
+51
+2
+2
+----
+
+.Example standard output
+----
+snap: 2
+----
+
+// //////////////////////////////////////////////////////////////
+=== Discussion
+
+****
+Again, here, _we do not know ho many times our loop must iterate_.
+
+It could be that the very first two numbers read are the same, and we're
+done immediately; or, it could be a that we read and read and read before
+encountering a duplicate pair.  It depends upon the input.
+
+Therefore, again we cannot use the _do-something-$n$-times_ loop pattern.
+****
+
+// //////////////////////////////////////////////////////////////
+== Search loops
+
+****
+Consider the two example tasks above, _sum_ and _snap_.
+
+One way to view these tasks is that we are _searching for something_:
+
+- in the first case we are _searching for a line containing only $0$_, and
+- in the second case we are _searching for a duplicate pair_.
+
+And in both cases, our loop will:
+
+- stop iterating when we find what we're looking for, but
+- but _keep going_ while we still _haven't_ found what we're looking for.
+****
+
+****
+Note the last point:
+
+- we *keep iterating* while we *haven't* found what we're searching for.
+
+This observation suggests an approach to writing these types of Python
+scripts which works for all search-type problems.
+****
+
+// //////////////////////////////////////////////////////////////
+=== Sum
+
+****
+Our goal is to add up a sequence of numbers, stopping and the sum to
+standard output when we encounter a $0$.
+
+Let's start with a simpler tasks, let's _just copy the numbers to standard
+output_, and stop when we encounter a $0$.
+
+If we can do that, then we can work on adding the numbers up afterwards.
+****
+
+****
+So:
+
+- we *stop* when the current value *is zero*.
+
+Therefore:
+
+- we *keep going* while the current value is *not zero*.
+****
+
+****
+We have to track _the current value_.
+
+The current value is an integer of no particular significance, so we'll use the variable $n$.
+
+Our loop will be structured like this:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+# Initialisation.
+while n != 0:
+   # Do something.
+----
+
+There's a lot still missing, but at least we have the key Boolean expression in our loop.
+
+We *keep going* while *$n$ isn't zero*.
+****
+
+****
+The first time we encounter the condition, $n$ must be the first value read from standard input.
+
+Therefore, we must read that value before encountering the loop.
+
+So:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+n = int(input())             # Read the *first* value before encountering the loop.
+while n != 0:
+   # Do something.
+----
+****
+
+****
+And every subsequent time we encounter the condition, $n$ must be the
+_next_ value read from standard input.
+
+Therefore, we must read that value at the end of the loop body, so that we
+have that new value before returning to the top of the loop.
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+n = int(input())
+while n != 0:
+   # Do something.
+   n = int(input())          # Read the *next* value before looping back to the top.
+----
+
+This is our basic loop structure for this task.
+
+It reads a sequence of integers from standard input, stopping when it encounters a $0$.
+****
+
+****
+We could just print out each number as we encounter it, just to see that our loop works:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+n = int(input())
+while n != 0:
+   print(n)                  # Print n, just to see that our loop works.
+   n = int(input())
+----
+****
+
+****
+The goal of the program is to calculate and output the sum of a sequence is values.
+
+Therefore, we need to keep track of the sum (or +total+) as we go along.
+
+Our approach is:
+
+. start off by taking the +total+ to be $0$,
+. for each new value $n$ encountered, add that value to the +total+,
+. and when we're done, print out the +total+.
+
+This is the approach we would take if we were to solve this problem in our
+heads.
+****
+
+****
+Here is our solution:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+total = 0                    # 1, above; start of with 0.
+
+n = int(input())
+while n != 0:
+   total = total + n         # 2, above; add the current value to the total.
+   n = int(input())
+
+print total                  # 3, above; print out the total.
+----
+****
+
+// //////////////////////////////////////////////////////////////
+=== Search loops
+
+****
+Consider that example again; in particular, consider just the loop:
+
+[source, python]
+----
+n = int(input())
+while n != 0:
+   total = total + n
+   n = int(input())
+----
+****
+
+****
+The assignment to the variable +total+ is specific to this particular task.
+
+More generally, out script involve require any computation here; it depends
+upon the task at hand.
+
+So we can think of the loop like this:
+
+[source, python]
+----
+n = int(input())
+while n != 0:
+   # Do something.           # This depends upon the task at hand.
+   n = int(input())
+----
+****
+
+****
+In the general case, the structure of our loop is:
+
+[source, python]
+----
+# Prepare to test the loop condition.           # 1, below.
+while not STOP_CONDITION:                       # 2, below.
+   # Do something.                              # 3, below.
+   # Prepare to test the loop condition again.  # 4, below.
+----
+
+. We begin by preparing to evaluate the loop condition for the first time. +
+  In the example, the test depends upon the _current value_ $n$, so we need to read
+  that value from standard input.
+. We know the +STOP_CONDITION+; this is the state we're _searching for_. +
+  Therefore, the loop should _keep going_ as long as we haven't found that state;
+  so, as long as the stop condition is +False+. +
+  In the example, we stop when $n$ is $0$, so we keep going while _$n$ is not $0$_.
+. Within the body of the loop, we do whatever is required by the task at hand +
+  In the example, that is to add the current value $n$ to the +total+.
+. Finally, before looping back to the top and repeating the test, we must prepare for that test.
+  In the example, that means that we must read the next value $n$ from standard input.
+****
+
+****
+Many search-type problems involve loops with this structure.
+
+We will call this loop pattern a _search loop_.
+****
+
+****
+Compare, this loop pattern:
+
+[source, python]
+----
+# Prepare to test the loop condition.
+while not STOP_CONDITION:
+   # Do something.
+   # Prepare to test the loop condition again.
+----
+
+And observe how this general pattern translates to the specific case of our example task:
+
+[source, python]
+----
+n = int(input())              # Prepare to test the loop condition.
+while n != 0:                 # Stop condition is "n == 0", so keep going while "n != 0".
+   total = total + n          # Do something.
+   n = int(input())           # Prepare to test the loop condition again.
+----
+****
+
+[TIP]
+====
+All of the loops we write in the labs match one of three patterns:
+
+- the _do-something-+n+-times_ pattern we covered previously,
+- the _search loop_ pattern above,
+- or a third pattern (which we have not yet covered).
+
+Once you decide which type of loop is required, you can write in the loop
+pattern before filling in the details required for the task at hand.
+====
+
+// //////////////////////////////////////////////////////////////
+=== Snap
+
+****
+Recall that, for this task, our goal is to find the first adjacent pair of
+equal numbers, like the card game snap.
+****
+
+****
+For this task we:
+
+- observe that we need a loop,
+- but we do not know how many times that loop must iterate (that depends upon the input).
+
+Therefore we need to use the _search loop_ pattern:
+
+- we're searching for an adjacent pair of equal numbers.
+****
+
+****
+So we start like this:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+# Prepare to test the loop condition.
+while not STOP_CONDITION:
+   # Do something.
+   # Prepare to test the loop condition again.
+----
+****
+
+****
+The _stop condition_ is that the current value equals the previous value; so
+we will track those two values in variables called +prev+ and +curr+ (short for "previous" and "current").
+
+We stop when those values are the same; therefore we keep going while they are different:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+# Prepare to test the loop condition.
+while curr != prev:                    # <-- Here.
+   # Do something.
+   # Prepare to test the loop condition again.
+----
+****
+
+****
+To _prepare to test the loop condition_ we need to have the first values for +prev+ and +curr+.
+
+Therefore, we need to read the first two values:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+prev = input()                         # <-- Here.
+curr = input()                         #
+while curr != prev:
+   # Do something.
+   # Prepare to test the loop condition again.
+----
+****
+
+****
+And to
+_prepare to test the loop condition again_
+we need to move on to the next pair of +prev+ and +curr+ values.
+
+So we need to remember the current value (it is the new previous value), and read the new current value:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+prev = input()
+curr = input()
+while curr != prev:
+   # Do something.
+   prev = curr                         # <-- Here.
+   curr = input()                      #
+----
+****
+
+****
+As it happens, there's nothing left to do within the body of the loop in
+this case.
+
+So the final script looks like this:
+
+[source, python]
+----
+#!/usr/bin/env python3
+
+prev = input()
+curr = input()
+while curr != prev:
+   prev = curr
+   curr = input()
+
+print curr
+----
+****
+
+// //////////////////////////////////////////////////////////////
+== More examples
+
+// //////////////////////////////////////////////////////////////
+=== Copy to standard output
+
+.Task
+****
+Standard input consists of a sequence of lines of text, terminated by
+a line containing only the text "end".
+
+Write a Python script to copy those lines to standard output.
+****
+
+.Example standard input
+----
+Nobody expects
+the Spanish inquisition!
+end
+----
+
+.Example standard output
+----
+Nobody expects
+the Spanish inquisition!
+----
+
+.Discussion
+****
+Here, we're reading lines of text, not integers, so we just use +input()+
+to read the lines.
+
+Assume we use a string variable $s$ for each line.
+
+We _stop_ when $s$ is "end"; therefore _we keep_ going while $s$ is not "end".
+****
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+s = input()                  # Prepare to test the loop condition.
+while s != "end":            # This is the opposite of the stop condition.
+   print(s)                  # Do something.
+   s = input()               # Prepare to test the loop condition again.
+----
+
+// //////////////////////////////////////////////////////////////
+=== First odd number
+
+.Task
+****
+Standard input consists of a sequence of integers, one per line.
+
+Write a Python script which writes _the first odd number encountered_ to standard output.
+
+You should assume that the input does indeed contain at least one odd number.
+****
+
+.Example standard input
+----
+2
+0
+14
+5
+28
+----
+
+.Example standard output
+----
+5
+----
+
+.Discussion
+****
+We are searching for the first odd number.
+
+Therefore, we _keep going_ while the current number is not odd (so, it's even).
+****
+
+[source, python]
+.Solution
+----
+#!/usr/bin/env python3
+
+n = int(input())             # Prepare to test the loop condition.
+while n % 2 == 0:            # This is the opposite of the stop condition.
+   n = int(input())          # Prepare to test the loop condition again.
+
+print(n)
+----
+
+include::misc/instrument.txt[]
+include::misc/asciimath.txt[]
+
+// //////////////////////////////////////////////////////////////
+// vim: set syntax=asciidoc ft=asciidoc
+// //////////////////////////////////////////////////////////////

@@ -1,0 +1,34 @@
+running bits-to-values.py multiple times...
+
+bits = 1 : values = 2
+bits = 2 : values = 4
+bits = 3 : values = 8
+bits = 4 : values = 16
+bits = 5 : values = 32
+bits = 6 : values = 64
+bits = 7 : values = 128
+bits = 8 : values = 256
+bits = 9 : values = 512
+bits = 10 : values = 1024
+bits = 11 : values = 2048
+bits = 12 : values = 4096
+bits = 13 : values = 8192
+bits = 14 : values = 16384
+bits = 15 : values = 32768
+bits = 16 : values = 65536
+bits = 17 : values = 131072
+bits = 18 : values = 262144
+bits = 19 : values = 524288
+bits = 20 : values = 1048576
+bits = 21 : values = 2097152
+bits = 22 : values = 4194304
+bits = 23 : values = 8388608
+bits = 24 : values = 16777216
+bits = 25 : values = 33554432
+bits = 26 : values = 67108864
+bits = 27 : values = 134217728
+bits = 28 : values = 268435456
+bits = 29 : values = 536870912
+bits = 30 : values = 1073741824
+bits = 31 : values = 2147483648
+bits = 32 : values = 4294967296

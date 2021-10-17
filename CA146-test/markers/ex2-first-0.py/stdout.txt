@@ -1,0 +1,11 @@
+$ echo "Mary had 1 little lamb" | python3 ex2-first.py
+a
+$ echo "9 little lamb" | python3 ex2-first.py
+e
+$ echo "And everywhere that 45 Marys went" | python3 ex2-first.py
+d
+$ echo "g" | python3 ex2-first.py
+g
+$ echo "Z" | python3 ex2-first.py
+$ echo "9" | python3 ex2-first.py
+$ echo "321" | python3 ex2-first.py

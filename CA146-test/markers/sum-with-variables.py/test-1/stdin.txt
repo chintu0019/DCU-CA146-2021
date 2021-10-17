@@ -1,0 +1,7 @@
+aa = 4
+b = 5
+ccc = 6
+aa
+b
+ccc
+ccc

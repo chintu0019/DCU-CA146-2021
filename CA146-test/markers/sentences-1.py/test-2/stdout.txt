@@ -1,0 +1,3 @@
+The host name ca116.computing.dcu.ie is the course web site.
+#!/usr/bin/env python should be the first line in every Python script.
+https://ca116.computing.dcu.ie/einstein/report.html?task=hello.py is one of many Einstein links.

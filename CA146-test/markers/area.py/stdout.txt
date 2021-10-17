@@ -1,0 +1,7 @@
+side: 20
+  executing...
+  variable area is now 400
+
+side: 30
+  executing...
+  variable area is now 900

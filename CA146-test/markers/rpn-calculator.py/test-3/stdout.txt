@@ -1,0 +1,5 @@
+Testing literals...
+2
+-1
+3.141
+3.141

@@ -1,0 +1,7 @@
+import sys
+s = sys.argv[1]
+a = sys.argv[2:]
+
+print "s =", s
+print "a =", a
+
